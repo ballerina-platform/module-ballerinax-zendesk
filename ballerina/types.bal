@@ -2856,7 +2856,7 @@ public type CustomObjectRecordsResponse record {
     CustomObjectRecordsResponse_meta? meta?;
 };
 
-public type Organization_field_id int|string?;
+public type Organization_field_id int|string;
 
 public type MacroUpdateManyInput_macros record {
     # The active status of the macro (true or false)
@@ -3393,7 +3393,7 @@ public type TicketMergeInput record {
     boolean? target_comment_is_public?;
 };
 
-public type User_field_id int|string?;
+public type User_field_id int|string;
 
 public type AssigneeFieldAssignableGroupObject record {
     # Description of the group

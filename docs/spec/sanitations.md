@@ -20,3 +20,5 @@ These changes are done in order to improve the overall usability, and as workaro
       which will generate all the request/response type fields with the support to handle null values.
     * This workaround can be removed once https://github.com/ballerina-platform/ballerina-library/issues/4870 is addressed.
 
+3. Change the types `Organization_field_id` and `User_field_id` from `int|string?` to `int|string`.
+    * This is done as a post-workaround after using the `--nullable` option to generate the client, as nilable types are not supported for path parameters in Ballerina
