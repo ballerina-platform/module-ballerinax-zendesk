@@ -80,127 +80,127 @@ public type ProxyConfig record {|
 public type TicketMetricEventBreachObject record {
     *TicketMetricEventBaseObject;
     # Available if `type` is `breach`. In general, you can ignore any breach event when `deleted` is true. See [deleted](#deleted)
-    boolean deleted?;
+    boolean? deleted?;
 };
 
 public type TicketRelatedInformation record {
-    string[] followup_source_ids?;
+    string[]? followup_source_ids?;
     # Is true if the current ticket is archived
-    boolean from_archive?;
+    boolean? from_archive?;
     # A count of related incident occurrences
-    int incidents?;
+    int? incidents?;
     # Related topic in the Web portal (deprecated feature)
     string? topic_id?;
     # X (formerly Twitter) information associated with the ticket
-    record {} twitter?;
+    record {}? twitter?;
 };
 
 # Google Apps configuration. See [G Suite](#g-suite)
 public type AccountSettingsGoogleAppsObject record {
-    boolean has_google_apps?;
-    boolean has_google_apps_admin?;
+    boolean? has_google_apps?;
+    boolean? has_google_apps_admin?;
 };
 
 public type TargetCampfire record {
-    boolean preserve_format?;
-    string room;
-    boolean ssl?;
-    string subdomain;
-    string token;
+    boolean? preserve_format?;
+    string? room;
+    boolean? ssl?;
+    string? subdomain;
+    string? token;
 };
 
 public type TriggerCategoryRuleCounts record {
-    int active_count?;
-    int inactive_count?;
+    int? active_count?;
+    int? inactive_count?;
 };
 
 public type SLAPolicyFilterDefinitionResponse_definitions record {
-    SLAPolicyFilterDefinitionResponse_definitions_all[] all?;
-    SLAPolicyFilterDefinitionResponse_definitions_all[] 'any?;
+    SLAPolicyFilterDefinitionResponse_definitions_all[]? all?;
+    SLAPolicyFilterDefinitionResponse_definitions_all[]? 'any?;
 };
 
 public type UserIdentityObject record {
     # The time the identity was created
-    string created_at?;
+    string? created_at?;
     # Email identity type only. Indicates if Zendesk sends notifications to the email address. See [Deliverable state](#deliverable-state)
-    string deliverable_state?;
+    string? deliverable_state?;
     # Automatically assigned on creation
-    int id?;
+    int? id?;
     # If the identity is the primary identity. *Writable only when creating, not when updating. Use the [Make Identity Primary](#make-identity-primary) endpoint instead
-    boolean primary?;
+    boolean? primary?;
     # The type of this identity
     "email"|"twitter"|"facebook"|"google"|"phone_number"|"agent_forwarding"|"any_channel"|"foreign"|"sdk" 'type;
     # The number of times a soft-bounce response was received at that address
-    int undeliverable_count?;
+    int? undeliverable_count?;
     # The time the identity was updated
-    string updated_at?;
+    string? updated_at?;
     # The API url of this identity
-    string url?;
+    string? url?;
     # The id of the user
-    int user_id;
+    int? user_id;
     # The identifier for this identity, such as an email address
-    string value;
+    string? value;
     # If the identity has been verified
-    boolean verified?;
+    boolean? verified?;
 };
 
 public type TargetResponse record {
-    TargetObject target?;
+    TargetObject? target?;
 };
 
 public type CustomRolesResponse record {
-    CustomRoleObject[] custom_roles?;
+    CustomRoleObject[]? custom_roles?;
 };
 
 public type CustomFieldObject record {
     # If true, this field is available for use
-    boolean active?;
+    boolean? active?;
     # The time of the last update of the ticket field
-    string created_at?;
+    string? created_at?;
     # Required and presented for a custom field of type "dropdown". Each option is represented by an object with a `name` and `value` property
-    CustomFieldOptionObject[] custom_field_options?;
+    CustomFieldOptionObject[]? custom_field_options?;
     # User-defined description of this field's purpose
-    string description?;
+    string? description?;
     # Automatically assigned upon creation
-    int id?;
+    int? id?;
     # A unique key that identifies this custom field. This is used for updating the field and referencing in placeholders. The key must consist of only letters, numbers, and underscores. It can't be only numbers and can't be reused if deleted.
-    string 'key;
+    string? 'key;
     # Ordering of the field relative to other fields
-    int position?;
+    int? position?;
     # The dynamic content placeholder, if present, or the `description` value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string raw_description?;
+    string? raw_description?;
     # The dynamic content placeholder, if present, or the `title` value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string raw_title?;
+    string? raw_title?;
     # Regular expression field only. The validation pattern for a field value to be deemed valid
     string? regexp_for_validation?;
     # A filter definition that allows your autocomplete to filter down results
-    record {} relationship_filter?;
+    record {}? relationship_filter?;
     # A representation of what type of object the field references. Options are "zen:user", "zen:organization", "zen:ticket", and "zen:custom_object:{key}" where key is a custom object key. For example "zen:custom_object:apartment".
-    string relationship_target_type?;
+    string? relationship_target_type?;
     # If true, only active and position values of this field can be changed
-    boolean system?;
+    boolean? system?;
     # Optional for custom field of type "checkbox"; not presented otherwise.
-    string tag?;
+    string? tag?;
     # The title of the custom field
-    string title;
+    string? title;
     # The custom field type: "checkbox", "date", "decimal", "dropdown", "integer", ["lookup"](/api-reference/ticketing/lookup_relationships/lookup_relationships/), "regexp", "text", or "textarea"
-    string 'type;
+    string? 'type;
     # The time of the last update of the ticket field
-    string updated_at?;
+    string? updated_at?;
     # The URL for this resource
-    string url?;
+    string? url?;
 };
 
 public type RecoverSuspendedTicketResponse record {
-    SuspendedTicketObject[] ticket?;
+    SuspendedTicketObject[]? ticket?;
 };
 
 public type TicketCommentResponse record {
-    TicketCommentObject comment?;
+    TicketCommentObject? comment?;
 };
 
 public type DeletedUserResponse record {
-    DeletedUserObject deleted_user?;
+    DeletedUserObject? deleted_user?;
 };
 
 # Metadata for the export query response.
@@ -210,145 +210,145 @@ public type SearchExportResponse_meta record {
     # The cursor id for the previous object.
     string? before_cursor?;
     # Whether there are more items yet to be returned by the cursor.
-    boolean has_more?;
+    boolean? has_more?;
 };
 
 public type TagCountResponse record {
-    TagCountObject count?;
+    TagCountObject? count?;
 };
 
 public type OrganizationsResponse record {
-    int count?;
+    int? count?;
     string? next_page?;
-    OrganizationObject[] organizations?;
+    OrganizationObject[]? organizations?;
     string? previous_page?;
 };
 
 public type TriggerCategoryResponse record {
-    TriggerCategory trigger_category?;
+    TriggerCategory? trigger_category?;
 };
 
 public type TicketObject record {
     # Permission for agents to add add attachments to a comment. Defaults to true
-    boolean allow_attachments?;
+    boolean? allow_attachments?;
     # Is false if channelback is disabled, true otherwise. Only applicable for channels framework ticket
-    boolean allow_channelback?;
+    boolean? allow_channelback?;
     # Write only. The email address of the agent to assign the ticket to
-    string assignee_email?;
+    string? assignee_email?;
     # The agent currently assigned to the ticket
-    int assignee_id?;
+    int? assignee_id?;
     # Write only. An array of the IDs of attribute values to be associated with the ticket
-    int[] attribute_value_ids?;
+    int[]? attribute_value_ids?;
     # The id of the brand this ticket is associated with. See [Setting up multiple brands](https://support.zendesk.com/hc/en-us/articles/4408829476378)
-    int brand_id?;
+    int? brand_id?;
     # The ids of users currently CC'ed on the ticket
-    int[] collaborator_ids?;
+    int[]? collaborator_ids?;
     # POST requests only. Users to add as cc's when creating a ticket. See [Setting Collaborators](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-collaborators)
-    CollaboratorObject[] collaborators?;
+    CollaboratorObject[]? collaborators?;
     # Write only. An object that adds a comment to the ticket. See [Ticket comments](/api-reference/ticketing/tickets/ticket_comments/). To include an attachment with the comment, see [Attaching files](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#attaching-files)
-    record {} comment?;
+    record {}? comment?;
     # When this record was created
-    string created_at?;
+    string? created_at?;
     # Custom fields for the ticket. See [Setting custom field values](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-custom-field-values)
-    TicketObject_custom_fields[] custom_fields?;
+    TicketObject_custom_fields[]? custom_fields?;
     # The custom ticket status id of the ticket. See [custom ticket statuses](#custom-ticket-statuses)
-    int custom_status_id?;
+    int? custom_status_id?;
     # Read-only first comment on the ticket. When [creating a ticket](#create-ticket), use `comment` to set the description. See [Description and first comment](#description-and-first-comment)
-    string description?;
+    string? description?;
     # If this is a ticket of type "task" it has a due date.  Due date format uses [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601) format.
     string? due_at?;
     # The ids of agents or end users currently CC'ed on the ticket. See [CCs and followers resources](https://support.zendesk.com/hc/en-us/articles/360020585233) in the Support Help Center
-    int[] email_cc_ids?;
+    int[]? email_cc_ids?;
     # Write only. An array of objects that represent agent or end users email CCs to add or delete from the ticket. See [Setting email CCs](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#setting-email-ccs)
-    record {} email_ccs?;
+    record {}? email_ccs?;
     # An id you can use to link Zendesk Support tickets to local records
-    string external_id?;
+    string? external_id?;
     # The ids of agents currently following the ticket. See [CCs and followers resources](https://support.zendesk.com/hc/en-us/articles/360020585233)
-    int[] follower_ids?;
+    int[]? follower_ids?;
     # Write only. An array of objects that represent agent followers to add or delete from the ticket. See [Setting followers](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#setting-followers)
-    record {} followers?;
+    record {}? followers?;
     # The ids of the followups created from this ticket. Ids are only visible once the ticket is closed
-    int[] followup_ids?;
+    int[]? followup_ids?;
     # The topic in the Zendesk Web portal this ticket originated from, if any. The Web portal is deprecated
-    int forum_topic_id?;
+    int? forum_topic_id?;
     # If true, the ticket's [via type](/documentation/ticketing/reference-guides/via-object-reference/) is a messaging channel.
-    boolean from_messaging_channel?;
+    boolean? from_messaging_channel?;
     # The group this ticket is assigned to
-    int group_id?;
+    int? group_id?;
     # Is true if a ticket is a problem type and has one or more incidents linked to it. Otherwise, the value is false.
-    boolean has_incidents?;
+    boolean? has_incidents?;
     # Automatically assigned when the ticket is created
-    int id?;
+    int? id?;
     # Is true if any comments are public, false otherwise
-    boolean is_public?;
+    boolean? is_public?;
     # Write only. A macro ID to be recorded in the ticket audit
-    int macro_id?;
+    int? macro_id?;
     # POST requests only. List of macro IDs to be recorded in the ticket audit
-    int[] macro_ids?;
+    int[]? macro_ids?;
     # Write only. Metadata for the audit. In the `audit` object, the data is specified in the `custom` property of the `metadata` object. See [Setting Metadata](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#setting-metadata)
-    record {} metadata?;
+    record {}? metadata?;
     # The organization of the requester. You can only specify the ID of an organization associated with the requester. See [Organization Memberships](/api-reference/ticketing/organizations/organization_memberships/)
-    int organization_id?;
+    int? organization_id?;
     # The urgency with which the ticket should be addressed
     "urgent"|"high"|"normal"|"low" priority?;
     # For tickets of type "incident", the ID of the problem the incident is linked to
-    int problem_id?;
+    int? problem_id?;
     # The dynamic content placeholder, if present, or the "subject" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string raw_subject?;
+    string? raw_subject?;
     # The original recipient e-mail address of the ticket. Notification emails for the ticket are sent from this address
-    string recipient?;
+    string? recipient?;
     # Write only. See [Creating a ticket with a new requester](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#creating-a-ticket-with-a-new-requester)
-    record {} requester?;
+    record {}? requester?;
     # The user who requested this ticket
-    int requester_id;
+    int? requester_id;
     # Write only. Optional boolean. When true and an `update_stamp` date is included, protects against ticket update collisions and returns a message to let you know if one occurs. See [Protecting against ticket update collisions](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#protecting-against-ticket-update-collisions). A value of false has the same effect as true. Omit the property to force the updates to not be safe
-    boolean safe_update?;
+    boolean? safe_update?;
     # The satisfaction rating of the ticket, if it exists, or the state of satisfaction, "offered" or "unoffered". The value is null for plan types that don't support CSAT
-    record {} satisfaction_rating?;
+    record {}? satisfaction_rating?;
     # The ids of the sharing agreements used for this ticket
-    int[] sharing_agreement_ids?;
+    int[]? sharing_agreement_ids?;
     # The state of the ticket.
     # 
     # If your account has activated custom ticket statuses, this is the ticket's
     # status category. See [custom ticket statuses](#custom-ticket-statuses)
     "new"|"open"|"pending"|"hold"|"solved"|"closed" status?;
     # The value of the subject field for this ticket. See [Subject](/api-reference/ticketing/tickets/tickets/#subject)
-    string subject?;
+    string? subject?;
     # The user who submitted the ticket. The submitter always becomes the author of the first comment on the ticket
-    int submitter_id?;
+    int? submitter_id?;
     # The array of tags applied to this ticket
-    string[] tags?;
+    string[]? tags?;
     # Enterprise only. The id of the ticket form to render for the ticket
-    int ticket_form_id?;
+    int? ticket_form_id?;
     # The type of this ticket
     "problem"|"incident"|"question"|"task" 'type?;
     # When this record last got updated. It is updated only if the update generates a [ticket event](#incremental-ticket-event-export)
-    string updated_at?;
+    string? updated_at?;
     # Write only. Datetime of last update received from API. See the `safe_update` property
-    string updated_stamp?;
+    string? updated_stamp?;
     # The API url of this ticket
-    string url?;
+    string? url?;
     # For more information, see the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
-    TicketObject_via via?;
+    TicketObject_via? via?;
     # POST requests only. The id of a closed ticket when creating a follow-up ticket. See [Creating a follow-up ticket](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#creating-a-follow-up-ticket)
-    int via_followup_source_id?;
+    int? via_followup_source_id?;
     # Write only. For more information, see the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference/)
-    int via_id?;
+    int? via_id?;
     # Write only. See [Creating voicemail ticket](/api-reference/voice/talk-partner-edition-api/reference/#creating-voicemail-tickets)
-    record {} voice_comment?;
+    record {}? voice_comment?;
 };
 
 public type TrialAccountResponse record {
-    TrialAccountObject account?;
+    TrialAccountObject? account?;
 };
 
 public type TicketFieldsResponse record {
-    TicketFieldObject[] ticket_fields?;
+    TicketFieldObject[]? ticket_fields?;
 };
 
 public type TicketAuditsResponseNoneCursor record {
-    TicketAuditObject[] audits?;
-    int count?;
+    TicketAuditObject[]? audits?;
+    int? count?;
     string? next_page?;
     string? previous_page?;
 };
@@ -358,18 +358,18 @@ public type CursorBasedExportIncrementalUsersResponse record {
     string? after_url?;
     string? before_cursor?;
     string? before_url?;
-    boolean end_of_stream?;
-    UserObject[] users?;
+    boolean? end_of_stream?;
+    UserObject[]? users?;
 };
 
 public type RequestsResponse record {
-    RequestObject[] requests?;
+    RequestObject[]? requests?;
 };
 
-public type ReverseLookupResponse UsersResponse;
+public type ReverseLookupResponse UsersResponse?;
 
 public type WorkspaceResponse record {
-    WorkspaceObject[] workspaces?;
+    WorkspaceObject[]? workspaces?;
     *OffsetPaginationObject;
 };
 
@@ -377,15 +377,15 @@ public type AssigneeFieldAssignableAgentObject record {
     # URL of Agent's avatar
     string? avatar_url?;
     # Agent Support ID
-    int id?;
+    int? id?;
     # Name of the agent
-    string name?;
+    string? name?;
 };
 
 public type CustomFieldOptionsResponse record {
     # Total count of records retrieved
-    int count?;
-    CustomFieldOptionObject[] custom_field_options?;
+    int? count?;
+    CustomFieldOptionObject[]? custom_field_options?;
     # URL of the next page
     string? next_page?;
     # URL of the previous page
@@ -395,27 +395,27 @@ public type CustomFieldOptionsResponse record {
 public type TicketMetricEventGroupSLAObject record {
     *TicketMetricEventBaseObject;
     # Available if `type` is "apply_group_sla". The Group SLA policy and target being enforced on the ticket and metric in question, if any. See [group_sla](#group_sla)
-    record {} group_sla?;
+    record {}? group_sla?;
 };
 
 public type MacroAttachmentsResponse record {
-    MacroAttachmentObject[] macro_attachments?;
+    MacroAttachmentObject[]? macro_attachments?;
 };
 
 public type CountResponse_count record {
-    string refreshed_at?;
-    int value?;
+    string? refreshed_at?;
+    int? value?;
 };
 
 public type SkillBasedRoutingAttributesResponse record {
-    SkillBasedRoutingAttributeObject[] attributes?;
-    int count?;
+    SkillBasedRoutingAttributeObject[]? attributes?;
+    int? count?;
     string? next_page?;
     string? previous_page?;
 };
 
 public type TargetFailureResponse record {
-    TargetFailureObject target_failure?;
+    TargetFailureObject? target_failure?;
 };
 
 public type ListTicketProblemsResponse record {
@@ -423,259 +423,259 @@ public type ListTicketProblemsResponse record {
 
 public type Inline_response_200_1_count record {
     # The time the last count was performed
-    string refreshed_at?;
+    string? refreshed_at?;
     # Number of records at the time of the latest count operation
-    int value?;
+    int? value?;
 };
 
 public type TriggerCategoriesResponse record {
-    TriggerCategory[] trigger_categories?;
+    TriggerCategory[]? trigger_categories?;
 };
 
 public type TicketCommentObject record {
     # Attachments, if any. See [Attachment](/api-reference/ticketing/tickets/ticket-attachments/)
-    AttachmentObject[] attachments?;
+    AttachmentObject[]? attachments?;
     # The id of the ticket audit record. See [Show Audit](/api-reference/ticketing/tickets/ticket_audits/#show-audit)
-    int audit_id?;
+    int? audit_id?;
     # The id of the comment author. See [Author id](#author-id)
-    int author_id?;
+    int? author_id?;
     # The comment string. See [Bodies](#bodies)
-    string body?;
+    string? body?;
     # The time the comment was created
-    string created_at?;
+    string? created_at?;
     # The comment formatted as HTML. See [Bodies](#bodies)
-    string html_body?;
+    string? html_body?;
     # Automatically assigned when the comment is created
-    int id?;
+    int? id?;
     # System information (web client, IP address, etc.) and comment flags, if any. See [Comment flags](#comment-flags)
-    record {} metadata?;
+    record {}? metadata?;
     # The comment presented as plain text. See [Bodies](#bodies)
-    string plain_body?;
+    string? plain_body?;
     # true if a public comment; false if an internal note. The initial value set on ticket creation persists for any additional comment unless you change it
-    boolean 'public?;
+    boolean? 'public?;
     # `Comment` or `VoiceComment`. The JSON object for adding voice comments to tickets is different. See [Adding voice comments to tickets](/documentation/ticketing/managing-tickets/adding-voice-comments-to-tickets)
-    string 'type?;
+    string? 'type?;
     # List of tokens received from [uploading files](/api-reference/ticketing/tickets/ticket-attachments/#upload-files) for comment attachments. The files are attached by creating or updating tickets with the tokens. See [Attaching files](/api-reference/ticketing/tickets/tickets/#attaching-files) in Tickets
-    string[] uploads?;
+    string[]? uploads?;
     # Describes how the object was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
-    TicketAuditViaObject via?;
+    TicketAuditViaObject? via?;
 };
 
 public type TicketImportInput record {
     # The agent currently assigned to the ticket
-    int assignee_id?;
+    int? assignee_id?;
     # The conversation between requesters, collaborators, and agents
-    record {} comments?;
+    record {}? comments?;
     # Read-only first comment on the ticket. When [creating a ticket](#create-ticket), use `comment` to set the description. See [Description and first comment](#description-and-first-comment)
-    string description?;
+    string? description?;
     # The user who requested this ticket
-    int requester_id?;
+    int? requester_id?;
     # The value of the subject field for this ticket
-    string subject?;
+    string? subject?;
     # The array of tags applied to this ticket
-    string[] tags?;
+    string[]? tags?;
 };
 
 public type TwitterChannelTwicketStatusResponse record {
-    TwitterChannelTwicketStatusResponse_statuses[] statuses?;
+    TwitterChannelTwicketStatusResponse_statuses[]? statuses?;
 };
 
 # The active features for an account. See [Active Features](#active-features)
 public type AccountSettingsActiveFeaturesObject record {
-    boolean advanced_analytics?;
-    boolean agent_forwarding?;
-    boolean allow_ccs?;
-    boolean allow_email_template_customization?;
-    boolean automatic_answers?;
-    boolean bcc_archiving?;
-    boolean benchmark_opt_out?;
-    boolean business_hours?;
-    boolean chat?;
-    boolean chat_about_my_ticket?;
-    boolean csat_reason_code?;
-    boolean custom_dkim_domain?;
-    boolean customer_context_as_default?;
-    boolean customer_satisfaction?;
-    boolean dynamic_contents?;
-    boolean explore?;
-    boolean explore_on_support_ent_plan?;
-    boolean explore_on_support_pro_plan?;
-    boolean facebook?;
-    boolean facebook_login?;
-    boolean fallback_composer?;
-    boolean forum_analytics?;
-    boolean good_data_and_explore?;
-    boolean google_login?;
-    boolean insights?;
-    boolean is_abusive?;
-    boolean light_agents?;
-    boolean markdown?;
-    boolean on_hold_status?;
-    boolean organization_access_enabled?;
-    boolean rich_content_in_emails?;
-    boolean sandbox?;
-    boolean satisfaction_prediction?;
-    boolean suspended_ticket_notification?;
-    boolean ticket_forms?;
-    boolean ticket_tagging?;
-    boolean topic_suggestion?;
-    boolean twitter?;
-    boolean twitter_login?;
-    boolean user_org_fields?;
-    boolean user_tagging?;
-    boolean voice?;
+    boolean? advanced_analytics?;
+    boolean? agent_forwarding?;
+    boolean? allow_ccs?;
+    boolean? allow_email_template_customization?;
+    boolean? automatic_answers?;
+    boolean? bcc_archiving?;
+    boolean? benchmark_opt_out?;
+    boolean? business_hours?;
+    boolean? chat?;
+    boolean? chat_about_my_ticket?;
+    boolean? csat_reason_code?;
+    boolean? custom_dkim_domain?;
+    boolean? customer_context_as_default?;
+    boolean? customer_satisfaction?;
+    boolean? dynamic_contents?;
+    boolean? explore?;
+    boolean? explore_on_support_ent_plan?;
+    boolean? explore_on_support_pro_plan?;
+    boolean? facebook?;
+    boolean? facebook_login?;
+    boolean? fallback_composer?;
+    boolean? forum_analytics?;
+    boolean? good_data_and_explore?;
+    boolean? google_login?;
+    boolean? insights?;
+    boolean? is_abusive?;
+    boolean? light_agents?;
+    boolean? markdown?;
+    boolean? on_hold_status?;
+    boolean? organization_access_enabled?;
+    boolean? rich_content_in_emails?;
+    boolean? sandbox?;
+    boolean? satisfaction_prediction?;
+    boolean? suspended_ticket_notification?;
+    boolean? ticket_forms?;
+    boolean? ticket_tagging?;
+    boolean? topic_suggestion?;
+    boolean? twitter?;
+    boolean? twitter_login?;
+    boolean? user_org_fields?;
+    boolean? user_tagging?;
+    boolean? voice?;
 };
 
 public type BookmarkInput record {
     # The id of the ticket the bookmark is for.
-    int ticket_id?;
+    int? ticket_id?;
 };
 
 public type BookmarkResponse record {
-    BookmarkObject bookmark?;
+    BookmarkObject? bookmark?;
 };
 
 public type CountOrganizationObject record {
-    string refreshed_at?;
-    int value?;
+    string? refreshed_at?;
+    int? value?;
 };
 
 public type IncrementalSkillBasedRoutingInstanceValue record {
     # Id of the associated attribute value
-    string attribute_value_id?;
+    string? attribute_value_id?;
     # Automatically assigned when an instance value is created
-    string id?;
+    string? id?;
     # Id of the associated agent or ticket
-    string instance_id?;
+    string? instance_id?;
     # The time the instance value was created or deleted
-    string time?;
+    string? time?;
     # One of "associate_agent", "unassociate_agent", "associate_ticket", or "unassociate_ticket"
-    string 'type?;
+    string? 'type?;
 };
 
 # For some channels a source object gives more information about how or why the ticket or event was created
 public type ViaObject_source record {
-    ViaObject_source_from 'from?;
+    ViaObject_source_from? 'from?;
     string? rel?;
-    ViaObject_source_to to?;
+    ViaObject_source_to? to?;
 };
 
 public type ChannelFrameworkPushResultsResponse record {
     # An array of [result objects](#result-object)
-    ChannelFrameworkResultObject[] results?;
+    ChannelFrameworkResultObject[]? results?;
 };
 
 public type AutomationObject record {
     # An object describing what the automation will do. See [Actions reference](/documentation/ticketing/reference-guides/actions-reference)
-    ActionObject[] actions?;
+    ActionObject[]? actions?;
     # Whether the automation is active
-    boolean active?;
+    boolean? active?;
     # An object that describes the conditions under which the automation will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
-    ConditionsObject conditions?;
+    ConditionsObject? conditions?;
     # The time the automation was created
-    string created_at?;
+    string? created_at?;
     # If true, the automation is a default automation
-    boolean default?;
+    boolean? default?;
     # Automatically assigned when created
-    int id?;
+    int? id?;
     # The position of the automation which specifies the order it will be executed
-    int position?;
+    int? position?;
     # The raw title of the automation
-    string raw_title?;
+    string? raw_title?;
     # The title of the automation
-    string title?;
+    string? title?;
     # The time of the last update of the automation
-    string updated_at?;
+    string? updated_at?;
 };
 
 public type SearchExportResponse record {
     # The facets corresponding to the search query
     string? facets?;
     # The links to the previous and next entries via the cursor ids in the metadata.
-    SearchExportResponse_links links?;
+    SearchExportResponse_links? links?;
     # Metadata for the export query response.
-    SearchExportResponse_meta meta?;
+    SearchExportResponse_meta? meta?;
     # May consist of tickets, users, groups, or organizations, as specified by the `result_type` property in each result object
-    SearchResultObject[] results?;
+    SearchResultObject[]? results?;
 };
 
 public type ComplianceDeletionStatusObject record {
-    string account_subdomain;
-    string action;
-    string application;
-    string created_at;
+    string? account_subdomain;
+    string? action;
+    string? application;
+    string? created_at;
     int? executer_id;
-    int user_id;
+    int? user_id;
 };
 
 public type UserRelatedResponse record {
-    UserRelatedObject user_related?;
+    UserRelatedObject? user_related?;
 };
 
 public type TriggerConditionObject record {
-    string 'field?;
-    string operator?;
-    string|int|(string|int)[] value?;
+    string? 'field?;
+    string? operator?;
+    string|int|(string|int?)[]? value?;
 };
 
 # Zendesk Talk settings. See [Voice](#voice)
 public type AccountSettingsVoiceObject record {
-    boolean agent_confirmation_when_forwarding?;
-    boolean agent_wrap_up_after_calls?;
-    boolean enabled?;
-    boolean logging?;
-    int maximum_queue_size?;
-    int maximum_queue_wait_time?;
-    boolean only_during_business_hours?;
-    boolean outbound_enabled?;
-    boolean recordings_public?;
-    boolean uk_mobile_forwarding?;
+    boolean? agent_confirmation_when_forwarding?;
+    boolean? agent_wrap_up_after_calls?;
+    boolean? enabled?;
+    boolean? logging?;
+    int? maximum_queue_size?;
+    int? maximum_queue_wait_time?;
+    boolean? only_during_business_hours?;
+    boolean? outbound_enabled?;
+    boolean? recordings_public?;
+    boolean? uk_mobile_forwarding?;
 };
 
 public type SupportAddressObject record {
     # The ID of the [brand](/api-reference/ticketing/account-configuration/brands/)
-    int brand_id?;
+    int? brand_id?;
     # Whether all of the required CNAME records are set. Possible values: "unknown", "verified", "failed"
     "unknown"|"verified"|"failed" cname_status?;
     # When the address was created
-    string created_at?;
+    string? created_at?;
     # Whether the address is the account's default support address
-    boolean default?;
+    boolean? default?;
     # Verification statuses for the domain and CNAME records. Possible types: "verified", "failed"
     "verified"|"failed" dns_results?;
     # Verification string to be added as a TXT record to the domain. Possible types: string or null.
-    string domain_verification_code?;
+    string? domain_verification_code?;
     # Whether the domain verification record is valid. Possible values: "unknown", "verified", "failed"
     "unknown"|"verified"|"failed" domain_verification_status?;
     # The email address. You can't change the email address of an existing support address.
-    string email;
+    string? email;
     # Status of email forwarding. Possible values: "unknown", "waiting", "verified", or "failed"
     "unknown"|"waiting"|"verified"|"failed" forwarding_status?;
     # Automatically assigned when created
-    int id?;
+    int? id?;
     # The name for the address
-    string name?;
+    string? name?;
     # Whether the SPF record is set up correctly. Possible values: "unknown", "verified", "failed"
     "unknown"|"verified"|"failed" spf_status?;
     # When the address was updated
-    string updated_at?;
+    string? updated_at?;
 };
 
 public type ViaObject_source_to record {
-    string address?;
-    string name?;
+    string? address?;
+    string? name?;
 };
 
 public type TicketUpdateRequest record {
-    TicketUpdateInput ticket?;
+    TicketUpdateInput? ticket?;
 };
 
 public type ActionsObject record {
-    ActionObject[] actions?;
+    ActionObject[]? actions?;
 };
 
 public type TicketBulkImportRequest record {
-    TicketImportInput[] tickets?;
+    TicketImportInput[]? tickets?;
 };
 
 public type ViaObject_source_from record {
@@ -687,141 +687,141 @@ public type ViaObject_source_from record {
 
 # Brand settings. See [Brands](#brands)
 public type AccountSettingsBrandsObject record {
-    int default_brand_id?;
-    boolean require_brand_on_new_tickets?;
+    int? default_brand_id?;
+    boolean? require_brand_on_new_tickets?;
 };
 
 public type TicketAuditObject record {
     # The user who created the audit
-    int author_id?;
+    int? author_id?;
     # The time the audit was created
-    string created_at?;
+    string? created_at?;
     # An array of the events that happened in this audit. See the [Ticket Audit events reference](/documentation/ticketing/reference-guides/ticket-audit-events-reference)
-    record {}[] events?;
+    record {}[]? events?;
     # Automatically assigned when creating audits
-    int id?;
+    int? id?;
     # Metadata for the audit, custom and system data
-    record {} metadata?;
+    record {}? metadata?;
     # The ID of the associated ticket
-    int ticket_id?;
+    int? ticket_id?;
     # Describes how the object was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
-    TicketAuditViaObject via?;
+    TicketAuditViaObject? via?;
 };
 
 public type OrganizationMembershipObject record {
     # When this record was created
-    string created_at?;
+    string? created_at?;
     # Denotes whether this is the default organization membership for the user. If false, returns `null`
     boolean? default;
     # Automatically assigned when the membership is created
-    int id?;
+    int? id?;
     # The ID of the organization associated with this user, in this membership
-    int organization_id;
+    int? organization_id;
     # The name of the organization associated with this user, in this membership
-    string organization_name?;
+    string? organization_name?;
     # When this record last got updated
-    string updated_at?;
+    string? updated_at?;
     # The API url of this membership
-    string url?;
+    string? url?;
     # The ID of the user for whom this memberships belongs
-    int user_id;
+    int? user_id;
     # Denotes whether the user can or cannot have access to all organization's tickets.
-    boolean view_tickets?;
+    boolean? view_tickets?;
 };
 
 public type TicketMetricEventBaseObject record {
     # Automatically assigned when the record is created
-    int id?;
+    int? id?;
     # The instance of the metric associated with the event. See [instance_id](#instance_id)
-    int instance_id?;
+    int? instance_id?;
     # The metric being tracked
     "agent_work_time"|"pausable_update_time"|"periodic_update_time"|"reply_time"|"requester_wait_time"|"resolution_time" metric?;
     # Id of the associated ticket
-    int ticket_id?;
+    int? ticket_id?;
     # The time the event occurred
-    string time?;
+    string? time?;
     # The type of the metric event. See [Ticket metric event types reference](/documentation/ticketing/reference-guides/ticket-metric-event-types-reference)
     "activate"|"pause"|"fulfill"|"apply_sla"|"breach"|"update_status"|"measure" 'type?;
 };
 
 public type UserMergeByIdInput record {
-    int id?;
+    int? id?;
 };
 
 public type AssigneeFieldAssignableGroupsAndAgentsSearchResponse record {
-    AssigneeFieldAssignableSearchAgentObject[] agents?;
+    AssigneeFieldAssignableSearchAgentObject[]? agents?;
     # Number of agents + groups listed from search result.
-    int count?;
-    AssigneeFieldAssignableSearchGroupObject[] groups?;
+    int? count?;
+    AssigneeFieldAssignableSearchGroupObject[]? groups?;
 };
 
 # See [Tickets](/api-reference/ticketing/tickets/tickets/) for a detailed example.
 public type TimeBasedExportIncrementalTicketsResponse record {
-    int count?;
-    boolean end_of_stream?;
-    int end_time?;
+    int? count?;
+    boolean? end_of_stream?;
+    int? end_time?;
     string? next_page?;
-    TicketObject[] tickets?;
+    TicketObject[]? tickets?;
 };
 
 public type TargetYammer record {
-    string group_id?;
-    string token?;
+    string? group_id?;
+    string? token?;
 };
 
 public type AuditObject record {
-    int author_id?;
-    string created_at?;
-    AuditObject_events[] events?;
-    int id?;
-    record {} metadata?;
-    int ticket_id?;
+    int? author_id?;
+    string? created_at?;
+    AuditObject_events[]? events?;
+    int? id?;
+    record {}? metadata?;
+    int? ticket_id?;
     # An object explaining how the ticket was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
-    ViaObject via?;
+    ViaObject? via?;
 };
 
 public type TriggerCategoryBatchRequest record {
-    string id;
-    int position;
+    string? id;
+    int? position;
 };
 
 public type TicketObject_custom_fields record {
     # The id of the custom field
-    int id?;
+    int? id?;
     # The value of the custom field
-    string value?;
+    string? value?;
 };
 
 public type OrganizationResponse record {
-    OrganizationObject organization?;
+    OrganizationObject? organization?;
 };
 
 public type TargetCommonFields record {
     # Whether or not the target is activated
-    boolean active?;
+    boolean? active?;
     # The time the target was created
-    string created_at?;
+    string? created_at?;
     # Automatically assigned when created
-    int id?;
+    int? id?;
     # A name for the target
-    string title;
+    string? title;
     # A pre-defined target, such as "basecamp_target". See the additional attributes for the type that follow
-    string 'type;
+    string? 'type;
 };
 
 public type TicketsCreateRequest record {
-    TicketCreateInput[] tickets?;
+    TicketCreateInput[]? tickets?;
 };
 
 public type Macros_macro_id_body record {
-    MacroInput macro?;
+    MacroInput? macro?;
 };
 
 public type TriggersResponse record {
-    int count?;
+    int? count?;
     string? next_page?;
     string? previous_page?;
-    TriggerObject[] triggers?;
+    TriggerObject[]? triggers?;
 };
 
 public type TriggerCategoryRequestRequired record {
@@ -829,42 +829,42 @@ public type TriggerCategoryRequestRequired record {
 
 public type UserForAdmin record {
     # false if the user has been deleted
-    boolean active?;
+    boolean? active?;
     # An alias displayed to end users
-    string alias?;
+    string? alias?;
     # Whether or not the user is a chat-only agent
-    boolean chat_only?;
+    boolean? chat_only?;
     # The time the user was created
-    string created_at?;
+    string? created_at?;
     # A custom role if the user is an agent on the Enterprise plan or above
     int? custom_role_id?;
     # The id of the user's default group
-    int default_group_id?;
+    int? default_group_id?;
     # Any details you want to store about the user, such as an address
-    string details?;
+    string? details?;
     # The user's primary email address. *Writeable on create only. On update, a secondary email is added. See [Email Address](#email-address)
-    string email?;
+    string? email?;
     # A unique identifier from another system. The API treats the id as case insensitive. Example: "ian1" and "IAN1" are the same value.
     string? external_id?;
     # The time zone for the user
-    string iana_time_zone?;
+    string? iana_time_zone?;
     # Automatically assigned when the user is created
-    int id?;
+    int? id?;
     # Last time the user signed in to Zendesk Support or made an API request
     # using an API token or basic authentication
-    string last_login_at?;
+    string? last_login_at?;
     # The user's locale. A BCP-47 compliant tag for the locale. If both "locale" and "locale_id" are present on create or update, "locale_id" is ignored and only "locale" is used.
-    string locale?;
+    string? locale?;
     # The user's language identifier
-    int locale_id?;
+    int? locale_id?;
     # Designates whether the user has forum moderation capabilities
-    boolean moderator?;
+    boolean? moderator?;
     # The user's name
-    string name;
+    string? name;
     # Any notes you want to store about the user
-    string notes?;
+    string? notes?;
     # true if the user can only create private comments
-    boolean only_private_comments?;
+    boolean? only_private_comments?;
     # The id of the user's organization. If the user has more than one [organization memberships](/api-reference/ticketing/organizations/organization_memberships/), the id of the user's default organization. If updating, see [Organization ID](#organization-id)
     int? organization_id?;
     # The user's primary phone number. See [Phone Number](#phone-number) below
@@ -872,7 +872,7 @@ public type UserForAdmin record {
     # The user's profile picture represented as an [Attachment](/api-reference/ticketing/tickets/ticket-attachments/) object
     record {}? photo?;
     # A URL pointing to the user's profile picture.
-    string remote_photo_url?;
+    string? remote_photo_url?;
     # This parameter is inert and has no effect. It may be deprecated in the
     # future.
     # 
@@ -880,148 +880,148 @@ public type UserForAdmin record {
     # report in a legacy Guide dashboard. This dashboard has been removed. See
     # [Announcing Guide legacy reporting upgrade to
     # Explore](https://support.zendesk.com/hc/en-us/articles/4762263171610-Announcing-Guide-legacy-reporting-upgrade-to-Explore-)
-    boolean report_csv?;
+    boolean? report_csv?;
     # If the agent has any restrictions; false for admins and unrestricted agents, true for other agents
-    boolean restricted_agent?;
+    boolean? restricted_agent?;
     # The user's role. Possible values are "end-user", "agent", or "admin"
-    string role?;
+    string? role?;
     # The user's role id. 0 for a custom agent, 1 for a light agent, 2 for a chat agent, 3 for a chat agent added to the Support account as a contributor ([Chat Phase 4](https://support.zendesk.com/hc/en-us/articles/360022365373#topic_djh_1zk_4fb)), 4 for an admin, and 5 for a billing admin
     int? role_type?;
     # If the user is shared from a different Zendesk Support instance. Ticket sharing accounts only
-    boolean shared?;
+    boolean? shared?;
     # If the user is a shared agent from a different Zendesk Support instance. Ticket sharing accounts only
-    boolean shared_agent?;
+    boolean? shared_agent?;
     # Whether the `phone` number is shared or not. See [Phone Number](#phone-number) below
     boolean? shared_phone_number?;
     # The user's signature. Only agents and admins can have signatures
-    string signature?;
+    string? signature?;
     # If the agent is suspended. Tickets from suspended users are also suspended, and these users cannot sign in to the end user portal
-    boolean suspended?;
+    boolean? suspended?;
     # The user's tags. Only present if your account has user tagging enabled
-    string[] tags?;
+    string[]? tags?;
     # Specifies which tickets the user has access to. Possible values are: "organization", "groups", "assigned", "requested", null. "groups" and "assigned" are valid only for agents. If you pass an invalid value to an end user (for example, "groups"), they will be assigned to "requested", regardless of their previous access
     string? ticket_restriction?;
     # The user's time zone. See [Time Zone](#time-zone)
-    string time_zone?;
+    string? time_zone?;
     # If two factor authentication is enabled
     boolean? two_factor_auth_enabled?;
     # The time the user was last updated
-    string updated_at?;
+    string? updated_at?;
     # The user's API url
-    string url?;
+    string? url?;
     # Values of custom fields in the user's profile. See [User Fields](#user-fields)
-    record {} user_fields?;
+    record {}? user_fields?;
     # Any of the user's identities is verified. See [User Identities](/api-reference/ticketing/users/user_identities)
-    boolean verified?;
+    boolean? verified?;
 };
 
 public type BulkUpdateDefaultCustomStatusResponse record {
 };
 
 public type TwitterChannelsResponse record {
-    TwitterChannelObject[] monitored_twitter_handles?;
+    TwitterChannelObject[]? monitored_twitter_handles?;
 };
 
 public type UserRelatedObject record {
     # Count of assigned tickets
-    int assigned_tickets?;
+    int? assigned_tickets?;
     # Count of collaborated tickets
-    int ccd_tickets?;
+    int? ccd_tickets?;
     # Count of organization subscriptions
-    int organization_subscriptions?;
+    int? organization_subscriptions?;
     # Count of requested tickets
-    int requested_tickets?;
+    int? requested_tickets?;
 };
 
 # For more information, see the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
 public type TicketObject_via record {
     # This tells you how the ticket or event was created. Examples: "web", "mobile", "rule", "system"
-    string channel?;
+    string? channel?;
     # For some channels a source object gives more information about how or why the ticket or event was created
-    record {} 'source?;
+    record {}? 'source?;
 };
 
 public type TriggerBulkUpdateItem record {
     # The active status of the trigger (true or false)
-    boolean active?;
+    boolean? active?;
     # The ID of the new category the trigger is to be moved to
-    string category_id?;
+    string? category_id?;
     # The ID of the trigger to update
-    int id;
+    int? id;
     # The new position of the trigger
-    int position?;
+    int? position?;
 };
 
 public type TicketFormResponse record {
-    TicketFormObject ticket_form?;
+    TicketFormObject? ticket_form?;
 };
 
 public type SuspendedTicketsExportResponse record {
-    SuspendedTicketsExportResponse_export export?;
+    SuspendedTicketsExportResponse_export? export?;
 };
 
 public type TicketMetricObject record {
     # Number of minutes the agent spent waiting during calendar and business hours
-    TicketMetricTimeObject agent_wait_time_in_minutes?;
+    TicketMetricTimeObject?? agent_wait_time_in_minutes?;
     # When the ticket was assigned
-    string assigned_at?;
+    string? assigned_at?;
     # Number of assignees the ticket had
-    int assignee_stations?;
+    int? assignee_stations?;
     # When the assignee last updated the ticket
-    string assignee_updated_at?;
+    string? assignee_updated_at?;
     # When the record was created
-    string created_at?;
+    string? created_at?;
     # The date and time the ticket's custom status was last updated
-    string custom_status_updated_at?;
+    string? custom_status_updated_at?;
     # Number of minutes to the first resolution time during calendar and business hours
-    TicketMetricTimeObject first_resolution_time_in_minutes?;
+    TicketMetricTimeObject?? first_resolution_time_in_minutes?;
     # Number of minutes to the full resolution during calendar and business hours
-    TicketMetricTimeObject full_resolution_time_in_minutes?;
+    TicketMetricTimeObject?? full_resolution_time_in_minutes?;
     # Number of groups the ticket passed through
-    int group_stations?;
+    int? group_stations?;
     # Automatically assigned when the client is created
-    int id?;
+    int? id?;
     # When the ticket was initially assigned
-    string initially_assigned_at?;
+    string? initially_assigned_at?;
     # When the latest comment was added
-    string latest_comment_added_at?;
+    string? latest_comment_added_at?;
     # Number of minutes on hold
-    TicketMetricTimeObject on_hold_time_in_minutes?;
+    TicketMetricTimeObject?? on_hold_time_in_minutes?;
     # Total number of times the ticket was reopened
-    int reopens?;
+    int? reopens?;
     # The number of public replies added to a ticket by an agent
-    int replies?;
+    int? replies?;
     # Number of minutes to the first reply during calendar and business hours
-    TicketMetricTimeObject reply_time_in_minutes?;
+    TicketMetricTimeObject?? reply_time_in_minutes?;
     # Number of seconds to the first reply during calendar hours, only available for Messaging tickets
-    TicketMetricTimeObject reply_time_in_seconds?;
+    TicketMetricTimeObject?? reply_time_in_seconds?;
     # When the requester last updated the ticket
-    string requester_updated_at?;
+    string? requester_updated_at?;
     # Number of minutes the requester spent waiting during calendar and business hours
-    TicketMetricTimeObject requester_wait_time_in_minutes?;
+    TicketMetricTimeObject?? requester_wait_time_in_minutes?;
     # When the ticket was solved
-    string solved_at?;
+    string? solved_at?;
     # When the status of the ticket was last updated
-    string status_updated_at?;
+    string? status_updated_at?;
     # Id of the associated ticket
-    int ticket_id?;
+    int? ticket_id?;
     # When the record was last updated
-    string updated_at?;
+    string? updated_at?;
     # The API url of the ticket metric
-    string url?;
+    string? url?;
 };
 
 public type CountOrganizationResponse record {
-    CountOrganizationObject count?;
+    CountOrganizationObject? count?;
 };
 
 public type Problems_autocomplete_body record {
     # The text to search for
-    string text?;
+    string? text?;
 };
 
 public type Inline_response_200_5 record {
-    ActivitiesCountResponse_count count?;
+    ActivitiesCountResponse_count? count?;
 };
 
 public type Inline_response_200_6 record {
@@ -1030,31 +1030,31 @@ public type Inline_response_200_6 record {
 };
 
 public type TicketSkipCreation record {
-    TicketSkipObject skip?;
+    TicketSkipObject? skip?;
 };
 
-public type UserInput UserCreateInput|UserMergePropertiesInput|UserMergeByIdInput;
+public type UserInput UserCreateInput|UserMergePropertiesInput|UserMergeByIdInput?;
 
 public type TicketAuditsCountResponse record {
-    ActivitiesCountResponse_count count?;
+    ActivitiesCountResponse_count? count?;
 };
 
 # Ticket sharing partners settings. See [Ticket Sharing Partners](#ticket-sharing-partners)
 public type AccountSettingsTicketSharingPartnersObject record {
-    string[] support_addresses?;
+    string[]? support_addresses?;
 };
 
 public type ExportIncrementalOrganizationsResponse record {
-    int count?;
-    boolean end_of_stream?;
-    int end_time?;
+    int? count?;
+    boolean? end_of_stream?;
+    int? end_time?;
     string? next_page?;
-    OrganizationObject[] organizations?;
+    OrganizationObject[]? organizations?;
 };
 
 public type OffsetPaginationObject record {
     # the total record count
-    int count?;
+    int? count?;
     # the URL of the next page
     string? next_page?;
     # the URL of the previous page
@@ -1062,161 +1062,161 @@ public type OffsetPaginationObject record {
 };
 
 public type OrganizationFieldResponse record {
-    OrganizationFieldObject organization_field?;
+    OrganizationFieldObject? organization_field?;
 };
 
 # Account statistics settings. See [Statistics](#statistics)
 public type AccountSettingsStatisticsObject record {
-    boolean forum?;
-    boolean rule_usage?;
-    boolean search?;
+    boolean? forum?;
+    boolean? rule_usage?;
+    boolean? search?;
 };
 
 # Account limits configuration. See [Limits](#limits)
 public type AccountSettingsLimitsObject record {
-    int attachment_size?;
+    int? attachment_size?;
 };
 
 public type Inline_response_200_3 record {
-    record {}[] actions?;
+    record {}[]? actions?;
 };
 
 public type Inline_response_200_4 record {
-    Inline_response_200_3 definitions?;
+    Inline_response_200_3? definitions?;
 };
 
 public type Inline_response_200_1 record {
-    record {|Inline_response_200_1_count...;|} count?;
+    record {|Inline_response_200_1_count?...;|}? count?;
 };
 
 public type TriggerActionObject record {
-    string 'field?;
-    string|int|(string|int)[] value?;
+    string? 'field?;
+    string|int|(string|int?)[]? value?;
 };
 
 public type Inline_response_200_2 record {
-    MacroObject macro?;
+    MacroObject? macro?;
 };
 
 public type SharingAgreementObject record {
     # The time the record was created
-    string created_at?;
+    string? created_at?;
     # Automatically assigned upon creation
-    int id?;
+    int? id?;
     # Name of this sharing agreement
-    string name?;
+    string? name?;
     # Can be one of the following: "jira", null
     string? partner_name?;
     # Subdomain of the remote account or null if not associated with an account
-    string remote_subdomain?;
+    string? remote_subdomain?;
     # Can be one of the following: "accepted", "declined", "pending", "inactive", "failed", "ssl_error", "configuration_error"
-    string status?;
+    string? status?;
     # Can be one of the following: "inbound", "outbound"
-    string 'type?;
+    string? 'type?;
     # URL of the sharing agreement record
-    string url?;
+    string? url?;
 };
 
 public type MacroCommonObject record {
     # Each action describes what the macro will do. See [Actions reference](/documentation/ticketing/reference-guides/actions-reference)
-    ActionObject[] actions;
+    ActionObject[]? actions;
     # Useful for determining if the macro should be displayed
-    boolean active?;
+    boolean? active?;
     # The time the macro was created
-    string created_at?;
+    string? created_at?;
     # If true, the macro is a default macro
-    boolean default?;
+    boolean? default?;
     # The description of the macro
     string? description?;
     # The ID automatically assigned when a macro is created
-    int id?;
+    int? id?;
     # The position of the macro
-    int position?;
+    int? position?;
     # Access to this macro. A null value allows unrestricted access for all users in the account
     record {}? restriction?;
     # The title of the macro
-    string title;
+    string? title;
     # The time of the last update of the macro
-    string updated_at?;
+    string? updated_at?;
     # A URL to access the macro's details
-    string url?;
+    string? url?;
 };
 
-public type OrganizationFieldObject CustomFieldObject;
+public type OrganizationFieldObject CustomFieldObject?;
 
 public type TriggerActionDefinitionObject record {
-    string group?;
-    boolean nullable?;
-    boolean repeatable?;
-    string subject?;
-    string title?;
-    string 'type?;
-    DefinitionsResponse_definitions_values[] values?;
+    string? group?;
+    boolean? nullable?;
+    boolean? repeatable?;
+    string? subject?;
+    string? title?;
+    string? 'type?;
+    DefinitionsResponse_definitions_values[]? values?;
 };
 
 public type SLAPolicyFilterDefinitionResponse_definitions_values record {
-    SLAPolicyFilterDefinitionResponse_definitions_values_list[] list?;
-    string 'type?;
+    SLAPolicyFilterDefinitionResponse_definitions_values_list[]? list?;
+    string? 'type?;
 };
 
 public type EmailCCObject record {
     *FollowerObject;
     "put"|"delete" action?;
-    string user_email?;
-    string user_id?;
-    string user_name?;
+    string? user_email?;
+    string? user_id?;
+    string? user_name?;
 };
 
 # Who may access this macro. Will be null when everyone in the account can access it
 public type MacroInput_restriction record {
     # The numeric ID of the group or user
-    int id?;
+    int? id?;
     # The numeric IDs of the groups
-    int[] ids?;
+    int[]? ids?;
     # Allowed values are Group or User
-    string 'type?;
+    string? 'type?;
 };
 
 public type GroupMembershipsResponse record {
-    GroupMembershipObject[] group_memberships?;
+    GroupMembershipObject[]? group_memberships?;
 };
 
 public type TriggerBulkUpdateRequest record {
-    TriggerBulkUpdateItem[] triggers?;
+    TriggerBulkUpdateItem[]? triggers?;
 };
 
 public type ViewExportResponse_export record {
-    string status?;
-    int view_id?;
+    string? status?;
+    int? view_id?;
 };
 
 public type SLAPolicyFilterConditionObject record {
     # The name of a ticket field
-    string 'field?;
+    string? 'field?;
     # A comparison operator
-    string operator?;
+    string? operator?;
     # The value of a ticket field
-    string|(string|int)[] value?;
+    string|(string|int?)[]? value?;
 };
 
 public type ChannelFrameworkResultObject record {
     # The external ID of the resource, as passed in
-    string external_resource_id?;
+    string? external_resource_id?;
     # The status of the import for the indicated resource
-    ChannelFrameworkResultStatusObject status?;
+    ChannelFrameworkResultStatusObject? status?;
 };
 
 # Billing configuration options. See [Billing](#billing)
 public type AccountSettingsBillingObject record {
-    string backend?;
+    string? backend?;
 };
 
 public type AccountSettingsCdnObject_hosts record {
-    string name?;
-    string url?;
+    string? name?;
+    string? url?;
 };
 
-public type CustomObjectField CustomFieldObject;
+public type CustomObjectField CustomFieldObject?;
 
 public type CustomStatusCreateInput record {
     *CustomStatusUpdateInput;
@@ -1226,55 +1226,55 @@ public type CustomStatusCreateInput record {
 
 public type CustomObjectRecord record {
     # The time the object was created
-    string created_at?;
+    string? created_at?;
     # Id of a user who created the object
-    string created_by_user_id?;
-    record {} custom_object_fields?;
+    string? created_by_user_id?;
+    record {}? custom_object_fields?;
     # A user-defined unique identifier
-    string custom_object_key?;
+    string? custom_object_key?;
     # An id you can use to link custom object records to external data
     string? external_id?;
     # Automatically assigned upon creation
-    string id?;
+    string? id?;
     # User-defined display name for the object
-    string name;
+    string? name;
     # The time of the last update of the object
-    string updated_at?;
+    string? updated_at?;
     # Id of the last user who updated the object
-    string updated_by_user_id?;
+    string? updated_by_user_id?;
     # Direct link to the specific custom object
-    string url?;
+    string? url?;
 };
 
 public type TriggerCategoryRequest record {
-    string name?;
-    int position?;
+    string? name?;
+    int? position?;
 };
 
 # An object explaining how the ticket was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
 public type ViaObject record {
     # This tells you how the ticket or event was created. Examples: "web", "mobile", "rule", "system"
-    string channel?;
+    string? channel?;
     # For some channels a source object gives more information about how or why the ticket or event was created
-    ViaObject_source 'source?;
+    ViaObject_source? 'source?;
 };
 
 public type CustomStatusResponse record {
-    CustomStatusObject custom_status?;
+    CustomStatusObject? custom_status?;
 };
 
 public type Trigger_categories_trigger_category_id_body record {
-    TriggerCategoryRequest trigger_category?;
+    TriggerCategoryRequest? trigger_category?;
 };
 
 public type TicketCreateVoicemailTicketInput record {
-    TicketCommentObject comment?;
+    TicketCommentObject? comment?;
     # The urgency with which the ticket should be addressed.
     "urgent"|"high"|"normal"|"low" priority?;
     # Required for Create Ticket operation
     44|45|46 via_id?;
     # Required if creating voicemail ticket
-    TicketCreateVoicemailTicketVoiceCommentInput voice_comment?;
+    TicketCreateVoicemailTicketVoiceCommentInput?? voice_comment?;
 };
 
 public type TriggerConditionsDiffObject record {
@@ -1283,399 +1283,399 @@ public type TriggerConditionsDiffObject record {
 };
 
 public type UserFieldResponse record {
-    UserFieldObject user_field?;
+    UserFieldObject? user_field?;
 };
 
 public type GroupSLAPolicyObject record {
     # The time the Group SLA policy was created
-    string created_at?;
+    string? created_at?;
     # The description of the Group SLA policy
-    string description?;
+    string? description?;
     # An object that describes the conditions a ticket must match for a Group SLA policy to be applied to the ticket. See [Filter](#filter).
-    GroupSLAPolicyFilterObject filter;
+    GroupSLAPolicyFilterObject? filter;
     # Automatically assigned when created
-    string id?;
+    string? id?;
     # Array of [policy metric](#policy-metric) objects
-    GroupSLAPolicyMetricObject[] policy_metrics?;
+    GroupSLAPolicyMetricObject[]? policy_metrics?;
     # Position of the Group SLA policy. This position determines the order in which policies are matched to tickets. If not specified, the Group SLA policy is added at the last position
-    int position?;
+    int? position?;
     # The title of the Group SLA policy
-    string title;
+    string? title;
     # The time of the last update of the Group SLA policy
-    string updated_at?;
+    string? updated_at?;
     # URL of the Group SLA policy record
-    string url?;
+    string? url?;
 };
 
 public type TicketMetricTimeObject record {
     # Time in business hours
-    int business?;
+    int? business?;
     # Time in calendar hours
-    int calendar?;
+    int? calendar?;
 };
 
 public type TicketFieldObject record {
     # Whether this field is available
-    boolean active?;
+    boolean? active?;
     # A description of the ticket field that only agents can see
-    string agent_description?;
+    string? agent_description?;
     # If true, the field is shown to agents by default. If false, the field is hidden alongside infrequently used fields. Classic interface only
-    boolean collapsed_for_agents?;
+    boolean? collapsed_for_agents?;
     # The time the custom ticket field was created
-    string created_at?;
+    string? created_at?;
     # Name of the app that created the ticket field, or a null value if no app created the ticket field
-    string creator_app_name?;
+    string? creator_app_name?;
     # The id of the user that created the ticket field, or a value of "-1" if an app created the ticket field
-    int creator_user_id?;
+    int? creator_user_id?;
     # Required and presented for a custom ticket field of type "multiselect" or "tagger"
-    CustomFieldOptionObject[] custom_field_options?;
+    CustomFieldOptionObject[]? custom_field_options?;
     # List of customized ticket statuses. Only presented for a system ticket field of type "custom_status"
-    TicketFieldCustomStatusObject[] custom_statuses?;
+    TicketFieldCustomStatusObject[]? custom_statuses?;
     # Describes the purpose of the ticket field to users
-    string description?;
+    string? description?;
     # Whether this field is editable by end users in Help Center
-    boolean editable_in_portal?;
+    boolean? editable_in_portal?;
     # Automatically assigned when created
-    int id?;
+    int? id?;
     # The relative position of the ticket field on a ticket. Note that for accounts with ticket forms, positions are controlled by the different forms
-    int position?;
+    int? position?;
     # The dynamic content placeholder if present, or the `description` value if not. See [Dynamic Content](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string raw_description?;
+    string? raw_description?;
     # The dynamic content placeholder if present, or the `title` value if not. See [Dynamic Content](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string raw_title?;
+    string? raw_title?;
     # The dynamic content placeholder if present, or the "title_in_portal" value if not. See [Dynamic Content](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string raw_title_in_portal?;
+    string? raw_title_in_portal?;
     # For "regexp" fields only. The validation pattern for a field value to be deemed valid
     string? regexp_for_validation?;
     # A filter definition that allows your autocomplete to filter down results
-    record {} relationship_filter?;
+    record {}? relationship_filter?;
     # A representation of what type of object the field references. Options are "zen:user", "zen:organization", "zen:ticket", or "zen:custom_object:{key}" where key is a custom object key. For example "zen:custom_object:apartment".
-    string relationship_target_type?;
+    string? relationship_target_type?;
     # If false, this field is a system field that must be present on all tickets
-    boolean removable?;
+    boolean? removable?;
     # If true, agents must enter a value in the field to change the ticket status to solved
-    boolean required?;
+    boolean? required?;
     # If true, end users must enter a value in the field to create the request
-    boolean required_in_portal?;
+    boolean? required_in_portal?;
     # For system ticket fields of type "priority" and "status". Defaults to 0. A "priority" sub type of 1 removes the "Low" and "Urgent" options. A "status" sub type of 1 adds the "On-Hold" option
-    int sub_type_id?;
+    int? sub_type_id?;
     # Presented for a system ticket field of type "tickettype", "priority" or "status"
-    SystemFieldOptionObject[] system_field_options?;
+    SystemFieldOptionObject[]? system_field_options?;
     # For "checkbox" fields only. A tag added to tickets when the checkbox field is selected
     string? tag?;
     # The title of the ticket field
-    string title;
+    string? title;
     # The title of the ticket field for end users in Help Center
-    string title_in_portal?;
+    string? title_in_portal?;
     # System or custom field type. Editable for custom field types and only on creation. See [Create Ticket Field](#create-ticket-field)
-    string 'type;
+    string? 'type;
     # The time the custom ticket field was last updated
-    string updated_at?;
+    string? updated_at?;
     # The URL for this resource
-    string url?;
+    string? url?;
     # Whether this field is visible to end users in Help Center
-    boolean visible_in_portal?;
+    boolean? visible_in_portal?;
 };
 
 public type RequestResponse record {
-    RequestObject request?;
+    RequestObject? request?;
 };
 
 public type ComplianceDeletionStatusesResponse record {
-    ComplianceDeletionStatusObject[] compliance_deletion_statuses?;
+    ComplianceDeletionStatusObject[]? compliance_deletion_statuses?;
 };
 
 public type V2_workspaces_body record {
-    WorkspaceInput workspace?;
+    WorkspaceInput? workspace?;
 };
 
 public type TicketFieldCustomStatusObject record {
     # If true, if the custom status is set to active. If false, the custom status is set to inactive
-    boolean active?;
+    boolean? active?;
     # The label displayed to agents
-    string agent_label?;
+    string? agent_label?;
     # The date and time at which the custom ticket status was created
-    string created_at?;
+    string? created_at?;
     # If true, the custom status is set to default. If false, the custom status is set to non-default
-    boolean default?;
+    boolean? default?;
     # The description of when the user should select this custom ticket status
-    string description?;
+    string? description?;
     # The description displayed to end users
-    string end_user_description?;
+    string? end_user_description?;
     # The label displayed to end users
-    string end_user_label?;
+    string? end_user_label?;
     # Automatically assigned when the custom ticket status is created
-    int id?;
+    int? id?;
     # The status category the custom ticket status belongs to
     "new"|"open"|"pending"|"hold"|"solved" status_category?;
     # The date and time at which the custom ticket status was last updated
-    string updated_at?;
+    string? updated_at?;
 };
 
 public type AccountSettingsResponse record {
-    AccountSettingsObject settings?;
+    AccountSettingsObject? settings?;
 };
 
 public type CustomObjectResponse record {
-    CustomObject custom_object?;
+    CustomObject? custom_object?;
 };
 
 public type AttachmentUploadResponse_upload record {
     # A file represented as an [Attachment](/api-reference/ticketing/tickets/ticket-attachments/) object
-    AttachmentObject attachment?;
-    AttachmentObject[] attachments?;
+    AttachmentObject? attachment?;
+    AttachmentObject[]? attachments?;
     # Token for subsequent request
-    string token?;
+    string? token?;
 };
 
 # X (formerly Twitter) settings. See [X](#x-formerly-twitter)
 public type AccountSettingsTwitterObject record {
-    string shorten_url?;
+    string? shorten_url?;
 };
 
 public type CustomObjectRecordsJobsResponse record {
-    CustomObjectRecordsJobsResponse_job_status job_status?;
+    CustomObjectRecordsJobsResponse_job_status? job_status?;
 };
 
 public type IncrementalSkillBasedRouting record {
     # Routing attribute values
-    IncrementalSkillBasedRoutingAttributeValue[] attribute_values?;
+    IncrementalSkillBasedRoutingAttributeValue[]? attribute_values?;
     # Routing attributes
-    IncrementalSkillBasedRoutingAttribute[] attributes?;
+    IncrementalSkillBasedRoutingAttribute[]? attributes?;
     # The number of results returned for the current request
-    int count?;
+    int? count?;
     # The most recent resource creation time present in this result set in Unix epoch time
-    int end_time?;
+    int? end_time?;
     # Routing instance values
-    IncrementalSkillBasedRoutingInstanceValue[] instance_values?;
+    IncrementalSkillBasedRoutingInstanceValue[]? instance_values?;
     # The URL that should be called to get the next set of results
-    string next_page?;
+    string? next_page?;
 };
 
 public type ResourceCollectionObject_resources record {
-    boolean deleted?;
-    string identifier?;
-    int resource_id?;
-    string 'type?;
+    boolean? deleted?;
+    string? identifier?;
+    int? resource_id?;
+    string? 'type?;
 };
 
 public type AssigneeFieldAssignableGroupAgentsResponse record {
-    AssigneeFieldAssignableAgentObject[] agents?;
+    AssigneeFieldAssignableAgentObject[]? agents?;
     # Number of agents listed in `agents` property.
-    int count?;
+    int? count?;
     string? next_page?;
     string? previous_page?;
 };
 
 public type SkillBasedRoutingAttributeDefinitions record {
-    SkillBasedRoutingAttributeDefinitions_definitions definitions?;
+    SkillBasedRoutingAttributeDefinitions_definitions? definitions?;
 };
 
 public type CustomRoleResponse record {
-    CustomRoleObject custom_role?;
+    CustomRoleObject? custom_role?;
 };
 
 public type UsersRequest record {
-    UserInput[] users;
+    UserInput[]? users;
 };
 
 public type TriggerDefinitionObject record {
-    TriggerActionDefinitionObject[] actions?;
-    TriggerConditionDefinitionObjectAll[] conditions_all?;
-    TriggerConditionDefinitionObjectAny[] conditions_any?;
+    TriggerActionDefinitionObject[]? actions?;
+    TriggerConditionDefinitionObjectAll[]? conditions_all?;
+    TriggerConditionDefinitionObjectAny[]? conditions_any?;
 };
 
 public type ListTicketFollowersResponse record {
 };
 
 public type AttachmentUpdateRequest record {
-    AttachmentUpdateInput attachment?;
+    AttachmentUpdateInput? attachment?;
 };
 
 public type DynamicContentResponse record {
-    DynamicContentObject item?;
+    DynamicContentObject? item?;
 };
 
 # Internationalization configuration settings. See [Localization](#localization)
 public type AccountSettingsLocalizationObject record {
-    int[] locale_ids?;
+    int[]? locale_ids?;
 };
 
 public type UserForEndUser record {
     # The time the user was created
-    string created_at?;
+    string? created_at?;
     # The primary email address of this user. If the primary email address is not [verified](https://support.zendesk.com/hc/en-us/articles/4408886752410), the secondary email address is used
-    string email?;
+    string? email?;
     # The time zone for the user
-    string iana_time_zone?;
+    string? iana_time_zone?;
     # Automatically assigned when creating users
-    int id?;
+    int? id?;
     # The locale for this user
-    string locale?;
+    string? locale?;
     # The language identifier for this user
-    int locale_id?;
+    int? locale_id?;
     # The name of the user
-    string name;
+    string? name;
     # The id of the user's organization. If the user has more than one [organization memberships](/api-reference/ticketing/organizations/organization_memberships/), the id of the user's default organization. If updating, see [Organization ID](/api-reference/ticketing/users/users/#organization-id)
-    int organization_id?;
+    int? organization_id?;
     # The primary phone number of this user. See [Phone Number](/api-reference/ticketing/users/users/#phone-number) in the Users API
-    string phone?;
+    string? phone?;
     # The user's profile picture represented as an [Attachment](/api-reference/ticketing/tickets/ticket-attachments/) object
-    record {} photo?;
+    record {}? photo?;
     # The role of the user. Possible values: `"end-user"`, `"agent"`, `"admin"`
-    string role?;
+    string? role?;
     # Whether the `phone` number is shared or not. See [Phone Number](/api-reference/ticketing/users/users/#phone-number) in the Users API
-    boolean shared_phone_number?;
+    boolean? shared_phone_number?;
     # The time-zone of this user
-    string time_zone?;
+    string? time_zone?;
     # The time of the last update of the user
-    string updated_at?;
+    string? updated_at?;
     # The API url of this user
-    string url?;
+    string? url?;
     # Any of the user's identities is verified. See [User Identities](/api-reference/ticketing/users/user_identities)
-    boolean verified?;
+    boolean? verified?;
 };
 
 public type SkillBasedRoutingTicketFulfilledResponse record {
-    int[] fulfilled_ticket_ids?;
+    int[]? fulfilled_ticket_ids?;
 };
 
 public type BrandUpdateRequest record {
-    BrandObject brand?;
+    BrandObject? brand?;
 };
 
 public type OrganizationFieldsResponse record {
     # Total count of records retrieved
-    int count?;
+    int? count?;
     # URL of the next page
     string? next_page?;
-    OrganizationFieldObject[] organization_fields?;
+    OrganizationFieldObject[]? organization_fields?;
     # URL of the previous page
     string? previous_page?;
 };
 
 # Cross Sell settings
 public type AccountSettingsCrossSellObject record {
-    boolean show_chat_tooltip?;
+    boolean? show_chat_tooltip?;
     string? xsell_source?;
 };
 
 public type DeletedUsersResponse record {
-    DeletedUserObject[] deleted_users?;
+    DeletedUserObject[]? deleted_users?;
 };
 
 # An object that describes the conditions a ticket must match for a Group SLA policy to be applied to the ticket. See [Filter](#filter).
 public type GroupSLAPolicyFilterObject record {
-    GroupSLAPolicyFilterConditionObject[] all?;
+    GroupSLAPolicyFilterConditionObject[]? all?;
 };
 
 public type SuspendedTicketsAttachmentsResponse record {
-    SuspendedTicketsAttachmentsResponse_upload upload?;
+    SuspendedTicketsAttachmentsResponse_upload? upload?;
 };
 
 public type TwitterChannelObject record {
     # If replies are allowed for this handle
-    boolean allow_reply?;
+    boolean? allow_reply?;
     # The profile image url of the handle
-    string avatar_url?;
+    string? avatar_url?;
     # What brand the handle is associated with
-    int brand_id?;
+    int? brand_id?;
     # If replies are allowed for this handle
-    boolean can_reply?;
+    boolean? can_reply?;
     # The time the handle was created
-    string created_at?;
+    string? created_at?;
     # Automatically assigned upon creation
-    int id;
+    int? id;
     # The profile name of the handle
-    string name?;
+    string? name?;
     # The Twitter handle
-    string screen_name;
+    string? screen_name;
     # The country's code
-    int twitter_user_id;
+    int? twitter_user_id;
     # The time of the last update of the handle
-    string updated_at?;
+    string? updated_at?;
 };
 
 public type GroupSLAPolicyFilterConditionObject record {
     # The name of a ticket field
-    string 'field?;
+    string? 'field?;
     # A comparison operator
-    string operator?;
+    string? operator?;
     # The value of a ticket field
-    (string|int)[] value?;
+    (string|int?)[]? value?;
 };
 
 public type SharingAgreementResponse record {
-    SharingAgreementObject sharing_agreement?;
+    SharingAgreementObject? sharing_agreement?;
 };
 
 public type QueueObject record {
     # The time the queue was created
-    string created_at?;
+    string? created_at?;
     # Conditions when queue could be applied
-    QueueObject_definition definition?;
+    QueueObject_definition? definition?;
     # The description of the queue
-    string description?;
+    string? description?;
     # Automatically assigned when creating queue
-    string id?;
+    string? id?;
     # The name of the queue
-    string name?;
+    string? name?;
     # The queue-applied order
-    int 'order?;
+    int? 'order?;
     # Primary group ids linked to the queue
-    QueueObject_primary_groups primary_groups?;
+    QueueObject_primary_groups? primary_groups?;
     # The queue-applied priority
-    int priority?;
+    int? priority?;
     # Secondary group ids linked to the queue
-    QueueObject_secondary_groups secondary_groups?;
+    QueueObject_secondary_groups? secondary_groups?;
     # The time of the queue's last update
-    string updated_at?;
+    string? updated_at?;
     # The API URL of the queue
-    string url?;
+    string? url?;
 };
 
 public type TriggerWithCategoryRequest record {
-    TriggerObject trigger?;
+    TriggerObject?? trigger?;
 };
 
 public type GroupsResponse record {
-    GroupObject[] groups?;
+    GroupObject[]? groups?;
 };
 
 public type Inline_response_201 record {
-    WorkspaceObject workspace?;
+    WorkspaceObject? workspace?;
 };
 
 public type Inline_response_200 record {
-    boolean success?;
+    boolean? success?;
 };
 
 public type SkillBasedRoutingAttributeDefinitions_definitions_conditions_all record {
-    string subject?;
-    string title?;
+    string? subject?;
+    string? title?;
 };
 
 public type AuditLogObject record {
     # Type of change made. Possible values are "create", "destroy", "exported", "login", and "update"
-    string action?;
+    string? action?;
     # Localized string of action field
-    string action_label?;
+    string? action_label?;
     # id of the user or system that initiated the change
-    int actor_id?;
+    int? actor_id?;
     # Name of the user or system that initiated the change
-    string actor_name?;
+    string? actor_name?;
     # The description of the change that occurred
-    string change_description?;
+    string? change_description?;
     # The time the audit got created
-    string created_at?;
+    string? created_at?;
     # The id automatically assigned upon creation
-    int id?;
+    int? id?;
     # The IP address of the user doing the audit
-    string ip_address?;
+    string? ip_address?;
     # The id of the item being audited
-    int source_id?;
+    int? source_id?;
     # The name of the item being audited
-    string source_label?;
+    string? source_label?;
     # Item type being audited. Typically describes the system where the change
     # was initiated. Possible values vary based on your account's Zendesk
     # products and activity. Common values include "apitoken", "rule", "ticket",
@@ -1685,418 +1685,418 @@ public type AuditLogObject record {
     # [triggers](https://support.zendesk.com/hc/en-us/articles/4408822236058),
     # [views](https://support.zendesk.com/hc/en-us/articles/4408888828570),
     # and other automated business rules
-    string source_type?;
+    string? source_type?;
     # The URL to access the audit log
-    string url?;
+    string? url?;
 };
 
 public type GroupSLAPolicyFilterDefinitionResponse_definitions_operators record {
-    string title?;
-    string value?;
+    string? title?;
+    string? value?;
 };
 
 public type ActivityResponse record {
-    ActivityObject activity?;
+    ActivityObject? activity?;
 };
 
 public type CustomObjectRecordsUpsertRequest record {
-    CustomObjectRecord custom_object_record?;
+    CustomObjectRecord? custom_object_record?;
 };
 
 public type CustomStatusUpdateRequest record {
-    CustomStatusUpdateInput custom_status?;
+    CustomStatusUpdateInput? custom_status?;
 };
 
 public type Workspaces_reorder_body record {
-    decimal[] ids?;
+    decimal[]? ids?;
 };
 
-public type Users_update_many_body UserRequest|UsersRequest;
+public type Users_update_many_body UserRequest|UsersRequest?;
 
 public type TicketsResponse record {
-    TicketObject[] tickets?;
+    TicketObject[]? tickets?;
 };
 
 public type ViewObject record {
     # Whether the view is active
-    boolean active?;
+    boolean? active?;
     # Describes how the view is constructed. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
-    record {} conditions?;
+    record {}? conditions?;
     # The time the view was created
-    string created_at?;
+    string? created_at?;
     # If true, the view is a default view
-    boolean default?;
+    boolean? default?;
     # The description of the view
-    string description?;
+    string? description?;
     # Describes how the view should be executed. See [Execution](#execution)
-    record {} execution?;
+    record {}? execution?;
     # Automatically assigned when created
-    int id?;
+    int? id?;
     # The position of the view
-    int position?;
+    int? position?;
     # Who may access this account. Is null when everyone in the account can access it
-    record {} restriction?;
+    record {}? restriction?;
     # The title of the view
-    string title?;
+    string? title?;
     # The time the view was last updated
-    string updated_at?;
+    string? updated_at?;
 };
 
 public type SuspendedTicketResponse record {
-    SuspendedTicketObject[] suspended_ticket?;
+    SuspendedTicketObject[]? suspended_ticket?;
 };
 
 # An object that describes the conditions under which the automation will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
 public type ConditionsObject record {
     # Logical AND. Tickets must fulfill all of the conditions to be considered matching
-    ConditionObject[] all?;
+    ConditionObject[]? all?;
     # Logical OR. Tickets may satisfy any of the conditions to be considered matching
-    ConditionObject[] 'any?;
+    ConditionObject[]? 'any?;
 };
 
 public type OrganizationsRelatedResponse record {
-    OrganizationMetadataObject organization_related?;
+    OrganizationMetadataObject? organization_related?;
 };
 
 public type TriggerRevisionResponse_trigger_revision record {
-    int author_id?;
-    string created_at?;
-    int id?;
-    TriggerRevisionResponse_trigger_revision_snapshot snapshot?;
-    string url?;
+    int? author_id?;
+    string? created_at?;
+    int? id?;
+    TriggerRevisionResponse_trigger_revision_snapshot? snapshot?;
+    string? url?;
 };
 
 public type BatchJobRequest_job_items record {
-    TriggerCategoryBatchRequest[] trigger_categories?;
-    TriggerBatchRequest[] triggers?;
+    TriggerCategoryBatchRequest[]? trigger_categories?;
+    TriggerBatchRequest[]? triggers?;
 };
 
 # Side conversations settings
 public type AccountSettingsSideConversationsObject record {
-    boolean email_channel?;
-    boolean msteams_channel?;
-    boolean show_in_context_panel?;
-    boolean slack_channel?;
-    boolean tickets_channel?;
+    boolean? email_channel?;
+    boolean? msteams_channel?;
+    boolean? show_in_context_panel?;
+    boolean? slack_channel?;
+    boolean? tickets_channel?;
 };
 
 public type GroupSLAPoliciesResponse record {
-    int count?;
-    GroupSLAPolicyObject[] group_sla_policies?;
+    int? count?;
+    GroupSLAPolicyObject[]? group_sla_policies?;
     string? next_page?;
     string? previous_page?;
 };
 
 # API configuration options. See [API](#api)
 public type AccountSettingsApiObject record {
-    boolean accepted_api_agreement?;
-    string api_password_access?;
-    string api_token_access?;
+    boolean? accepted_api_agreement?;
+    string? api_password_access?;
+    string? api_token_access?;
 };
 
 public type OrganizationMembershipResponse record {
-    OrganizationMembershipObject organization_membership?;
+    OrganizationMembershipObject? organization_membership?;
 };
 
 public type CustomObjectRecordsBulkCreateRequest_job record {
-    string action?;
+    string? action?;
     # An array of record objects for job actions that create, update, or set. An array of strings for job actions that delete.
-    CustomObjectRecord[] items?;
+    CustomObjectRecord[]? items?;
 };
 
 # User settings. See [Users](#users)
 public type AccountSettingsUserObject record {
-    boolean agent_created_welcome_emails?;
-    boolean end_user_phone_number_validation?;
-    boolean have_gravatars_enabled?;
-    boolean language_selection?;
-    boolean multiple_organizations?;
-    boolean tagging?;
-    boolean time_zone_selection?;
+    boolean? agent_created_welcome_emails?;
+    boolean? end_user_phone_number_validation?;
+    boolean? have_gravatars_enabled?;
+    boolean? language_selection?;
+    boolean? multiple_organizations?;
+    boolean? tagging?;
+    boolean? time_zone_selection?;
 };
 
 public type GroupsCountObject record {
-    GroupsCountObject_count count?;
+    GroupsCountObject_count? count?;
 };
 
 public type MacroAttachmentObject record {
     # The content type of the image. Example value: "image/png"
-    string content_type?;
+    string? content_type?;
     # A full URL where the attachment image file can be downloaded
-    string content_url?;
+    string? content_url?;
     # The time when this attachment was created
-    string created_at?;
+    string? created_at?;
     # The name of the image file
-    string filename?;
+    string? filename?;
     # Automatically assigned when created
-    int id?;
+    int? id?;
     # The size of the image file in bytes
-    int size?;
+    int? size?;
 };
 
 public type CustomObjectsResponse record {
-    CustomObject[] custom_objects?;
+    CustomObject[]? custom_objects?;
 };
 
 public type UsersResponse record {
-    UserObject[] users?;
+    UserObject[]? users?;
 };
 
 public type CustomObjectRecordsResponse_meta record {
     string? after_cursor;
     string? before_cursor;
-    boolean has_more;
+    boolean? has_more;
 };
 
 public type GroupSLAPolicyFilterDefinitionResponse record {
-    GroupSLAPolicyFilterDefinitionResponse_definitions definitions?;
+    GroupSLAPolicyFilterDefinitionResponse_definitions? definitions?;
 };
 
 public type DefinitionsResponse_definitions_operators record {
-    boolean terminal?;
-    string title?;
-    string value?;
+    boolean? terminal?;
+    string? title?;
+    string? value?;
 };
 
 public type PushNotificationDevicesRequest record {
-    PushNotificationDevicesInput push_notification_devices?;
+    PushNotificationDevicesInput? push_notification_devices?;
 };
 
 public type SLAPolicyFilterDefinitionResponse_definitions_values_list record {
-    string title?;
+    string? title?;
     string? value?;
 };
 
 public type CustomStatusCreateRequest record {
-    CustomStatusCreateInput custom_status?;
+    CustomStatusCreateInput? custom_status?;
 };
 
 # An object that describes the conditions that a ticket must match in order for an SLA policy to be applied to that ticket. See [Filter](#filter).
 public type SLAPolicyFilterObject record {
-    SLAPolicyFilterConditionObject[] all?;
-    SLAPolicyFilterConditionObject[] 'any?;
+    SLAPolicyFilterConditionObject[]? all?;
+    SLAPolicyFilterConditionObject[]? 'any?;
 };
 
 public type AssigneeFieldAssignableSearchAgentObject record {
     # Name of the agent's group
-    string group?;
+    string? group?;
     # Agent's Group ID
-    int group_id?;
+    int? group_id?;
     # Agent ID
-    int id?;
+    int? id?;
     # Name of the agent
-    string name?;
+    string? name?;
     # URL of Avatar
     string? photo_url?;
 };
 
 public type TargetTwitter record {
     # only writable
-    string secret?;
-    string token?;
+    string? secret?;
+    string? token?;
 };
 
 public type DynamicContentsResponse record {
-    DynamicContentObject[] items?;
+    DynamicContentObject[]? items?;
 };
 
-public type TriggerCategoryId string;
+public type TriggerCategoryId string?;
 
 public type TargetEmail record {
-    string email;
-    string subject;
+    string? email;
+    string? subject;
 };
 
 public type TwitterChannelTwicketStatusResponse_statuses record {
-    boolean favorited?;
-    int id?;
-    boolean retweeted?;
-    boolean user_followed?;
+    boolean? favorited?;
+    int? id?;
+    boolean? retweeted?;
+    boolean? user_followed?;
 };
 
 public type JobStatusesResponse record {
-    JobStatusObject[] job_statuses;
+    JobStatusObject[]? job_statuses;
 };
 
 public type Error record {
-    string code;
-    string detail?;
-    string id?;
-    record {} links?;
-    record {} 'source?;
-    string status?;
-    string title;
+    string? code;
+    string? detail?;
+    string? id?;
+    record {}? links?;
+    record {}? 'source?;
+    string? status?;
+    string? title;
 };
 
 public type TicketMetricEventUpdateStatusObject record {
     *TicketMetricEventBaseObject;
     # Available if `type` is `update_status`. Minutes since the metric has been open. See [status](#status)
-    record {} status?;
+    record {}? status?;
 };
 
 public type AuditLogResponse record {
-    AuditLogObject audit_log?;
+    AuditLogObject? audit_log?;
 };
 
 public type ResourceCollectionResponse record {
-    ResourceCollectionObject resource_collection?;
+    ResourceCollectionObject? resource_collection?;
 };
 
-public type TargetObject TargetCommonFields;
+public type TargetObject TargetCommonFields?;
 
 public type SystemFieldOptionObject record {
     # Name of the system field option
-    string name?;
+    string? name?;
     # Value of the system field option
-    string value?;
+    string? value?;
 };
 
 public type QueuesResponse record {
-    QueueObject[] queues?;
+    QueueObject[]? queues?;
 };
 
 public type AuditLogsResponse record {
-    AuditLogObject[] audit_logs?;
+    AuditLogObject[]? audit_logs?;
 };
 
 public type TagListTagObject record {
     # The number of tags
-    int count?;
+    int? count?;
     # A name for the tag
-    string name?;
+    string? name?;
 };
 
 public type CurrentUserResponse record {
-    UserObject user?;
+    UserObject?? user?;
 };
 
 public type ViewResponse record {
-    record {}[] columns?;
-    record {}[] groups?;
-    record {}[] rows?;
-    ViewObject view?;
+    record {}[]? columns?;
+    record {}[]? groups?;
+    record {}[]? rows?;
+    ViewObject? view?;
 };
 
 public type CustomObjectFieldsResponse record {
-    CustomObjectField[] custom_object_fields?;
+    CustomObjectField[]? custom_object_fields?;
 };
 
 public type V2_trigger_categories_body record {
-    record {*TriggerCategoryRequest; *TriggerCategoryRequestRequired;} trigger_category?;
+    record {*TriggerCategoryRequest; *TriggerCategoryRequestRequired;}? trigger_category?;
 };
 
 public type UserIdentitiesResponse record {
-    UserIdentityObject[] identities?;
+    UserIdentityObject[]? identities?;
 };
 
 public type TriggerCategory record {
-    string created_at?;
-    string id?;
-    string name?;
-    int position?;
-    string updated_at?;
+    string? created_at?;
+    string? id?;
+    string? name?;
+    int? position?;
+    string? updated_at?;
 };
 
 public type TriggerResponse record {
-    TriggerObject trigger?;
+    TriggerObject? trigger?;
 };
 
 public type DefinitionsResponse_definitions record {
-    DefinitionsResponse_definitions_conditions_all[] conditions_all?;
-    DefinitionsResponse_definitions_conditions_all[] conditions_any?;
+    DefinitionsResponse_definitions_conditions_all[]? conditions_all?;
+    DefinitionsResponse_definitions_conditions_all[]? conditions_any?;
 };
 
 public type DynamicContentObject record {
     # When this record was created
-    string created_at?;
+    string? created_at?;
     # The default locale for the item. Must be one of the [locales the account has active](/api-reference/ticketing/account-configuration/locales/#list-locales).
-    int default_locale_id;
+    int? default_locale_id;
     # Automatically assigned when creating items
-    int id?;
+    int? id?;
     # The unique name of the item
-    string name;
+    string? name;
     # Indicates the item has outdated variants within it
-    boolean outdated?;
+    boolean? outdated?;
     # Automatically generated placeholder for the item, derived from name
-    string placeholder?;
+    string? placeholder?;
     # When this record was last updated
-    string updated_at?;
+    string? updated_at?;
     # The API url of this item
-    string url?;
+    string? url?;
     # All variants within this item. See [Dynamic Content Item Variants](/api-reference/ticketing/ticket-management/dynamic_content_item_variants/)
-    DynamicContentVariantObject[] variants;
+    DynamicContentVariantObject[]? variants;
 };
 
 public type RequestObject record {
     # The id of the assignee if the field is visible to end users
-    int assignee_id?;
+    int? assignee_id?;
     # If true, an end user can mark the request as solved. See [Update Request](/api-reference/ticketing/tickets/ticket-requests/#update-request)
-    boolean can_be_solved_by_me?;
+    boolean? can_be_solved_by_me?;
     # The ids of users currently CC'ed on the ticket
-    int[] collaborator_ids?;
+    int[]? collaborator_ids?;
     # When this record was created
-    string created_at?;
+    string? created_at?;
     # Custom fields for the request. See [Setting custom field values](/api-reference/ticketing/tickets/tickets/#setting-custom-field-values) in the Tickets doc
-    MacroApplyTicketResponse_result_ticket_fields[] custom_fields?;
+    MacroApplyTicketResponse_result_ticket_fields[]? custom_fields?;
     # The custom ticket status id of the ticket
-    int custom_status_id?;
+    int? custom_status_id?;
     # Read-only first comment on the request. When [creating a request](#create-request), use `comment` to set the description
-    string description?;
+    string? description?;
     # When the task is due (only applies if the request is of type "task")
-    string due_at?;
+    string? due_at?;
     # The ids of users who are currently email CCs on the ticket. See [CCs and followers resources](https://support.zendesk.com/hc/en-us/articles/360020585233) in the Support Help Center
-    int[] email_cc_ids?;
+    int[]? email_cc_ids?;
     # The id of the original ticket if this request is a follow-up ticket. See [Create Request](#create-request)
-    int followup_source_id?;
+    int? followup_source_id?;
     # The id of the assigned group if the field is visible to end users
-    int group_id?;
+    int? group_id?;
     # Automatically assigned when creating requests
-    int id?;
+    int? id?;
     # Is true if any comments are public, false otherwise
-    boolean is_public?;
+    boolean? is_public?;
     # The organization of the requester
-    int organization_id?;
+    int? organization_id?;
     # The priority of the request, "low", "normal", "high", "urgent"
-    string priority?;
+    string? priority?;
     # The original recipient e-mail address of the request
-    string recipient?;
+    string? recipient?;
     # The id of the requester
-    int requester_id?;
+    int? requester_id?;
     # Whether or not request is solved (an end user can set this if "can_be_solved_by_me", above, is true for that user)
-    boolean solved?;
+    boolean? solved?;
     # The state of the request, "new", "open", "pending", "hold", "solved", "closed"
-    string status?;
+    string? status?;
     # The value of the subject field for this request if the subject field is visible to end users; a truncated version of the description otherwise
-    string subject;
+    string? subject;
     # The numeric id of the ticket form associated with this request if the form is visible to end users - only applicable for enterprise accounts
-    int ticket_form_id?;
+    int? ticket_form_id?;
     # The type of the request, "question", "incident", "problem", "task"
-    string 'type?;
+    string? 'type?;
     # When this record last got updated
-    string updated_at?;
+    string? updated_at?;
     # The API url of this request
-    string url?;
+    string? url?;
     # Describes how the object was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
-    TicketAuditViaObject via?;
+    TicketAuditViaObject? via?;
 };
 
 public type TicketAuditsResponse record {
-    string after_cursor?;
-    string after_url?;
-    TicketAuditObject[] audits?;
-    string before_cursor?;
-    string before_url?;
+    string? after_cursor?;
+    string? after_url?;
+    TicketAuditObject[]? audits?;
+    string? before_cursor?;
+    string? before_url?;
 };
 
 public type OrganizationMembershipsResponse record {
-    OrganizationMembershipObject[] organization_memberships?;
+    OrganizationMembershipObject[]? organization_memberships?;
 };
 
 public type SessionObject record {
     # When the session was created
     string? authenticated_at?;
     # Automatically assigned when the session is created
-    int id;
+    int? id;
     # The last approximate time this session was seen. This does not update on every request.
     string? last_seen_at?;
     # The API URL of this session
@@ -2106,46 +2106,46 @@ public type SessionObject record {
 };
 
 public type RelationshipFilterDefinitionResponse record {
-    RelationshipFilterDefinition definitions?;
+    RelationshipFilterDefinition? definitions?;
 };
 
 public type SatisfactionReasonObject record {
     # The time the reason was created
-    string created_at?;
+    string? created_at?;
     # The time the reason was deleted
-    string deleted_at?;
+    string? deleted_at?;
     # Automatically assigned upon creation
-    int id?;
+    int? id?;
     # The dynamic content placeholder, if present, or the current "value", if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string raw_value?;
+    string? raw_value?;
     # An account-level code for referencing the reason. Custom reasons are assigned an auto-incrementing integer (non-system reason codes begin at 1000). See [Reason codes](#reason-codes)
-    int reason_code?;
+    int? reason_code?;
     # The time the reason was updated
-    string updated_at?;
+    string? updated_at?;
     # API URL for the resource
-    string url?;
+    string? url?;
     # Translated value of the reason in the account locale
-    string value;
+    string? value;
 };
 
 public type Workspaces_workspace_id_body record {
-    WorkspaceInput workspace?;
+    WorkspaceInput? workspace?;
 };
 
 public type TagCountObject record {
     # The time that the count value was last refreshed
-    string refreshed_at?;
+    string? refreshed_at?;
     # The count of tags created in the last 24 hours
-    int value?;
+    int? value?;
 };
 
 public type ActivitiesResponse record {
-    ActivityObject[] activities?;
-    record {}[] actors?;
-    int count?;
+    ActivityObject[]? activities?;
+    record {}[]? actors?;
+    int? count?;
     string? next_page?;
     string? previous_page?;
-    record {}[] users?;
+    record {}[]? users?;
 };
 
 public type ListTicketIncidentsResponse record {
@@ -2153,55 +2153,55 @@ public type ListTicketIncidentsResponse record {
 
 # Support UI settings. See [Lotus](#lotus)
 public type AccountSettingsLotusObject record {
-    int pod_id?;
-    boolean prefer_lotus?;
-    boolean reporting?;
+    int? pod_id?;
+    boolean? prefer_lotus?;
+    boolean? reporting?;
 };
 
 public type DefinitionsResponse record {
-    DefinitionsResponse_definitions definitions?;
+    DefinitionsResponse_definitions? definitions?;
 };
 
 public type TriggerChangeObject record {
     # One of `-`, `+`, `=` representing the type of change
-    string change?;
+    string? change?;
     # The value of the item it represents
-    boolean|string|int|(string|int|boolean)[] content?;
+    boolean|string|int|(string|int|boolean?)[]? content?;
 };
 
 public type TriggerConditionDefinitionObjectAny record {
-    string group?;
-    boolean nullable?;
-    DefinitionsResponse_definitions_operators[] operators?;
-    boolean repeatable?;
-    string subject?;
-    string title?;
-    string 'type?;
+    string? group?;
+    boolean? nullable?;
+    DefinitionsResponse_definitions_operators[]? operators?;
+    boolean? repeatable?;
+    string? subject?;
+    string? title?;
+    string? 'type?;
 };
 
 public type MacroResponse record {
-    MacroObject macro?;
+    MacroObject? macro?;
 };
 
 public type AttachmentThumbnails record {
     # An array of attachment objects. Note that photo thumbnails do not have thumbnails
-    AttachmentBaseObject[] thumbnails?;
+    AttachmentBaseObject[]? thumbnails?;
 };
 
 public type TicketSkipsResponse record {
-    TicketSkipObject[] skips?;
+    TicketSkipObject[]? skips?;
 };
 
 public type SuspendedTicketsExportResponse_export record {
-    string status?;
-    string view_id?;
+    string? status?;
+    string? view_id?;
 };
 
 public type ResourceCollectionsResponse record {
-    int count?;
+    int? count?;
     string? next_page?;
     string? previous_page?;
-    ResourceCollectionObject[] resource_collections?;
+    ResourceCollectionObject[]? resource_collections?;
 };
 
 public type CustomObjectRecordsResponse_links record {
@@ -2210,762 +2210,762 @@ public type CustomObjectRecordsResponse_links record {
 };
 
 public type JobStatusResponse record {
-    JobStatusObject job_status?;
+    JobStatusObject? job_status?;
 };
 
 public type ViewsResponse record {
-    int count?;
+    int? count?;
     string? next_page?;
     string? previous_page?;
-    ViewObject[] views?;
+    ViewObject[]? views?;
 };
 
 # Primary group ids linked to the queue
 public type QueueObject_primary_groups record {
-    int count?;
-    ListDeletedTicketsResponse_actor[] groups?;
+    int? count?;
+    ListDeletedTicketsResponse_actor[]? groups?;
 };
 
 public type SessionsResponse record {
-    SessionObject[] sessions?;
+    SessionObject[]? sessions?;
 };
 
 public type SkillBasedRoutingAttributeDefinitions_definitions record {
-    SkillBasedRoutingAttributeDefinitions_definitions_conditions_all[] conditions_all?;
-    SkillBasedRoutingAttributeDefinitions_definitions_conditions_all[] conditions_any?;
+    SkillBasedRoutingAttributeDefinitions_definitions_conditions_all[]? conditions_all?;
+    SkillBasedRoutingAttributeDefinitions_definitions_conditions_all[]? conditions_any?;
 };
 
 public type DynamicContentVariantResponse record {
-    DynamicContentVariantObject variant?;
+    DynamicContentVariantObject? variant?;
 };
 
 public type AuditObject_events record {
-    string body?;
-    string field_name?;
-    int id?;
-    string 'type?;
-    string|int value?;
+    string? body?;
+    string? field_name?;
+    int? id?;
+    string? 'type?;
+    string|int? value?;
 };
 
 public type SatisfactionReasonsResponse record {
-    SatisfactionReasonObject[] reasons?;
+    SatisfactionReasonObject[]? reasons?;
 };
 
 # Zendesk Chat settings. See [Chat](#chat)
 public type AccountSettingsChatObject record {
-    boolean available?;
-    boolean enabled?;
-    boolean integrated?;
-    int maximum_request_count?;
-    string welcome_message?;
+    boolean? available?;
+    boolean? enabled?;
+    boolean? integrated?;
+    int? maximum_request_count?;
+    string? welcome_message?;
 };
 
 public type OrganizationSubscriptionsResponse record {
     *OffsetPaginationObject;
     # An array of organization subscriptions
-    OrganizationSubscriptionObject[] organization_subscriptions?;
+    OrganizationSubscriptionObject[]? organization_subscriptions?;
 };
 
 public type LocaleObject record {
     # The ISO 8601 formatted date-time the locale was created
-    string created_at?;
+    string? created_at?;
     # The unique ID of the locale
-    int id?;
+    int? id?;
     # The name of the locale
-    string locale?;
+    string? locale?;
     # The name of the language
-    string name?;
+    string? name?;
     # The ISO 8601 formatted date-time when the locale was last updated
-    string updated_at?;
+    string? updated_at?;
     # The URL of the locale record
-    string url?;
+    string? url?;
 };
 
 public type AttachmentUploadResponse record {
-    AttachmentUploadResponse_upload upload?;
+    AttachmentUploadResponse_upload? upload?;
 };
 
 public type CreateResourceResult record {
     # the id of the new resource
-    int id;
+    int? id;
     # the index number of the resul
-    int index;
+    int? index;
 };
 
 public type SatisfactionRatingResponse record {
-    SatisfactionRatingObject[] satisfaction_rating?;
+    SatisfactionRatingObject[]? satisfaction_rating?;
 };
 
 public type TagUrlObject record {
     # The url associated to the api request
-    string url?;
+    string? url?;
 };
 
 public type CustomStatusUpdateInput record {
     # True if the custom status is set as active; inactive if false
-    boolean active?;
+    boolean? active?;
     # The dynamic content placeholder, if present, or the "agent_label" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string agent_label?;
+    string? agent_label?;
     # The dynamic content placeholder, if present, or the "description" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string description?;
+    string? description?;
     # The dynamic content placeholder, if present, or the "end_user_description" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string end_user_description?;
+    string? end_user_description?;
     # The dynamic content placeholder, if present, or the "end_user_label" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string end_user_label?;
+    string? end_user_label?;
 };
 
 public type SessionResponse record {
-    SessionObject[] session?;
+    SessionObject[]? session?;
 };
 
 public type ActivityObject record {
     # The full user record of the user responsible for the ticket activity. See [Users](/api-reference/ticketing/users/users/)
-    UserObject actor?;
+    UserObject?? actor?;
     # The id of the user responsible for the ticket activity. An `actor_id` of "-1" is a Zendesk system user, such as an automations action.
-    int actor_id?;
+    int? actor_id?;
     # When the record was created
-    string created_at?;
+    string? created_at?;
     # Automatically assigned on creation
-    int id?;
+    int? id?;
     # The content of the activity. Can be a ticket, comment, or change.
-    record {} 'object?;
+    record {}? 'object?;
     # The target of the activity, a ticket.
-    record {} target?;
+    record {}? target?;
     # Description of the activity
-    string title?;
+    string? title?;
     # When the record was last updated
-    string updated_at?;
+    string? updated_at?;
     # The API url of the activity
-    string url?;
+    string? url?;
     # The full user record of the agent making the request. See [Users](/api-reference/ticketing/users/users/)
-    UserObject user?;
+    UserObject?? user?;
     # The id of the agent making the request
-    int user_id?;
+    int? user_id?;
     # The type of activity. Can be "tickets.assignment", "tickets.comment", or "tickets.priority_increase"
-    string verb?;
+    string? verb?;
 };
 
 public type GroupSLAPolicyFilterDefinitionResponse_definitions_values_list record {
-    string title?;
+    string? title?;
     int? value?;
 };
 
 public type TwitterChannelResponse record {
-    TwitterChannelObject monitored_twitter_handle?;
+    TwitterChannelObject? monitored_twitter_handle?;
 };
 
 public type UserCreateInput_organization record {
-    string name;
+    string? name;
 };
 
 public type DynamicContentVariantObject record {
     # If the variant is active and useable
-    boolean active?;
+    boolean? active?;
     # The content of the variant
-    string content;
+    string? content;
     # When the variant was created
-    string created_at?;
+    string? created_at?;
     # If the variant is the default for the item it belongs to
-    boolean default?;
+    boolean? default?;
     # Automatically assigned when the variant is created
-    int id?;
+    int? id?;
     # An active locale
-    int locale_id;
+    int? locale_id;
     # If the variant is outdated
-    boolean outdated?;
+    boolean? outdated?;
     # When the variant was last updated
-    string updated_at?;
+    string? updated_at?;
     # The API url of the variant
-    string url?;
+    string? url?;
 };
 
 public type IncrementalSkillBasedRoutingAttribute record {
     # Automatically assigned when an attribute is created
-    string id?;
+    string? id?;
     # The name of the attribute
-    string name?;
+    string? name?;
     # The time the attribute was created, updated, or deleted
-    string time?;
+    string? time?;
     # One of "create", "update", or "delete"
-    string 'type?;
+    string? 'type?;
 };
 
 public type SLAPolicyFilterDefinitionResponse record {
-    SLAPolicyFilterDefinitionResponse_definitions definitions?;
+    SLAPolicyFilterDefinitionResponse_definitions? definitions?;
 };
 
 public type ViewCountObject record {
     # Only active views if true, inactive views if false, all views if null.
-    boolean active?;
+    boolean? active?;
     # false if the cached data is stale and the system is still loading and caching new data
-    boolean fresh?;
+    boolean? fresh?;
     # A pretty-printed text approximation of the view count
-    string pretty?;
+    string? pretty?;
     # The API url of the count
-    string url?;
+    string? url?;
     # The cached number of tickets in the view. Can also be null if the system is loading and caching new data. Not to be confused with 0 tickets
     int? value?;
     # The id of the view
-    int view_id?;
+    int? view_id?;
 };
 
 public type QueueResponse record {
-    QueueObject queue?;
+    QueueObject? queue?;
 };
 
 public type FollowerObject record {
     "put"|"delete" action?;
-    string user_email?;
-    string user_id?;
+    string? user_email?;
+    string? user_id?;
 };
 
 public type TicketMetricsResponse record {
-    TicketMetricObject[] ticket_metrics?;
+    TicketMetricObject[]? ticket_metrics?;
 };
 
 public type LocaleResponse record {
-    LocaleObject locale?;
+    LocaleObject? locale?;
 };
 
 public type OrganizationObject record {
     # The time the organization was created
-    string created_at?;
+    string? created_at?;
     # Any details obout the organization, such as the address
     string? details?;
     # An array of domain names associated with this organization
-    string[] domain_names?;
+    string[]? domain_names?;
     # A unique external id to associate organizations to an external record. The id is case-insensitive. For example, "company1" and "Company1" are considered the same
     string? external_id?;
     # New tickets from users in this organization are automatically put in this group
     int? group_id?;
     # Automatically assigned when the organization is created
-    int id?;
+    int? id?;
     # A unique name for the organization
-    string name?;
+    string? name?;
     # Any notes you have about the organization
     string? notes?;
     # Custom fields for this organization. See [Custom organization fields](/api-reference/ticketing/organizations/organizations/#custom-organization-fields)
     record {}? organization_fields?;
     # End users in this organization are able to comment on each other's tickets
-    boolean shared_comments?;
+    boolean? shared_comments?;
     # End users in this organization are able to see each other's tickets
-    boolean shared_tickets?;
+    boolean? shared_tickets?;
     # The tags of the organization
-    string[] tags?;
+    string[]? tags?;
     # The time of the last update of the organization
-    string updated_at?;
+    string? updated_at?;
     # The API url of this organization
-    string url?;
+    string? url?;
 };
 
 public type ActivitiesCountResponse_count record {
-    string refreshed_at?;
-    int value?;
+    string? refreshed_at?;
+    int? value?;
 };
 
 public type GroupSLAPolicyFilterDefinitionResponse_definitions_values record {
-    GroupSLAPolicyFilterDefinitionResponse_definitions_values_list[] list?;
-    string 'type?;
+    GroupSLAPolicyFilterDefinitionResponse_definitions_values_list[]? list?;
+    string? 'type?;
 };
 
 public type CollaboratorObject record {
-    string email?;
-    string name?;
+    string? email?;
+    string? name?;
 };
 
 public type SupportAddressResponse record {
-    SupportAddressObject recipient_address?;
+    SupportAddressObject? recipient_address?;
 };
 
 # Ticket form settings. See [Ticket Form](#ticket-form)
 public type AccountSettingsTicketFormObject record {
-    string raw_ticket_forms_instructions?;
-    string ticket_forms_instructions?;
+    string? raw_ticket_forms_instructions?;
+    string? ticket_forms_instructions?;
 };
 
 public type SatisfactionRatingObject record {
     # The id of agent assigned to at the time of rating
-    int assignee_id;
+    int? assignee_id;
     # The comment received with this rating, if available
-    string comment?;
+    string? comment?;
     # The time the satisfaction rating got created
-    string created_at?;
+    string? created_at?;
     # The id of group assigned to at the time of rating
-    int group_id;
+    int? group_id;
     # Automatically assigned upon creation
-    int id?;
+    int? id?;
     # The reason for a bad rating given by the requester in a follow-up question. Satisfaction reasons must be [enabled](https://support.zendesk.com/hc/en-us/articles/223152967)
-    string reason?;
+    string? reason?;
     # The default reasons the user can select from a list menu for giving a negative rating. See [Reason codes](/api-reference/ticketing/ticket-management/satisfaction_reasons/#reason-codes) in the Satisfaction Reasons API. Can only be set on ratings with a `score` of "bad". Responses don't include this property
-    int reason_code?;
+    int? reason_code?;
     # id for the reason the user gave a negative rating. Can only be set on ratings with a `score` of "bad". To get a descriptive value for the id, use the [Show Reason for Satisfaction Rating](/api-reference/ticketing/ticket-management/satisfaction_reasons/#show-reason-for-satisfaction-rating) endpoint
-    int reason_id?;
+    int? reason_id?;
     # The id of ticket requester submitting the rating
-    int requester_id;
+    int? requester_id;
     # The rating "offered", "unoffered", "good" or "bad"
-    string score;
+    string? score;
     # The id of ticket being rated
-    int ticket_id;
+    int? ticket_id;
     # The time the satisfaction rating got updated
-    string updated_at?;
+    string? updated_at?;
     # The API url of this rating
-    string url?;
+    string? url?;
 };
 
 public type GroupSLAPolicyFilterDefinitionResponse_definitions_all record {
-    string group?;
-    GroupSLAPolicyFilterDefinitionResponse_definitions_operators[] operators?;
-    string title?;
-    string value?;
-    GroupSLAPolicyFilterDefinitionResponse_definitions_values values?;
+    string? group?;
+    GroupSLAPolicyFilterDefinitionResponse_definitions_operators[]? operators?;
+    string? title?;
+    string? value?;
+    GroupSLAPolicyFilterDefinitionResponse_definitions_values? values?;
 };
 
 public type ListDeletedTicketsResponse_actor record {
-    int id?;
-    string name?;
+    int? id?;
+    string? name?;
 };
 
 public type SkillBasedRoutingAttributeObject record {
     # When this record was created
-    string created_at?;
+    string? created_at?;
     # Automatically assigned when an attribute is created
-    string id?;
+    string? id?;
     # The name of the attribute
-    string name;
+    string? name;
     # When this record was last updated
-    string updated_at?;
+    string? updated_at?;
     # URL of the attribute
-    string url?;
+    string? url?;
 };
 
 public type UserMergePropertiesInput record {
-    string email?;
-    string name?;
-    int organization_id?;
-    string password?;
+    string? email?;
+    string? name?;
+    int? organization_id?;
+    string? password?;
 };
 
 # Branding settings. See [Branding](#branding)
 public type AccountSettingsBrandingObject record {
     string? favicon_url?;
-    string header_color?;
+    string? header_color?;
     string? header_logo_url?;
-    string page_background_color?;
-    string tab_background_color?;
-    string text_color?;
+    string? page_background_color?;
+    string? tab_background_color?;
+    string? text_color?;
 };
 
 public type AttachmentUpdateInput record {
     # If true, allows access to attachments with detected malware.
-    boolean malware_access_override?;
+    boolean? malware_access_override?;
 };
 
 public type MacroCategoriesResponse record {
-    string[] categories?;
+    string[]? categories?;
 };
 
 public type BatchJobRequest_job record {
     "patch" action?;
-    BatchJobRequest_job_items items?;
+    BatchJobRequest_job_items? items?;
 };
 
 public type TicketCreateRequest record {
-    TicketCreateInput ticket?;
+    TicketCreateInput? ticket?;
 };
 
 public type GroupResponse record {
-    GroupObject group?;
+    GroupObject? group?;
 };
 
 public type SkillBasedRoutingAttributeValueObject record {
     # Id of the associated attribute
-    string attribute_id?;
+    string? attribute_id?;
     # When this record was created
-    string created_at?;
+    string? created_at?;
     # Automatically assigned when an attribute value is created
-    string id?;
+    string? id?;
     # The name of the attribute value
-    string name?;
+    string? name?;
     # When this record was last updated
-    string updated_at?;
+    string? updated_at?;
     # URL of the attribute value
-    string url?;
+    string? url?;
 };
 
 public type CustomObjectsCreateRequest record {
-    CustomObjectCreateInput custom_object?;
+    CustomObjectCreateInput? custom_object?;
 };
 
 public type SuspendedTicketObject record {
     # The attachments, if any associated to this suspended ticket. See [Attachments](/api-reference/ticketing/tickets/ticket-attachments/)
     AttachmentObject[]? attachments?;
     # The author id (if available), name and email
-    AuthorObject author?;
+    AuthorObject?? author?;
     # The id of the brand this ticket is associated with. Only applicable for Enterprise accounts
-    int brand_id?;
+    int? brand_id?;
     # Why the ticket was suspended
-    string cause?;
+    string? cause?;
     # The ID of the cause
-    int cause_id?;
+    int? cause_id?;
     # The content that was flagged
-    string content?;
+    string? content?;
     # The ticket ID this suspended email is associated with, if available
-    string created_at?;
+    string? created_at?;
     # The error messages if any associated to this suspended ticket
     record {}[]? error_messages?;
     # Automatically assigned
-    int id?;
+    int? id?;
     # The ID of the email, if available
-    string message_id?;
+    string? message_id?;
     # The original recipient e-mail address of the ticket
-    string recipient?;
+    string? recipient?;
     # The value of the subject field for this ticket
-    string subject?;
+    string? subject?;
     # The ticket ID this suspended email is associated with, if available
-    int ticket_id?;
+    int? ticket_id?;
     # When the ticket was assigned
-    string updated_at?;
+    string? updated_at?;
     # The API url of this ticket
-    string url?;
+    string? url?;
     # An object explaining how the ticket was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
-    ViaObject via?;
+    ViaObject? via?;
 };
 
 public type OrganizationSubscriptionResponse record {
-    OrganizationSubscriptionObject organization_subscription?;
+    OrganizationSubscriptionObject? organization_subscription?;
 };
 
 public type ResourceCollectionObject record {
     # When the resource collection was created
-    string created_at?;
+    string? created_at?;
     # id for the resource collection. Automatically assigned upon creation
-    int id?;
+    int? id?;
     # Array of resource metadata objects. See [Resource objects](#resource-objects)
-    ResourceCollectionObject_resources[] resources?;
+    ResourceCollectionObject_resources[]? resources?;
     # Last time the resource collection was updated
-    string updated_at?;
+    string? updated_at?;
 };
 
 public type TargetHTTP record {
     # "application/json", "application/xml", or "application/x-www-form-urlencoded"
-    string content_type;
+    string? content_type;
     # "get", "patch", "put", "post", or "delete"
-    string method;
+    string? method;
     # only writable
-    string password?;
-    string target_url;
-    string username?;
+    string? password?;
+    string? target_url;
+    string? username?;
 };
 
 public type TicketCreateInput record {
     *TicketUpdateInput;
     # Enterprise only. The id of the brand this ticket is associated with
-    int brand_id?;
+    int? brand_id?;
     # POST requests only. Users to add as cc's when creating a ticket. See [Setting Collaborators](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-collaborators)
-    CollaboratorObject[] collaborators?;
+    CollaboratorObject[]? collaborators?;
     # The ids of agents or end users currently CC'ed on the ticket. See [CCs and followers resources](https://support.zendesk.com/hc/en-us/articles/360020585233) in the Support Help Center
-    int[] email_cc_ids?;
+    int[]? email_cc_ids?;
     # The ids of agents currently following the ticket. See [CCs and followers resources](https://support.zendesk.com/hc/en-us/articles/360020585233)
-    int[] follower_ids?;
+    int[]? follower_ids?;
     # POST requests only. List of macro IDs to be recorded in the ticket audit
-    int[] macro_ids?;
+    int[]? macro_ids?;
     # The dynamic content placeholder, if present, or the "subject" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string raw_subject?;
+    string? raw_subject?;
     # The original recipient e-mail address of the ticket
-    string recipient?;
+    string? recipient?;
     # The user who submitted the ticket. The submitter always becomes the author of the first comment on the ticket
-    int submitter_id?;
+    int? submitter_id?;
     # Enterprise only. The id of the ticket form to render for the ticket
-    int ticket_form_id?;
+    int? ticket_form_id?;
     # An object explaining how the ticket was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
-    ViaObject via?;
+    ViaObject? via?;
     # POST requests only. The id of a closed ticket when creating a follow-up ticket. See [Creating a follow-up ticket](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#creating-a-follow-up-ticket)
-    int via_followup_source_id?;
+    int? via_followup_source_id?;
 };
 
 public type TrialAccountObject record {
     # The name of the account
-    string name?;
+    string? name?;
     # The subdomain of the account
-    string subdomain?;
+    string? subdomain?;
     # The URL of the account
-    string url?;
+    string? url?;
 };
 
 public type SLAPolicyFilterDefinitionResponse_definitions_all record {
-    string group?;
-    GroupSLAPolicyFilterDefinitionResponse_definitions_operators[] operators?;
+    string? group?;
+    GroupSLAPolicyFilterDefinitionResponse_definitions_operators[]? operators?;
     string? target?;
-    string title?;
-    string value?;
-    SLAPolicyFilterDefinitionResponse_definitions_values values?;
+    string? title?;
+    string? value?;
+    SLAPolicyFilterDefinitionResponse_definitions_values? values?;
 };
 
 public type WorkspaceObject record {
     # If true, this workspace is available for use
-    boolean activated?;
+    boolean? activated?;
     # The apps associated to this workspace
-    record {}[] apps?;
+    record {}[]? apps?;
     # An object that describes the conditions under which the automation will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
-    ConditionsObject conditions?;
+    ConditionsObject? conditions?;
     # The time the workspace was created
-    string created_at?;
+    string? created_at?;
     # User-defined description of this workspace's purpose
-    string description?;
+    string? description?;
     # Automatically assigned upon creation
-    int id?;
+    int? id?;
     # The ids of the macros associated to this workspace
-    int[] macro_ids?;
+    int[]? macro_ids?;
     # The ids of the macros associated to this workspace
-    int[] macros?;
+    int[]? macros?;
     # Ordering of the workspace relative to other workspaces
-    int position?;
+    int? position?;
     # If true, the order of apps within the workspace will be preserved
-    boolean prefer_workspace_app_order?;
+    boolean? prefer_workspace_app_order?;
     # An array of the macro objects that will be used in this workspace. See [Macros](/api-reference/ticketing/business-rules/macros/)
-    MacroObject[] selected_macros?;
+    MacroObject[]? selected_macros?;
     # The id of the ticket web form associated to this workspace
-    int ticket_form_id?;
+    int? ticket_form_id?;
     # The title of the workspace
-    string title?;
+    string? title?;
     # The time of the last update of the workspace
-    string updated_at?;
+    string? updated_at?;
     # The URL for this resource
-    string url?;
+    string? url?;
 };
 
 public type ConditionObject record {
     # The name of a ticket field
-    string 'field?;
+    string? 'field?;
     # A comparison operator
-    string operator?;
+    string? operator?;
     # The value of a ticket field
-    string value?;
+    string? value?;
 };
 
 public type SLAPolicyObject record {
     # The time the SLA policy was created
-    string created_at?;
+    string? created_at?;
     # The description of the SLA policy
-    string description?;
+    string? description?;
     # An object that describes the conditions that a ticket must match in order for an SLA policy to be applied to that ticket. See [Filter](#filter).
-    SLAPolicyFilterObject filter;
+    SLAPolicyFilterObject? filter;
     # Automatically assigned when created
-    int id?;
+    int? id?;
     # Array of [Policy Metric](#policy-metric) objects
-    SLAPolicyMetricObject[] policy_metrics?;
+    SLAPolicyMetricObject[]? policy_metrics?;
     # Position of the SLA policy that determines the order they will be matched. If not specified, the SLA policy is added as the last position
-    int position?;
+    int? position?;
     # The title of the SLA policy
-    string title;
+    string? title;
     # The time of the last update of the SLA policy
-    string updated_at?;
+    string? updated_at?;
     # URL of the SLA Policy reacord
-    string url?;
+    string? url?;
 };
 
 public type ListDeletedTicketsResponse_deleted_tickets record {
-    ListDeletedTicketsResponse_actor actor?;
-    string deleted_at?;
-    int id?;
-    string previous_state?;
-    string subject?;
+    ListDeletedTicketsResponse_actor? actor?;
+    string? deleted_at?;
+    int? id?;
+    string? previous_state?;
+    string? subject?;
 };
 
 public type OrganizationMetadataObject record {
     # The number of tickets for the organization
-    int tickets_count?;
+    int? tickets_count?;
     # The number of users for the organization
-    int users_count?;
+    int? users_count?;
 };
 
-public type PushNotificationDevicesInput string[];
+public type PushNotificationDevicesInput string[]?;
 
 public type TargetGetSatisfaction record {
-    string account_name;
-    string email;
+    string? account_name;
+    string? email;
     # only writable
-    string password;
-    string target_url?;
+    string? password;
+    string? target_url?;
 };
 
 public type MacroApplyTicketResponse_result record {
-    MacroApplyTicketResponse_result_ticket ticket?;
+    MacroApplyTicketResponse_result_ticket? ticket?;
 };
 
 public type BrandCreateRequest record {
-    BrandObject brand?;
+    BrandObject? brand?;
 };
 
 public type Page record {
-    string after?;
-    string before?;
-    int size?;
+    string? after?;
+    string? before?;
+    int? size?;
 };
 
 public type CustomObjectLimitsResponse record {
     # The current numnber of the requested resource
-    int count?;
+    int? count?;
     # The maximum allowed number for the requested resource
-    int 'limit?;
+    int? 'limit?;
 };
 
 public type CustomRoleObject record {
     # Configuration settings for the role. See [Configuration](#configuration)
-    CustomRoleConfigurationObject configuration?;
+    CustomRoleConfigurationObject? configuration?;
     # The time the record was created
-    string created_at?;
+    string? created_at?;
     # A description of the role
-    string description?;
+    string? description?;
     # Automatically assigned on creation
-    int id?;
+    int? id?;
     # Name of the custom role
-    string name;
+    string? name;
     # The user's role. 0 stands for a custom agent, 1 for a light agent, 2 for a chat agent, 3 for a contributor, 4 for an admin and 5 for a billing admin. See [Understanding standard agent roles in Zendesk Support](https://support.zendesk.com/hc/en-us/articles/4409155971354-Understanding-standard-agent-roles-in-Zendesk-Support) in Zendesk help
-    int role_type;
+    int? role_type;
     # The number of team members assigned to this role
-    int team_member_count?;
+    int? team_member_count?;
     # The time the record was last updated
-    string updated_at?;
+    string? updated_at?;
 };
 
 public type EssentialsCardObject record {
     # Date and time the essentials card were created
-    string created_at?;
+    string? created_at?;
     # If true, the system has used the first twenty fields for the custom object type as the essentials card.
-    boolean default?;
+    boolean? default?;
     # Fields that are displayed in the essentials card details. The order is defined by the order of the fields in the array
-    record {}[] fields;
+    record {}[]? fields;
     # id of the essentials card
     string? id?;
     # Object type. Example: `zen:user` refers to `User` type
-    string 'key?;
+    string? 'key?;
     # layout type
-    string layout?;
+    string? layout?;
     # Maximum number of fields allowed in the essentials card
-    int max_count?;
+    int? max_count?;
     # Date and time the essentials card were last updated
-    string updated_at?;
+    string? updated_at?;
 };
 
 public type CustomObjectRecordsResponse record {
     # The number of results returned for the current request
-    int count?;
-    CustomObjectRecord[] custom_object_records?;
-    CustomObjectRecordsResponse_links links?;
-    CustomObjectRecordsResponse_meta meta?;
+    int? count?;
+    CustomObjectRecord[]? custom_object_records?;
+    CustomObjectRecordsResponse_links? links?;
+    CustomObjectRecordsResponse_meta? meta?;
 };
 
-public type Organization_field_id int|string;
+public type Organization_field_id int|string?;
 
 public type MacroUpdateManyInput_macros record {
     # The active status of the macro (true or false)
-    boolean active?;
+    boolean? active?;
     # The ID of the macro to update
-    int id;
+    int? id;
     # The new position of the macro
-    int position?;
+    int? position?;
 };
 
 public type ListTicketCollaboratorsResponse record {
 };
 
 public type TriggerRevisionResponse_trigger_revision_snapshot record {
-    TriggerActionObject[] actions?;
-    boolean active?;
+    TriggerActionObject[]? actions?;
+    boolean? active?;
     # An object that describes the conditions under which the trigger will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
-    TriggerConditionsObject conditions?;
+    TriggerConditionsObject? conditions?;
     string? description?;
-    string title?;
+    string? title?;
 };
 
 # Describes how the object was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
 public type TicketAuditViaObject record {
     # This tells you how the ticket or event was created. Examples: "web", "mobile", "rule", "system"
-    string channel?;
+    string? channel?;
     # For some channels a source object gives more information about how or why the ticket or event was created
-    record {} 'source?;
+    record {}? 'source?;
 };
 
 public type UserRequest record {
-    UserInput user;
+    UserInput? user;
 };
 
 public type OrganizationSubscriptionObject record {
     # The date the organization subscription was created
-    string created_at?;
+    string? created_at?;
     # The ID of the organization subscription
-    int id?;
+    int? id?;
     # The ID of the organization
-    int organization_id?;
+    int? organization_id?;
     # The ID of the user
-    int user_id?;
+    int? user_id?;
 };
 
 # Account metrics settings. See [Metrics](#metrics)
 public type AccountSettingsMetricsObject record {
-    string account_size?;
+    string? account_size?;
 };
 
 public type MacrosResponse record {
-    MacroObject[] macros?;
+    MacroObject[]? macros?;
     *OffsetPaginationObject;
 };
 
 public type TicketMetricEventSLAObject record {
     *TicketMetricEventBaseObject;
     # Available if `type` is `apply_sla`. The SLA policy and target being enforced on the ticket and metric in question, if any. See [sla](#sla)
-    record {} sla?;
+    record {}? sla?;
 };
 
 public type SkillBasedRoutingAttributeValueResponse record {
-    SkillBasedRoutingAttributeValueObject attribute_value?;
+    SkillBasedRoutingAttributeValueObject? attribute_value?;
 };
 
 public type SLAPoliciesResponse record {
-    int count?;
+    int? count?;
     string? next_page?;
     string? previous_page?;
-    SLAPolicyObject[] sla_policies?;
+    SLAPolicyObject[]? sla_policies?;
 };
 
 public type CountResponse record {
-    CountResponse_count count?;
+    CountResponse_count? count?;
 };
 
 public type GroupObject record {
     # The time the group was created
-    string created_at?;
+    string? created_at?;
     # If the group is the default one for the account
-    boolean default?;
+    boolean? default?;
     # Deleted groups get marked as such
-    boolean deleted?;
+    boolean? deleted?;
     # The description of the group
-    string description?;
+    string? description?;
     # Automatically assigned when creating groups
-    int id?;
+    int? id?;
     # If true, the group is public.
     # If false, the group is private.
     # You can't change a private group to a public group
-    boolean is_public?;
+    boolean? is_public?;
     # The name of the group
-    string name;
+    string? name;
     # The time of the last update of the group
-    string updated_at?;
+    string? updated_at?;
     # The API url of the group
-    string url?;
+    string? url?;
 };
 
 # Onboarding settings
 public type AccountSettingsOnboardingObject record {
-    int checklist_onboarding_version?;
+    int? checklist_onboarding_version?;
     string? onboarding_segments?;
     string? product_sign_up?;
 };
 
 public type SearchResponse record {
     # The number of resources returned by the query corresponding to this page of results in the paginated response
-    int count?;
+    int? count?;
     # The facets corresponding to the search query
     string? facets?;
     # URL to the next page of results
@@ -2973,176 +2973,176 @@ public type SearchResponse record {
     # URL to the previous page of results
     string? previous_page?;
     # May consist of tickets, users, groups, or organizations, as specified by the `result_type` property in each result object
-    SearchResultObject[] results?;
+    SearchResultObject[]? results?;
 };
 
 public type ViewExportResponse record {
-    ViewExportResponse_export export?;
+    ViewExportResponse_export? export?;
 };
 
 public type UserCreateInput_identities record {
-    string 'type;
-    string value;
+    string? 'type;
+    string? value;
 };
 
 public type AttachmentBaseObject record {
     # The content type of the image. Example value: "image/png"
-    string content_type?;
+    string? content_type?;
     # A full URL where the attachment image file can be downloaded. The file may be hosted externally so take care not to inadvertently send Zendesk authentication credentials. See [Working with url properties](/documentation/ticketing/managing-tickets/working-with-url-properties)
-    string content_url?;
+    string? content_url?;
     # If true, the attachment has been deleted
-    boolean deleted?;
+    boolean? deleted?;
     # The name of the image file
-    string file_name?;
+    string? file_name?;
     # The height of the image file in pixels. If height is unknown, returns null
-    string height?;
+    string? height?;
     # Automatically assigned when created
-    int id?;
+    int? id?;
     # If true, the attachment is excluded from the attachment list and the attachment's URL
     # can be referenced within the comment of a ticket. Default is false
-    boolean inline?;
+    boolean? inline?;
     # If true, you can download an attachment flagged as malware. If false, you can't download such an attachment.
-    boolean malware_access_override?;
+    boolean? malware_access_override?;
     # The result of the malware scan. There is a delay between the time the attachment is uploaded and when the malware scan is completed. Usually the scan is done within a few seconds, but high load conditions can delay the scan results. Possible values: "malware_found", "malware_not_found", "failed_to_scan", "not_scanned"
-    string malware_scan_result?;
+    string? malware_scan_result?;
     # The URL the attachment image file has been mapped to
-    string mapped_content_url?;
+    string? mapped_content_url?;
     # The size of the image file in bytes
-    int size?;
+    int? size?;
     # A URL to access the attachment details
-    string url?;
+    string? url?;
     # The width of the image file in pixels. If width is unknown, returns null
-    string width?;
+    string? width?;
 };
 
 public type UpdateResourceResult record {
     # the action the job attempted (`"action": "update"`)
-    string action;
+    string? action;
     # the id of the resource the job attempted to update
-    int id;
+    int? id;
     # the status (`"status": "Updated"`)
-    string status;
+    string? status;
     # whether the action was successful or not (`"success": true`)
-    boolean success;
+    boolean? success;
 };
 
 public type QueueObject_definition_all record {
-    string 'field?;
-    string operator?;
-    string value?;
+    string? 'field?;
+    string? operator?;
+    string? value?;
 };
 
 public type UserPasswordRequirementsResponse record {
-    string[] requirements?;
+    string[]? requirements?;
 };
 
 public type TicketCommentsCountResponse record {
-    ActivitiesCountResponse_count count?;
+    ActivitiesCountResponse_count? count?;
 };
 
 public type SuspendedTicketsAttachmentsResponse_upload record {
-    AttachmentObject[] attachments?;
+    AttachmentObject[]? attachments?;
     # Token for subsequent request
-    string token?;
+    string? token?;
 };
 
 public type SatisfactionRatingsResponse record {
-    SatisfactionRatingObject[] satisfaction_ratings?;
+    SatisfactionRatingObject[]? satisfaction_ratings?;
 };
 
 public type TicketCreateVoicemailTicketVoiceCommentInput record {
     # The agent who answered the call
-    int answered_by_id?;
+    int? answered_by_id?;
     # Duration in seconds of the call
-    int call_duration?;
+    int? call_duration?;
     # Incoming phone number
-    string 'from?;
+    string? 'from?;
     # Location of the caller (optional)
-    string location?;
+    string? location?;
     # Incoming phone number
-    string recording_url?;
+    string? recording_url?;
     # [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp of the call starting time
-    string started_at?;
+    string? started_at?;
     # Dialed phone number
-    string to?;
+    string? to?;
     # Transcription of the call (optional)
-    string transcription_text?;
+    string? transcription_text?;
 };
 
 public type SearchResultObject record {
     # When the resource was created
-    string created_at?;
+    string? created_at?;
     # Flag to indicate whether this is the default resource
-    boolean default?;
+    boolean? default?;
     # Flag to indicate whether or not resource has been deleted
-    boolean deleted?;
+    boolean? deleted?;
     # The description of the resource
-    string description?;
+    string? description?;
     # The ID of the resource
-    int id?;
+    int? id?;
     # The name of the resource
-    string name?;
+    string? name?;
     # The type of the resource
-    string result_type?;
+    string? result_type?;
     # When the resource was last updated
-    string updated_at?;
+    string? updated_at?;
     # The url of the resource
-    string url?;
+    string? url?;
 };
 
 public type SupportAddressesResponse record {
-    SupportAddressObject[] recipient_addresses?;
+    SupportAddressObject[]? recipient_addresses?;
 };
 
 public type TriggerConditionDefinitionObjectAll record {
-    string group?;
-    boolean nullable?;
-    DefinitionsResponse_definitions_operators[] operators?;
-    boolean repeatable?;
-    string subject?;
-    string title?;
-    string 'type?;
-    DefinitionsResponse_definitions_values[] values?;
+    string? group?;
+    boolean? nullable?;
+    DefinitionsResponse_definitions_operators[]? operators?;
+    boolean? repeatable?;
+    string? subject?;
+    string? title?;
+    string? 'type?;
+    DefinitionsResponse_definitions_values[]? values?;
 };
 
 # Ticket settings. See [Tickets](#tickets)
 public type AccountSettingsTicketObject record {
-    boolean accepted_new_collaboration_tos?;
-    boolean agent_collision?;
-    boolean agent_invitation_enabled?;
-    boolean agent_ticket_deletion?;
-    boolean allow_group_reset?;
-    boolean assign_default_organization?;
-    boolean assign_tickets_upon_solve?;
-    boolean auto_translation_enabled?;
-    boolean auto_updated_ccs_followers_rules?;
-    boolean chat_sla_enablement?;
-    boolean collaboration?;
-    boolean comments_public_by_default?;
-    boolean email_attachments?;
-    boolean emoji_autocompletion?;
-    boolean follower_and_email_cc_collaborations?;
-    boolean has_color_text?;
-    boolean is_first_comment_private_enabled?;
-    boolean light_agent_email_ccs_allowed?;
-    boolean list_empty_views?;
-    boolean list_newest_comments_first?;
-    boolean markdown_ticket_comments?;
-    int maximum_personal_views_to_list?;
-    boolean private_attachments?;
-    boolean rich_text_comments?;
-    boolean status_hold?;
-    boolean tagging?;
-    boolean using_skill_based_routing?;
+    boolean? accepted_new_collaboration_tos?;
+    boolean? agent_collision?;
+    boolean? agent_invitation_enabled?;
+    boolean? agent_ticket_deletion?;
+    boolean? allow_group_reset?;
+    boolean? assign_default_organization?;
+    boolean? assign_tickets_upon_solve?;
+    boolean? auto_translation_enabled?;
+    boolean? auto_updated_ccs_followers_rules?;
+    boolean? chat_sla_enablement?;
+    boolean? collaboration?;
+    boolean? comments_public_by_default?;
+    boolean? email_attachments?;
+    boolean? emoji_autocompletion?;
+    boolean? follower_and_email_cc_collaborations?;
+    boolean? has_color_text?;
+    boolean? is_first_comment_private_enabled?;
+    boolean? light_agent_email_ccs_allowed?;
+    boolean? list_empty_views?;
+    boolean? list_newest_comments_first?;
+    boolean? markdown_ticket_comments?;
+    int? maximum_personal_views_to_list?;
+    boolean? private_attachments?;
+    boolean? rich_text_comments?;
+    boolean? status_hold?;
+    boolean? tagging?;
+    boolean? using_skill_based_routing?;
 };
 
 public type TagsByObjectIdResponse record {
     # An array of strings
-    string[] tags;
+    string[]? tags;
 };
 
 public type TicketResponse record {
-    TicketObject ticket?;
+    TicketObject? ticket?;
 };
 
 # An object that describes the conditions under which the trigger will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
@@ -3153,386 +3153,386 @@ public type TriggerConditionsObject record {
 
 # Secondary group ids linked to the queue
 public type QueueObject_secondary_groups record {
-    int count?;
-    ListDeletedTicketsResponse_actor[] groups?;
+    int? count?;
+    ListDeletedTicketsResponse_actor[]? groups?;
 };
 
 # Configuration for the agent workspace. See [Agents](#agents)
 public type AccountSettingsAgentObject record {
-    boolean agent_home?;
-    boolean agent_workspace?;
-    boolean aw_self_serve_migration_enabled?;
-    boolean focus_mode?;
-    boolean idle_timeout_enabled?;
-    boolean unified_agent_statuses?;
+    boolean? agent_home?;
+    boolean? agent_workspace?;
+    boolean? aw_self_serve_migration_enabled?;
+    boolean? focus_mode?;
+    boolean? idle_timeout_enabled?;
+    boolean? unified_agent_statuses?;
 };
 
 public type TicketMetricsByTicketMetricIdResponse record {
-    TicketMetricObject[] ticket_metric?;
+    TicketMetricObject[]? ticket_metric?;
 };
 
 public type TicketFormObject record {
     # If the form is set as active
-    boolean active?;
+    boolean? active?;
     # Array of condition sets for agent workspaces
-    record {}[] agent_conditions?;
+    record {}[]? agent_conditions?;
     # The time the ticket form was created
-    string created_at?;
+    string? created_at?;
     # Is the form the default form for this account
-    boolean default?;
+    boolean? default?;
     # The name of the form that is displayed to an end user
-    string display_name?;
+    string? display_name?;
     # Array of condition sets for end user products
-    record {}[] end_user_conditions?;
+    record {}[]? end_user_conditions?;
     # Is the form visible to the end user
-    boolean end_user_visible?;
+    boolean? end_user_visible?;
     # Automatically assigned when creating ticket form
-    int id?;
+    int? id?;
     # Is the form available for use in all brands on this account
-    boolean in_all_brands?;
+    boolean? in_all_brands?;
     # The name of the form
-    string name;
+    string? name;
     # The position of this form among other forms in the account, i.e. dropdown
-    int position?;
+    int? position?;
     # The dynamic content placeholder, if present, or the "display_name" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string raw_display_name?;
+    string? raw_display_name?;
     # The dynamic content placeholder, if present, or the "name" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string raw_name?;
+    string? raw_name?;
     # ids of all brands that this ticket form is restricted to
-    int[] restricted_brand_ids?;
+    int[]? restricted_brand_ids?;
     # ids of all ticket fields which are in this ticket form. The products use the order of the ids to show the field values in the tickets
-    int[] ticket_field_ids?;
+    int[]? ticket_field_ids?;
     # The time of the last update of the ticket form
-    string updated_at?;
+    string? updated_at?;
     # URL of the ticket form
-    string url?;
+    string? url?;
 };
 
 public type BatchJobResponse_results record {
-    TriggerCategory[] trigger_categories?;
-    TriggerObject[] triggers?;
+    TriggerCategory[]? trigger_categories?;
+    TriggerObject[]? triggers?;
 };
 
 public type ListDeletedTicketsResponse record {
-    ListDeletedTicketsResponse_deleted_tickets[] deleted_tickets?;
+    ListDeletedTicketsResponse_deleted_tickets[]? deleted_tickets?;
     *OffsetPaginationObject;
 };
 
 public type MacroApplyTicketResponse_result_ticket record {
-    int assignee_id?;
-    MacroApplyTicketResponse_result_ticket_comment comment?;
-    MacroApplyTicketResponse_result_ticket_fields fields?;
-    int group_id?;
-    int id?;
-    string url?;
+    int? assignee_id?;
+    MacroApplyTicketResponse_result_ticket_comment? comment?;
+    MacroApplyTicketResponse_result_ticket_fields? fields?;
+    int? group_id?;
+    int? id?;
+    string? url?;
 };
 
 public type TargetsResponse record {
-    TargetObject[] targets?;
+    TargetObject[]? targets?;
 };
 
-public type UserObject UserForAdmin|UserForEndUser;
+public type UserObject UserForAdmin|UserForEndUser?;
 
 public type WorkspaceInput record {
     # An object that describes the conditions under which the automation will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
-    ConditionsObject conditions?;
+    ConditionsObject? conditions?;
     # User-defined description of this workspace's purpose
-    string description?;
-    decimal[] macros?;
-    decimal ticket_form_id?;
+    string? description?;
+    decimal[]? macros?;
+    decimal? ticket_form_id?;
     # The title of the workspace
-    string title?;
+    string? title?;
 };
 
 public type ActionObject record {
     # The name of a ticket field to modify
-    string 'field?;
+    string? 'field?;
     # The new value of the field
-    string value?;
+    string? value?;
 };
 
 public type UserResponse record {
-    UserObject user?;
+    UserObject? user?;
 };
 
 public type Pagination_meta record {
-    string after_cursor?;
-    string before_cursor?;
-    boolean has_more?;
+    string? after_cursor?;
+    string? before_cursor?;
+    boolean? has_more?;
 };
 
 public type Filter record {
-    TriggerObject 'json?;
+    TriggerObject? 'json?;
 };
 
 # Configuration settings for the role. See [Configuration](#configuration)
 public type CustomRoleConfigurationObject record {
     # Whether or not the agent can assign tickets to any group
-    boolean assign_tickets_to_any_group?;
+    boolean? assign_tickets_to_any_group?;
     # Whether or not the agent has access to Chat
-    boolean chat_access?;
+    boolean? chat_access?;
     # Whether or not the agent can view lists of user profiles. Allowed values: "full", "none"
-    string end_user_list_access?;
+    string? end_user_list_access?;
     # What the agent can do with end-user profiles. Allowed values: "edit", "edit-within-org", "full", "readonly"
-    string end_user_profile_access?;
+    string? end_user_profile_access?;
     # Allowed values: "edit", "full", "none", "readonly"
-    string explore_access?;
+    string? explore_access?;
     # The kind of access the agent has to Guide. Allowed values: "edit-topics", "full", "readonly"
-    string forum_access?;
-    boolean forum_access_restricted_content?;
+    string? forum_access?;
+    boolean? forum_access_restricted_content?;
     # Whether or not the agent can add or modify groups
-    boolean group_access?;
-    boolean light_agent?;
+    boolean? group_access?;
+    boolean? light_agent?;
     # What the agent can do with macros. Allowed values: "full", "manage-group", "manage-personal", "readonly"
-    string macro_access?;
+    string? macro_access?;
     # Whether or not the agent can manage business rules
-    boolean manage_business_rules?;
+    boolean? manage_business_rules?;
     # Whether or not the agent can view, add, and edit contextual workspaces
-    boolean manage_contextual_workspaces?;
+    boolean? manage_contextual_workspaces?;
     # Whether or not the agent can access dynamic content
-    boolean manage_dynamic_content?;
+    boolean? manage_dynamic_content?;
     # Whether or not the agent can manage channels and extensions
-    boolean manage_extensions_and_channels?;
+    boolean? manage_extensions_and_channels?;
     # Whether or not the agent can manage Facebook pages
-    boolean manage_facebook?;
+    boolean? manage_facebook?;
     # Whether or not the agent can create and manage organization fields
-    boolean manage_organization_fields?;
+    boolean? manage_organization_fields?;
     # Whether or not the agent can create and manage ticket fields
-    boolean manage_ticket_fields?;
+    boolean? manage_ticket_fields?;
     # Whether or not the agent can create and manage ticket forms
-    boolean manage_ticket_forms?;
+    boolean? manage_ticket_forms?;
     # Whether or not the agent can create and manage user fields
-    boolean manage_user_fields?;
-    boolean moderate_forums?;
+    boolean? manage_user_fields?;
+    boolean? moderate_forums?;
     # Whether or not the agent can add or modify organizations
-    boolean organization_editing?;
+    boolean? organization_editing?;
     # Whether or not the agent can add or modify organization notes
-    boolean organization_notes_editing?;
+    boolean? organization_notes_editing?;
     # What the agent can do with reports. Allowed values: "full", "none", "readonly"
-    string report_access?;
+    string? report_access?;
     # Whether or not the agent can contribute to side conversations
-    boolean side_conversation_create?;
+    boolean? side_conversation_create?;
     # What kind of tickets the agent can access. Allowed values: "all", "assigned-only", "within-groups", "within-groups-and-public-groups", "within-organization"
-    string ticket_access?;
+    string? ticket_access?;
     # What type of comments the agent can make. Allowed values: "public", "none"
-    string ticket_comment_access?;
+    string? ticket_comment_access?;
     # Whether or not the agent can delete tickets
-    boolean ticket_deletion?;
+    boolean? ticket_deletion?;
     # Whether or not the agent can edit ticket properties
-    boolean ticket_editing?;
+    boolean? ticket_editing?;
     # Whether or not the agent can merge tickets
-    boolean ticket_merge?;
+    boolean? ticket_merge?;
     # Whether or not the agent can edit ticket tags
-    boolean ticket_tag_editing?;
-    boolean twitter_search_access?;
+    boolean? ticket_tag_editing?;
+    boolean? twitter_search_access?;
     # What the agent can do with customer lists. Allowed values: "full", "manage-group", "manage-personal", "none", "readonly"
-    string user_view_access?;
+    string? user_view_access?;
     # What the agent can do with views. Allowed values: "full", "manage-group", "manage-personal", "playonly", "readonly"
-    string view_access?;
+    string? view_access?;
     # Whether or not the agent can view deleted tickets
-    boolean view_deleted_tickets?;
+    boolean? view_deleted_tickets?;
     # Whether or not the agent can answer and place calls to end users
-    boolean voice_access?;
+    boolean? voice_access?;
     # Whether or not the agent can view details about calls on the Talk dashboard
-    boolean voice_dashboard_access?;
+    boolean? voice_dashboard_access?;
 };
 
 public type SLAPolicyResponse record {
-    SLAPolicyObject sla_policy?;
+    SLAPolicyObject? sla_policy?;
 };
 
 public type TriggerConditionDiffObject record {
     # An array of [change](#change) objects
-    TriggerChangeObject[] 'field?;
+    TriggerChangeObject[]? 'field?;
     # An array of [change](#change) objects
-    TriggerChangeObject[] operator?;
+    TriggerChangeObject[]? operator?;
     # An array of [change](#change) objects
-    TriggerChangeObject[] value?;
+    TriggerChangeObject[]? value?;
 };
 
 # The value of the chat event object
 public type TicketChatCommentRedactionResponse_chat_event_value record {
     # Id of the chat session
-    string chat_id?;
+    string? chat_id?;
     # Chat events within the chat session
-    record {}[] history?;
+    record {}[]? history?;
     # Id assigned to the visitor
-    string visitor_id?;
+    string? visitor_id?;
 };
 
 public type MacroApplyTicketResponse_result_ticket_comment record {
-    string body?;
-    boolean 'public?;
-    string[][] scoped_body?;
+    string? body?;
+    boolean? 'public?;
+    string[][]? scoped_body?;
 };
 
 public type UserFieldsResponse record {
     # Total count of records retrieved
-    int count?;
+    int? count?;
     # URL of the next page
     string? next_page?;
     # URL of the previous page
     string? previous_page?;
-    UserFieldObject[] user_fields?;
+    UserFieldObject[]? user_fields?;
 };
 
 public type ViewsCountResponse record {
-    ActivitiesCountResponse_count count?;
+    ActivitiesCountResponse_count? count?;
 };
 
 public type TicketMergeInput record {
     # Ids of tickets to merge into the target ticket
-    int[] ids;
+    int[]? ids;
     # Private comment to add to the source ticket
-    string source_comment?;
+    string? source_comment?;
     # Whether comment in source tickets are public or private
-    boolean source_comment_is_public?;
+    boolean? source_comment_is_public?;
     # Private comment to add to the target ticket
-    string target_comment?;
+    string? target_comment?;
     # Whether comment in target ticket is public or private
-    boolean target_comment_is_public?;
+    boolean? target_comment_is_public?;
 };
 
-public type User_field_id int|string;
+public type User_field_id int|string?;
 
 public type AssigneeFieldAssignableGroupObject record {
     # Description of the group
-    string description?;
+    string? description?;
     # Group ID
-    int id?;
+    int? id?;
     # Name of the group
-    string name?;
+    string? name?;
 };
 
 public type CustomFieldOptionResponse record {
-    CustomFieldOptionObject custom_field_option?;
+    CustomFieldOptionObject? custom_field_option?;
 };
 
 public type SLAPolicyMetricObject record {
     # Whether the metric targets are being measured in business hours or calendar hours
-    boolean business_hours?;
+    boolean? business_hours?;
     # The definition of the time that is being measured
-    string metric?;
+    string? metric?;
     # Priority that a ticket must match
-    string priority?;
+    string? priority?;
     # The time within which the end-state for a metric should be met
-    int target?;
+    int? target?;
 };
 
 public type HostMappingObject record {
     # The canonical name record for a host mapping
-    string cname?;
+    string? cname?;
     # Array of expected CNAME records for host mapping(s) of a given brand
-    string[] expected_cnames?;
+    string[]? expected_cnames?;
     # Whether a host mapping is valid or not for a given brand
-    boolean is_valid?;
+    boolean? is_valid?;
     # Reason why a host mapping is valid or not
-    string reason?;
+    string? reason?;
 };
 
 public type AssigneeFieldAssignableSearchGroupObject record {
     # Group ID
-    int id?;
+    int? id?;
     # Name of the group
-    string name?;
+    string? name?;
 };
 
 public type CustomObject record {
     # The time the object type was created
-    string created_at?;
+    string? created_at?;
     # Id of a user who created the object
-    string created_by_user_id?;
+    string? created_by_user_id?;
     # User-defined description of the object
-    string description?;
+    string? description?;
     # A user-defined unique identifier. Writable on create only. Cannot be reused if deleted.
-    string 'key;
+    string? 'key;
     # The dynamic content placeholder, if present, or the "raw_description" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string raw_description?;
+    string? raw_description?;
     # The dynamic content placeholder, if present, or the "title" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string raw_title?;
+    string? raw_title?;
     # The dynamic content placeholder, if present, or the "raw_title_pluralized" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string raw_title_pluralized?;
+    string? raw_title_pluralized?;
     # User-defined display name for the object
-    string title;
+    string? title;
     # User-defined pluralized version of the object's title
-    string title_pluralized;
+    string? title_pluralized;
     # The time of the last update of the object
-    string updated_at?;
+    string? updated_at?;
     # Id of the last user who updated the object
-    string updated_by_user_id?;
+    string? updated_by_user_id?;
     # Direct link to the specific custom object
-    string url?;
+    string? url?;
 };
 
 public type Pagination_links record {
-    string next?;
-    string prev?;
+    string? next?;
+    string? prev?;
 };
 
 public type TicketFieldResponse record {
-    TicketFieldObject ticket_field?;
+    TicketFieldObject? ticket_field?;
 };
 
 public type DefinitionsResponse_definitions_values record {
-    boolean enabled?;
-    string title?;
-    string value?;
+    boolean? enabled?;
+    string? title?;
+    string? value?;
 };
 
 public type BrandObject record {
     # If the brand is set as active
-    boolean active?;
+    boolean? active?;
     # The url of the brand
-    string brand_url?;
+    string? brand_url?;
     # The time the brand was created
-    string created_at?;
+    string? created_at?;
     # Is the brand the default brand for this account
-    boolean default?;
+    boolean? default?;
     # If the brand has a Help Center
-    boolean has_help_center?;
+    boolean? has_help_center?;
     # The state of the Help Center
     "enabled"|"disabled"|"restricted" help_center_state?;
     # The hostmapping to this brand, if any. Only admins view this property.
-    string host_mapping?;
+    string? host_mapping?;
     # The ID automatically assigned when the brand is created
-    int id?;
+    int? id?;
     # If the brand object is deleted or not
-    boolean is_deleted?;
+    boolean? is_deleted?;
     # A file represented as an [Attachment](/api-reference/ticketing/tickets/ticket-attachments/) object
-    AttachmentObject logo?;
+    AttachmentObject? logo?;
     # The name of the brand
-    string name;
+    string? name;
     # The signature template for a brand
-    string signature_template?;
+    string? signature_template?;
     # The subdomain of the brand
-    string subdomain;
+    string? subdomain;
     # The ids of ticket forms that are available for use by a brand
-    int[] ticket_form_ids?;
+    int[]? ticket_form_ids?;
     # The time of the last update of the brand
-    string updated_at?;
+    string? updated_at?;
     # The API url of this brand
-    string url?;
+    string? url?;
 };
 
 # Apps configuration options. See [Apps](#apps)
 public type AccountSettingsAppsObject record {
-    boolean create_private?;
-    boolean create_public?;
-    boolean use?;
+    boolean? create_private?;
+    boolean? create_public?;
+    boolean? use?;
 };
 
 public type TargetURL record {
-    string attribute;
+    string? attribute;
     # "get"
-    string method?;
+    string? method?;
     # only writable
-    string password?;
-    string target_url;
-    string username?;
+    string? password?;
+    string? target_url;
+    string? username?;
 };
 
 public type ViewCountResponse record {
-    ViewCountObject view_count?;
+    ViewCountObject? view_count?;
 };
 
 # See [Tickets](/api-reference/ticketing/tickets/tickets/) for a detailed example.
@@ -3541,424 +3541,424 @@ public type CursorBasedExportIncrementalTicketsResponse record {
     string? after_url?;
     string? before_cursor?;
     string? before_url?;
-    boolean end_of_stream?;
-    TicketObject[] tickets?;
+    boolean? end_of_stream?;
+    TicketObject[]? tickets?;
 };
 
 public type OrganizationSubscriptionCreateRequest record {
-    OrganizationSubscriptionInput organization_subscription?;
+    OrganizationSubscriptionInput? organization_subscription?;
 };
 
 public type TargetJira record {
     # only writable
-    string password;
-    string target_url;
-    string username;
+    string? password;
+    string? target_url;
+    string? username;
 };
 
 public type IncrementalSkillBasedRoutingAttributeValue record {
     # Id of the associated attribute
-    string attribute_id?;
+    string? attribute_id?;
     # Automatically assigned when an attribute value is created
-    string id?;
+    string? id?;
     # The name of the attribute value
-    string name?;
+    string? name?;
     # The time the attribute value was created, updated, or deleted
-    string time?;
+    string? time?;
     # One of "create", "update", or "delete"
-    string 'type?;
+    string? 'type?;
 };
 
 public type ActivitiesCountResponse record {
-    ActivitiesCountResponse_count count?;
+    ActivitiesCountResponse_count? count?;
 };
 
 public type TicketFieldCountResponse record {
-    ActivitiesCountResponse_count count?;
+    ActivitiesCountResponse_count? count?;
 };
 
 public type TicketImportRequest record {
-    TicketImportInput ticket?;
+    TicketImportInput? ticket?;
 };
 
 public type BulkUpdateDefaultCustomStatusRequest record {
     # The comma-separated list of custom ticket status ids to be set as default for their status categories
-    string ids?;
+    string? ids?;
 };
 
 public type UserIdentityResponse record {
-    UserIdentityObject identity?;
+    UserIdentityObject? identity?;
 };
 
 public type MacroInput record {
     # Each action describes what the macro will do
-    ActionObject[] actions;
+    ActionObject[]? actions;
     # Useful for determining if the macro should be displayed
-    boolean active?;
+    boolean? active?;
     # The description of the macro
     string? description?;
     # Who may access this macro. Will be null when everyone in the account can access it
-    MacroInput_restriction restriction?;
+    MacroInput_restriction? restriction?;
     # The title of the macro
-    string title;
+    string? title;
 };
 
 public type TicketChatCommentRedactionResponse record {
     # Chat event object
-    TicketChatCommentRedactionResponse_chat_event chat_event?;
+    TicketChatCommentRedactionResponse_chat_event? chat_event?;
 };
 
 public type TriggerBatchRequest record {
-    boolean active?;
-    string category_id?;
-    string id;
-    int position?;
+    boolean? active?;
+    string? category_id?;
+    string? id;
+    int? position?;
 };
 
 public type CustomObjectRecordResponse record {
-    CustomObjectRecord custom_object_record?;
+    CustomObjectRecord? custom_object_record?;
 };
 
 public type MacroApplyTicketResponse_result_ticket_fields record {
-    int id?;
-    string value?;
+    int? id?;
+    string? value?;
 };
 
 public type OrganizationSubscriptionInput record {
     # The ID of the organization
-    int organization_id?;
+    int? organization_id?;
     # The ID of the user
-    int user_id?;
+    int? user_id?;
 };
 
 public type SkillBasedRoutingAttributeValuesResponse record {
-    SkillBasedRoutingAttributeValueObject[] attribute_values?;
+    SkillBasedRoutingAttributeValueObject[]? attribute_values?;
 };
 
 public type TargetClickatell record {
-    string api_id;
+    string? api_id;
     # Read-only
-    string attribute?;
-    string 'from?;
+    string? attribute?;
+    string? 'from?;
     # Read-only
-    string method?;
+    string? method?;
     # only writable
-    string password;
+    string? password;
     # Read-only
-    string target_url?;
-    string to;
-    string us_small_business_account?;
-    string username;
+    string? target_url?;
+    string? to;
+    string? us_small_business_account?;
+    string? username;
 };
 
 public type TriggerObject record {
     # An array of actions describing what the trigger will do. See [Actions reference](/documentation/ticketing/reference-guides/actions-reference)
-    TriggerActionObject[] actions;
+    TriggerActionObject[]? actions;
     # Whether the trigger is active
-    boolean active?;
+    boolean? active?;
     # The ID of the category the trigger belongs to
-    string category_id?;
+    string? category_id?;
     # An object that describes the conditions under which the trigger will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
-    TriggerConditionsObject conditions;
+    TriggerConditionsObject? conditions;
     # The time the trigger was created
-    string created_at?;
+    string? created_at?;
     # If true, the trigger is a default trigger
-    boolean default?;
+    boolean? default?;
     # The description of the trigger
-    string description?;
+    string? description?;
     # Automatically assigned when created
-    int id?;
+    int? id?;
     # Position of the trigger, determines the order they will execute in
-    int position?;
+    int? position?;
     # The raw format of the title of the trigger
-    string raw_title?;
+    string? raw_title?;
     # The title of the trigger
-    string title;
+    string? title;
     # The time of the last update of the trigger
-    string updated_at?;
+    string? updated_at?;
     # The url of the trigger
-    string url?;
+    string? url?;
 };
 
 public type TicketUpdateResponse record {
-    AuditObject audit?;
-    TicketObject ticket?;
+    AuditObject? audit?;
+    TicketObject? ticket?;
 };
 
 public type TriggerRevisionsResponse_diff record {
     # An array that contain [action diff objects](#Action Diffs)
-    TriggerActionDiffObject[] actions?;
+    TriggerActionDiffObject[]? actions?;
     # An array of [change](#change) objects
-    TriggerChangeObject[] active?;
-    TriggerConditionDiffObject conditions?;
+    TriggerChangeObject[]? active?;
+    TriggerConditionDiffObject? conditions?;
     # An array of [change](#change) objects
-    TriggerChangeObject[] description?;
+    TriggerChangeObject[]? description?;
     # ID of the source revision
-    int source_id?;
+    int? source_id?;
     # ID of the target revision
-    int target_id?;
+    int? target_id?;
     # An array of [change](#change) objects
-    TriggerChangeObject[] title?;
+    TriggerChangeObject[]? title?;
 };
 
 public type UserCreateInput record {
-    int custom_role_id?;
-    string email;
-    string external_id?;
-    UserCreateInput_identities[] identities?;
-    string name;
-    UserCreateInput_organization organization?;
-    int organization_id?;
-    string role?;
+    int? custom_role_id?;
+    string? email;
+    string? external_id?;
+    UserCreateInput_identities[]? identities?;
+    string? name;
+    UserCreateInput_organization? organization?;
+    int? organization_id?;
+    string? role?;
 };
 
 public type TargetFlowdock record {
-    string api_token;
+    string? api_token;
 };
 
 public type AccountSettingsObject record {
     # The active features for an account. See [Active Features](#active-features)
-    AccountSettingsActiveFeaturesObject active_features?;
+    AccountSettingsActiveFeaturesObject? active_features?;
     # Configuration for the agent workspace. See [Agents](#agents)
-    AccountSettingsAgentObject agents?;
+    AccountSettingsAgentObject? agents?;
     # API configuration options. See [API](#api)
-    AccountSettingsApiObject api?;
+    AccountSettingsApiObject? api?;
     # Apps configuration options. See [Apps](#apps)
-    AccountSettingsAppsObject apps?;
+    AccountSettingsAppsObject? apps?;
     # Billing configuration options. See [Billing](#billing)
-    AccountSettingsBillingObject billing?;
+    AccountSettingsBillingObject? billing?;
     # Branding settings. See [Branding](#branding)
-    AccountSettingsBrandingObject branding?;
+    AccountSettingsBrandingObject? branding?;
     # Brand settings. See [Brands](#brands)
-    AccountSettingsBrandsObject brands?;
+    AccountSettingsBrandsObject? brands?;
     # CDN settings
-    AccountSettingsCdnObject cdn?;
+    AccountSettingsCdnObject? cdn?;
     # Zendesk Chat settings. See [Chat](#chat)
-    AccountSettingsChatObject chat?;
+    AccountSettingsChatObject? chat?;
     # Cross Sell settings
-    AccountSettingsCrossSellObject cross_sell?;
+    AccountSettingsCrossSellObject? cross_sell?;
     # GoodData settings, used for insights. Legacy configuration prior to Zendesk Explore. See [GoodData Advanced Analytics](#gooddata-advanced-analytics)
-    AccountSettingsGooddataAdvancedAnalyticsObject gooddata_advanced_analytics?;
+    AccountSettingsGooddataAdvancedAnalyticsObject? gooddata_advanced_analytics?;
     # Google Apps configuration. See [G Suite](#g-suite)
-    AccountSettingsGoogleAppsObject google_apps?;
+    AccountSettingsGoogleAppsObject? google_apps?;
     # Group configuration
-    AccountSettingsGroupObject groups?;
+    AccountSettingsGroupObject? groups?;
     # Account limits configuration. See [Limits](#limits)
-    AccountSettingsLimitsObject limits?;
+    AccountSettingsLimitsObject? limits?;
     # Internationalization configuration settings. See [Localization](#localization)
-    AccountSettingsLocalizationObject localization?;
+    AccountSettingsLocalizationObject? localization?;
     # Support UI settings. See [Lotus](#lotus)
-    AccountSettingsLotusObject lotus?;
+    AccountSettingsLotusObject? lotus?;
     # Account metrics settings. See [Metrics](#metrics)
-    AccountSettingsMetricsObject metrics?;
+    AccountSettingsMetricsObject? metrics?;
     # Onboarding settings
-    AccountSettingsOnboardingObject onboarding?;
+    AccountSettingsOnboardingObject? onboarding?;
     # Configuration for routing. See [Routing](#routing)
-    AccountSettingsRoutingObject routing?;
+    AccountSettingsRoutingObject? routing?;
     # Rules settings for triggers, macros, views, and automations. See [Rules](#rules)
-    AccountSettingsRuleObject rule?;
+    AccountSettingsRuleObject? rule?;
     # Side conversations settings
-    AccountSettingsSideConversationsObject side_conversations?;
+    AccountSettingsSideConversationsObject? side_conversations?;
     # Account statistics settings. See [Statistics](#statistics)
-    AccountSettingsStatisticsObject statistics?;
+    AccountSettingsStatisticsObject? statistics?;
     # Ticket form settings. See [Ticket Form](#ticket-form)
-    AccountSettingsTicketFormObject ticket_form?;
+    AccountSettingsTicketFormObject? ticket_form?;
     # Ticket sharing partners settings. See [Ticket Sharing Partners](#ticket-sharing-partners)
-    AccountSettingsTicketSharingPartnersObject ticket_sharing_partners?;
+    AccountSettingsTicketSharingPartnersObject? ticket_sharing_partners?;
     # Ticket settings. See [Tickets](#tickets)
-    AccountSettingsTicketObject tickets?;
+    AccountSettingsTicketObject? tickets?;
     # X (formerly Twitter) settings. See [X](#x-formerly-twitter)
-    AccountSettingsTwitterObject twitter?;
+    AccountSettingsTwitterObject? twitter?;
     # User settings. See [Users](#users)
-    AccountSettingsUserObject user?;
+    AccountSettingsUserObject? user?;
     # Zendesk Talk settings. See [Voice](#voice)
-    AccountSettingsVoiceObject voice?;
+    AccountSettingsVoiceObject? voice?;
 };
 
 public type BrandsResponse record {
     *OffsetPaginationObject;
     # Array of brands
-    BrandObject[] brands?;
+    BrandObject[]? brands?;
 };
 
 public type TagsResponse record {
     # The number of pages
-    int count?;
+    int? count?;
     # The url of the previous page
     string? next_page?;
     # The url of the next page
     string? previous_page?;
-    TagListTagObject[] tags?;
+    TagListTagObject[]? tags?;
 };
 
 public type EssentialsCardsResponse record {
-    EssentialsCardObject[] object_layouts?;
+    EssentialsCardObject[]? object_layouts?;
 };
 
 public type CustomObjectFieldResponse record {
-    CustomObjectField custom_object_field?;
+    CustomObjectField? custom_object_field?;
 };
 
 public type GroupSLAPolicyFilterDefinitionResponse_definitions record {
-    GroupSLAPolicyFilterDefinitionResponse_definitions_all[] all?;
+    GroupSLAPolicyFilterDefinitionResponse_definitions_all[]? all?;
 };
 
 public type TriggerRevisionsResponse_trigger_revisions record {
-    int author_id?;
-    string created_at?;
-    TriggerRevisionsResponse_diff diff?;
-    int id?;
-    TriggerSnapshotObject snapshot?;
-    string url?;
+    int? author_id?;
+    string? created_at?;
+    TriggerRevisionsResponse_diff? diff?;
+    int? id?;
+    TriggerSnapshotObject? snapshot?;
+    string? url?;
 };
 
 public type TicketMetricEventsResponse record {
-    TicketMetricEventBaseObject[] ticket_metric_events?;
-    int count?;
-    int end_time?;
-    string next_page?;
+    TicketMetricEventBaseObject[]? ticket_metric_events?;
+    int? count?;
+    int? end_time?;
+    string? next_page?;
 };
 
 public type BatchJobResponse record {
-    BatchErrorItem[] errors?;
-    BatchJobResponse_results results?;
+    BatchErrorItem[]? errors?;
+    BatchJobResponse_results? results?;
     "complete"|"failed" status?;
 };
 
 public type GroupSLAPolicyResponse record {
-    GroupSLAPolicyObject group_sla_policy?;
+    GroupSLAPolicyObject? group_sla_policy?;
 };
 
 public type MacroApplyTicketResponse record {
-    MacroApplyTicketResponse_result result?;
+    MacroApplyTicketResponse_result? result?;
 };
 
 public type CustomObjectRecordsJobsResponse_job_status record {
-    string id?;
+    string? id?;
     string? message?;
     int? progress?;
     CustomObjectRecord[]? results?;
-    string status?;
-    int total?;
-    string url?;
+    string? status?;
+    int? total?;
+    string? url?;
 };
 
 public type GroupsCountObject_count record {
     # Timestamp that indicates when the count was last updated
-    string refreshed_at?;
+    string? refreshed_at?;
     # Approximate count of groups
-    int value?;
+    int? value?;
 };
 
 public type TargetBasecamp record {
     # Can be filled if it is a "message" resource
-    string message_id?;
+    string? message_id?;
     # The 37Signals password for the Basecamp account (only writable)
-    string password?;
+    string? password?;
     # The ID of the project in Basecamp where updates should be pushed
-    string project_id;
+    string? project_id;
     # "todo" or "message"
-    string 'resource;
+    string? 'resource;
     # The URL of your Basecamp account, including protocol and path
-    string target_url;
+    string? target_url;
     # Can be filled if it is a "todo" resource
-    string todo_list_id?;
+    string? todo_list_id?;
     # Get the API token from My info > Show your tokens > Token for feed readers or the Basecamp API in your Basecamp account
-    string token;
+    string? token;
     # The 37Signals username of the account you use to log in to Basecamp
-    string username?;
+    string? username?;
 };
 
 public type TimeBasedExportIncrementalUsersResponse record {
-    int count?;
-    boolean end_of_stream?;
-    int end_time?;
+    int? count?;
+    boolean? end_of_stream?;
+    int? end_time?;
     string? next_page?;
-    UserObject[] users?;
+    UserObject[]? users?;
 };
 
 public type ExportIncrementalTicketEventsResponse record {
-    int count?;
-    boolean end_of_stream?;
-    int end_time?;
+    int? count?;
+    boolean? end_of_stream?;
+    int? end_time?;
     string? next_page?;
-    TicketMetricEventBaseObject[] ticket_events?;
+    TicketMetricEventBaseObject[]? ticket_events?;
 };
 
 public type TargetFailureObject record {
     # Number of times the target failed consecutively
-    int consecutive_failure_count?;
+    int? consecutive_failure_count?;
     # Time of the failure
-    string created_at?;
+    string? created_at?;
     # The ID of the target failure
-    int id?;
+    int? id?;
     # The raw message of the target request
-    string raw_request?;
+    string? raw_request?;
     # The raw response of the failure
-    string raw_response?;
+    string? raw_response?;
     # HTTP status code of the target failure
-    int status_code?;
+    int? status_code?;
     # Name of the target failure
-    string target_name?;
+    string? target_name?;
     # The API url of the failure record
-    string url?;
+    string? url?;
 };
 
 public type TargetPivotal record {
-    string owner_by?;
-    string project_id;
-    string requested_by?;
-    string story_labels?;
-    string story_title;
-    string story_type;
-    string token;
+    string? owner_by?;
+    string? project_id;
+    string? requested_by?;
+    string? story_labels?;
+    string? story_title;
+    string? story_type;
+    string? token;
 };
 
 public type CustomObjectCreateInput record {
     # Unique identifier. Writable on create only
-    string 'key?;
+    string? 'key?;
     # Display name for the object
-    string title?;
+    string? title?;
     # Pluralized version of the object's title
-    string title_pluralized?;
+    string? title_pluralized?;
 };
 
 public type TriggerActionDiffObject record {
     # An array of [change](#change) objects.
-    TriggerChangeObject[] 'field?;
+    TriggerChangeObject[]? 'field?;
     # An array of [change](#change) objects.
-    TriggerChangeObject[] value?;
+    TriggerChangeObject[]? value?;
 };
 
 public type CustomFieldOptionObject record {
     # Automatically assigned upon creation
-    int id?;
+    int? id?;
     # Name of the dropdown option
-    string name;
+    string? name;
     # Position of the dropdown option
-    int position?;
+    int? position?;
     # Raw name of the dropdown option
-    string raw_name?;
+    string? raw_name?;
     # URL of the dropdown option
-    string url?;
+    string? url?;
     # Value of the dropdown option
-    string value;
+    string? value;
 };
 
 public type BookmarkCreateRequest record {
-    BookmarkInput bookmark?;
+    BookmarkInput? bookmark?;
 };
 
 public type TicketFormsResponse record {
-    TicketFormObject[] ticket_forms?;
+    TicketFormObject[]? ticket_forms?;
 };
 
 public type SharingAgreementsResponse record {
-    SharingAgreementObject[] sharing_agreements?;
+    SharingAgreementObject[]? sharing_agreements?;
 };
 
 public type SatisfactionReasonResponse record {
-    SatisfactionReasonObject[] reason?;
+    SatisfactionReasonObject[]? reason?;
 };
 
 # The links to the previous and next entries via the cursor ids in the metadata.
@@ -3971,73 +3971,73 @@ public type SearchExportResponse_links record {
 
 public type BookmarkObject record {
     # The time the bookmark was created
-    string created_at?;
+    string? created_at?;
     # Automatically assigned when the bookmark is created
-    int id?;
-    TicketObject ticket?;
+    int? id?;
+    TicketObject?? ticket?;
     # The API url of this bookmark
-    string url?;
+    string? url?;
 };
 
 public type CustomStatusObject record {
     # If true, the custom status is set to active, If false, the custom status is set to inactive
-    boolean active?;
+    boolean? active?;
     # The label displayed to agents. Maximum length is 48 characters
-    string agent_label;
+    string? agent_label;
     # The date and time the custom ticket status was created
-    string created_at?;
+    string? created_at?;
     # If true, the custom status is set to default. If false, the custom status is set to non-default
-    boolean default?;
+    boolean? default?;
     # The description of when the user should select this custom ticket status
-    string description?;
+    string? description?;
     # The description displayed to end users
-    string end_user_description?;
+    string? end_user_description?;
     # The label displayed to end users. Maximum length is 48 characters
-    string end_user_label?;
+    string? end_user_label?;
     # Automatically assigned when the custom ticket status is created
-    int id?;
+    int? id?;
     # The dynamic content placeholder. If the dynamic content placeholder is not available, this is the "agent_label" value. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string raw_agent_label?;
+    string? raw_agent_label?;
     # The dynamic content placeholder. If the dynamic content placeholder is not available, this is the "description" value. [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string raw_description?;
+    string? raw_description?;
     # The dynamic content placeholder. If the dynamic content placeholder is not available, this is the "end_user_description" value. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string raw_end_user_description?;
+    string? raw_end_user_description?;
     # The dynamic content placeholder. If the dynamic content placeholder is not available, this is the "end_user_label" value. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string raw_end_user_label?;
+    string? raw_end_user_label?;
     # The status category the custom ticket status belongs to
     "new"|"open"|"pending"|"hold"|"solved" status_category;
     # The date and time the custom ticket status was last updated
-    string updated_at?;
+    string? updated_at?;
 };
 
 public type AutomationResponse record {
-    AutomationObject automation?;
+    AutomationObject? automation?;
 };
 
 public type SearchCountResponse record {
-    int count?;
+    int? count?;
 };
 
 public type TicketAuditResponse record {
-    TicketAuditObject audit?;
+    TicketAuditObject? audit?;
 };
 
 # Configuration for routing. See [Routing](#routing)
 public type AccountSettingsRoutingObject record {
-    string autorouting_tag?;
-    boolean enabled?;
-    int max_email_capacity?;
-    int max_messaging_capacity?;
-    boolean reassignment_messaging_enabled?;
-    int reassignment_messaging_timeout?;
-    int reassignment_talk_timeout?;
+    string? autorouting_tag?;
+    boolean? enabled?;
+    int? max_email_capacity?;
+    int? max_messaging_capacity?;
+    boolean? reassignment_messaging_enabled?;
+    int? reassignment_messaging_timeout?;
+    int? reassignment_talk_timeout?;
 };
 
 public type JobStatusObject record {
     # Automatically assigned when the job is queued
-    string id?;
+    string? id?;
     # The type of the job
-    string job_type?;
+    string? job_type?;
     # Message from the job worker, if any
     string? message?;
     # Number of tasks that have already been completed
@@ -4045,60 +4045,60 @@ public type JobStatusObject record {
     # Result data from processed tasks. See [Results](#results) below
     JobStatusResultObject[]|record {
         # Whether the action was successful or not
-        boolean success;
+        boolean? success;
     }? results?;
     # The current status. One of the following: "queued", "working", "failed", "completed"
-    string status?;
+    string? status?;
     # The total number of tasks this job is batching through
     int? total?;
     # The URL to poll for status updates
-    string url?;
+    string? url?;
 };
 
 # Group configuration
 public type AccountSettingsGroupObject record {
-    boolean check_group_name_uniqueness?;
+    boolean? check_group_name_uniqueness?;
 };
 
 # GoodData settings, used for insights. Legacy configuration prior to Zendesk Explore. See [GoodData Advanced Analytics](#gooddata-advanced-analytics)
 public type AccountSettingsGooddataAdvancedAnalyticsObject record {
-    boolean enabled?;
+    boolean? enabled?;
 };
 
 public type AuthorObject record {
     # The author email
-    string email?;
+    string? email?;
     # The author id
-    int id?;
+    int? id?;
     # The author name
-    string name?;
+    string? name?;
 };
 
 # Chat event object
 public type TicketChatCommentRedactionResponse_chat_event record {
     # Id assigned to the chat event object
-    int id?;
+    int? id?;
     # Type of chat event
-    string 'type?;
+    string? 'type?;
     # The value of the chat event object
-    TicketChatCommentRedactionResponse_chat_event_value value?;
+    TicketChatCommentRedactionResponse_chat_event_value? value?;
 };
 
 public type CustomStatusesResponse record {
-    CustomStatusObject[] custom_statuses?;
+    CustomStatusObject[]? custom_statuses?;
 };
 
 public type Pagination record {
-    Pagination_links links?;
-    Pagination_meta meta?;
+    Pagination_links? links?;
+    Pagination_meta? meta?;
 };
 
 public type RecoverSuspendedTicketUnprocessableContentResponse record {
-    SuspendedTicketObject[] ticket?;
+    SuspendedTicketObject[]? ticket?;
 };
 
 public type TriggerDefinitionResponse record {
-    TriggerDefinitionObject definitions?;
+    TriggerDefinitionObject? definitions?;
 };
 
 # A file represented as an [Attachment](/api-reference/ticketing/tickets/ticket-attachments/) object
@@ -4108,7 +4108,7 @@ public type AttachmentObject record {
 };
 
 public type LocalesResponse record {
-    LocaleObject[] locales?;
+    LocaleObject[]? locales?;
 };
 
 public type MacroObject record {
@@ -4120,327 +4120,327 @@ public type MacroObject record {
     # Permissions for each macro
     string? permissions?;
     # The number of times each macro has been used in the past hour
-    int usage_1h?;
+    int? usage_1h?;
     # The number of times each macro has been used in the past week
-    int usage_7d?;
+    int? usage_7d?;
     # The number of times each macro has been used in the past day
-    int usage_24h?;
+    int? usage_24h?;
     # The number of times each macro has been used in the past thirty days
-    int usage_30d?;
+    int? usage_30d?;
 };
 
 public type SkillBasedRoutingAttributeResponse record {
-    SkillBasedRoutingAttributeObject attribute?;
+    SkillBasedRoutingAttributeObject? attribute?;
 };
 
 public type AttachmentResponse record {
     # A file represented as an [Attachment](/api-reference/ticketing/tickets/ticket-attachments/) object
-    AttachmentObject attachment?;
+    AttachmentObject? attachment?;
 };
 
 public type MacroUpdateManyInput record {
-    MacroUpdateManyInput_macros[] macros?;
+    MacroUpdateManyInput_macros[]? macros?;
 };
 
 public type AutomationsResponse record {
-    AutomationObject[] automations?;
-    int count?;
+    AutomationObject[]? automations?;
+    int? count?;
     string? next_page?;
     string? previous_page?;
 };
 
 public type GroupMembershipObject record {
     # The time the group was created
-    string created_at?;
+    string? created_at?;
     # If true, tickets assigned directly to the agent will assume this membership's group
-    boolean default?;
+    boolean? default?;
     # The id of a group
-    int group_id;
+    int? group_id;
     # Automatically assigned upon creation
-    int id?;
+    int? id?;
     # The time of the last update of the group
-    string updated_at?;
+    string? updated_at?;
     # The API url of this record
-    string url?;
+    string? url?;
     # The id of an agent
-    int user_id;
+    int? user_id;
 };
 
-public type JobStatusResultObject CreateResourceResult|UpdateResourceResult;
+public type JobStatusResultObject CreateResourceResult|UpdateResourceResult?;
 
 public type GroupMembershipResponse record {
-    GroupMembershipObject group_membership?;
+    GroupMembershipObject? group_membership?;
 };
 
 public type ListTicketEmailCCsResponse record {
 };
 
 public type DeletedUserObject record {
-    boolean active;
-    string created_at;
-    string email;
-    int id;
-    string locale;
-    int locale_id;
-    string name;
-    int organization_id;
+    boolean? active;
+    string? created_at;
+    string? email;
+    int? id;
+    string? locale;
+    int? locale_id;
+    string? name;
+    int? organization_id;
     string? phone;
     record {}? photo;
-    string role;
+    string? role;
     string? shared_phone_number;
-    string time_zone;
-    string updated_at;
-    string url;
+    string? time_zone;
+    string? updated_at;
+    string? url;
 };
 
-public type UserFieldObject CustomFieldObject;
+public type UserFieldObject CustomFieldObject?;
 
 public type BrandResponse record {
-    BrandObject brand?;
+    BrandObject? brand?;
 };
 
 public type Errors record {
-    Error[] errors?;
+    Error[]? errors?;
 };
 
 public type RenewSessionResponse record {
     # A token of authenticity for the request
-    string authenticity_token?;
+    string? authenticity_token?;
 };
 
 public type DynamicContentVariantsResponse record {
-    DynamicContentVariantObject[] variants?;
+    DynamicContentVariantObject[]? variants?;
 };
 
 public type RelationshipFilterDefinition record {
-    TriggerConditionDefinitionObjectAll[] conditions_all?;
-    TriggerConditionDefinitionObjectAny[] conditions_any?;
+    TriggerConditionDefinitionObjectAll[]? conditions_all?;
+    TriggerConditionDefinitionObjectAny[]? conditions_any?;
 };
 
 public type TriggerRevisionsResponse record {
-    string after_cursor?;
-    string after_url?;
-    string before_cursor?;
-    string before_url?;
-    int count?;
-    TriggerRevisionsResponse_trigger_revisions[] trigger_revisions?;
+    string? after_cursor?;
+    string? after_url?;
+    string? before_cursor?;
+    string? before_url?;
+    int? count?;
+    TriggerRevisionsResponse_trigger_revisions[]? trigger_revisions?;
 };
 
 public type MacroAttachmentResponse record {
-    MacroAttachmentObject macro_attachment?;
+    MacroAttachmentObject? macro_attachment?;
 };
 
 public type GroupSLAPolicyMetricObject record {
     # Whether the metric targets are being measured in business hours or calendar hours
-    boolean business_hours?;
+    boolean? business_hours?;
     # The definition of the time that is being measured
-    string metric?;
+    string? metric?;
     # Priority that a ticket must match
-    string priority?;
+    string? priority?;
     # The time within which the end-state for a metric should be met
-    int target?;
+    int? target?;
 };
 
 public type TargetFailuresResponse record {
-    TargetFailureObject[] target_failures?;
+    TargetFailureObject[]? target_failures?;
 };
 
 public type TicketCommentsResponse record {
-    TicketCommentObject[] comments?;
+    TicketCommentObject[]? comments?;
 };
 
 # Rules settings for triggers, macros, views, and automations. See [Rules](#rules)
 public type AccountSettingsRuleObject record {
-    boolean macro_most_used?;
-    string macro_order?;
-    record {}[] skill_based_filtered_views?;
-    boolean using_skill_based_routing?;
+    boolean? macro_most_used?;
+    string? macro_order?;
+    record {}[]? skill_based_filtered_views?;
+    boolean? using_skill_based_routing?;
 };
 
 # Conditions when queue could be applied
 public type QueueObject_definition record {
-    QueueObject_definition_all[] all?;
-    QueueObject_definition_all[] 'any?;
+    QueueObject_definition_all[]? all?;
+    QueueObject_definition_all[]? 'any?;
 };
 
 public type AssigneeFieldAssignableGroupsResponse record {
     # Number of groups listed in `groups` property.
-    int count?;
-    AssigneeFieldAssignableGroupObject[] groups?;
+    int? count?;
+    AssigneeFieldAssignableGroupObject[]? groups?;
     string? next_page?;
     string? previous_page?;
 };
 
 public type CustomObjectRecordsCreateRequest record {
-    CustomObjectRecord custom_object_record?;
+    CustomObjectRecord? custom_object_record?;
 };
 
 public type SuspendedTicketsResponse record {
-    SuspendedTicketObject[] suspended_tickets?;
+    SuspendedTicketObject[]? suspended_tickets?;
 };
 
 public type TicketUpdateInput record {
     # An array of numeric IDs, emails, or objects containing name and email properties. See [Setting Collaborators](/api-reference/ticketing/tickets/tickets/#setting-collaborators). An email notification is sent to them when the ticket is updated
-    CollaboratorObject[] additional_collaborators?;
+    CollaboratorObject[]? additional_collaborators?;
     # The email address of the agent to assign the ticket to
-    string assignee_email?;
+    string? assignee_email?;
     # The agent currently assigned to the ticket
-    int assignee_id?;
+    int? assignee_id?;
     # An array of the IDs of attribute values to be associated with the ticket
-    int[] attribute_value_ids?;
+    int[]? attribute_value_ids?;
     # The ids of users currently CC'ed on the ticket
-    int[] collaborator_ids?;
-    TicketCommentObject comment?;
+    int[]? collaborator_ids?;
+    TicketCommentObject? comment?;
     # Custom fields for the ticket. See [Setting custom field values](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-custom-field-values)
-    CustomFieldObject[] custom_fields?;
+    CustomFieldObject[]? custom_fields?;
     # The custom ticket status id of the ticket. See [custom ticket statuses](#custom-ticket-statuses)
-    int custom_status_id?;
+    int? custom_status_id?;
     # If this is a ticket of type "task" it has a due date.  Due date format uses [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601) format.
     string? due_at?;
     # An array of objects that represent agent or end users email CCs to add or delete from the ticket. See [Setting email CCs](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-email-ccs)
-    EmailCCObject[] email_ccs?;
+    EmailCCObject[]? email_ccs?;
     # An id you can use to link Zendesk Support tickets to local records
-    string external_id?;
+    string? external_id?;
     # An array of objects that represent agent followers to add or delete from the ticket. See [Setting followers](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-followers)
-    FollowerObject[] followers?;
+    FollowerObject[]? followers?;
     # The group this ticket is assigned to
-    int group_id?;
+    int? group_id?;
     # The organization of the requester. You can only specify the ID of an organization associated with the requester. See [Organization Memberships](/api-reference/ticketing/organizations/organization_memberships/)
-    int organization_id?;
+    int? organization_id?;
     # The urgency with which the ticket should be addressed.
     "urgent"|"high"|"normal"|"low" priority?;
     # For tickets of type "incident", the ID of the problem the incident is linked to
-    int problem_id?;
+    int? problem_id?;
     # The user who requested this ticket
-    int requester_id?;
+    int? requester_id?;
     # Optional boolean. Prevents updates with outdated ticket data (`updated_stamp` property required when true)
-    boolean safe_update?;
+    boolean? safe_update?;
     # An array of the numeric IDs of sharing agreements. Note that this replaces any existing agreements
-    int[] sharing_agreement_ids?;
+    int[]? sharing_agreement_ids?;
     # The state of the ticket.
     # 
     # If your account has activated custom ticket statuses, this is the ticket's
     # status category. See [custom ticket statuses](#custom-ticket-statuses).
     "new"|"open"|"pending"|"hold"|"solved"|"closed" status?;
     # The value of the subject field for this ticket
-    string subject?;
+    string? subject?;
     # The array of tags applied to this ticket
-    string[] tags?;
+    string[]? tags?;
     # The type of this ticket.
     "problem"|"incident"|"question"|"task" 'type?;
     # Datetime of last update received from API. See the safe_update property
-    string updated_stamp?;
+    string? updated_stamp?;
 };
 
 public type V2_macros_body record {
-    MacroInput macro?;
+    MacroInput? macro?;
 };
 
 public type TriggerRevisionResponse record {
-    TriggerRevisionResponse_trigger_revision trigger_revision?;
+    TriggerRevisionResponse_trigger_revision? trigger_revision?;
 };
 
 # CDN settings
 public type AccountSettingsCdnObject record {
-    string cdn_provider?;
-    string fallback_cdn_provider?;
-    AccountSettingsCdnObject_hosts[] hosts?;
+    string? cdn_provider?;
+    string? fallback_cdn_provider?;
+    AccountSettingsCdnObject_hosts[]? hosts?;
 };
 
 public type BatchErrorItem record {
     *Error;
-    string trigger_id?;
+    string? trigger_id?;
 };
 
 public type TicketSkipObject record {
     # Time the skip was created
-    string created_at?;
+    string? created_at?;
     # Automatically assigned upon creation
-    int id?;
+    int? id?;
     # Reason for skipping the ticket
-    string reason?;
+    string? reason?;
     # The skipped ticket. See the [Ticket object reference](/api-reference/ticketing/tickets/tickets/#json-format)
-    TicketObject ticket?;
+    TicketObject?? ticket?;
     # ID of the skipped ticket
-    int ticket_id?;
+    int? ticket_id?;
     # Time the skip was last updated
-    string updated_at?;
+    string? updated_at?;
     # ID of the skipping agent
-    int user_id?;
+    int? user_id?;
 };
 
 public type ViewCountsResponse record {
-    ViewCountObject[] view_counts?;
+    ViewCountObject[]? view_counts?;
 };
 
 public type UrlObject record {
-    string url?;
+    string? url?;
 };
 
 public type BookmarksResponse record {
     *OffsetPaginationObject;
-    BookmarkObject[] bookmarks?;
+    BookmarkObject[]? bookmarks?;
 };
 
 public type RecoverSuspendedTicketsResponse record {
-    SuspendedTicketObject[] tickets?;
+    SuspendedTicketObject[]? tickets?;
 };
 
 public type TriggerSnapshotObject record {
     # An array of [Actions](#actions) describing what the trigger will do
-    TriggerActionObject[] actions?;
+    TriggerActionObject[]? actions?;
     # Whether the trigger is active
-    boolean active?;
+    boolean? active?;
     # An object that describes the conditions under which the trigger will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
-    TriggerConditionsObject conditions?;
+    TriggerConditionsObject? conditions?;
     # The description of the trigger
     string? description?;
     # The title of the trigger
-    string title?;
+    string? title?;
 };
 
 public type SatisfactionRatingsCountResponse record {
-    ActivitiesCountResponse_count count?;
+    ActivitiesCountResponse_count? count?;
 };
 
 public type EssentialsCardResponse record {
-    EssentialsCardObject object_layout?;
+    EssentialsCardObject? object_layout?;
 };
 
 # The status of the import for the indicated resource
 public type ChannelFrameworkResultStatusObject record {
     # A code indicating the status of the import of the resource, as described in [status codes](#status-codes)
-    string code?;
+    string? code?;
     # In the case of an exception, a description of the exception. Otherwise, not present.
-    string description?;
+    string? description?;
 };
 
 public type BatchJobRequest record {
-    BatchJobRequest_job job?;
+    BatchJobRequest_job? job?;
 };
 
 public type CustomObjectFieldsCreateRequest record {
-    CustomObjectField custom_object_field?;
+    CustomObjectField? custom_object_field?;
 };
 
 public type TicketCreateVoicemailTicketRequest record {
     # Optional value such as the ID of the agent that will see the newly created ticket.
-    int display_to_agent?;
+    int? display_to_agent?;
     # Ticket object that lists the values to set when the ticket is created
-    TicketCreateVoicemailTicketInput ticket?;
+    TicketCreateVoicemailTicketInput?? ticket?;
 };
 
 public type CustomObjectRecordsBulkCreateRequest record {
-    CustomObjectRecordsBulkCreateRequest_job job?;
+    CustomObjectRecordsBulkCreateRequest_job? job?;
 };
 
 public type DefinitionsResponse_definitions_conditions_all record {
-    string group?;
-    boolean nullable?;
-    DefinitionsResponse_definitions_operators[] operators?;
-    boolean repeatable?;
-    string subject?;
-    string title?;
-    string 'type?;
-    DefinitionsResponse_definitions_values[] values?;
+    string? group?;
+    boolean? nullable?;
+    DefinitionsResponse_definitions_operators[]? operators?;
+    boolean? repeatable?;
+    string? subject?;
+    string? title?;
+    string? 'type?;
+    DefinitionsResponse_definitions_values[]? values?;
 };

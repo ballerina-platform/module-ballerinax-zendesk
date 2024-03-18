@@ -14,3 +14,9 @@ These changes are done in order to improve the overall usability, and as workaro
     * The OpenAPI specification obtained from the ZenDesk API reference does not include these security schemes. 
     * Therefore, these security schemes are added to the OpenAPI specification.
 
+2. Use `--nullable` option when generating the client using the Ballerina OpenAPI tool. 
+    * The ZenDesk API reference does not properly include the "nullable" property for some the request and response schemas. 
+    * Therefore, the `--nullable` option is used as a precaution to avoid potential data-binding issues in the runtime,  
+      which will generate all the request/response type fields with the support to handle null values.
+    * This workaround can be removed once https://github.com/ballerina-platform/ballerina-library/issues/4870 is addressed.
+
