@@ -26,3 +26,13 @@ These changes are done in order to improve the overall usability, and as workaro
 4. Add `Accept` header (as `application/json`) to all the operations.
     * The ZenDesk OpenAPI reference does not include the `Accept` header in the operations, but the server returns an 
     unsupported media type error if the `Accept` header is not included in the requests.
+
+## OpenAPI cli command
+
+The following command was used to generate the Ballerina client from the OpenAPI specification. The command should be 
+executed from the repository root directory.
+
+```bash
+bal openapi -i docs/spec/openapi.yaml --mode client  --license docs/license.txt -o ballerina/ --nullable
+```
+Note: The license year is hardcoded to 2024, change if necessary.
