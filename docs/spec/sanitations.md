@@ -22,3 +22,7 @@ These changes are done in order to improve the overall usability, and as workaro
 
 3. Change the types `Organization_field_id` and `User_field_id` from `int|string?` to `int|string`.
     * This is done as a post-workaround after using the `--nullable` option to generate the client, as nilable types are not supported for path parameters in Ballerina
+
+4. Add `Accept` header (as `application/json`) to all the operations.
+    * The ZenDesk OpenAPI reference does not include the `Accept` header in the operations, but the server returns an 
+    unsupported media type error if the `Accept` header is not included in the requests.

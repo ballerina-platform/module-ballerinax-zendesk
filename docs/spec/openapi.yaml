@@ -94,6 +94,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/AssigneeFieldSearchValue'
       responses:
         "200":
@@ -140,6 +141,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/GroupId'
       responses:
         "200":
@@ -174,6 +176,7 @@ paths:
 
         See [Pagination](/api-reference/introduction/pagination/).
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: target_type
           in: path
           description: |
@@ -288,6 +291,7 @@ paths:
 
         Returns "true" if the subdomain is available.
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: subdomain
           in: query
           description: |
@@ -310,6 +314,7 @@ paths:
                 success: true
   /api/v2/activities:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/ActivitySince'
     get:
       operationId: ListActivities
@@ -347,6 +352,7 @@ paths:
                   $ref: '#/components/examples/ActivitiesResponseExample'
   /api/v2/activities/{activity_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/ActivityId'
     get:
       operationId: ShowActivity
@@ -590,6 +596,7 @@ paths:
 
          * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/AttachmentId'
       responses:
         "200":
@@ -613,6 +620,7 @@ paths:
 
         * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/AttachmentId'
       requestBody:
         content:
@@ -652,6 +660,7 @@ paths:
 
         Returns a maximum of 100 records per page.
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: filter[source_type]
           in: query
           description: Filter audit logs by the source type. For example, user or rule
@@ -709,6 +718,7 @@ paths:
                   $ref: '#/components/examples/AuditLogsResponseExample'
   /api/v2/audit_logs/{audit_log_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/AuditLogId'
     get:
       operationId: ShowAuditLog
@@ -740,6 +750,7 @@ paths:
 
         * Admins on accounts that have audit log access
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: filter[source_type]
           in: query
           description: Filter audit logs by the source type. For example, user or rule
@@ -782,6 +793,7 @@ paths:
               example: ""
   /api/v2/autocomplete/tags:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TagNameFragment'
     get:
       operationId: AutocompleteTags
@@ -895,6 +907,7 @@ paths:
                   $ref: '#/components/examples/AutomationCreateResponseExample'
   /api/v2/automations/{automation_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/AutomationId'
     get:
       operationId: ShowAutomation
@@ -1034,6 +1047,7 @@ paths:
         }
         ```
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ids
           in: query
           description: The IDs of the automations to delete
@@ -1046,6 +1060,7 @@ paths:
           description: No Content response
   /api/v2/automations/search:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/AutomationSearchQuery'
       - $ref: '#/components/parameters/AutomationActive'
       - $ref: '#/components/parameters/AutomationSortBy'
@@ -1192,6 +1207,7 @@ paths:
                   $ref: '#/components/examples/BookmarkResponse'
   /api/v2/bookmarks/{bookmark_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/BookmarkId'
     delete:
       operationId: DeleteBookmark
@@ -1274,6 +1290,7 @@ paths:
 
         * Admins, Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/BrandId'
       responses:
         "200":
@@ -1299,6 +1316,7 @@ paths:
         #### Updating a Brand's Image
         A brand image can be updated by uploading a local file using the update brand endpoint. See the **Using curl** sections below for more information.
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/BrandId'
       requestBody:
         content:
@@ -1331,6 +1349,7 @@ paths:
         #### Allowed for
         - Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/BrandId'
       responses:
         "204":
@@ -1347,6 +1366,7 @@ paths:
         #### Allowed for
         - Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/BrandId'
       responses:
         "200":
@@ -1375,6 +1395,7 @@ paths:
 
         * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/HostMapping'
         - $ref: '#/components/parameters/Subdomain'
       responses:
@@ -1414,6 +1435,7 @@ paths:
                   $ref: '#/components/examples/TwitterChannelsResponseExample'
   /api/v2/channels/twitter/monitored_twitter_handles/{monitored_twitter_handle_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/MonitoredTwitterHandleId'
     get:
       operationId: ShowMonitoredTwitterHandle
@@ -1461,6 +1483,7 @@ paths:
               example: ""
   /api/v2/channels/twitter/tickets/{comment_id}/statuses:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/CommentId'
     get:
       operationId: GettingTwicketStatus
@@ -1472,6 +1495,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ids
           in: query
           description: Optional comment ids to retrieve tweet information for only particular comments
@@ -1512,6 +1536,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/AgentId'
         - $ref: '#/components/parameters/TicketId'
       responses:
@@ -1557,6 +1582,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/AgentId'
         - $ref: '#/components/parameters/UserId'
       responses:
@@ -1629,6 +1655,7 @@ paths:
         | transcription_text | string                | Transcription of the call (optional)
         | location           | string                | Location of the caller (optional)
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/AgentId'
         - $ref: '#/components/parameters/TicketId'
       requestBody:
@@ -1660,6 +1687,7 @@ paths:
               example: ""
   /api/v2/chat_file_redactions/{ticket_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketId'
     put:
       operationId: RedactChatCommentAttachment
@@ -1727,6 +1755,7 @@ paths:
                   $ref: '#/components/examples/TicketChatCommentAttachmentRedactionResponseExample'
   /api/v2/chat_redactions/{ticket_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketId'
     put:
       operationId: RedactChatComment
@@ -1746,6 +1775,7 @@ paths:
                   $ref: '#/components/examples/TicketChatCommentRedactionResponseExample'
   /api/v2/comment_redactions/{ticket_comment_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketCommentId'
     put:
       operationId: RedactTicketCommentInAgentWorkspace
@@ -1821,6 +1851,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
       responses:
         "200":
@@ -1844,6 +1875,7 @@ paths:
         #### Allowed For
         * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
       responses:
         "200":
@@ -1865,6 +1897,7 @@ paths:
         #### Allowed For
         * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
       responses:
         "204":
@@ -1887,6 +1920,7 @@ paths:
 
         See [Pagination](/api-reference/introduction/pagination/).
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
         - $ref: '#/components/parameters/IncludeStandardFields'
       responses:
@@ -1923,6 +1957,7 @@ paths:
 
         * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
       requestBody:
         content:
@@ -1953,6 +1988,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
         - $ref: '#/components/parameters/CustomObjectFieldKeyOrId'
       responses:
@@ -1978,6 +2014,7 @@ paths:
         #### Allowed For
         * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
         - $ref: '#/components/parameters/CustomObjectFieldKeyOrId'
       responses:
@@ -2000,6 +2037,7 @@ paths:
         #### Allowed For
         * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
         - $ref: '#/components/parameters/CustomObjectFieldKeyOrId'
       responses:
@@ -2017,6 +2055,7 @@ paths:
 
         * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
       responses:
         "200":
@@ -2056,6 +2095,7 @@ paths:
         #### Response ###
         This endpoint returns a `job_status` [JSON object](/api-reference/ticketing/ticket-management/job_statuses/#json-format) and queues a background job to do the work. Use the [Show Job Status](/api-reference/ticketing/ticket-management/job_statuses/#show-job-status) endpoint to check for the job's completion. Only a certain number of jobs can be queued or running at the same time. See [Job limit](/api-reference/introduction/rate-limits/#job-limit) for more information.
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
       requestBody:
         content:
@@ -2086,6 +2126,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
       responses:
         "200":
@@ -2112,6 +2153,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
         - name: filter[ids]
           in: query
@@ -2181,6 +2223,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
       requestBody:
         content:
@@ -2210,6 +2253,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
         - $ref: '#/components/parameters/CustomObjectRecordExternalId'
       requestBody:
@@ -2240,6 +2284,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
         - $ref: '#/components/parameters/CustomObjectRecordExternalId'
       responses:
@@ -2256,6 +2301,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
         - $ref: '#/components/parameters/CustomObjectRecordId'
       responses:
@@ -2280,6 +2326,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
         - $ref: '#/components/parameters/CustomObjectRecordId'
       responses:
@@ -2302,6 +2349,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
         - $ref: '#/components/parameters/CustomObjectRecordId'
       responses:
@@ -2323,6 +2371,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
         - name: name
           in: query
@@ -2380,6 +2429,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
       responses:
         "200":
@@ -2424,6 +2474,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomObjectKey'
         - name: query
           in: query
@@ -2561,6 +2612,7 @@ paths:
                   $ref: '#/components/examples/CustomRoleResponseExample'
   /api/v2/custom_roles/{custom_role_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/CustomRoleId'
     get:
       operationId: ShowCustomRoleById
@@ -2670,6 +2722,7 @@ paths:
 
         * End Users
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: status_categories
           in: query
           description: Filter the list of custom ticket statuses by a comma-separated list of status categories
@@ -2737,6 +2790,7 @@ paths:
 
         * End Users
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomStatusId'
       responses:
         "200":
@@ -2760,6 +2814,7 @@ paths:
 
         * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/CustomStatusId'
       requestBody:
         content:
@@ -2817,6 +2872,7 @@ paths:
         The rate limiting mechanism behaves as described in
         [Monitoring your request activity](/api-reference/ticketing/account-configuration/usage_limits/#monitoring-your-request-activity) in the API introduction.
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketSortBy'
         - $ref: '#/components/parameters/TicketSortOrder'
       responses:
@@ -2850,6 +2906,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketId'
       responses:
         "200":
@@ -2872,6 +2929,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketId'
       responses:
         "200":
@@ -2905,6 +2963,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketIds'
       responses:
         "200":
@@ -2927,6 +2986,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketIds'
       responses:
         "200":
@@ -2975,6 +3035,7 @@ paths:
                   $ref: '#/components/examples/DeletedUsersResponseExample'
   /api/v2/deleted_users/{deleted_user_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/DeletedUserId'
     get:
       operationId: ShowDeletedUser
@@ -3108,6 +3169,7 @@ paths:
                   $ref: '#/components/examples/DynamicContentResponseExample'
   /api/v2/dynamic_content/items/{dynamic_content_item_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/DynamicContentItemId'
     get:
       operationId: ShowDynamicContentItem
@@ -3165,6 +3227,7 @@ paths:
           description: No Content response
   /api/v2/dynamic_content/items/{dynamic_content_item_id}/variants:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/DynamicContentItemId'
     get:
       operationId: DynamicContentListVariants
@@ -3217,6 +3280,7 @@ paths:
                   $ref: '#/components/examples/DynamicContentVariantResponseExample'
   /api/v2/dynamic_content/items/{dynamic_content_item_id}/variants/{dynammic_content_variant_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/DynamicContentItemId'
       - $ref: '#/components/parameters/DynamicContentVariantId'
     get:
@@ -3275,6 +3339,7 @@ paths:
           description: No Content response
   /api/v2/dynamic_content/items/{dynamic_content_item_id}/variants/create_many:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/DynamicContentItemId'
     post:
       operationId: CreateManyDynamicContentVariants
@@ -3297,6 +3362,7 @@ paths:
                   $ref: '#/components/examples/DynamicContentVariantsCreateManyResponseExample'
   /api/v2/dynamic_content/items/{dynamic_content_item_id}/variants/update_many:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/DynamicContentItemId'
     put:
       operationId: UpdateManyDynamicContentVariants
@@ -3336,6 +3402,7 @@ paths:
 
         * Admins, Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: identifiers
           in: query
           description: Identifiers for the dynamic contents
@@ -3405,6 +3472,7 @@ paths:
                   $ref: '#/components/examples/GroupMembershipResponseExample'
   /api/v2/group_memberships/{group_membership_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/GroupMembershipId'
       - $ref: '#/components/parameters/UserId'
     get:
@@ -3515,6 +3583,7 @@ paths:
         * Admins
         * Agents assigned to a custom role with permissions to manage group memberships (Enterprise only)
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ids
           in: query
           description: Id of the group memberships to delete. Comma separated
@@ -3572,6 +3641,7 @@ paths:
                   $ref: '#/components/examples/GroupSLAPolicyCreateResponse'
   /api/v2/group_slas/policies/{group_sla_policy_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/GroupSLAPolicyId'
     get:
       operationId: ShowGroupSLAPolicy
@@ -3656,6 +3726,7 @@ paths:
 
         * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: group_sla_policy_ids
           in: query
           description: The ids of the Group SLA policies to reorder
@@ -3694,6 +3765,7 @@ paths:
         * Admins
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/UserId'
         - $ref: '#/components/parameters/ExcludeDeleted'
       responses:
@@ -3728,6 +3800,7 @@ paths:
                   $ref: '#/components/examples/GroupCreateResponseExample'
   /api/v2/groups/{group_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/GroupId'
     get:
       operationId: ShowGroupById
@@ -3783,6 +3856,7 @@ paths:
           description: No content response
   /api/v2/groups/{group_id}/memberships:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/GroupId'
     get:
       operationId: ListGroupMembershipsByGroupId
@@ -3844,6 +3918,7 @@ paths:
                   $ref: '#/components/examples/GroupsResponseExample'
   /api/v2/groups/count:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
     get:
       operationId: CountGroups
@@ -3882,6 +3957,7 @@ paths:
 
         * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/ArchiveImmediately'
       requestBody:
         content:
@@ -3914,6 +3990,7 @@ paths:
 
         * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/ArchiveImmediately'
       requestBody:
         content:
@@ -3935,6 +4012,7 @@ paths:
                   $ref: '#/components/examples/JobStatusResponseExample'
   /api/v2/incremental/{incremental_resource}/sample:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/IncrementalUnixTime'
       - $ref: '#/components/parameters/IncrementalResource'
     get:
@@ -3960,6 +4038,7 @@ paths:
                   $ref: '#/components/examples/TimeBasedExportIncrementalTicketsResponseExample'
   /api/v2/incremental/organizations:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/IncrementalUnixTime'
     get:
       operationId: IncrementalOrganizationExport
@@ -4078,6 +4157,7 @@ paths:
                   $ref: '#/components/examples/IncrementalSkillBasedRoutingInstanceValuesExample'
   /api/v2/incremental/ticket_events:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/IncrementalUnixTime'
     get:
       operationId: IncrementalTicketEvents
@@ -4163,6 +4243,7 @@ paths:
 
         * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: start_time
           in: query
           description: 'The Unix UTC epoch time of the oldest event you''re interested in. Example: 1332034771.'
@@ -4182,6 +4263,7 @@ paths:
                   $ref: '#/components/examples/TicketMetricEventsResponseExample'
   /api/v2/incremental/tickets:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/IncrementalUnixTime'
     get:
       operationId: IncrementalTicketExportTime
@@ -4227,6 +4309,7 @@ paths:
                   $ref: '#/components/examples/TimeBasedExportIncrementalTicketsResponseExample'
   /api/v2/incremental/tickets/cursor:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/IncrementalUnixTime'
       - $ref: '#/components/parameters/IncrementalCursor'
     get:
@@ -4264,6 +4347,7 @@ paths:
                   $ref: '#/components/examples/CursorBasedExportIncrementalTicketsResponseExample'
   /api/v2/incremental/users:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/IncrementalUnixTime'
       - $ref: '#/components/parameters/IncrementalPage'
     get:
@@ -4291,6 +4375,7 @@ paths:
                   $ref: '#/components/examples/TimeBasedExportIncrementalUsersResponseExample'
   /api/v2/incremental/users/cursor:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/IncrementalUnixTime'
       - $ref: '#/components/parameters/IncrementalCursor'
       - $ref: '#/components/parameters/IncrementalPage'
@@ -4347,6 +4432,7 @@ paths:
                   $ref: '#/components/examples/JobStatusesResponseExample'
   /api/v2/job_statuses/{job_status_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/JobStatusId'
     get:
       operationId: ShowJobStatus
@@ -4382,6 +4468,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ids
           in: query
           description: Comma-separated list of job status ids.
@@ -4425,6 +4512,7 @@ paths:
                   $ref: '#/components/examples/LocalesResponseExample'
   /api/v2/locales/{locale_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/LocaleId'
     get:
       operationId: ShowLocaleById
@@ -4552,6 +4640,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/MacroInclude'
         - $ref: '#/components/parameters/MacroAccess'
         - $ref: '#/components/parameters/MacroActive'
@@ -4609,6 +4698,7 @@ paths:
                   $ref: '#/components/examples/CreateMacroResponseExample'
   /api/v2/macros/{macro_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/MacroId'
     get:
       operationId: ShowMacro
@@ -4678,6 +4768,7 @@ paths:
           description: No Content
   /api/v2/macros/{macro_id}/apply:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/MacroId'
     get:
       operationId: ShowChangesToTicket
@@ -4707,6 +4798,7 @@ paths:
                   $ref: '#/components/examples/MacroChangesToTicketsResponseExample'
   /api/v2/macros/{macro_id}/attachments:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/MacroId'
     get:
       operationId: ListMacroAttachments
@@ -4788,6 +4880,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/MacroInclude'
         - $ref: '#/components/parameters/MacroAccess'
         - $ref: '#/components/parameters/MacroCategory'
@@ -4830,6 +4923,7 @@ paths:
                   $ref: '#/components/examples/MacroAttachmentResponseExample'
   /api/v2/macros/attachments/{attachment_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/AttachmentId'
     get:
       operationId: ShowMacroAttachment
@@ -4918,6 +5012,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ids
           in: query
           description: The IDs of the macros to delete
@@ -4935,6 +5030,7 @@ paths:
           description: No Content
   /api/v2/macros/new:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/MacroIdQuery'
       - name: ticket_id
         in: query
@@ -4967,6 +5063,7 @@ paths:
                   $ref: '#/components/examples/MacroResponseExample'
   /api/v2/macros/search:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/MacroInclude'
       - $ref: '#/components/parameters/MacroAccess'
       - $ref: '#/components/parameters/MacroActive'
@@ -5036,6 +5133,7 @@ paths:
                   $ref: '#/components/examples/MacrosResponseExample'
   /api/v2/object_layouts/{object_type}/essentials_card:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/EssentialsCardKey'
     get:
       operationId: ShowEssentialsCard
@@ -5173,6 +5271,7 @@ paths:
                   $ref: '#/components/examples/OrganizationFieldCreateResponseExample'
   /api/v2/organization_fields/{organization_field_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/OrganizationFieldId'
     get:
       operationId: ShowOrganizationField
@@ -5320,6 +5419,7 @@ paths:
                   $ref: '#/components/examples/OrganizationMembershipCreateResponseExample'
   /api/v2/organization_memberships/{organization_membership_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/OrganizationMembershipId'
     get:
       operationId: ShowOrganizationMembershipById
@@ -5394,6 +5494,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ids
           in: query
           description: The IDs of the organization memberships to delete
@@ -5487,6 +5588,7 @@ paths:
 
         For end users, the response will only list the subscriptions created by the requesting end user.
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/OrganizationSubscriptionId'
       responses:
         "200":
@@ -5509,6 +5611,7 @@ paths:
         * Agents
         * End users
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/OrganizationSubscriptionId'
       responses:
         "204":
@@ -5572,6 +5675,7 @@ paths:
                   $ref: '#/components/examples/CreatedOrganizationResponseExample'
   /api/v2/organizations/{organization_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/OrganizationId'
     get:
       operationId: ShowOrganization
@@ -5654,6 +5758,7 @@ paths:
           description: No Content Response
   /api/v2/organizations/{organization_id}/related:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/OrganizationId'
     get:
       operationId: OrganizationRelated
@@ -5676,6 +5781,7 @@ paths:
                   $ref: '#/components/examples/OrganizationsRelatedResponse'
   /api/v2/organizations/autocomplete:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/OrganizationQueryFragment'
       - $ref: '#/components/parameters/LookupRelationshipAutocompleteFieldIdFragment'
       - $ref: '#/components/parameters/LookupRelationshipAutocompleteSourceFragment'
@@ -5838,6 +5944,7 @@ paths:
                   $ref: '#/components/examples/CreatedOrganizationResponseExample'
   /api/v2/organizations/destroy_many:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/OrganizationIds'
       - $ref: '#/components/parameters/OrganizationExternalIds'
     delete:
@@ -5868,6 +5975,7 @@ paths:
                   $ref: '#/components/examples/JobStatusBulkDeleteResponseExample'
   /api/v2/organizations/search:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/OrganizationExternalId'
       - $ref: '#/components/parameters/OrganizationName'
     get:
@@ -5906,6 +6014,7 @@ paths:
                   $ref: '#/components/examples/OrganizationsResponseExample'
   /api/v2/organizations/show_many:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/OrganizationIds'
       - $ref: '#/components/parameters/OrganizationExternalIds'
     get:
@@ -5932,6 +6041,7 @@ paths:
                   $ref: '#/components/examples/AutocompleteOrganizationsResponseExample'
   /api/v2/organizations/update_many:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/OrganizationIds'
       - $ref: '#/components/parameters/OrganizationExternalIds'
     put:
@@ -6037,6 +6147,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: text
           in: query
           description: The text to search for
@@ -6134,6 +6245,7 @@ paths:
                   $ref: '#/components/examples/QueueCreateResponseExample'
   /api/v2/queues/{queue_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/OcrQueueId'
     get:
       operationId: ShowQueueById
@@ -6266,6 +6378,7 @@ paths:
                   $ref: '#/components/examples/SupportAddressCreateResponseExample'
   /api/v2/recipient_addresses/{support_address_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/SupportAddressId'
     get:
       operationId: ShowSupportAddress
@@ -6330,6 +6443,7 @@ paths:
           description: No Content response
   /api/v2/recipient_addresses/{support_address_id}/verify:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/SupportAddressId'
     put:
       operationId: VerifySupportAddressForwarding
@@ -6379,6 +6493,7 @@ paths:
         The returned filter definitions are the options that you can use to build a custom field or ticket field's
         `relationship_filter`.
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: target_type
           in: path
           description: |
@@ -6424,6 +6539,7 @@ paths:
 
         See [Pagination](/api-reference/introduction/pagination/).
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: sort_by
           in: query
           description: Possible values are "updated_at", "created_at"
@@ -6482,6 +6598,7 @@ paths:
                   $ref: '#/components/examples/RequestCreateResponseExample'
   /api/v2/requests/{request_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/RequestId'
     get:
       operationId: ShowRequest
@@ -6542,6 +6659,7 @@ paths:
                   $ref: '#/components/examples/RequestCreateResponseExample'
   /api/v2/requests/{request_id}/comments:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/RequestId'
     get:
       operationId: ListComments
@@ -6577,6 +6695,7 @@ paths:
 
         * End Users
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: since
           in: query
           description: Filters the comments from the given datetime
@@ -6599,6 +6718,7 @@ paths:
                   $ref: '#/components/examples/RequestListCommentsResponseExample'
   /api/v2/requests/{request_id}/comments/{ticket_comment_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/RequestId'
       - $ref: '#/components/parameters/TicketCommentId'
     get:
@@ -6648,6 +6768,7 @@ paths:
 
         * End Users
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: query
           in: query
           description: The syntax and matching logic for the string is detailed in the [Zendesk Support search reference](https://support.zendesk.com/hc/en-us/articles/203663226). See also [Query basics](/api-reference/ticketing/ticket-management/search/#query-basics) in the Tickets API doc.
@@ -6711,6 +6832,7 @@ paths:
                   $ref: '#/components/examples/ResourceCollectionCreateResponseExample'
   /api/v2/resource_collections/{resource_collection_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/ResourceCollectionId'
     get:
       operationId: RetrieveResourceCollection
@@ -6783,6 +6905,7 @@ paths:
                   $ref: '#/components/examples/ResourceCollectionDeleteResponseExample'
   /api/v2/routing/agents/{user_id}/instance_values:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
     get:
       operationId: ListAGentAttributeValues
@@ -6879,6 +7002,7 @@ paths:
                   $ref: '#/components/examples/SkillBasedRoutingAttributeCreateResponseExample'
   /api/v2/routing/attributes/{attribute_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/SkillBasedRoutingAttributeId'
     get:
       operationId: ShowAttribute
@@ -6938,6 +7062,7 @@ paths:
           description: No Content response
   /api/v2/routing/attributes/{attribute_id}/values:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/SkillBasedRoutingAttributeId'
     get:
       operationId: ListAttributeValues
@@ -6983,6 +7108,7 @@ paths:
                   $ref: '#/components/examples/SkillBasedRoutingAttributeValueCreateResponseExample'
   /api/v2/routing/attributes/{attribute_id}/values/{attribute_value_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/SkillBasedRoutingAttributeId'
       - $ref: '#/components/parameters/SkillBasedRoutingAttributeValueId'
     get:
@@ -7076,6 +7202,7 @@ paths:
 
         * Agents and admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ticket_ids
           in: query
           description: The IDs of the relevant tickets to check for matching attributes
@@ -7095,6 +7222,7 @@ paths:
                   $ref: '#/components/examples/SkillBasedRoutingTicketFulfilledResponseExample'
   /api/v2/routing/tickets/{ticket_id}/instance_values:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketId'
     get:
       operationId: ListTicketAttributeValues
@@ -7196,6 +7324,7 @@ paths:
 
          * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: satisfaction_rating_id
           in: path
           description: The id of the satisfaction rating to retrieve
@@ -7272,6 +7401,7 @@ paths:
 
         * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: satisfaction_reason_id
           in: path
           description: The id of the satisfaction rating reason
@@ -7297,6 +7427,7 @@ paths:
       summary: List Search Results
       description: "Use the ampersand character (&) to append the `sort_by` or `sort_order` parameters to the URL.\n\nFor examples, see [Searching with Zendesk API](/documentation/ticketing/using-the-zendesk-api/searching-with-the-zendesk-api).\n\n#### Pagination\n\n* Offset pagination only\n\nOffset pagination may result in duplicate results when paging. You can also use the \n[Export Search Results](/api-reference/ticketing/ticket-management/search/#export-search-results) endpoint, which \nuses cursor-based pagination and doesn't return duplicate results. See \n[Pagination](/api-reference/introduction/pagination/) for more information.\n\n#### Allowed For\n\n* Admins, Agents and Light Agents\n\n\n#### Errors JSON Format\n\nErrors are represented as JSON objects which have the following keys:\n\n| Name                  | Type                 | Comment\n| --------------------- | ---------------------| --------------------\n| error                 | string               | The type of error. Examples: \"unavailable\", \"invalid\"\n| description           | string               |\n\n##### Example Error\n```js\n{\n  \"error\": \"unavailable\",\n  \"description\": \"Sorry, we could not complete your search query. Please try again in a moment.\"\n}\n```\n"
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: query
           in: query
           description: The search query. See [Query basics](#query-basics) above. For details on the query syntax, see the [Zendesk Support search reference](https://support.zendesk.com/hc/en-us/articles/203663226)
@@ -7333,6 +7464,7 @@ paths:
       description: |
         Returns the number of items matching the query rather than the items. The search string works the same as a regular search.
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: query
           in: query
           description: The search query
@@ -7406,6 +7538,7 @@ paths:
 
         There's no `count` property.
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: query
           in: query
           description: The search query. See [Query basics](#query-basics) above. For details on the query syntax, see the [Zendesk Support search reference](https://support.zendesk.com/hc/en-us/articles/203663226)
@@ -7435,6 +7568,7 @@ paths:
                   $ref: '#/components/examples/SearchExportResponseExample'
   /api/v2/sessions:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
     get:
       operationId: ListSessions
@@ -7505,6 +7639,7 @@ paths:
                   $ref: '#/components/examples/SharingAgreementResponseExample'
   /api/v2/sharing_agreements/{sharing_agreement_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/SharingAgreementId'
     get:
       operationId: ShowSharingAgreement
@@ -7633,6 +7768,7 @@ paths:
                   $ref: '#/components/examples/SLAPolicyCreateResponse'
   /api/v2/slas/policies/{sla_policy_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/SLAPolicyId'
     get:
       operationId: ShowSLAPolicy
@@ -7737,6 +7873,7 @@ paths:
 
         * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: sla_policy_ids
           in: query
           description: The IDs of the SLA Policies to reorder
@@ -7756,6 +7893,7 @@ paths:
               example: ""
   /api/v2/suspended_tickets:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/SuspendedTicketsSortBy'
       - $ref: '#/components/parameters/SuspendedTicketsSortOrder'
     get:
@@ -7800,6 +7938,7 @@ paths:
         * Admins and [agents in custom roles with permission](https://support.zendesk.com/hc/en-us/articles/4408882153882#topic_cxn_hig_bd) to manage suspended tickets on Enterprise plans
         * Unrestricted agents on all other plans
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/SuspendedTicketId'
       responses:
         "200":
@@ -7821,6 +7960,7 @@ paths:
 
         * Unrestricted agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/SuspendedTicketId'
       responses:
         "204":
@@ -7844,6 +7984,7 @@ paths:
         * Admins and [agents in custom roles with permission](https://support.zendesk.com/hc/en-us/articles/4408882153882#topic_cxn_hig_bd) to manage suspended tickets on Enterprise plans
         * Unrestricted agents on all other plans
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/SuspendedTicketId'
       responses:
         "200":
@@ -7866,6 +8007,7 @@ paths:
                   $ref: '#/components/examples/RecoverSuspendedTicketUnprocessableContentResponseExample'
   /api/v2/suspended_tickets/attachments:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/SuspendedTicketId'
     post:
       operationId: SuspendedTicketsAttachments
@@ -7891,6 +8033,7 @@ paths:
                   $ref: '#/components/examples/SuspendedTicketsAttachmentsResponseExample'
   /api/v2/suspended_tickets/destroy_many:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/SuspendedTicketsDeleteIds'
     delete:
       operationId: DeleteSuspendedTickets
@@ -7937,6 +8080,7 @@ paths:
                   $ref: '#/components/examples/SuspendedTicketsExportResponseExample'
   /api/v2/suspended_tickets/recover_many:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/SuspendedTicketsRecoverIds'
     put:
       operationId: RecoverSuspendedTickets
@@ -8050,6 +8194,7 @@ paths:
                   $ref: '#/components/examples/TargetFailuresResponseExample'
   /api/v2/target_failures/{target_failure_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TargetFailureId'
     get:
       operationId: ShowTargetFailure
@@ -8115,6 +8260,7 @@ paths:
                   $ref: '#/components/examples/TargetCreateResponseExample'
   /api/v2/targets/{target_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TargetId'
     get:
       operationId: ShowTarget
@@ -8172,6 +8318,7 @@ paths:
       summary: List All Ticket Audits
       description: "Returns ticket audits. Archived tickets are not included in the response. Use the [List Audits for a Ticket](#list-audits-for-a-ticket) endpoint to \nretrieve audit records for an archived ticket. To learn more about archived tickets, see [About archived tickets](https://support.zendesk.com/hc/en-us/articles/203657756).\n\nThis endpoint should not be used for capturing change data. When continually chasing the tail of a cursor, some records will be skipped. For this use case, use the [Incremental Ticket Event Export API](/api-reference/ticketing/ticket-management/incremental_exports/#incremental-ticket-event-export).\n\n#### Pagination\n\n- Cursor pagination\n\nSee [Pagination](/api-reference/introduction/pagination/).\n\nReturns a maximum of 100 records per page.\n\n#### Allowed For\n\n* Admins\n"
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: limit
           in: query
           description: Maximum number of results returned
@@ -8225,6 +8372,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: locale
           in: query
           description: |
@@ -8297,6 +8445,7 @@ paths:
                   $ref: '#/components/examples/TicketFieldResponseExample'
   /api/v2/ticket_fields/{ticket_field_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketFieldId'
       - $ref: '#/components/parameters/Creator'
     get:
@@ -8411,6 +8560,7 @@ paths:
           description: No Content response
   /api/v2/ticket_fields/{ticket_field_id}/options:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketFieldId'
     get:
       operationId: ListTicketFieldOptions
@@ -8494,6 +8644,7 @@ paths:
                   $ref: '#/components/examples/CustomTicketFieldOptionCreateResponseExample'
   /api/v2/ticket_fields/{ticket_field_id}/options/{ticket_field_option_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketFieldId'
       - $ref: '#/components/parameters/TicketFieldOptionId'
     get:
@@ -8564,6 +8715,7 @@ paths:
 
         * Anyone
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: active
           in: query
           description: true returns active ticket forms; false returns inactive ticket forms. If not present, returns both
@@ -8615,6 +8767,7 @@ paths:
                   $ref: '#/components/examples/TicketFormCreateResponseExample'
   /api/v2/ticket_forms/{ticket_form_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketFormId'
     get:
       operationId: ShowTicketForm
@@ -8666,6 +8819,7 @@ paths:
           description: No Content response
   /api/v2/ticket_forms/{ticket_form_id}/clone:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketFormId'
     post:
       operationId: CloneTicketForm
@@ -8726,6 +8880,7 @@ paths:
 
         * Anyone
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ids
           in: query
           description: IDs of the ticket forms to be shown
@@ -8825,6 +8980,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ticket_metric_id
           in: path
           description: The id of the ticket metric to retrieve
@@ -8849,6 +9005,7 @@ paths:
         - Tickets
       summary: List Tickets
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: external_id
           in: query
           description: Lists tickets by external id. External ids don't have to be unique for each ticket. As a result, the request may return multiple tickets with the same external id.
@@ -8905,6 +9062,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketId'
       responses:
         "200":
@@ -8922,6 +9080,7 @@ paths:
         - Tickets
       summary: Update Ticket
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketId'
       requestBody:
         content:
@@ -8964,12 +9123,14 @@ paths:
         Zendesk recommends that you obey the Retry-After header values.
         To delete many tickets, you may use [Bulk Delete Tickets](/api-reference/ticketing/tickets/tickets/#bulk-delete-tickets).
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketId'
       responses:
         "204":
           description: No content
   /api/v2/tickets/{ticket_id}/audits:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketId'
     get:
       operationId: ListAuditsForTicket
@@ -9005,6 +9166,7 @@ paths:
                   $ref: '#/components/examples/TicketAuditsForTicketResponseExample'
   /api/v2/tickets/{ticket_id}/audits/{ticket_audit_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketId'
       - $ref: '#/components/parameters/TicketAuditId'
     get:
@@ -9028,6 +9190,7 @@ paths:
                   $ref: '#/components/examples/TicketAuditResponseExample'
   /api/v2/tickets/{ticket_id}/audits/{ticket_audit_id}/make_private:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketId'
       - $ref: '#/components/parameters/TicketAuditId'
     put:
@@ -9051,6 +9214,7 @@ paths:
               example: ""
   /api/v2/tickets/{ticket_id}/audits/count:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketId'
     get:
       operationId: CountAuditsForTicket
@@ -9089,6 +9253,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketId'
       responses:
         "200":
@@ -9102,6 +9267,7 @@ paths:
                   $ref: '#/components/examples/ListTicketCollaboratorsResponseExample'
   /api/v2/tickets/{ticket_id}/comments:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketId'
     get:
       operationId: ListTicketComments
@@ -9142,6 +9308,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: include_inline_images
           in: query
           description: Default is false. When true, inline images are also listed as attachments in the response
@@ -9164,6 +9331,7 @@ paths:
                   $ref: '#/components/examples/TicketCommentsResponseExample'
   /api/v2/tickets/{ticket_id}/comments/{comment_id}/attachments/{attachment_id}/redact:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketId'
       - $ref: '#/components/parameters/CommentId'
       - $ref: '#/components/parameters/AttachmentId'
@@ -9196,6 +9364,7 @@ paths:
                   $ref: '#/components/examples/AttachmentResponseExample'
   /api/v2/tickets/{ticket_id}/comments/{ticket_comment_id}/make_private:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketId'
       - $ref: '#/components/parameters/TicketCommentId'
     put:
@@ -9219,6 +9388,7 @@ paths:
               example: ""
   /api/v2/tickets/{ticket_id}/comments/{ticket_comment_id}/redact:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketId'
       - $ref: '#/components/parameters/TicketCommentId'
     put:
@@ -9267,6 +9437,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketId'
       responses:
         "200":
@@ -9297,6 +9468,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketId'
       responses:
         "200":
@@ -9325,6 +9497,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketId'
       responses:
         "200":
@@ -9353,6 +9526,7 @@ paths:
 
         See [Pagination](/api-reference/introduction/pagination/).
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketId'
       responses:
         "200":
@@ -9366,6 +9540,7 @@ paths:
                   $ref: '#/components/examples/ListTicketIncidentsResponseExample'
   /api/v2/tickets/{ticket_id}/macros/{macro_id}/apply:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/MacroId'
       - name: ticket_id
         in: path
@@ -9410,6 +9585,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketId'
       responses:
         "200":
@@ -9465,6 +9641,7 @@ paths:
 
         In any other case, comments default to private but can be modified with the comment privacy parameters.
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketId'
       requestBody:
         content:
@@ -9505,6 +9682,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketId'
       responses:
         "200":
@@ -9518,6 +9696,7 @@ paths:
                   $ref: '#/components/examples/TicketRelatedInformationExample'
   /api/v2/tickets/{ticket_id}/satisfaction_rating:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - name: ticket_id
         in: path
         description: The id of the ticket
@@ -9553,6 +9732,7 @@ paths:
                   $ref: '#/components/examples/SatisfactionRatingResponseExample'
   /api/v2/tickets/{ticket_id}/tags:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TicketId'
     get:
       operationId: ListResourceTags
@@ -9750,6 +9930,7 @@ paths:
 
         This endpoint returns a `job_status` [JSON object](/api-reference/ticketing/ticket-management/job_statuses/#json-format) and queues a background job to do the work. Use the [Show Job Status](/api-reference/ticketing/ticket-management/job_statuses/#show-job-status) endpoint to check for the job's completion. Only a certain number of jobs can be queued or running at the same time. See [Job limit](/api-reference/introduction/rate-limits/#job-limit) for more information.
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketIds'
       responses:
         "200":
@@ -9776,6 +9957,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketIds'
       responses:
         "200":
@@ -9801,6 +9983,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TicketIds'
       responses:
         "200":
@@ -9820,6 +10003,7 @@ paths:
       summary: Update Many Tickets
       description: Accepts an array of up to 100 ticket objects, or a comma-separated list of up to 100 ticket ids.
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ids
           in: query
           description: Comma-separated list of ticket ids
@@ -9852,6 +10036,7 @@ paths:
 
         See [Pagination](/api-reference/introduction/pagination/).
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: page
           in: query
           description: Pagination parameters
@@ -10004,6 +10189,7 @@ paths:
       summary: Show Trigger Category
       description: Returns the trigger category with the specified ID.
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: trigger_category_id
           in: path
           description: The id of the trigger category to retrieve
@@ -10042,6 +10228,7 @@ paths:
       summary: Update Trigger Category
       description: Updates the trigger category with the specified ID.
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: trigger_category_id
           in: path
           description: The id of the trigger category to update
@@ -10103,6 +10290,7 @@ paths:
       summary: Delete Trigger Category
       description: Deletes the trigger category with the specified ID.
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: trigger_category_id
           in: path
           description: The id of the trigger category to delete
@@ -10257,6 +10445,7 @@ paths:
         | usage_7d         | The number of times each trigger has been used in the past week
         | usage_30d        | The number of times each trigger has been used in the past thirty days
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/TriggerActive'
         - $ref: '#/components/parameters/TriggerSort'
         - $ref: '#/components/parameters/TriggerSortBy'
@@ -10302,6 +10491,7 @@ paths:
                   $ref: '#/components/examples/TriggerResponseExample'
   /api/v2/triggers/{trigger_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TriggerId'
     get:
       operationId: GetTrigger
@@ -10372,6 +10562,7 @@ paths:
           description: No Content response
   /api/v2/triggers/{trigger_id}/revisions:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TriggerId'
     get:
       operationId: ListTriggerRevisions
@@ -10426,6 +10617,7 @@ paths:
                   $ref: '#/components/examples/TriggerRevisionsResponseExample'
   /api/v2/triggers/{trigger_id}/revisions/{trigger_revision_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TriggerId'
       - $ref: '#/components/parameters/TriggerRevisionId'
     get:
@@ -10459,6 +10651,7 @@ paths:
                   $ref: '#/components/examples/TriggerRevisionResponseExample'
   /api/v2/triggers/active:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TriggerSort'
       - $ref: '#/components/parameters/TriggerSortBy'
       - $ref: '#/components/parameters/TriggerSortOrder'
@@ -10536,6 +10729,7 @@ paths:
                   $ref: '#/components/examples/TriggerDefinitionResponseExample'
   /api/v2/triggers/destroy_many:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TriggerIds'
     delete:
       operationId: DeleteManyTriggers
@@ -10599,6 +10793,7 @@ paths:
                   $ref: '#/components/examples/TriggerResponseExample'
   /api/v2/triggers/search:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/TriggerSearchQuery'
       - $ref: '#/components/parameters/TriggerSearchFilter'
       - $ref: '#/components/parameters/TriggerActive'
@@ -10754,6 +10949,7 @@ paths:
 
         * End Users
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: token
           in: path
           description: The token of the uploaded attachment
@@ -10830,6 +11026,7 @@ paths:
                   $ref: '#/components/examples/UserFieldCreateResponseExample'
   /api/v2/user_fields/{user_field_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserFieldId'
     get:
       operationId: ShowUserField
@@ -10902,6 +11099,7 @@ paths:
           description: No Content response
   /api/v2/user_fields/{user_field_id}/options:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserFieldId'
     get:
       operationId: ListUserFieldOptions
@@ -10974,6 +11172,7 @@ paths:
                   $ref: '#/components/examples/CustomUserFieldOptionCreateResponseExample'
   /api/v2/user_fields/{user_field_id}/options/{user_field_option_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserFieldId'
       - $ref: '#/components/parameters/UserFieldOptionId'
     get:
@@ -11045,6 +11244,7 @@ paths:
 
         * Admins, Agents and Light Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/UserRoleFilter'
         - $ref: '#/components/parameters/UserRolesFilter'
         - $ref: '#/components/parameters/UserPermissionSetFilter'
@@ -11085,6 +11285,7 @@ paths:
                   $ref: '#/components/examples/UserCreateResponseExample'
   /api/v2/users/{user_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
     get:
       operationId: ShowUser
@@ -11159,6 +11360,7 @@ paths:
                   $ref: '#/components/examples/DeleteUserResponseExample'
   /api/v2/users/{user_id}/compliance_deletion_statuses:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
     get:
       operationId: ShowUserComplianceDeletionStatuses
@@ -11189,6 +11391,7 @@ paths:
 
         See [Pagination](/api-reference/introduction/pagination/).
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: application
           in: query
           description: Area of compliance
@@ -11207,6 +11410,7 @@ paths:
                   $ref: '#/components/examples/ComplianceDeletionStatusesResponseExample'
   /api/v2/users/{user_id}/group_memberships:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
     get:
       operationId: ListGroupMembershipsByUserId
@@ -11238,6 +11442,7 @@ paths:
                   $ref: '#/components/examples/GroupMembershipsResponseExample'
   /api/v2/users/{user_id}/group_memberships/{group_membership_id}/make_default:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
       - $ref: '#/components/parameters/GroupMembershipId'
     put:
@@ -11261,6 +11466,7 @@ paths:
                   $ref: '#/components/examples/GroupMembershipsResponseExample'
   /api/v2/users/{user_id}/identities:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
     get:
       operationId: ListUserIdentities
@@ -11331,6 +11537,7 @@ paths:
                   $ref: '#/components/examples/UserIdentityCreateResponseExample'
   /api/v2/users/{user_id}/identities/{user_identity_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
       - $ref: '#/components/parameters/UserIdentityId'
     get:
@@ -11399,6 +11606,7 @@ paths:
           description: No Content response
   /api/v2/users/{user_id}/identities/{user_identity_id}/make_primary:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
       - $ref: '#/components/parameters/UserIdentityId'
     put:
@@ -11427,6 +11635,7 @@ paths:
                   $ref: '#/components/examples/UserIdentitiesResponseExample'
   /api/v2/users/{user_id}/identities/{user_identity_id}/request_verification:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
       - $ref: '#/components/parameters/UserIdentityId'
     put:
@@ -11452,6 +11661,7 @@ paths:
               example: ""
   /api/v2/users/{user_id}/identities/{user_identity_id}/verify:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
       - $ref: '#/components/parameters/UserIdentityId'
     put:
@@ -11479,6 +11689,7 @@ paths:
                   $ref: '#/components/examples/UserIdentityResponseExample'
   /api/v2/users/{user_id}/merge:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
     put:
       operationId: MergeEndUsers
@@ -11518,6 +11729,7 @@ paths:
                   $ref: '#/components/examples/UserResponseExample'
   /api/v2/users/{user_id}/organization_memberships/{organization_membership_id}/make_default:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
       - $ref: '#/components/parameters/OrganizationMembershipId'
     put:
@@ -11544,6 +11756,7 @@ paths:
                   $ref: '#/components/examples/OrganizationMembershipsResponseExample'
   /api/v2/users/{user_id}/organizations/{organization_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/OrganizationId'
       - $ref: '#/components/parameters/UserId'
     delete:
@@ -11562,6 +11775,7 @@ paths:
           description: No Content response
   /api/v2/users/{user_id}/organizations/{organization_id}/make_default:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
       - $ref: '#/components/parameters/OrganizationId'
     put:
@@ -11587,6 +11801,7 @@ paths:
                   $ref: '#/components/examples/OrganizationMembershipResponseExample'
   /api/v2/users/{user_id}/password:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
     post:
       operationId: SetUserPassword
@@ -11633,6 +11848,7 @@ paths:
               example: ""
   /api/v2/users/{user_id}/password/requirements:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
     get:
       operationId: GetUserPasswordRequirements
@@ -11656,6 +11872,7 @@ paths:
                   $ref: '#/components/examples/UserPasswordRequirementsResponseExample'
   /api/v2/users/{user_id}/related:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
     get:
       operationId: ShowUserRelated
@@ -11674,6 +11891,7 @@ paths:
                   $ref: '#/components/examples/UserRelatedResponseExample'
   /api/v2/users/{user_id}/sessions:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/UserId'
     delete:
       operationId: BulkDeleteSessionsByUserId
@@ -11691,6 +11909,7 @@ paths:
           description: No Content
   /api/v2/users/{user_id}/sessions/{session_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/SessionId'
       - $ref: '#/components/parameters/UserId'
     get:
@@ -11726,6 +11945,7 @@ paths:
           description: No Content
   /api/v2/users/{user_id}/skips:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/SkipTicketUserId'
       - $ref: '#/components/parameters/TicketSortOrder'
       - $ref: '#/components/parameters/TicketId'
@@ -11776,6 +11996,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: name
           in: query
           description: |
@@ -11814,6 +12035,7 @@ paths:
 
         * Admins, Agents and Light Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - $ref: '#/components/parameters/UserRoleFilter'
         - $ref: '#/components/parameters/UserRolesFilter'
         - $ref: '#/components/parameters/UserPermissionSetFilter'
@@ -11971,6 +12193,7 @@ paths:
 
         This endpoint returns a `job_status` [JSON object](/api-reference/ticketing/ticket-management/job_statuses/#json-format) and queues a background job to do the work. Use the [Show Job Status](/api-reference/ticketing/ticket-management/job_statuses/#show-job-status) endpoint to check for the job's completion. Only a certain number of jobs can be queued or running at the same time. See [Job limit](/api-reference/introduction/rate-limits/#job-limit) for more information.
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ids
           in: query
           description: Id of the users to delete. Comma separated
@@ -12006,6 +12229,7 @@ paths:
 
         * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ids
           in: query
           description: |
@@ -12155,6 +12379,7 @@ paths:
 
         * Admins, Agents and Light Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: query
           in: query
           description: |
@@ -12196,6 +12421,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ids
           in: query
           description: |
@@ -12227,6 +12453,7 @@ paths:
         - Users
       summary: Update Many Users
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ids
           in: query
           description: Id of the users to update. Comma separated
@@ -12292,6 +12519,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: access
           in: query
           description: Only views with given access. May be "personal", "shared", or "account"
@@ -12460,6 +12688,7 @@ paths:
                   $ref: '#/components/examples/ViewCreateResponseExample'
   /api/v2/views/{view_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/ViewId'
     get:
       operationId: ShowView
@@ -12563,6 +12792,7 @@ paths:
           description: No Content response
   /api/v2/views/{view_id}/count:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/ViewId'
     get:
       operationId: GetViewCount
@@ -12615,6 +12845,7 @@ paths:
                   $ref: '#/components/examples/ViewCountResponseExample'
   /api/v2/views/{view_id}/execute:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/ViewId'
     get:
       operationId: ExecuteView
@@ -12649,6 +12880,7 @@ paths:
 
         See [Pagination](/api-reference/introduction/pagination/).
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: sort_by
           in: query
           description: The ticket field used for sorting. This will either be a title or a custom field id.
@@ -12671,6 +12903,7 @@ paths:
                   $ref: '#/components/examples/ViewExecuteResponseExample'
   /api/v2/views/{view_id}/export:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/ViewId'
     get:
       operationId: ExportView
@@ -12695,6 +12928,7 @@ paths:
                   $ref: '#/components/examples/ViewExportResponseExample'
   /api/v2/views/{view_id}/tickets:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/ViewId'
     get:
       operationId: ListTicketsFromView
@@ -12712,6 +12946,7 @@ paths:
 
         See [Pagination](/api-reference/introduction/pagination/).
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: sort_by
           in: query
           description: Sort or group the tickets by a column in the [View columns](#view-columns) table. The `subject` and `submitter` columns are not supported
@@ -12762,6 +12997,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: access
           in: query
           description: Only views with given access. May be "personal", "shared", or "account"
@@ -12857,6 +13093,7 @@ paths:
 
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ids
           in: query
           description: List of view's ids separated by commas.
@@ -12886,6 +13123,7 @@ paths:
         #### Allowed For
         * Agents
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ids
           in: query
           description: The IDs of the views to delete
@@ -12976,6 +13214,7 @@ paths:
         | app_installation | The app installation that requires each view, if present
         | permissions      | The permissions for each view
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: query
           in: query
           description: Query string used to find all views with matching title
@@ -13044,6 +13283,7 @@ paths:
         | app_installation | The app installation that requires each view, if present
         | permissions      | The permissions for each view
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ids
           in: query
           description: List of view's ids separated by commas.
@@ -13260,6 +13500,7 @@ paths:
                       url: https://{subdomain}.zendesk.com/api/v2/workspaces.json
   /api/v2/workspaces/{workspace_id}:
     parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
       - $ref: '#/components/parameters/WorkspaceId'
     get:
       operationId: ShowWorkspace
@@ -13423,6 +13664,7 @@ paths:
         #### Allowed For
         * Admins
       parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
         - name: ids
           in: query
           description: The ids of the workspaces to delete
@@ -23335,6 +23577,13 @@ components:
                 $ref: '#/components/schemas/WorkspaceObject'
         - $ref: '#/components/schemas/OffsetPaginationObject'
   parameters:
+    AcceptHeader:
+        name: Accept
+        in: header
+        required: false
+        schema:
+            type: string
+            default: application/json
     ActivityId:
       name: activity_id
       in: path

@@ -58,11 +58,13 @@ public isolated client class Client {
     #
     # + name - Query string used to search assignable groups & agents in the AssigneeField
     # + return - Success response 
-    resource isolated function get api/lotus/assignables/autocomplete\.json(string name) returns AssigneeFieldAssignableGroupsAndAgentsSearchResponse|error {
+    resource isolated function get api/lotus/assignables/autocomplete\.json(string name, string accept = "application/json") returns AssigneeFieldAssignableGroupsAndAgentsSearchResponse|error {
         string resourcePath = string `/api/lotus/assignables/autocomplete.json`;
         map<anydata> queryParam = {"name": name};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        AssigneeFieldAssignableGroupsAndAgentsSearchResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        AssigneeFieldAssignableGroupsAndAgentsSearchResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List assignable groups on the AssigneeField
@@ -77,9 +79,11 @@ public isolated client class Client {
     #
     # + group_id - The ID of the group
     # + return - Success response 
-    resource isolated function get api/lotus/assignables/groups/[int group_id]/agents\.json() returns AssigneeFieldAssignableGroupAgentsResponse|error {
+    resource isolated function get api/lotus/assignables/groups/[int group_id]/agents\.json(string accept = "application/json") returns AssigneeFieldAssignableGroupAgentsResponse|error {
         string resourcePath = string `/api/lotus/assignables/groups/${getEncodedUri(group_id)}/agents.json`;
-        AssigneeFieldAssignableGroupAgentsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        AssigneeFieldAssignableGroupAgentsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Get sources by target
@@ -91,9 +95,11 @@ public isolated client class Client {
     # + source_type - The type of object the relationship field belongs to (example. ticket field belongs to a ticket object).
     # The options are "zen:user", "zen:ticket", "zen:organization", and "zen:custom_object:CUSTOM_OBJECT_KEY"
     # + return - Success response 
-    resource isolated function get api/v2/[string target_type]/[int target_id]/relationship_fields/[int field_id]/[string source_type]() returns ReverseLookupResponse|error {
+    resource isolated function get api/v2/[string target_type]/[int target_id]/relationship_fields/[int field_id]/[string source_type](string accept = "application/json") returns ReverseLookupResponse|error {
         string resourcePath = string `/api/v2/${getEncodedUri(target_type)}/${getEncodedUri(target_id)}/relationship_fields/${getEncodedUri(field_id)}/${getEncodedUri(source_type)}`;
-        ReverseLookupResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ReverseLookupResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Show Settings
@@ -126,31 +132,37 @@ public isolated client class Client {
     #
     # + subdomain - Specify the name of the subdomain you want to verify. The name can't contain underscores, hyphens, or spaces.
     # + return - Success response 
-    resource isolated function get api/v2/accounts/available(string subdomain) returns Inline_response_200|error {
+    resource isolated function get api/v2/accounts/available(string subdomain, string accept = "application/json") returns Inline_response_200|error {
         string resourcePath = string `/api/v2/accounts/available`;
         map<anydata> queryParam = {"subdomain": subdomain};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        Inline_response_200 response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        Inline_response_200 response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Activities
     #
     # + since - A UTC time in ISO 8601 format to return ticket activities since said date.
     # + return - Success response 
-    resource isolated function get api/v2/activities(string? since = ()) returns ActivitiesResponse|error {
+    resource isolated function get api/v2/activities(string accept = "application/json", string? since = ()) returns ActivitiesResponse|error {
         string resourcePath = string `/api/v2/activities`;
         map<anydata> queryParam = {"since": since};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        ActivitiesResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ActivitiesResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Show Activity
     #
     # + activity_id - The activity ID
     # + return - Success response 
-    resource isolated function get api/v2/activities/[int activity_id]() returns ActivityResponse|error {
+    resource isolated function get api/v2/activities/[int activity_id](string accept = "application/json") returns ActivityResponse|error {
         string resourcePath = string `/api/v2/activities/${getEncodedUri(activity_id)}`;
-        ActivityResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ActivityResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Count Activities
@@ -192,21 +204,25 @@ public isolated client class Client {
     #
     # + attachment_id - The ID of the attachment
     # + return - Success Response 
-    resource isolated function get api/v2/attachments/[int attachment_id]() returns AttachmentResponse|error {
+    resource isolated function get api/v2/attachments/[int attachment_id](string accept = "application/json") returns AttachmentResponse|error {
         string resourcePath = string `/api/v2/attachments/${getEncodedUri(attachment_id)}`;
-        AttachmentResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        AttachmentResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Attachment for Malware
     #
     # + attachment_id - The ID of the attachment
     # + return - Success response 
-    resource isolated function put api/v2/attachments/[int attachment_id](AttachmentUpdateRequest payload) returns AttachmentResponse|error {
+    resource isolated function put api/v2/attachments/[int attachment_id](AttachmentUpdateRequest payload, string accept = "application/json") returns AttachmentResponse|error {
         string resourcePath = string `/api/v2/attachments/${getEncodedUri(attachment_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        AttachmentResponse response = check self.clientEp->put(resourcePath, request);
+        AttachmentResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # List Audit Logs
@@ -221,20 +237,24 @@ public isolated client class Client {
     # + sort_order - Offset pagination only. Sort audit logs. Default is `sort_order=desc`
     # + sort - Cursor pagination only. Sort audit logs. Default is `sort=-created_at`
     # + return - Success response 
-    resource isolated function get api/v2/audit_logs(string? filterSource_type = (), int? filterSource_id = (), int? filterActor_id = (), string? filterIp_address = (), string? filterCreated_at = (), string? filterAction = (), string? sort_by = (), string? sort_order = (), string? sort = ()) returns AuditLogsResponse|error {
+    resource isolated function get api/v2/audit_logs(string accept = "application/json", string? filterSource_type = (), int? filterSource_id = (), int? filterActor_id = (), string? filterIp_address = (), string? filterCreated_at = (), string? filterAction = (), string? sort_by = (), string? sort_order = (), string? sort = ()) returns AuditLogsResponse|error {
         string resourcePath = string `/api/v2/audit_logs`;
         map<anydata> queryParam = {"filter[source_type]": filterSource_type, "filter[source_id]": filterSource_id, "filter[actor_id]": filterActor_id, "filter[ip_address]": filterIp_address, "filter[created_at]": filterCreated_at, "filter[action]": filterAction, "sort_by": sort_by, "sort_order": sort_order, "sort": sort};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        AuditLogsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        AuditLogsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Show Audit Log
     #
     # + audit_log_id - The ID of the audit log
     # + return - Success response 
-    resource isolated function get api/v2/audit_logs/[int audit_log_id]() returns AuditLogResponse|error {
+    resource isolated function get api/v2/audit_logs/[int audit_log_id](string accept = "application/json") returns AuditLogResponse|error {
         string resourcePath = string `/api/v2/audit_logs/${getEncodedUri(audit_log_id)}`;
-        AuditLogResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        AuditLogResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Export Audit Logs
@@ -246,23 +266,27 @@ public isolated client class Client {
     # + filterCreated_at - Filter audit logs by the time of creation. When used, you must specify `filter[created_at]` twice in your request, first with the start time and again with an end time
     # + filterAction - Filter audit logs by the action
     # + return - Accepted description 
-    resource isolated function post api/v2/audit_logs/export(string? filterSource_type = (), int? filterSource_id = (), int? filterActor_id = (), string? filterIp_address = (), string? filterCreated_at = (), string? filterAction = ()) returns string|error {
+    resource isolated function post api/v2/audit_logs/export(string accept = "application/json", string? filterSource_type = (), int? filterSource_id = (), int? filterActor_id = (), string? filterIp_address = (), string? filterCreated_at = (), string? filterAction = ()) returns string|error {
         string resourcePath = string `/api/v2/audit_logs/export`;
         map<anydata> queryParam = {"filter[source_type]": filterSource_type, "filter[source_id]": filterSource_id, "filter[actor_id]": filterActor_id, "filter[ip_address]": filterIp_address, "filter[created_at]": filterCreated_at, "filter[action]": filterAction};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        string response = check self.clientEp->post(resourcePath, request);
+        string response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Search Tags
     #
     # + name - A substring of a tag to search for
     # + return - Success response 
-    resource isolated function get api/v2/autocomplete/tags(string? name = ()) returns TagsByObjectIdResponse|error {
+    resource isolated function get api/v2/autocomplete/tags(string accept = "application/json", string? name = ()) returns TagsByObjectIdResponse|error {
         string resourcePath = string `/api/v2/autocomplete/tags`;
         map<anydata> queryParam = {"name": name};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TagsByObjectIdResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TagsByObjectIdResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Automations
@@ -286,28 +310,34 @@ public isolated client class Client {
     #
     # + automation_id - The ID of the automation
     # + return - Success response 
-    resource isolated function get api/v2/automations/[int automation_id]() returns AutomationResponse|error {
+    resource isolated function get api/v2/automations/[int automation_id](string accept = "application/json") returns AutomationResponse|error {
         string resourcePath = string `/api/v2/automations/${getEncodedUri(automation_id)}`;
-        AutomationResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        AutomationResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Automation
     #
     # + automation_id - The ID of the automation
     # + return - Success response 
-    resource isolated function put api/v2/automations/[int automation_id]() returns AutomationResponse|error {
+    resource isolated function put api/v2/automations/[int automation_id](string accept = "application/json") returns AutomationResponse|error {
         string resourcePath = string `/api/v2/automations/${getEncodedUri(automation_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        AutomationResponse response = check self.clientEp->put(resourcePath, request);
+        AutomationResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Automation
     #
     # + automation_id - The ID of the automation
     # + return - No Content response 
-    resource isolated function delete api/v2/automations/[int automation_id]() returns error? {
+    resource isolated function delete api/v2/automations/[int automation_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/automations/${getEncodedUri(automation_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # List Active Automations
     #
@@ -321,12 +351,14 @@ public isolated client class Client {
     #
     # + ids - The IDs of the automations to delete
     # + return - No Content response 
-    resource isolated function delete api/v2/automations/destroy_many(int[]? ids = ()) returns error? {
+    resource isolated function delete api/v2/automations/destroy_many(string accept = "application/json", int[]? ids = ()) returns error? {
         string resourcePath = string `/api/v2/automations/destroy_many`;
         map<anydata> queryParam = {"ids": ids};
         map<Encoding> queryParamEncoding = {"ids": {style: FORM, explode: true}};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam, queryParamEncoding);
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Search Automations
     #
@@ -336,11 +368,13 @@ public isolated client class Client {
     # + sort_order - One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
     # + include - A sideload to include in the response. See [Sideloads](#sideloads-2)
     # + return - Success response 
-    resource isolated function get api/v2/automations/search(string query, boolean? active = (), string? sort_by = (), string? sort_order = (), string? include = ()) returns AutomationsResponse|error {
+    resource isolated function get api/v2/automations/search(string query, string accept = "application/json", boolean? active = (), string? sort_by = (), string? sort_order = (), string? include = ()) returns AutomationsResponse|error {
         string resourcePath = string `/api/v2/automations/search`;
         map<anydata> queryParam = {"query": query, "active": active, "sort_by": sort_by, "sort_order": sort_order, "include": include};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        AutomationsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        AutomationsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Many Automations
@@ -375,9 +409,11 @@ public isolated client class Client {
     #
     # + bookmark_id - The ID of the bookmark
     # + return - No content 
-    resource isolated function delete api/v2/bookmarks/[int bookmark_id]() returns error? {
+    resource isolated function delete api/v2/bookmarks/[int bookmark_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/bookmarks/${getEncodedUri(bookmark_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # List Brands
     #
@@ -402,38 +438,46 @@ public isolated client class Client {
     #
     # + brand_id - The ID of the brand
     # + return - Successful response 
-    resource isolated function get api/v2/brands/[int brand_id]() returns BrandResponse|error {
+    resource isolated function get api/v2/brands/[int brand_id](string accept = "application/json") returns BrandResponse|error {
         string resourcePath = string `/api/v2/brands/${getEncodedUri(brand_id)}`;
-        BrandResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        BrandResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update a Brand
     #
     # + brand_id - The ID of the brand
     # + return - Successful response 
-    resource isolated function put api/v2/brands/[int brand_id](BrandUpdateRequest payload) returns BrandResponse|error {
+    resource isolated function put api/v2/brands/[int brand_id](BrandUpdateRequest payload, string accept = "application/json") returns BrandResponse|error {
         string resourcePath = string `/api/v2/brands/${getEncodedUri(brand_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        BrandResponse response = check self.clientEp->put(resourcePath, request);
+        BrandResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete a Brand
     #
     # + brand_id - The ID of the brand
     # + return - No Content response 
-    resource isolated function delete api/v2/brands/[int brand_id]() returns error? {
+    resource isolated function delete api/v2/brands/[int brand_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/brands/${getEncodedUri(brand_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Check Host Mapping Validity for an Existing Brand
     #
     # + brand_id - The ID of the brand
     # + return - Successful response 
-    resource isolated function get api/v2/brands/[int brand_id]/check_host_mapping() returns HostMappingObject|error {
+    resource isolated function get api/v2/brands/[int brand_id]/check_host_mapping(string accept = "application/json") returns HostMappingObject|error {
         string resourcePath = string `/api/v2/brands/${getEncodedUri(brand_id)}/check_host_mapping`;
-        HostMappingObject response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        HostMappingObject response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Check Host Mapping Validity
@@ -441,11 +485,13 @@ public isolated client class Client {
     # + host_mapping - The hostmapping to a brand, if any (only admins view this key)
     # + subdomain - Subdomain for a given Zendesk account address
     # + return - Successful response 
-    resource isolated function get api/v2/brands/check_host_mapping(string host_mapping, string subdomain) returns HostMappingObject|error {
+    resource isolated function get api/v2/brands/check_host_mapping(string host_mapping, string subdomain, string accept = "application/json") returns HostMappingObject|error {
         string resourcePath = string `/api/v2/brands/check_host_mapping`;
         map<anydata> queryParam = {"host_mapping": host_mapping, "subdomain": subdomain};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        HostMappingObject response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        HostMappingObject response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Monitored Twitter Handles
@@ -460,9 +506,11 @@ public isolated client class Client {
     #
     # + monitored_twitter_handle_id - The ID of the custom agent role
     # + return - Success response 
-    resource isolated function get api/v2/channels/twitter/monitored_twitter_handles/[int monitored_twitter_handle_id]() returns TwitterChannelResponse|error {
+    resource isolated function get api/v2/channels/twitter/monitored_twitter_handles/[int monitored_twitter_handle_id](string accept = "application/json") returns TwitterChannelResponse|error {
         string resourcePath = string `/api/v2/channels/twitter/monitored_twitter_handles/${getEncodedUri(monitored_twitter_handle_id)}`;
-        TwitterChannelResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TwitterChannelResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Ticket from Tweet
@@ -479,11 +527,13 @@ public isolated client class Client {
     # + comment_id - The ID of the comment
     # + ids - Optional comment ids to retrieve tweet information for only particular comments
     # + return - Success response 
-    resource isolated function get api/v2/channels/twitter/tickets/[int comment_id]/statuses(string? ids = ()) returns TwitterChannelTwicketStatusResponse|error {
+    resource isolated function get api/v2/channels/twitter/tickets/[int comment_id]/statuses(string accept = "application/json", string? ids = ()) returns TwitterChannelTwicketStatusResponse|error {
         string resourcePath = string `/api/v2/channels/twitter/tickets/${getEncodedUri(comment_id)}/statuses`;
         map<anydata> queryParam = {"ids": ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TwitterChannelTwicketStatusResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TwitterChannelTwicketStatusResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Open Ticket in Agent's Browser
@@ -491,10 +541,12 @@ public isolated client class Client {
     # + agent_id - ID of an agent
     # + ticket_id - The ID of the ticket
     # + return - Successful response 
-    resource isolated function post api/v2/channels/voice/agents/[int agent_id]/tickets/[int ticket_id]/display() returns string|error {
+    resource isolated function post api/v2/channels/voice/agents/[int agent_id]/tickets/[int ticket_id]/display(string accept = "application/json") returns string|error {
         string resourcePath = string `/api/v2/channels/voice/agents/${getEncodedUri(agent_id)}/tickets/${getEncodedUri(ticket_id)}/display`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        string response = check self.clientEp->post(resourcePath, request);
+        string response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Open a User's Profile in an Agent's Browser
@@ -502,10 +554,12 @@ public isolated client class Client {
     # + agent_id - ID of an agent
     # + user_id - The id of the user
     # + return - Successful response 
-    resource isolated function post api/v2/channels/voice/agents/[int agent_id]/users/[int user_id]/display() returns string|error {
+    resource isolated function post api/v2/channels/voice/agents/[int agent_id]/users/[int user_id]/display(string accept = "application/json") returns string|error {
         string resourcePath = string `/api/v2/channels/voice/agents/${getEncodedUri(agent_id)}/users/${getEncodedUri(user_id)}/display`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        string response = check self.clientEp->post(resourcePath, request);
+        string response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Create Ticket or Voicemail Ticket
@@ -513,42 +567,50 @@ public isolated client class Client {
     # + agent_id - ID of an agent
     # + ticket_id - The ID of the ticket
     # + return - Successful response 
-    resource isolated function post api/v2/channels/voice/tickets(TicketCreateVoicemailTicketRequest payload) returns TicketResponse|error {
+    resource isolated function post api/v2/channels/voice/tickets(TicketCreateVoicemailTicketRequest payload, string accept = "application/json") returns TicketResponse|error {
         string resourcePath = string `/api/v2/channels/voice/tickets`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        TicketResponse response = check self.clientEp->post(resourcePath, request);
+        TicketResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Redact Chat Comment Attachment
     #
     # + ticket_id - The ID of the ticket
     # + return - Success response 
-    resource isolated function put api/v2/chat_file_redactions/[int ticket_id]() returns TicketChatCommentRedactionResponse|error {
+    resource isolated function put api/v2/chat_file_redactions/[int ticket_id](string accept = "application/json") returns TicketChatCommentRedactionResponse|error {
         string resourcePath = string `/api/v2/chat_file_redactions/${getEncodedUri(ticket_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        TicketChatCommentRedactionResponse response = check self.clientEp->put(resourcePath, request);
+        TicketChatCommentRedactionResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Redact Chat Comment
     #
     # + ticket_id - The ID of the ticket
     # + return - Success response 
-    resource isolated function put api/v2/chat_redactions/[int ticket_id]() returns TicketChatCommentRedactionResponse|error {
+    resource isolated function put api/v2/chat_redactions/[int ticket_id](string accept = "application/json") returns TicketChatCommentRedactionResponse|error {
         string resourcePath = string `/api/v2/chat_redactions/${getEncodedUri(ticket_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        TicketChatCommentRedactionResponse response = check self.clientEp->put(resourcePath, request);
+        TicketChatCommentRedactionResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Redact Ticket Comment In Agent Workspace
     #
     # + ticket_comment_id - The ID of the ticket comment
     # + return - Success response 
-    resource isolated function put api/v2/comment_redactions/[int ticket_comment_id]() returns TicketCommentResponse|error {
+    resource isolated function put api/v2/comment_redactions/[int ticket_comment_id](string accept = "application/json") returns TicketCommentResponse|error {
         string resourcePath = string `/api/v2/comment_redactions/${getEncodedUri(ticket_comment_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        TicketCommentResponse response = check self.clientEp->put(resourcePath, request);
+        TicketCommentResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # List Custom Objects
@@ -574,27 +636,33 @@ public isolated client class Client {
     #
     # + custom_object_key - The key of a custom object
     # + return - Custom Object 
-    resource isolated function get api/v2/custom_objects/[string custom_object_key]() returns CustomObjectResponse|error {
+    resource isolated function get api/v2/custom_objects/[string custom_object_key](string accept = "application/json") returns CustomObjectResponse|error {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}`;
-        CustomObjectResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CustomObjectResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Delete Custom Object
     #
     # + custom_object_key - The key of a custom object
     # + return - No content response 
-    resource isolated function delete api/v2/custom_objects/[string custom_object_key]() returns error? {
+    resource isolated function delete api/v2/custom_objects/[string custom_object_key](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Update Custom Object
     #
     # + custom_object_key - The key of a custom object
     # + return - Success response 
-    resource isolated function patch api/v2/custom_objects/[string custom_object_key]() returns CustomObjectResponse|error {
+    resource isolated function patch api/v2/custom_objects/[string custom_object_key](string accept = "application/json") returns CustomObjectResponse|error {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        CustomObjectResponse response = check self.clientEp->patch(resourcePath, request);
+        CustomObjectResponse response = check self.clientEp->patch(resourcePath, request, httpHeaders);
         return response;
     }
     # List Custom Object Fields
@@ -602,23 +670,27 @@ public isolated client class Client {
     # + custom_object_key - The key of a custom object
     # + include_standard_fields - Include standard fields if true. Exclude them if false
     # + return - Success response 
-    resource isolated function get api/v2/custom_objects/[string custom_object_key]/fields(boolean? include_standard_fields = ()) returns CustomObjectFieldsResponse|error {
+    resource isolated function get api/v2/custom_objects/[string custom_object_key]/fields(string accept = "application/json", boolean? include_standard_fields = ()) returns CustomObjectFieldsResponse|error {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/fields`;
         map<anydata> queryParam = {"include_standard_fields": include_standard_fields};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        CustomObjectFieldsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CustomObjectFieldsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Custom Object Field
     #
     # + custom_object_key - The key of a custom object
     # + return - Created 
-    resource isolated function post api/v2/custom_objects/[string custom_object_key]/fields(CustomObjectFieldsCreateRequest payload) returns CustomObjectFieldResponse|error {
+    resource isolated function post api/v2/custom_objects/[string custom_object_key]/fields(CustomObjectFieldsCreateRequest payload, string accept = "application/json") returns CustomObjectFieldResponse|error {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/fields`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        CustomObjectFieldResponse response = check self.clientEp->post(resourcePath, request);
+        CustomObjectFieldResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Show Custom Object Field
@@ -626,9 +698,11 @@ public isolated client class Client {
     # + custom_object_key - The key of a custom object
     # + custom_object_field_key_or_id - The key or id of a custom object field
     # + return - Custom Object Field 
-    resource isolated function get api/v2/custom_objects/[string custom_object_key]/fields/[string custom_object_field_key_or_id]() returns CustomObjectFieldResponse|error {
+    resource isolated function get api/v2/custom_objects/[string custom_object_key]/fields/[string custom_object_field_key_or_id](string accept = "application/json") returns CustomObjectFieldResponse|error {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/fields/${getEncodedUri(custom_object_field_key_or_id)}`;
-        CustomObjectFieldResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CustomObjectFieldResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Delete Custom Object Field
@@ -636,50 +710,60 @@ public isolated client class Client {
     # + custom_object_key - The key of a custom object
     # + custom_object_field_key_or_id - The key or id of a custom object field
     # + return - No content response 
-    resource isolated function delete api/v2/custom_objects/[string custom_object_key]/fields/[string custom_object_field_key_or_id]() returns error? {
+    resource isolated function delete api/v2/custom_objects/[string custom_object_key]/fields/[string custom_object_field_key_or_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/fields/${getEncodedUri(custom_object_field_key_or_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Update Custom Object Field
     #
     # + custom_object_key - The key of a custom object
     # + custom_object_field_key_or_id - The key or id of a custom object field
     # + return - Success response 
-    resource isolated function patch api/v2/custom_objects/[string custom_object_key]/fields/[string custom_object_field_key_or_id]() returns CustomObjectFieldResponse|error {
+    resource isolated function patch api/v2/custom_objects/[string custom_object_key]/fields/[string custom_object_field_key_or_id](string accept = "application/json") returns CustomObjectFieldResponse|error {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/fields/${getEncodedUri(custom_object_field_key_or_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        CustomObjectFieldResponse response = check self.clientEp->patch(resourcePath, request);
+        CustomObjectFieldResponse response = check self.clientEp->patch(resourcePath, request, httpHeaders);
         return response;
     }
     # Reorder Custom Fields of an Object
     #
     # + custom_object_key - The key of a custom object
     # + return - Reordered 
-    resource isolated function put api/v2/custom_objects/[string custom_object_key]/fields/reorder() returns string|error {
+    resource isolated function put api/v2/custom_objects/[string custom_object_key]/fields/reorder(string accept = "application/json") returns string|error {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/fields/reorder`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        string response = check self.clientEp->put(resourcePath, request);
+        string response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Custom Object Record Bulk Jobs
     #
     # + custom_object_key - The key of a custom object
     # + return - Created 
-    resource isolated function post api/v2/custom_objects/[string custom_object_key]/jobs(CustomObjectRecordsBulkCreateRequest payload) returns CustomObjectRecordsJobsResponse|error {
+    resource isolated function post api/v2/custom_objects/[string custom_object_key]/jobs(CustomObjectRecordsBulkCreateRequest payload, string accept = "application/json") returns CustomObjectRecordsJobsResponse|error {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/jobs`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        CustomObjectRecordsJobsResponse response = check self.clientEp->post(resourcePath, request);
+        CustomObjectRecordsJobsResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Custom Object Fields Limit
     #
     # + custom_object_key - The key of a custom object
     # + return - Success response 
-    resource isolated function get api/v2/custom_objects/[string custom_object_key]/limits/field_limit() returns CustomObjectLimitsResponse|error {
+    resource isolated function get api/v2/custom_objects/[string custom_object_key]/limits/field_limit(string accept = "application/json") returns CustomObjectLimitsResponse|error {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/limits/field_limit`;
-        CustomObjectLimitsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CustomObjectLimitsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Custom Object Records
@@ -692,23 +776,27 @@ public isolated client class Client {
     # + pageAfter - A [pagination cursor](/documentation/api-basics/pagination/paginating-through-lists-using-cursor-pagination) that tells the endpoint which page to start on. It should be a `meta.after_cursor` value from a previous request. Note: `page[before]` and `page[after]` can't be used together in the same request.
     # + pageSize - Specifies how many records should be returned in the response. You can specify up to 100 records per page.
     # + return - Success response 
-    resource isolated function get api/v2/custom_objects/[string custom_object_key]/records(string? filterIds = (), string? filterExternal_ids = (), string? sort = (), string? pageBefore = (), string? pageAfter = (), int? pageSize = ()) returns CustomObjectRecordsResponse|error {
+    resource isolated function get api/v2/custom_objects/[string custom_object_key]/records(string accept = "application/json", string? filterIds = (), string? filterExternal_ids = (), string? sort = (), string? pageBefore = (), string? pageAfter = (), int? pageSize = ()) returns CustomObjectRecordsResponse|error {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/records`;
         map<anydata> queryParam = {"filter[ids]": filterIds, "filter[external_ids]": filterExternal_ids, "sort": sort, "page[before]": pageBefore, "page[after]": pageAfter, "page[size]": pageSize};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        CustomObjectRecordsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CustomObjectRecordsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Custom Object Record
     #
     # + custom_object_key - The key of a custom object
     # + return - Created 
-    resource isolated function post api/v2/custom_objects/[string custom_object_key]/records(CustomObjectRecordsCreateRequest payload) returns CustomObjectRecordResponse|error {
+    resource isolated function post api/v2/custom_objects/[string custom_object_key]/records(CustomObjectRecordsCreateRequest payload, string accept = "application/json") returns CustomObjectRecordResponse|error {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/records`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        CustomObjectRecordResponse response = check self.clientEp->post(resourcePath, request);
+        CustomObjectRecordResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Custom Object Record by External Id
@@ -716,25 +804,29 @@ public isolated client class Client {
     # + custom_object_key - The key of a custom object
     # + external_id - The external id of a custom object record
     # + return - No content response 
-    resource isolated function delete api/v2/custom_objects/[string custom_object_key]/records(string external_id) returns error? {
+    resource isolated function delete api/v2/custom_objects/[string custom_object_key]/records(string external_id, string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/records`;
         map<anydata> queryParam = {"external_id": external_id};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Set Custom Object Record by External Id
     #
     # + custom_object_key - The key of a custom object
     # + external_id - The external id of a custom object record
     # + return - Success 
-    resource isolated function patch api/v2/custom_objects/[string custom_object_key]/records(string external_id, CustomObjectRecordsUpsertRequest payload) returns CustomObjectRecordResponse|error {
+    resource isolated function patch api/v2/custom_objects/[string custom_object_key]/records(string external_id, CustomObjectRecordsUpsertRequest payload, string accept = "application/json") returns CustomObjectRecordResponse|error {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/records`;
         map<anydata> queryParam = {"external_id": external_id};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        CustomObjectRecordResponse response = check self.clientEp->patch(resourcePath, request);
+        CustomObjectRecordResponse response = check self.clientEp->patch(resourcePath, request, httpHeaders);
         return response;
     }
     # Show Custom Object Record
@@ -742,9 +834,11 @@ public isolated client class Client {
     # + custom_object_key - The key of a custom object
     # + custom_object_record_id - The id of a custom object record
     # + return - Custom Object Record 
-    resource isolated function get api/v2/custom_objects/[string custom_object_key]/records/[string custom_object_record_id]() returns CustomObjectRecordResponse|error {
+    resource isolated function get api/v2/custom_objects/[string custom_object_key]/records/[string custom_object_record_id](string accept = "application/json") returns CustomObjectRecordResponse|error {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/records/${getEncodedUri(custom_object_record_id)}`;
-        CustomObjectRecordResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CustomObjectRecordResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Delete Custom Object Record
@@ -752,19 +846,23 @@ public isolated client class Client {
     # + custom_object_key - The key of a custom object
     # + custom_object_record_id - The id of a custom object record
     # + return - No content response 
-    resource isolated function delete api/v2/custom_objects/[string custom_object_key]/records/[string custom_object_record_id]() returns error? {
+    resource isolated function delete api/v2/custom_objects/[string custom_object_key]/records/[string custom_object_record_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/records/${getEncodedUri(custom_object_record_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Update Custom Object Record
     #
     # + custom_object_key - The key of a custom object
     # + custom_object_record_id - The id of a custom object record
     # + return - Success response 
-    resource isolated function patch api/v2/custom_objects/[string custom_object_key]/records/[string custom_object_record_id]() returns CustomObjectRecordResponse|error {
+    resource isolated function patch api/v2/custom_objects/[string custom_object_key]/records/[string custom_object_record_id](string accept = "application/json") returns CustomObjectRecordResponse|error {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/records/${getEncodedUri(custom_object_record_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        CustomObjectRecordResponse response = check self.clientEp->patch(resourcePath, request);
+        CustomObjectRecordResponse response = check self.clientEp->patch(resourcePath, request, httpHeaders);
         return response;
     }
     # Autocomplete Custom Object Record Search
@@ -777,20 +875,24 @@ public isolated client class Client {
     # + field_id - The id of the lookup field. If the field has a relationship filter, the filter is applied to the results. Must be used with `source` param.
     # + 'source - One of "zen:user", "zen:ticket", "zen:organization", or "zen:custom_object:CUSTOM_OBJECT_KEY". Represents the object `field_id` belongs to. Must be used with field_id param.
     # + return - Success response 
-    resource isolated function get api/v2/custom_objects/[string custom_object_key]/records/autocomplete(string? name = (), string? pageBefore = (), string? pageAfter = (), int? pageSize = (), string? field_id = (), string? 'source = ()) returns CustomObjectRecordsResponse|error {
+    resource isolated function get api/v2/custom_objects/[string custom_object_key]/records/autocomplete(string accept = "application/json", string? name = (), string? pageBefore = (), string? pageAfter = (), int? pageSize = (), string? field_id = (), string? 'source = ()) returns CustomObjectRecordsResponse|error {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/records/autocomplete`;
         map<anydata> queryParam = {"name": name, "page[before]": pageBefore, "page[after]": pageAfter, "page[size]": pageSize, "field_id": field_id, "source": 'source};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        CustomObjectRecordsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CustomObjectRecordsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Count Custom Object Records
     #
     # + custom_object_key - The key of a custom object
     # + return - Success response 
-    resource isolated function get api/v2/custom_objects/[string custom_object_key]/records/count() returns Inline_response_200_1|error {
+    resource isolated function get api/v2/custom_objects/[string custom_object_key]/records/count(string accept = "application/json") returns Inline_response_200_1|error {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/records/count`;
-        Inline_response_200_1 response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        Inline_response_200_1 response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Search Custom Object Records
@@ -805,11 +907,13 @@ public isolated client class Client {
     # + pageAfter - A [pagination cursor](/documentation/api-basics/pagination/paginating-through-lists-using-cursor-pagination) that tells the endpoint which page to start on. It should be a `meta.after_cursor` value from a previous request. Note: `page[before]` and `page[after]` can't be used together in the same request.
     # + pageSize - Specifies how many records should be returned in the response. You can specify up to 100 records per page.
     # + return - Success response 
-    resource isolated function get api/v2/custom_objects/[string custom_object_key]/records/search(string? query = (), string? sort = (), string? pageBefore = (), string? pageAfter = (), int? pageSize = ()) returns CustomObjectRecordsResponse|error {
+    resource isolated function get api/v2/custom_objects/[string custom_object_key]/records/search(string accept = "application/json", string? query = (), string? sort = (), string? pageBefore = (), string? pageAfter = (), int? pageSize = ()) returns CustomObjectRecordsResponse|error {
         string resourcePath = string `/api/v2/custom_objects/${getEncodedUri(custom_object_key)}/records/search`;
         map<anydata> queryParam = {"query": query, "sort": sort, "page[before]": pageBefore, "page[after]": pageAfter, "page[size]": pageSize};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        CustomObjectRecordsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CustomObjectRecordsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Custom Objects Limit
@@ -849,28 +953,34 @@ public isolated client class Client {
     #
     # + custom_role_id - The ID of the custom agent role
     # + return - Success response 
-    resource isolated function get api/v2/custom_roles/[int custom_role_id]() returns CustomRoleResponse|error {
+    resource isolated function get api/v2/custom_roles/[int custom_role_id](string accept = "application/json") returns CustomRoleResponse|error {
         string resourcePath = string `/api/v2/custom_roles/${getEncodedUri(custom_role_id)}`;
-        CustomRoleResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CustomRoleResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Custom Role
     #
     # + custom_role_id - The ID of the custom agent role
     # + return - Success response 
-    resource isolated function put api/v2/custom_roles/[int custom_role_id]() returns CustomRoleResponse|error {
+    resource isolated function put api/v2/custom_roles/[int custom_role_id](string accept = "application/json") returns CustomRoleResponse|error {
         string resourcePath = string `/api/v2/custom_roles/${getEncodedUri(custom_role_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        CustomRoleResponse response = check self.clientEp->put(resourcePath, request);
+        CustomRoleResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Custom Role
     #
     # + custom_role_id - The ID of the custom agent role
     # + return - No Contetnt response 
-    resource isolated function delete api/v2/custom_roles/[int custom_role_id]() returns error? {
+    resource isolated function delete api/v2/custom_roles/[int custom_role_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/custom_roles/${getEncodedUri(custom_role_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Bulk Update Default Custom Ticket Status
     #
@@ -889,11 +999,13 @@ public isolated client class Client {
     # + active - If true, show only active custom ticket statuses. If false, show only inactive custom ticket statuses. If the filter is not used, show all custom ticket statuses
     # + default - If true, show only default custom ticket statuses. If false, show only non-default custom ticket statuses. If the filter is not used, show all custom ticket statuses
     # + return - List custom ticket statuses 
-    resource isolated function get api/v2/custom_statuses(string? status_categories = (), boolean? active = (), boolean? default = ()) returns CustomStatusesResponse|error {
+    resource isolated function get api/v2/custom_statuses(string accept = "application/json", string? status_categories = (), boolean? active = (), boolean? default = ()) returns CustomStatusesResponse|error {
         string resourcePath = string `/api/v2/custom_statuses`;
         map<anydata> queryParam = {"status_categories": status_categories, "active": active, "default": default};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        CustomStatusesResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CustomStatusesResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Custom Ticket Status
@@ -911,21 +1023,25 @@ public isolated client class Client {
     #
     # + custom_status_id - The id of the custom status
     # + return - Custom Status 
-    resource isolated function get api/v2/custom_statuses/[int custom_status_id]() returns CustomStatusResponse|error {
+    resource isolated function get api/v2/custom_statuses/[int custom_status_id](string accept = "application/json") returns CustomStatusResponse|error {
         string resourcePath = string `/api/v2/custom_statuses/${getEncodedUri(custom_status_id)}`;
-        CustomStatusResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CustomStatusResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Custom Ticket Status
     #
     # + custom_status_id - The id of the custom status
     # + return - Updated 
-    resource isolated function put api/v2/custom_statuses/[int custom_status_id](CustomStatusUpdateRequest payload) returns CustomStatusResponse|error {
+    resource isolated function put api/v2/custom_statuses/[int custom_status_id](CustomStatusUpdateRequest payload, string accept = "application/json") returns CustomStatusResponse|error {
         string resourcePath = string `/api/v2/custom_statuses/${getEncodedUri(custom_status_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        CustomStatusResponse response = check self.clientEp->put(resourcePath, request);
+        CustomStatusResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # List Deleted Tickets
@@ -933,53 +1049,63 @@ public isolated client class Client {
     # + sort_by - Sort by
     # + sort_order - Sort order. Defaults to "asc"
     # + return - Successful response 
-    resource isolated function get api/v2/deleted_tickets("id"|"subject"|"deleted_at"? sort_by = (), "asc"|"desc"? sort_order = ()) returns ListDeletedTicketsResponse|error {
+    resource isolated function get api/v2/deleted_tickets(string accept = "application/json", "id"|"subject"|"deleted_at"? sort_by = (), "asc"|"desc"? sort_order = ()) returns ListDeletedTicketsResponse|error {
         string resourcePath = string `/api/v2/deleted_tickets`;
         map<anydata> queryParam = {"sort_by": sort_by, "sort_order": sort_order};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        ListDeletedTicketsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ListDeletedTicketsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Delete Ticket Permanently
     #
     # + ticket_id - The ID of the ticket
     # + return - Successful response 
-    resource isolated function delete api/v2/deleted_tickets/[int ticket_id]() returns JobStatusResponse|error {
+    resource isolated function delete api/v2/deleted_tickets/[int ticket_id](string accept = "application/json") returns JobStatusResponse|error {
         string resourcePath = string `/api/v2/deleted_tickets/${getEncodedUri(ticket_id)}`;
-        JobStatusResponse response = check self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        JobStatusResponse response = check self.clientEp->delete(resourcePath, headers = httpHeaders);
         return response;
     }
     # Restore a Previously Deleted Ticket
     #
     # + ticket_id - The ID of the ticket
     # + return - Empty response 
-    resource isolated function put api/v2/deleted_tickets/[int ticket_id]/restore() returns string|error {
+    resource isolated function put api/v2/deleted_tickets/[int ticket_id]/restore(string accept = "application/json") returns string|error {
         string resourcePath = string `/api/v2/deleted_tickets/${getEncodedUri(ticket_id)}/restore`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        string response = check self.clientEp->put(resourcePath, request);
+        string response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Multiple Tickets Permanently
     #
     # + ids - Comma-separated list of ticket ids
     # + return - Successful response 
-    resource isolated function delete api/v2/deleted_tickets/destroy_many(string ids) returns JobStatusResponse|error {
+    resource isolated function delete api/v2/deleted_tickets/destroy_many(string ids, string accept = "application/json") returns JobStatusResponse|error {
         string resourcePath = string `/api/v2/deleted_tickets/destroy_many`;
         map<anydata> queryParam = {"ids": ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        JobStatusResponse response = check self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        JobStatusResponse response = check self.clientEp->delete(resourcePath, headers = httpHeaders);
         return response;
     }
     # Restore Previously Deleted Tickets in Bulk
     #
     # + ids - Comma-separated list of ticket ids
     # + return - Empty response 
-    resource isolated function put api/v2/deleted_tickets/restore_many(string ids) returns string|error {
+    resource isolated function put api/v2/deleted_tickets/restore_many(string ids, string accept = "application/json") returns string|error {
         string resourcePath = string `/api/v2/deleted_tickets/restore_many`;
         map<anydata> queryParam = {"ids": ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        string response = check self.clientEp->put(resourcePath, request);
+        string response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # List Deleted Users
@@ -994,18 +1120,22 @@ public isolated client class Client {
     #
     # + deleted_user_id - The ID of the deleted user
     # + return - Success response 
-    resource isolated function get api/v2/deleted_users/[int deleted_user_id]() returns DeletedUserResponse|error {
+    resource isolated function get api/v2/deleted_users/[int deleted_user_id](string accept = "application/json") returns DeletedUserResponse|error {
         string resourcePath = string `/api/v2/deleted_users/${getEncodedUri(deleted_user_id)}`;
-        DeletedUserResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        DeletedUserResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Permanently Delete User
     #
     # + deleted_user_id - The ID of the deleted user
     # + return - Success response 
-    resource isolated function delete api/v2/deleted_users/[int deleted_user_id]() returns DeletedUserResponse|error {
+    resource isolated function delete api/v2/deleted_users/[int deleted_user_id](string accept = "application/json") returns DeletedUserResponse|error {
         string resourcePath = string `/api/v2/deleted_users/${getEncodedUri(deleted_user_id)}`;
-        DeletedUserResponse response = check self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        DeletedUserResponse response = check self.clientEp->delete(resourcePath, headers = httpHeaders);
         return response;
     }
     # Count Deleted Users
@@ -1037,46 +1167,56 @@ public isolated client class Client {
     #
     # + dynamic_content_item_id - The ID of the dynamic content item
     # + return - Success response 
-    resource isolated function get api/v2/dynamic_content/items/[int dynamic_content_item_id]() returns DynamicContentResponse|error {
+    resource isolated function get api/v2/dynamic_content/items/[int dynamic_content_item_id](string accept = "application/json") returns DynamicContentResponse|error {
         string resourcePath = string `/api/v2/dynamic_content/items/${getEncodedUri(dynamic_content_item_id)}`;
-        DynamicContentResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        DynamicContentResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Item
     #
     # + dynamic_content_item_id - The ID of the dynamic content item
     # + return - Success response 
-    resource isolated function put api/v2/dynamic_content/items/[int dynamic_content_item_id]() returns DynamicContentResponse|error {
+    resource isolated function put api/v2/dynamic_content/items/[int dynamic_content_item_id](string accept = "application/json") returns DynamicContentResponse|error {
         string resourcePath = string `/api/v2/dynamic_content/items/${getEncodedUri(dynamic_content_item_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        DynamicContentResponse response = check self.clientEp->put(resourcePath, request);
+        DynamicContentResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Item
     #
     # + dynamic_content_item_id - The ID of the dynamic content item
     # + return - No Content response 
-    resource isolated function delete api/v2/dynamic_content/items/[int dynamic_content_item_id]() returns error? {
+    resource isolated function delete api/v2/dynamic_content/items/[int dynamic_content_item_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/dynamic_content/items/${getEncodedUri(dynamic_content_item_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # List Variants
     #
     # + dynamic_content_item_id - The ID of the dynamic content item
     # + return - Success response 
-    resource isolated function get api/v2/dynamic_content/items/[int dynamic_content_item_id]/variants() returns DynamicContentVariantsResponse|error {
+    resource isolated function get api/v2/dynamic_content/items/[int dynamic_content_item_id]/variants(string accept = "application/json") returns DynamicContentVariantsResponse|error {
         string resourcePath = string `/api/v2/dynamic_content/items/${getEncodedUri(dynamic_content_item_id)}/variants`;
-        DynamicContentVariantsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        DynamicContentVariantsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Variant
     #
     # + dynamic_content_item_id - The ID of the dynamic content item
     # + return - Created response 
-    resource isolated function post api/v2/dynamic_content/items/[int dynamic_content_item_id]/variants() returns DynamicContentVariantResponse|error {
+    resource isolated function post api/v2/dynamic_content/items/[int dynamic_content_item_id]/variants(string accept = "application/json") returns DynamicContentVariantResponse|error {
         string resourcePath = string `/api/v2/dynamic_content/items/${getEncodedUri(dynamic_content_item_id)}/variants`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        DynamicContentVariantResponse response = check self.clientEp->post(resourcePath, request);
+        DynamicContentVariantResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Show Variant
@@ -1084,9 +1224,11 @@ public isolated client class Client {
     # + dynamic_content_item_id - The ID of the dynamic content item
     # + dynammic_content_variant_id - The ID of the variant
     # + return - Success response 
-    resource isolated function get api/v2/dynamic_content/items/[int dynamic_content_item_id]/variants/[int dynammic_content_variant_id]() returns DynamicContentVariantResponse|error {
+    resource isolated function get api/v2/dynamic_content/items/[int dynamic_content_item_id]/variants/[int dynammic_content_variant_id](string accept = "application/json") returns DynamicContentVariantResponse|error {
         string resourcePath = string `/api/v2/dynamic_content/items/${getEncodedUri(dynamic_content_item_id)}/variants/${getEncodedUri(dynammic_content_variant_id)}`;
-        DynamicContentVariantResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        DynamicContentVariantResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Variant
@@ -1094,10 +1236,12 @@ public isolated client class Client {
     # + dynamic_content_item_id - The ID of the dynamic content item
     # + dynammic_content_variant_id - The ID of the variant
     # + return - Success response 
-    resource isolated function put api/v2/dynamic_content/items/[int dynamic_content_item_id]/variants/[int dynammic_content_variant_id]() returns DynamicContentVariantResponse|error {
+    resource isolated function put api/v2/dynamic_content/items/[int dynamic_content_item_id]/variants/[int dynammic_content_variant_id](string accept = "application/json") returns DynamicContentVariantResponse|error {
         string resourcePath = string `/api/v2/dynamic_content/items/${getEncodedUri(dynamic_content_item_id)}/variants/${getEncodedUri(dynammic_content_variant_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        DynamicContentVariantResponse response = check self.clientEp->put(resourcePath, request);
+        DynamicContentVariantResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Variant
@@ -1105,39 +1249,47 @@ public isolated client class Client {
     # + dynamic_content_item_id - The ID of the dynamic content item
     # + dynammic_content_variant_id - The ID of the variant
     # + return - No Content response 
-    resource isolated function delete api/v2/dynamic_content/items/[int dynamic_content_item_id]/variants/[int dynammic_content_variant_id]() returns error? {
+    resource isolated function delete api/v2/dynamic_content/items/[int dynamic_content_item_id]/variants/[int dynammic_content_variant_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/dynamic_content/items/${getEncodedUri(dynamic_content_item_id)}/variants/${getEncodedUri(dynammic_content_variant_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Create Many Variants
     #
     # + dynamic_content_item_id - The ID of the dynamic content item
     # + return - Created response 
-    resource isolated function post api/v2/dynamic_content/items/[int dynamic_content_item_id]/variants/create_many() returns DynamicContentVariantsResponse|error {
+    resource isolated function post api/v2/dynamic_content/items/[int dynamic_content_item_id]/variants/create_many(string accept = "application/json") returns DynamicContentVariantsResponse|error {
         string resourcePath = string `/api/v2/dynamic_content/items/${getEncodedUri(dynamic_content_item_id)}/variants/create_many`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        DynamicContentVariantsResponse response = check self.clientEp->post(resourcePath, request);
+        DynamicContentVariantsResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Update Many Variants
     #
     # + dynamic_content_item_id - The ID of the dynamic content item
     # + return - Success response 
-    resource isolated function put api/v2/dynamic_content/items/[int dynamic_content_item_id]/variants/update_many() returns DynamicContentVariantsResponse|error {
+    resource isolated function put api/v2/dynamic_content/items/[int dynamic_content_item_id]/variants/update_many(string accept = "application/json") returns DynamicContentVariantsResponse|error {
         string resourcePath = string `/api/v2/dynamic_content/items/${getEncodedUri(dynamic_content_item_id)}/variants/update_many`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        DynamicContentVariantsResponse response = check self.clientEp->put(resourcePath, request);
+        DynamicContentVariantsResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Show Many Items
     #
     # + identifiers - Identifiers for the dynamic contents
     # + return - Success response 
-    resource isolated function get api/v2/dynamic_content/items/show_many(string? identifiers = ()) returns DynamicContentsResponse|error {
+    resource isolated function get api/v2/dynamic_content/items/show_many(string accept = "application/json", string? identifiers = ()) returns DynamicContentsResponse|error {
         string resourcePath = string `/api/v2/dynamic_content/items/show_many`;
         map<anydata> queryParam = {"identifiers": identifiers};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        DynamicContentsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        DynamicContentsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Memberships
@@ -1162,9 +1314,11 @@ public isolated client class Client {
     # + group_membership_id - The ID of the group membership
     # + user_id - The id of the user
     # + return - Success response 
-    resource isolated function get api/v2/group_memberships/[int group_membership_id]() returns GroupMembershipResponse|error {
+    resource isolated function get api/v2/group_memberships/[int group_membership_id](string accept = "application/json") returns GroupMembershipResponse|error {
         string resourcePath = string `/api/v2/group_memberships/${getEncodedUri(group_membership_id)}`;
-        GroupMembershipResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        GroupMembershipResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Delete Membership
@@ -1172,9 +1326,11 @@ public isolated client class Client {
     # + group_membership_id - The ID of the group membership
     # + user_id - The id of the user
     # + return - No content response 
-    resource isolated function delete api/v2/group_memberships/[int group_membership_id]() returns error? {
+    resource isolated function delete api/v2/group_memberships/[int group_membership_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/group_memberships/${getEncodedUri(group_membership_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # List Assignable Memberships
     #
@@ -1197,11 +1353,13 @@ public isolated client class Client {
     #
     # + ids - Id of the group memberships to delete. Comma separated
     # + return - Success response 
-    resource isolated function delete api/v2/group_memberships/destroy_many(string? ids = ()) returns JobStatusResponse|error {
+    resource isolated function delete api/v2/group_memberships/destroy_many(string accept = "application/json", string? ids = ()) returns JobStatusResponse|error {
         string resourcePath = string `/api/v2/group_memberships/destroy_many`;
         map<anydata> queryParam = {"ids": ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        JobStatusResponse response = check self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        JobStatusResponse response = check self.clientEp->delete(resourcePath, headers = httpHeaders);
         return response;
     }
     # List Group SLA Policies
@@ -1225,28 +1383,34 @@ public isolated client class Client {
     #
     # + group_sla_policy_id - The id of the Group SLA policy
     # + return - Success response 
-    resource isolated function get api/v2/group_slas/policies/[int group_sla_policy_id]() returns GroupSLAPolicyResponse|error {
+    resource isolated function get api/v2/group_slas/policies/[int group_sla_policy_id](string accept = "application/json") returns GroupSLAPolicyResponse|error {
         string resourcePath = string `/api/v2/group_slas/policies/${getEncodedUri(group_sla_policy_id)}`;
-        GroupSLAPolicyResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        GroupSLAPolicyResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Group SLA Policy
     #
     # + group_sla_policy_id - The id of the Group SLA policy
     # + return - Success response 
-    resource isolated function put api/v2/group_slas/policies/[int group_sla_policy_id]() returns GroupSLAPolicyResponse|error {
+    resource isolated function put api/v2/group_slas/policies/[int group_sla_policy_id](string accept = "application/json") returns GroupSLAPolicyResponse|error {
         string resourcePath = string `/api/v2/group_slas/policies/${getEncodedUri(group_sla_policy_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        GroupSLAPolicyResponse response = check self.clientEp->put(resourcePath, request);
+        GroupSLAPolicyResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Group SLA Policy
     #
     # + group_sla_policy_id - The id of the Group SLA policy
     # + return - No Content response 
-    resource isolated function delete api/v2/group_slas/policies/[int group_sla_policy_id]() returns error? {
+    resource isolated function delete api/v2/group_slas/policies/[int group_sla_policy_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/group_slas/policies/${getEncodedUri(group_sla_policy_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Retrieve Supported Filter Definition Items
     #
@@ -1260,13 +1424,15 @@ public isolated client class Client {
     #
     # + group_sla_policy_ids - The ids of the Group SLA policies to reorder
     # + return - Success response 
-    resource isolated function put api/v2/group_slas/policies/reorder(string[]? group_sla_policy_ids = ()) returns string|error {
+    resource isolated function put api/v2/group_slas/policies/reorder(string accept = "application/json", string[]? group_sla_policy_ids = ()) returns string|error {
         string resourcePath = string `/api/v2/group_slas/policies/reorder`;
         map<anydata> queryParam = {"group_sla_policy_ids": group_sla_policy_ids};
         map<Encoding> queryParamEncoding = {"group_sla_policy_ids": {style: FORM, explode: true}};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam, queryParamEncoding);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        string response = check self.clientEp->put(resourcePath, request);
+        string response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # List Groups
@@ -1274,11 +1440,13 @@ public isolated client class Client {
     # + user_id - The id of the user
     # + exclude_deleted - Whether to exclude deleted entities
     # + return - Success response 
-    resource isolated function get api/v2/groups(boolean? exclude_deleted = ()) returns GroupsResponse|error {
+    resource isolated function get api/v2/groups(string accept = "application/json", boolean? exclude_deleted = ()) returns GroupsResponse|error {
         string resourcePath = string `/api/v2/groups`;
         map<anydata> queryParam = {"exclude_deleted": exclude_deleted};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        GroupsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        GroupsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Group
@@ -1294,36 +1462,44 @@ public isolated client class Client {
     #
     # + group_id - The ID of the group
     # + return - Success response 
-    resource isolated function get api/v2/groups/[int group_id]() returns GroupResponse|error {
+    resource isolated function get api/v2/groups/[int group_id](string accept = "application/json") returns GroupResponse|error {
         string resourcePath = string `/api/v2/groups/${getEncodedUri(group_id)}`;
-        GroupResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        GroupResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Group
     #
     # + group_id - The ID of the group
     # + return - Success response 
-    resource isolated function put api/v2/groups/[int group_id]() returns GroupResponse|error {
+    resource isolated function put api/v2/groups/[int group_id](string accept = "application/json") returns GroupResponse|error {
         string resourcePath = string `/api/v2/groups/${getEncodedUri(group_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        GroupResponse response = check self.clientEp->put(resourcePath, request);
+        GroupResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Group
     #
     # + group_id - The ID of the group
     # + return - No content response 
-    resource isolated function delete api/v2/groups/[int group_id]() returns error? {
+    resource isolated function delete api/v2/groups/[int group_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/groups/${getEncodedUri(group_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # List Memberships
     #
     # + group_id - The ID of the group
     # + return - Success response 
-    resource isolated function get api/v2/groups/[int group_id]/memberships() returns GroupMembershipsResponse|error {
+    resource isolated function get api/v2/groups/[int group_id]/memberships(string accept = "application/json") returns GroupMembershipsResponse|error {
         string resourcePath = string `/api/v2/groups/${getEncodedUri(group_id)}/memberships`;
-        GroupMembershipsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        GroupMembershipsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Assignable Groups
@@ -1338,37 +1514,43 @@ public isolated client class Client {
     #
     # + user_id - The id of the user
     # + return - Success response 
-    resource isolated function get api/v2/groups/count() returns GroupsCountObject|error {
+    resource isolated function get api/v2/groups/count(string accept = "application/json") returns GroupsCountObject|error {
         string resourcePath = string `/api/v2/groups/count`;
-        GroupsCountObject response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        GroupsCountObject response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Ticket Import
     #
     # + archive_immediately - If `true`, any ticket created with a `closed` status bypasses the normal ticket lifecycle and will be created directly in your ticket archive
     # + return - Successfully created 
-    resource isolated function post api/v2/imports/tickets(TicketImportRequest payload, boolean? archive_immediately = ()) returns TicketResponse|error {
+    resource isolated function post api/v2/imports/tickets(TicketImportRequest payload, string accept = "application/json", boolean? archive_immediately = ()) returns TicketResponse|error {
         string resourcePath = string `/api/v2/imports/tickets`;
         map<anydata> queryParam = {"archive_immediately": archive_immediately};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        TicketResponse response = check self.clientEp->post(resourcePath, request);
+        TicketResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Ticket Bulk Import
     #
     # + archive_immediately - If `true`, any ticket created with a `closed` status bypasses the normal ticket lifecycle and will be created directly in your ticket archive
     # + return - Successful response 
-    resource isolated function post api/v2/imports/tickets/create_many(TicketBulkImportRequest payload, boolean? archive_immediately = ()) returns JobStatusResponse|error {
+    resource isolated function post api/v2/imports/tickets/create_many(TicketBulkImportRequest payload, string accept = "application/json", boolean? archive_immediately = ()) returns JobStatusResponse|error {
         string resourcePath = string `/api/v2/imports/tickets/create_many`;
         map<anydata> queryParam = {"archive_immediately": archive_immediately};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        JobStatusResponse response = check self.clientEp->post(resourcePath, request);
+        JobStatusResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Incremental Sample Export
@@ -1376,22 +1558,26 @@ public isolated client class Client {
     # + start_time - The time to start the incremental export from. Must be at least one minute in the past. Data isn't provided for the most recent minute
     # + incremental_resource - The resource requested for incremental sample export
     # + return - Success response 
-    resource isolated function get api/v2/incremental/[string incremental_resource]/sample(int start_time) returns TimeBasedExportIncrementalTicketsResponse|error {
+    resource isolated function get api/v2/incremental/[string incremental_resource]/sample(int start_time, string accept = "application/json") returns TimeBasedExportIncrementalTicketsResponse|error {
         string resourcePath = string `/api/v2/incremental/${getEncodedUri(incremental_resource)}/sample`;
         map<anydata> queryParam = {"start_time": start_time};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TimeBasedExportIncrementalTicketsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TimeBasedExportIncrementalTicketsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Incremental Organization Export
     #
     # + start_time - The time to start the incremental export from. Must be at least one minute in the past. Data isn't provided for the most recent minute
     # + return - Success response 
-    resource isolated function get api/v2/incremental/organizations(int start_time) returns ExportIncrementalOrganizationsResponse|error {
+    resource isolated function get api/v2/incremental/organizations(int start_time, string accept = "application/json") returns ExportIncrementalOrganizationsResponse|error {
         string resourcePath = string `/api/v2/incremental/organizations`;
         map<anydata> queryParam = {"start_time": start_time};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        ExportIncrementalOrganizationsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ExportIncrementalOrganizationsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Incremental Attributes Values Export
@@ -1422,33 +1608,39 @@ public isolated client class Client {
     #
     # + start_time - The time to start the incremental export from. Must be at least one minute in the past. Data isn't provided for the most recent minute
     # + return - Success response 
-    resource isolated function get api/v2/incremental/ticket_events(int start_time) returns ExportIncrementalTicketEventsResponse|error {
+    resource isolated function get api/v2/incremental/ticket_events(int start_time, string accept = "application/json") returns ExportIncrementalTicketEventsResponse|error {
         string resourcePath = string `/api/v2/incremental/ticket_events`;
         map<anydata> queryParam = {"start_time": start_time};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        ExportIncrementalTicketEventsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ExportIncrementalTicketEventsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Ticket Metric Events
     #
     # + start_time - The Unix UTC epoch time of the oldest event you're interested in. Example: 1332034771.
     # + return - Successful response 
-    resource isolated function get api/v2/incremental/ticket_metric_events(int start_time) returns TicketMetricEventsResponse|error {
+    resource isolated function get api/v2/incremental/ticket_metric_events(int start_time, string accept = "application/json") returns TicketMetricEventsResponse|error {
         string resourcePath = string `/api/v2/incremental/ticket_metric_events`;
         map<anydata> queryParam = {"start_time": start_time};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TicketMetricEventsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketMetricEventsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Incremental Ticket Export, Time Based
     #
     # + start_time - The time to start the incremental export from. Must be at least one minute in the past. Data isn't provided for the most recent minute
     # + return - Success response 
-    resource isolated function get api/v2/incremental/tickets(int start_time) returns TimeBasedExportIncrementalTicketsResponse|error {
+    resource isolated function get api/v2/incremental/tickets(int start_time, string accept = "application/json") returns TimeBasedExportIncrementalTicketsResponse|error {
         string resourcePath = string `/api/v2/incremental/tickets`;
         map<anydata> queryParam = {"start_time": start_time};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TimeBasedExportIncrementalTicketsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TimeBasedExportIncrementalTicketsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Incremental Ticket Export, Cursor Based
@@ -1456,11 +1648,13 @@ public isolated client class Client {
     # + start_time - The time to start the incremental export from. Must be at least one minute in the past. Data isn't provided for the most recent minute
     # + cursor - The cursor pointer to work with for all subsequent exports after the initial request
     # + return - Success response 
-    resource isolated function get api/v2/incremental/tickets/cursor(int start_time, string? cursor = ()) returns CursorBasedExportIncrementalTicketsResponse|error {
+    resource isolated function get api/v2/incremental/tickets/cursor(int start_time, string accept = "application/json", string? cursor = ()) returns CursorBasedExportIncrementalTicketsResponse|error {
         string resourcePath = string `/api/v2/incremental/tickets/cursor`;
         map<anydata> queryParam = {"start_time": start_time, "cursor": cursor};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        CursorBasedExportIncrementalTicketsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CursorBasedExportIncrementalTicketsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Incremental User Export, Time Based
@@ -1468,11 +1662,13 @@ public isolated client class Client {
     # + start_time - The time to start the incremental export from. Must be at least one minute in the past. Data isn't provided for the most recent minute
     # + per_page - The number of records to return per page
     # + return - Success response 
-    resource isolated function get api/v2/incremental/users(int start_time, int? per_page = ()) returns TimeBasedExportIncrementalUsersResponse|error {
+    resource isolated function get api/v2/incremental/users(int start_time, string accept = "application/json", int? per_page = ()) returns TimeBasedExportIncrementalUsersResponse|error {
         string resourcePath = string `/api/v2/incremental/users`;
         map<anydata> queryParam = {"start_time": start_time, "per_page": per_page};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TimeBasedExportIncrementalUsersResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TimeBasedExportIncrementalUsersResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Incremental User Export, Cursor Based
@@ -1481,11 +1677,13 @@ public isolated client class Client {
     # + cursor - The cursor pointer to work with for all subsequent exports after the initial request
     # + per_page - The number of records to return per page
     # + return - Success response 
-    resource isolated function get api/v2/incremental/users/cursor(int start_time, string? cursor = (), int? per_page = ()) returns CursorBasedExportIncrementalUsersResponse|error {
+    resource isolated function get api/v2/incremental/users/cursor(int start_time, string accept = "application/json", string? cursor = (), int? per_page = ()) returns CursorBasedExportIncrementalUsersResponse|error {
         string resourcePath = string `/api/v2/incremental/users/cursor`;
         map<anydata> queryParam = {"start_time": start_time, "cursor": cursor, "per_page": per_page};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        CursorBasedExportIncrementalUsersResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CursorBasedExportIncrementalUsersResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Job Statuses
@@ -1500,20 +1698,24 @@ public isolated client class Client {
     #
     # + job_status_id - the Id of the Job status
     # + return - Success Response 
-    resource isolated function get api/v2/job_statuses/[string job_status_id]() returns JobStatusResponse|error {
+    resource isolated function get api/v2/job_statuses/[string job_status_id](string accept = "application/json") returns JobStatusResponse|error {
         string resourcePath = string `/api/v2/job_statuses/${getEncodedUri(job_status_id)}`;
-        JobStatusResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        JobStatusResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Show Many Job Statuses
     #
     # + ids - Comma-separated list of job status ids.
     # + return - Success Response 
-    resource isolated function get api/v2/job_statuses/show_many(string ids) returns JobStatusesResponse|error {
+    resource isolated function get api/v2/job_statuses/show_many(string ids, string accept = "application/json") returns JobStatusesResponse|error {
         string resourcePath = string `/api/v2/job_statuses/show_many`;
         map<anydata> queryParam = {"ids": ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        JobStatusesResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        JobStatusesResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Locales
@@ -1528,9 +1730,11 @@ public isolated client class Client {
     #
     # + locale_id - The ID or the [BCP-47 code](https://en.wikipedia.org/wiki/IETF_language_tag) of the locale. Examples: es-419, en-us, pr-br
     # + return - Success Response 
-    resource isolated function get api/v2/locales/[string locale_id]() returns LocaleResponse|error {
+    resource isolated function get api/v2/locales/[string locale_id](string accept = "application/json") returns LocaleResponse|error {
         string resourcePath = string `/api/v2/locales/${getEncodedUri(locale_id)}`;
-        LocaleResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        LocaleResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Locales for Agent
@@ -1576,11 +1780,13 @@ public isolated client class Client {
     # + sort_by - Possible values are alphabetical, "created_at", "updated_at", "usage_1h", "usage_24h", "usage_7d", or "usage_30d". Defaults to alphabetical
     # + sort_order - One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
     # + return - Success Response 
-    resource isolated function get api/v2/macros(string? include = (), string? access = (), boolean? active = (), int? category = (), int? group_id = (), boolean? only_viewable = (), string? sort_by = (), string? sort_order = ()) returns MacrosResponse|error {
+    resource isolated function get api/v2/macros(string accept = "application/json", string? include = (), string? access = (), boolean? active = (), int? category = (), int? group_id = (), boolean? only_viewable = (), string? sort_by = (), string? sort_order = ()) returns MacrosResponse|error {
         string resourcePath = string `/api/v2/macros`;
         map<anydata> queryParam = {"include": include, "access": access, "active": active, "category": category, "group_id": group_id, "only_viewable": only_viewable, "sort_by": sort_by, "sort_order": sort_order};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        MacrosResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        MacrosResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Macro
@@ -1598,57 +1804,69 @@ public isolated client class Client {
     #
     # + macro_id - The ID of the macro
     # + return - Success Response 
-    resource isolated function get api/v2/macros/[int macro_id]() returns MacroResponse|error {
+    resource isolated function get api/v2/macros/[int macro_id](string accept = "application/json") returns MacroResponse|error {
         string resourcePath = string `/api/v2/macros/${getEncodedUri(macro_id)}`;
-        MacroResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        MacroResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Macro
     #
     # + macro_id - The ID of the macro
     # + return - OK 
-    resource isolated function put api/v2/macros/[int macro_id](Macros_macro_id_body payload) returns Inline_response_200_2|error {
+    resource isolated function put api/v2/macros/[int macro_id](Macros_macro_id_body payload, string accept = "application/json") returns Inline_response_200_2|error {
         string resourcePath = string `/api/v2/macros/${getEncodedUri(macro_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        Inline_response_200_2 response = check self.clientEp->put(resourcePath, request);
+        Inline_response_200_2 response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Macro
     #
     # + macro_id - The ID of the macro
     # + return - No Content 
-    resource isolated function delete api/v2/macros/[int macro_id]() returns error? {
+    resource isolated function delete api/v2/macros/[int macro_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/macros/${getEncodedUri(macro_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Show Changes to Ticket
     #
     # + macro_id - The ID of the macro
     # + return - Success Response 
-    resource isolated function get api/v2/macros/[int macro_id]/apply() returns MacroApplyTicketResponse|error {
+    resource isolated function get api/v2/macros/[int macro_id]/apply(string accept = "application/json") returns MacroApplyTicketResponse|error {
         string resourcePath = string `/api/v2/macros/${getEncodedUri(macro_id)}/apply`;
-        MacroApplyTicketResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        MacroApplyTicketResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Macro Attachments
     #
     # + macro_id - The ID of the macro
     # + return - Success Response 
-    resource isolated function get api/v2/macros/[int macro_id]/attachments() returns MacroAttachmentsResponse|error {
+    resource isolated function get api/v2/macros/[int macro_id]/attachments(string accept = "application/json") returns MacroAttachmentsResponse|error {
         string resourcePath = string `/api/v2/macros/${getEncodedUri(macro_id)}/attachments`;
-        MacroAttachmentsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        MacroAttachmentsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Macro Attachment
     #
     # + macro_id - The ID of the macro
     # + return - Success Response 
-    resource isolated function post api/v2/macros/[int macro_id]/attachments() returns MacroAttachmentResponse|error {
+    resource isolated function post api/v2/macros/[int macro_id]/attachments(string accept = "application/json") returns MacroAttachmentResponse|error {
         string resourcePath = string `/api/v2/macros/${getEncodedUri(macro_id)}/attachments`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        MacroAttachmentResponse response = check self.clientEp->post(resourcePath, request);
+        MacroAttachmentResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # List Supported Actions for Macros
@@ -1668,11 +1886,13 @@ public isolated client class Client {
     # + sort_by - Possible values are alphabetical, "created_at", "updated_at", "usage_1h", "usage_24h", "usage_7d", or "usage_30d". Defaults to alphabetical
     # + sort_order - One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
     # + return - Success Response 
-    resource isolated function get api/v2/macros/active(string? include = (), string? access = (), int? category = (), int? group_id = (), string? sort_by = (), string? sort_order = ()) returns MacrosResponse|error {
+    resource isolated function get api/v2/macros/active(string accept = "application/json", string? include = (), string? access = (), int? category = (), int? group_id = (), string? sort_by = (), string? sort_order = ()) returns MacrosResponse|error {
         string resourcePath = string `/api/v2/macros/active`;
         map<anydata> queryParam = {"include": include, "access": access, "category": category, "group_id": group_id, "sort_by": sort_by, "sort_order": sort_order};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        MacrosResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        MacrosResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Unassociated Macro Attachment
@@ -1688,9 +1908,11 @@ public isolated client class Client {
     #
     # + attachment_id - The ID of the attachment
     # + return - Success Response 
-    resource isolated function get api/v2/macros/attachments/[int attachment_id]() returns MacroAttachmentResponse|error {
+    resource isolated function get api/v2/macros/attachments/[int attachment_id](string accept = "application/json") returns MacroAttachmentResponse|error {
         string resourcePath = string `/api/v2/macros/attachments/${getEncodedUri(attachment_id)}`;
-        MacroAttachmentResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        MacroAttachmentResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Macro Categories
@@ -1713,23 +1935,27 @@ public isolated client class Client {
     #
     # + ids - The IDs of the macros to delete
     # + return - No Content 
-    resource isolated function delete api/v2/macros/destroy_many(int[] ids) returns error? {
+    resource isolated function delete api/v2/macros/destroy_many(int[] ids, string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/macros/destroy_many`;
         map<anydata> queryParam = {"ids": ids};
         map<Encoding> queryParamEncoding = {"ids": {style: FORM, explode: true}};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam, queryParamEncoding);
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Show Macro Replica
     #
     # + macro_id - The ID of the macro to replicate
     # + ticket_id - The ID of the ticket from which to build a macro replica
     # + return - Success Response 
-    resource isolated function get api/v2/macros/'new(int macro_id, int ticket_id) returns MacroResponse|error {
+    resource isolated function get api/v2/macros/'new(int macro_id, int ticket_id, string accept = "application/json") returns MacroResponse|error {
         string resourcePath = string `/api/v2/macros/new`;
         map<anydata> queryParam = {"macro_id": macro_id, "ticket_id": ticket_id};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        MacroResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        MacroResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Search Macros
@@ -1744,11 +1970,13 @@ public isolated client class Client {
     # + sort_order - One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
     # + query - Query string used to find macros with matching titles
     # + return - Success Response 
-    resource isolated function get api/v2/macros/search(string query, string? include = (), string? access = (), boolean? active = (), int? category = (), int? group_id = (), boolean? only_viewable = (), string? sort_by = (), string? sort_order = ()) returns MacrosResponse|error {
+    resource isolated function get api/v2/macros/search(string query, string accept = "application/json", string? include = (), string? access = (), boolean? active = (), int? category = (), int? group_id = (), boolean? only_viewable = (), string? sort_by = (), string? sort_order = ()) returns MacrosResponse|error {
         string resourcePath = string `/api/v2/macros/search`;
         map<anydata> queryParam = {"include": include, "access": access, "active": active, "category": category, "group_id": group_id, "only_viewable": only_viewable, "sort_by": sort_by, "sort_order": sort_order, "query": query};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        MacrosResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        MacrosResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Many Macros
@@ -1766,28 +1994,34 @@ public isolated client class Client {
     #
     # + object_type - Essentials card type. Example: `zen:user` refers user type
     # + return - Success response 
-    resource isolated function get api/v2/object_layouts/[string object_type]/essentials_card() returns EssentialsCardResponse|error {
+    resource isolated function get api/v2/object_layouts/[string object_type]/essentials_card(string accept = "application/json") returns EssentialsCardResponse|error {
         string resourcePath = string `/api/v2/object_layouts/${getEncodedUri(object_type)}/essentials_card`;
-        EssentialsCardResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        EssentialsCardResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Essentials Card
     #
     # + object_type - Essentials card type. Example: `zen:user` refers user type
     # + return - Success response 
-    resource isolated function put api/v2/object_layouts/[string object_type]/essentials_card() returns EssentialsCardResponse|error {
+    resource isolated function put api/v2/object_layouts/[string object_type]/essentials_card(string accept = "application/json") returns EssentialsCardResponse|error {
         string resourcePath = string `/api/v2/object_layouts/${getEncodedUri(object_type)}/essentials_card`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        EssentialsCardResponse response = check self.clientEp->put(resourcePath, request);
+        EssentialsCardResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Essentials Card
     #
     # + object_type - Essentials card type. Example: `zen:user` refers user type
     # + return - Success response 
-    resource isolated function delete api/v2/object_layouts/[string object_type]/essentials_card() returns error? {
+    resource isolated function delete api/v2/object_layouts/[string object_type]/essentials_card(string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/object_layouts/${getEncodedUri(object_type)}/essentials_card`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # List of Essentials Cards
     #
@@ -1818,28 +2052,34 @@ public isolated client class Client {
     #
     # + organization_field_id - The ID or key of the organization field
     # + return - Success response 
-    resource isolated function get api/v2/organization_fields/[Organization_field_id organization_field_id]() returns OrganizationFieldResponse|error {
+    resource isolated function get api/v2/organization_fields/[Organization_field_id organization_field_id](string accept = "application/json") returns OrganizationFieldResponse|error {
         string resourcePath = string `/api/v2/organization_fields/${getEncodedUri(organization_field_id)}`;
-        OrganizationFieldResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        OrganizationFieldResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Organization Field
     #
     # + organization_field_id - The ID or key of the organization field
     # + return - Success response 
-    resource isolated function put api/v2/organization_fields/[Organization_field_id organization_field_id]() returns OrganizationFieldResponse|error {
+    resource isolated function put api/v2/organization_fields/[Organization_field_id organization_field_id](string accept = "application/json") returns OrganizationFieldResponse|error {
         string resourcePath = string `/api/v2/organization_fields/${getEncodedUri(organization_field_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        OrganizationFieldResponse response = check self.clientEp->put(resourcePath, request);
+        OrganizationFieldResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Organization Field
     #
     # + organization_field_id - The ID or key of the organization field
     # + return - No Content response 
-    resource isolated function delete api/v2/organization_fields/[Organization_field_id organization_field_id]() returns error? {
+    resource isolated function delete api/v2/organization_fields/[Organization_field_id organization_field_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/organization_fields/${getEncodedUri(organization_field_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Reorder Organization Field
     #
@@ -1871,18 +2111,22 @@ public isolated client class Client {
     #
     # + organization_membership_id - The ID of the organization membership
     # + return - Success response 
-    resource isolated function get api/v2/organization_memberships/[int organization_membership_id]() returns OrganizationMembershipResponse|error {
+    resource isolated function get api/v2/organization_memberships/[int organization_membership_id](string accept = "application/json") returns OrganizationMembershipResponse|error {
         string resourcePath = string `/api/v2/organization_memberships/${getEncodedUri(organization_membership_id)}`;
-        OrganizationMembershipResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        OrganizationMembershipResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Delete Membership
     #
     # + organization_membership_id - The ID of the organization membership
     # + return - No Content response 
-    resource isolated function delete api/v2/organization_memberships/[int organization_membership_id]() returns error? {
+    resource isolated function delete api/v2/organization_memberships/[int organization_membership_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/organization_memberships/${getEncodedUri(organization_membership_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Create Many Memberships
     #
@@ -1897,12 +2141,14 @@ public isolated client class Client {
     #
     # + ids - The IDs of the organization memberships to delete
     # + return - Success response 
-    resource isolated function delete api/v2/organization_memberships/destroy_many(int[]? ids = ()) returns JobStatusResponse|error {
+    resource isolated function delete api/v2/organization_memberships/destroy_many(string accept = "application/json", int[]? ids = ()) returns JobStatusResponse|error {
         string resourcePath = string `/api/v2/organization_memberships/destroy_many`;
         map<anydata> queryParam = {"ids": ids};
         map<Encoding> queryParamEncoding = {"ids": {style: FORM, explode: true}};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam, queryParamEncoding);
-        JobStatusResponse response = check self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        JobStatusResponse response = check self.clientEp->delete(resourcePath, headers = httpHeaders);
         return response;
     }
     # List Organization Subscriptions
@@ -1928,18 +2174,22 @@ public isolated client class Client {
     #
     # + organization_subscription_id - The ID of the organization subscription
     # + return - Successful response 
-    resource isolated function get api/v2/organization_subscriptions/[int organization_subscription_id]() returns OrganizationSubscriptionResponse|error {
+    resource isolated function get api/v2/organization_subscriptions/[int organization_subscription_id](string accept = "application/json") returns OrganizationSubscriptionResponse|error {
         string resourcePath = string `/api/v2/organization_subscriptions/${getEncodedUri(organization_subscription_id)}`;
-        OrganizationSubscriptionResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        OrganizationSubscriptionResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Delete Organization Subscription
     #
     # + organization_subscription_id - The ID of the organization subscription
     # + return - No content 
-    resource isolated function delete api/v2/organization_subscriptions/[int organization_subscription_id]() returns error? {
+    resource isolated function delete api/v2/organization_subscriptions/[int organization_subscription_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/organization_subscriptions/${getEncodedUri(organization_subscription_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # List Organizations
     #
@@ -1962,36 +2212,44 @@ public isolated client class Client {
     #
     # + organization_id - The ID of an organization
     # + return - Success response 
-    resource isolated function get api/v2/organizations/[int organization_id]() returns OrganizationResponse|error {
+    resource isolated function get api/v2/organizations/[int organization_id](string accept = "application/json") returns OrganizationResponse|error {
         string resourcePath = string `/api/v2/organizations/${getEncodedUri(organization_id)}`;
-        OrganizationResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        OrganizationResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Organization
     #
     # + organization_id - The ID of an organization
     # + return - Success response 
-    resource isolated function put api/v2/organizations/[int organization_id]() returns OrganizationResponse|error {
+    resource isolated function put api/v2/organizations/[int organization_id](string accept = "application/json") returns OrganizationResponse|error {
         string resourcePath = string `/api/v2/organizations/${getEncodedUri(organization_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        OrganizationResponse response = check self.clientEp->put(resourcePath, request);
+        OrganizationResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Organization
     #
     # + organization_id - The ID of an organization
     # + return - No Content Response 
-    resource isolated function delete api/v2/organizations/[int organization_id]() returns error? {
+    resource isolated function delete api/v2/organizations/[int organization_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/organizations/${getEncodedUri(organization_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Show Organization's Related Information
     #
     # + organization_id - The ID of an organization
     # + return - Success response 
-    resource isolated function get api/v2/organizations/[int organization_id]/related() returns OrganizationsRelatedResponse|error {
+    resource isolated function get api/v2/organizations/[int organization_id]/related(string accept = "application/json") returns OrganizationsRelatedResponse|error {
         string resourcePath = string `/api/v2/organizations/${getEncodedUri(organization_id)}/related`;
-        OrganizationsRelatedResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        OrganizationsRelatedResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Autocomplete Organizations
@@ -2002,11 +2260,13 @@ public isolated client class Client {
     # + 'source - If a `field_id` is provided, this specifies the type of the field.
     # For example, if the field is on a "zen:user", it references a field on a user
     # + return - Success response 
-    resource isolated function get api/v2/organizations/autocomplete(string name, string? field_id = (), string? 'source = ()) returns OrganizationsResponse|error {
+    resource isolated function get api/v2/organizations/autocomplete(string name, string accept = "application/json", string? field_id = (), string? 'source = ()) returns OrganizationsResponse|error {
         string resourcePath = string `/api/v2/organizations/autocomplete`;
         map<anydata> queryParam = {"name": name, "field_id": field_id, "source": 'source};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        OrganizationsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        OrganizationsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Count Organizations
@@ -2040,11 +2300,13 @@ public isolated client class Client {
     # + ids - A list of organization ids
     # + external_ids - A list of external ids
     # + return - Success response 
-    resource isolated function delete api/v2/organizations/destroy_many(string? ids = (), string? external_ids = ()) returns JobStatusResponse|error {
+    resource isolated function delete api/v2/organizations/destroy_many(string accept = "application/json", string? ids = (), string? external_ids = ()) returns JobStatusResponse|error {
         string resourcePath = string `/api/v2/organizations/destroy_many`;
         map<anydata> queryParam = {"ids": ids, "external_ids": external_ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        JobStatusResponse response = check self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        JobStatusResponse response = check self.clientEp->delete(resourcePath, headers = httpHeaders);
         return response;
     }
     # Search Organizations
@@ -2052,11 +2314,13 @@ public isolated client class Client {
     # + external_id - The external id of an organization
     # + name - The name of an organization
     # + return - Success response 
-    resource isolated function get api/v2/organizations/search(int? external_id = (), string? name = ()) returns OrganizationsResponse|error {
+    resource isolated function get api/v2/organizations/search(string accept = "application/json", int? external_id = (), string? name = ()) returns OrganizationsResponse|error {
         string resourcePath = string `/api/v2/organizations/search`;
         map<anydata> queryParam = {"external_id": external_id, "name": name};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        OrganizationsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        OrganizationsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Show Many Organizations
@@ -2064,11 +2328,13 @@ public isolated client class Client {
     # + ids - A list of organization ids
     # + external_ids - A list of external ids
     # + return - Success response 
-    resource isolated function get api/v2/organizations/show_many(string? ids = (), string? external_ids = ()) returns OrganizationsResponse|error {
+    resource isolated function get api/v2/organizations/show_many(string accept = "application/json", string? ids = (), string? external_ids = ()) returns OrganizationsResponse|error {
         string resourcePath = string `/api/v2/organizations/show_many`;
         map<anydata> queryParam = {"ids": ids, "external_ids": external_ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        OrganizationsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        OrganizationsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Many Organizations
@@ -2076,12 +2342,14 @@ public isolated client class Client {
     # + ids - A list of organization ids
     # + external_ids - A list of external ids
     # + return - Success response 
-    resource isolated function put api/v2/organizations/update_many(string? ids = (), string? external_ids = ()) returns JobStatusResponse|error {
+    resource isolated function put api/v2/organizations/update_many(string accept = "application/json", string? ids = (), string? external_ids = ()) returns JobStatusResponse|error {
         string resourcePath = string `/api/v2/organizations/update_many`;
         map<anydata> queryParam = {"ids": ids, "external_ids": external_ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        JobStatusResponse response = check self.clientEp->put(resourcePath, request);
+        JobStatusResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # List Ticket Problems
@@ -2096,14 +2364,16 @@ public isolated client class Client {
     #
     # + text - The text to search for
     # + return - Successful response 
-    resource isolated function post api/v2/problems/autocomplete(Problems_autocomplete_body payload, string? text = ()) returns ListTicketProblemsResponse|error {
+    resource isolated function post api/v2/problems/autocomplete(Problems_autocomplete_body payload, string accept = "application/json", string? text = ()) returns ListTicketProblemsResponse|error {
         string resourcePath = string `/api/v2/problems/autocomplete`;
         map<anydata> queryParam = {"text": text};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        ListTicketProblemsResponse response = check self.clientEp->post(resourcePath, request);
+        ListTicketProblemsResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Bulk Unregister Push Notification Devices
@@ -2138,28 +2408,34 @@ public isolated client class Client {
     #
     # + queue_id - The id of the omnichannel routing queue
     # + return - Success response 
-    resource isolated function get api/v2/queues/[string queue_id]() returns QueueResponse|error {
+    resource isolated function get api/v2/queues/[string queue_id](string accept = "application/json") returns QueueResponse|error {
         string resourcePath = string `/api/v2/queues/${getEncodedUri(queue_id)}`;
-        QueueResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        QueueResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update queue
     #
     # + queue_id - The id of the omnichannel routing queue
     # + return - Success response 
-    resource isolated function put api/v2/queues/[string queue_id]() returns QueueResponse|error {
+    resource isolated function put api/v2/queues/[string queue_id](string accept = "application/json") returns QueueResponse|error {
         string resourcePath = string `/api/v2/queues/${getEncodedUri(queue_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        QueueResponse response = check self.clientEp->put(resourcePath, request);
+        QueueResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete queue
     #
     # + queue_id - The id of the omnichannel routing queue
     # + return - No content response 
-    resource isolated function delete api/v2/queues/[string queue_id]() returns error? {
+    resource isolated function delete api/v2/queues/[string queue_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/queues/${getEncodedUri(queue_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # List queue definitions
     #
@@ -2190,37 +2466,45 @@ public isolated client class Client {
     #
     # + support_address_id - The ID of the support address
     # + return - Success response 
-    resource isolated function get api/v2/recipient_addresses/[int support_address_id]() returns SupportAddressResponse|error {
+    resource isolated function get api/v2/recipient_addresses/[int support_address_id](string accept = "application/json") returns SupportAddressResponse|error {
         string resourcePath = string `/api/v2/recipient_addresses/${getEncodedUri(support_address_id)}`;
-        SupportAddressResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SupportAddressResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Support Address
     #
     # + support_address_id - The ID of the support address
     # + return - Success response 
-    resource isolated function put api/v2/recipient_addresses/[int support_address_id]() returns SupportAddressResponse|error {
+    resource isolated function put api/v2/recipient_addresses/[int support_address_id](string accept = "application/json") returns SupportAddressResponse|error {
         string resourcePath = string `/api/v2/recipient_addresses/${getEncodedUri(support_address_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        SupportAddressResponse response = check self.clientEp->put(resourcePath, request);
+        SupportAddressResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Support Address
     #
     # + support_address_id - The ID of the support address
     # + return - No Content response 
-    resource isolated function delete api/v2/recipient_addresses/[int support_address_id]() returns error? {
+    resource isolated function delete api/v2/recipient_addresses/[int support_address_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/recipient_addresses/${getEncodedUri(support_address_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Verify Support Address Forwarding
     #
     # + support_address_id - The ID of the support address
     # + return - Success response 
-    resource isolated function put api/v2/recipient_addresses/[int support_address_id]/verify() returns string|error {
+    resource isolated function put api/v2/recipient_addresses/[int support_address_id]/verify(string accept = "application/json") returns string|error {
         string resourcePath = string `/api/v2/recipient_addresses/${getEncodedUri(support_address_id)}/verify`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        string response = check self.clientEp->put(resourcePath, request);
+        string response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Filter Definitions
@@ -2230,11 +2514,13 @@ public isolated client class Client {
     # + source_type - The source type for which you would like to see filter definitions.
     # The options are "zen:user", "zen:ticket", and "zen:organization"
     # + return - Success response 
-    resource isolated function get api/v2/relationships/definitions/[string target_type](string? source_type = ()) returns RelationshipFilterDefinitionResponse|error {
+    resource isolated function get api/v2/relationships/definitions/[string target_type](string accept = "application/json", string? source_type = ()) returns RelationshipFilterDefinitionResponse|error {
         string resourcePath = string `/api/v2/relationships/definitions/${getEncodedUri(target_type)}`;
         map<anydata> queryParam = {"source_type": source_type};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        RelationshipFilterDefinitionResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        RelationshipFilterDefinitionResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Requests
@@ -2242,11 +2528,13 @@ public isolated client class Client {
     # + sort_by - Possible values are "updated_at", "created_at"
     # + sort_order - One of "asc", "desc". Defaults to "asc"
     # + return - Success response 
-    resource isolated function get api/v2/requests(string? sort_by = (), string? sort_order = ()) returns RequestsResponse|error {
+    resource isolated function get api/v2/requests(string accept = "application/json", string? sort_by = (), string? sort_order = ()) returns RequestsResponse|error {
         string resourcePath = string `/api/v2/requests`;
         map<anydata> queryParam = {"sort_by": sort_by, "sort_order": sort_order};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        RequestsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        RequestsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Request
@@ -2262,19 +2550,23 @@ public isolated client class Client {
     #
     # + request_id - The ID of the request
     # + return - Success response 
-    resource isolated function get api/v2/requests/[int request_id]() returns RequestResponse|error {
+    resource isolated function get api/v2/requests/[int request_id](string accept = "application/json") returns RequestResponse|error {
         string resourcePath = string `/api/v2/requests/${getEncodedUri(request_id)}`;
-        RequestResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        RequestResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Request
     #
     # + request_id - The ID of the request
     # + return - Success response 
-    resource isolated function put api/v2/requests/[int request_id]() returns RequestResponse|error {
+    resource isolated function put api/v2/requests/[int request_id](string accept = "application/json") returns RequestResponse|error {
         string resourcePath = string `/api/v2/requests/${getEncodedUri(request_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        RequestResponse response = check self.clientEp->put(resourcePath, request);
+        RequestResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Listing Comments
@@ -2283,11 +2575,13 @@ public isolated client class Client {
     # + since - Filters the comments from the given datetime
     # + role - One of "agent", "end_user". If not specified it does not filter
     # + return - Success response 
-    resource isolated function get api/v2/requests/[int request_id]/comments(string? since = (), string? role = ()) returns TicketCommentsResponse|error {
+    resource isolated function get api/v2/requests/[int request_id]/comments(string accept = "application/json", string? since = (), string? role = ()) returns TicketCommentsResponse|error {
         string resourcePath = string `/api/v2/requests/${getEncodedUri(request_id)}/comments`;
         map<anydata> queryParam = {"since": since, "role": role};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TicketCommentsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketCommentsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Getting Comments
@@ -2295,20 +2589,24 @@ public isolated client class Client {
     # + request_id - The ID of the request
     # + ticket_comment_id - The ID of the ticket comment
     # + return - Success response 
-    resource isolated function get api/v2/requests/[int request_id]/comments/[int ticket_comment_id]() returns TicketCommentResponse|error {
+    resource isolated function get api/v2/requests/[int request_id]/comments/[int ticket_comment_id](string accept = "application/json") returns TicketCommentResponse|error {
         string resourcePath = string `/api/v2/requests/${getEncodedUri(request_id)}/comments/${getEncodedUri(ticket_comment_id)}`;
-        TicketCommentResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketCommentResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Search Requests
     #
     # + query - The syntax and matching logic for the string is detailed in the [Zendesk Support search reference](https://support.zendesk.com/hc/en-us/articles/203663226). See also [Query basics](/api-reference/ticketing/ticket-management/search/#query-basics) in the Tickets API doc.
     # + return - Success response 
-    resource isolated function get api/v2/requests/search(string? query = ()) returns RequestsResponse|error {
+    resource isolated function get api/v2/requests/search(string accept = "application/json", string? query = ()) returns RequestsResponse|error {
         string resourcePath = string `/api/v2/requests/search`;
         map<anydata> queryParam = {"query": query};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        RequestsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        RequestsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Resource Collections
@@ -2332,47 +2630,57 @@ public isolated client class Client {
     #
     # + resource_collection_id - The id of the resource collection
     # + return - Success response 
-    resource isolated function get api/v2/resource_collections/[int resource_collection_id]() returns ResourceCollectionResponse|error {
+    resource isolated function get api/v2/resource_collections/[int resource_collection_id](string accept = "application/json") returns ResourceCollectionResponse|error {
         string resourcePath = string `/api/v2/resource_collections/${getEncodedUri(resource_collection_id)}`;
-        ResourceCollectionResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ResourceCollectionResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Resource Collection
     #
     # + resource_collection_id - The id of the resource collection
     # + return - Success response 
-    resource isolated function put api/v2/resource_collections/[int resource_collection_id]() returns JobStatusResponse|error {
+    resource isolated function put api/v2/resource_collections/[int resource_collection_id](string accept = "application/json") returns JobStatusResponse|error {
         string resourcePath = string `/api/v2/resource_collections/${getEncodedUri(resource_collection_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        JobStatusResponse response = check self.clientEp->put(resourcePath, request);
+        JobStatusResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Resource Collection
     #
     # + resource_collection_id - The id of the resource collection
     # + return - Success response 
-    resource isolated function delete api/v2/resource_collections/[int resource_collection_id]() returns JobStatusResponse|error {
+    resource isolated function delete api/v2/resource_collections/[int resource_collection_id](string accept = "application/json") returns JobStatusResponse|error {
         string resourcePath = string `/api/v2/resource_collections/${getEncodedUri(resource_collection_id)}`;
-        JobStatusResponse response = check self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        JobStatusResponse response = check self.clientEp->delete(resourcePath, headers = httpHeaders);
         return response;
     }
     # List Agent Attribute Values
     #
     # + user_id - The id of the user
     # + return - Success response 
-    resource isolated function get api/v2/routing/agents/[int user_id]/instance_values() returns SkillBasedRoutingAttributeValuesResponse|error {
+    resource isolated function get api/v2/routing/agents/[int user_id]/instance_values(string accept = "application/json") returns SkillBasedRoutingAttributeValuesResponse|error {
         string resourcePath = string `/api/v2/routing/agents/${getEncodedUri(user_id)}/instance_values`;
-        SkillBasedRoutingAttributeValuesResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SkillBasedRoutingAttributeValuesResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Set Agent Attribute Values
     #
     # + user_id - The id of the user
     # + return - Success response 
-    resource isolated function post api/v2/routing/agents/[int user_id]/instance_values() returns SkillBasedRoutingAttributeValuesResponse|error {
+    resource isolated function post api/v2/routing/agents/[int user_id]/instance_values(string accept = "application/json") returns SkillBasedRoutingAttributeValuesResponse|error {
         string resourcePath = string `/api/v2/routing/agents/${getEncodedUri(user_id)}/instance_values`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        SkillBasedRoutingAttributeValuesResponse response = check self.clientEp->post(resourcePath, request);
+        SkillBasedRoutingAttributeValuesResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # List Account Attributes
@@ -2396,46 +2704,56 @@ public isolated client class Client {
     #
     # + attribute_id - The ID of the skill-based routing attribute
     # + return - Success response 
-    resource isolated function get api/v2/routing/attributes/[string attribute_id]() returns SkillBasedRoutingAttributeResponse|error {
+    resource isolated function get api/v2/routing/attributes/[string attribute_id](string accept = "application/json") returns SkillBasedRoutingAttributeResponse|error {
         string resourcePath = string `/api/v2/routing/attributes/${getEncodedUri(attribute_id)}`;
-        SkillBasedRoutingAttributeResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SkillBasedRoutingAttributeResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Attribute
     #
     # + attribute_id - The ID of the skill-based routing attribute
     # + return - Success response 
-    resource isolated function put api/v2/routing/attributes/[string attribute_id]() returns SkillBasedRoutingAttributeResponse|error {
+    resource isolated function put api/v2/routing/attributes/[string attribute_id](string accept = "application/json") returns SkillBasedRoutingAttributeResponse|error {
         string resourcePath = string `/api/v2/routing/attributes/${getEncodedUri(attribute_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        SkillBasedRoutingAttributeResponse response = check self.clientEp->put(resourcePath, request);
+        SkillBasedRoutingAttributeResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Attribute
     #
     # + attribute_id - The ID of the skill-based routing attribute
     # + return - No Content response 
-    resource isolated function delete api/v2/routing/attributes/[string attribute_id]() returns error? {
+    resource isolated function delete api/v2/routing/attributes/[string attribute_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/routing/attributes/${getEncodedUri(attribute_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # List Attribute Values for an Attribute
     #
     # + attribute_id - The ID of the skill-based routing attribute
     # + return - Success response 
-    resource isolated function get api/v2/routing/attributes/[string attribute_id]/values() returns SkillBasedRoutingAttributeValuesResponse|error {
+    resource isolated function get api/v2/routing/attributes/[string attribute_id]/values(string accept = "application/json") returns SkillBasedRoutingAttributeValuesResponse|error {
         string resourcePath = string `/api/v2/routing/attributes/${getEncodedUri(attribute_id)}/values`;
-        SkillBasedRoutingAttributeValuesResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SkillBasedRoutingAttributeValuesResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Attribute Value
     #
     # + attribute_id - The ID of the skill-based routing attribute
     # + return - Created response 
-    resource isolated function post api/v2/routing/attributes/[string attribute_id]/values() returns SkillBasedRoutingAttributeValueResponse|error {
+    resource isolated function post api/v2/routing/attributes/[string attribute_id]/values(string accept = "application/json") returns SkillBasedRoutingAttributeValueResponse|error {
         string resourcePath = string `/api/v2/routing/attributes/${getEncodedUri(attribute_id)}/values`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        SkillBasedRoutingAttributeValueResponse response = check self.clientEp->post(resourcePath, request);
+        SkillBasedRoutingAttributeValueResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Show Attribute Value
@@ -2443,9 +2761,11 @@ public isolated client class Client {
     # + attribute_id - The ID of the skill-based routing attribute
     # + attribute_value_id - The ID of the skill-based routing attribute value
     # + return - Success response 
-    resource isolated function get api/v2/routing/attributes/[string attribute_id]/values/[string attribute_value_id]() returns SkillBasedRoutingAttributeValueResponse|error {
+    resource isolated function get api/v2/routing/attributes/[string attribute_id]/values/[string attribute_value_id](string accept = "application/json") returns SkillBasedRoutingAttributeValueResponse|error {
         string resourcePath = string `/api/v2/routing/attributes/${getEncodedUri(attribute_id)}/values/${getEncodedUri(attribute_value_id)}`;
-        SkillBasedRoutingAttributeValueResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SkillBasedRoutingAttributeValueResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Delete Attribute Value
@@ -2453,19 +2773,23 @@ public isolated client class Client {
     # + attribute_id - The ID of the skill-based routing attribute
     # + attribute_value_id - The ID of the skill-based routing attribute value
     # + return - No Content response 
-    resource isolated function delete api/v2/routing/attributes/[string attribute_id]/values/[string attribute_value_id]() returns error? {
+    resource isolated function delete api/v2/routing/attributes/[string attribute_id]/values/[string attribute_value_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/routing/attributes/${getEncodedUri(attribute_id)}/values/${getEncodedUri(attribute_value_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Update Attribute Value
     #
     # + attribute_id - The ID of the skill-based routing attribute
     # + attribute_value_id - The ID of the skill-based routing attribute value
     # + return - Success response 
-    resource isolated function patch api/v2/routing/attributes/[string attribute_id]/values/[string attribute_value_id]() returns SkillBasedRoutingAttributeValueResponse|error {
+    resource isolated function patch api/v2/routing/attributes/[string attribute_id]/values/[string attribute_value_id](string accept = "application/json") returns SkillBasedRoutingAttributeValueResponse|error {
         string resourcePath = string `/api/v2/routing/attributes/${getEncodedUri(attribute_id)}/values/${getEncodedUri(attribute_value_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        SkillBasedRoutingAttributeValueResponse response = check self.clientEp->patch(resourcePath, request);
+        SkillBasedRoutingAttributeValueResponse response = check self.clientEp->patch(resourcePath, request, httpHeaders);
         return response;
     }
     # List Routing Attribute Definitions
@@ -2480,30 +2804,36 @@ public isolated client class Client {
     #
     # + ticket_ids - The IDs of the relevant tickets to check for matching attributes
     # + return - Success response 
-    resource isolated function get api/v2/routing/requirements/fulfilled(int ticket_ids) returns SkillBasedRoutingTicketFulfilledResponse|error {
+    resource isolated function get api/v2/routing/requirements/fulfilled(int ticket_ids, string accept = "application/json") returns SkillBasedRoutingTicketFulfilledResponse|error {
         string resourcePath = string `/api/v2/routing/requirements/fulfilled`;
         map<anydata> queryParam = {"ticket_ids": ticket_ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        SkillBasedRoutingTicketFulfilledResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SkillBasedRoutingTicketFulfilledResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Ticket Attribute Values
     #
     # + ticket_id - The ID of the ticket
     # + return - Success response 
-    resource isolated function get api/v2/routing/tickets/[int ticket_id]/instance_values() returns SkillBasedRoutingAttributeValuesResponse|error {
+    resource isolated function get api/v2/routing/tickets/[int ticket_id]/instance_values(string accept = "application/json") returns SkillBasedRoutingAttributeValuesResponse|error {
         string resourcePath = string `/api/v2/routing/tickets/${getEncodedUri(ticket_id)}/instance_values`;
-        SkillBasedRoutingAttributeValuesResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SkillBasedRoutingAttributeValuesResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Set Ticket Attribute Values
     #
     # + ticket_id - The ID of the ticket
     # + return - Success response 
-    resource isolated function post api/v2/routing/tickets/[int ticket_id]/instance_values() returns SkillBasedRoutingAttributeValuesResponse|error {
+    resource isolated function post api/v2/routing/tickets/[int ticket_id]/instance_values(string accept = "application/json") returns SkillBasedRoutingAttributeValuesResponse|error {
         string resourcePath = string `/api/v2/routing/tickets/${getEncodedUri(ticket_id)}/instance_values`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        SkillBasedRoutingAttributeValuesResponse response = check self.clientEp->post(resourcePath, request);
+        SkillBasedRoutingAttributeValuesResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # List Satisfaction Ratings
@@ -2518,9 +2848,11 @@ public isolated client class Client {
     #
     # + satisfaction_rating_id - The id of the satisfaction rating to retrieve
     # + return - Success response 
-    resource isolated function get api/v2/satisfaction_ratings/[int satisfaction_rating_id]() returns SatisfactionRatingResponse|error {
+    resource isolated function get api/v2/satisfaction_ratings/[int satisfaction_rating_id](string accept = "application/json") returns SatisfactionRatingResponse|error {
         string resourcePath = string `/api/v2/satisfaction_ratings/${getEncodedUri(satisfaction_rating_id)}`;
-        SatisfactionRatingResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SatisfactionRatingResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Count Satisfaction Ratings
@@ -2543,9 +2875,11 @@ public isolated client class Client {
     #
     # + satisfaction_reason_id - The id of the satisfaction rating reason
     # + return - Success response 
-    resource isolated function get api/v2/satisfaction_reasons/[int satisfaction_reason_id]() returns SatisfactionReasonResponse|error {
+    resource isolated function get api/v2/satisfaction_reasons/[int satisfaction_reason_id](string accept = "application/json") returns SatisfactionReasonResponse|error {
         string resourcePath = string `/api/v2/satisfaction_reasons/${getEncodedUri(satisfaction_reason_id)}`;
-        SatisfactionReasonResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SatisfactionReasonResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Search Results
@@ -2554,22 +2888,26 @@ public isolated client class Client {
     # + sort_by - One of `updated_at`, `created_at`, `priority`, `status`, or `ticket_type`. Defaults to sorting by relevance
     # + sort_order - One of `asc` or `desc`.  Defaults to `desc`
     # + return - Success response 
-    resource isolated function get api/v2/search(string query, string? sort_by = (), string? sort_order = ()) returns SearchResponse|error {
+    resource isolated function get api/v2/search(string query, string accept = "application/json", string? sort_by = (), string? sort_order = ()) returns SearchResponse|error {
         string resourcePath = string `/api/v2/search`;
         map<anydata> queryParam = {"query": query, "sort_by": sort_by, "sort_order": sort_order};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        SearchResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SearchResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Show Results Count
     #
     # + query - The search query
     # + return - Success response 
-    resource isolated function get api/v2/search/count(string query) returns SearchCountResponse|error {
+    resource isolated function get api/v2/search/count(string query, string accept = "application/json") returns SearchCountResponse|error {
         string resourcePath = string `/api/v2/search/count`;
         map<anydata> queryParam = {"query": query};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        SearchCountResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SearchCountResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Export Search Results
@@ -2578,20 +2916,24 @@ public isolated client class Client {
     # + pageSize - The number of results shown in a page.
     # + filterType - The object type returned by the export query. Can be `ticket`, `organization`, `user`, or `group`.
     # + return - Success response 
-    resource isolated function get api/v2/search/export(string query, int? pageSize = (), string? filterType = ()) returns SearchExportResponse|error {
+    resource isolated function get api/v2/search/export(string query, string accept = "application/json", int? pageSize = (), string? filterType = ()) returns SearchExportResponse|error {
         string resourcePath = string `/api/v2/search/export`;
         map<anydata> queryParam = {"query": query, "page[size]": pageSize, "filter[type]": filterType};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        SearchExportResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SearchExportResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Sessions
     #
     # + user_id - The id of the user
     # + return - Success response 
-    resource isolated function get api/v2/sessions() returns SessionsResponse|error {
+    resource isolated function get api/v2/sessions(string accept = "application/json") returns SessionsResponse|error {
         string resourcePath = string `/api/v2/sessions`;
-        SessionsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SessionsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Sharing Agreements
@@ -2615,28 +2957,34 @@ public isolated client class Client {
     #
     # + sharing_agreement_id - The ID of the sharing agreement
     # + return - Success response 
-    resource isolated function get api/v2/sharing_agreements/[int sharing_agreement_id]() returns SharingAgreementResponse|error {
+    resource isolated function get api/v2/sharing_agreements/[int sharing_agreement_id](string accept = "application/json") returns SharingAgreementResponse|error {
         string resourcePath = string `/api/v2/sharing_agreements/${getEncodedUri(sharing_agreement_id)}`;
-        SharingAgreementResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SharingAgreementResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update a Sharing Agreement
     #
     # + sharing_agreement_id - The ID of the sharing agreement
     # + return - Success response 
-    resource isolated function put api/v2/sharing_agreements/[int sharing_agreement_id]() returns SharingAgreementResponse|error {
+    resource isolated function put api/v2/sharing_agreements/[int sharing_agreement_id](string accept = "application/json") returns SharingAgreementResponse|error {
         string resourcePath = string `/api/v2/sharing_agreements/${getEncodedUri(sharing_agreement_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        SharingAgreementResponse response = check self.clientEp->put(resourcePath, request);
+        SharingAgreementResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete a Sharing Agreement
     #
     # + sharing_agreement_id - The ID of the sharing agreement
     # + return - No Content response 
-    resource isolated function delete api/v2/sharing_agreements/[int sharing_agreement_id]() returns error? {
+    resource isolated function delete api/v2/sharing_agreements/[int sharing_agreement_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/sharing_agreements/${getEncodedUri(sharing_agreement_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Record a New Skip for the Current User
     #
@@ -2668,28 +3016,34 @@ public isolated client class Client {
     #
     # + sla_policy_id - The ID of the SLA Policy
     # + return - Success response 
-    resource isolated function get api/v2/slas/policies/[int sla_policy_id]() returns SLAPolicyResponse|error {
+    resource isolated function get api/v2/slas/policies/[int sla_policy_id](string accept = "application/json") returns SLAPolicyResponse|error {
         string resourcePath = string `/api/v2/slas/policies/${getEncodedUri(sla_policy_id)}`;
-        SLAPolicyResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SLAPolicyResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update SLA Policy
     #
     # + sla_policy_id - The ID of the SLA Policy
     # + return - Success response 
-    resource isolated function put api/v2/slas/policies/[int sla_policy_id]() returns SLAPolicyResponse|error {
+    resource isolated function put api/v2/slas/policies/[int sla_policy_id](string accept = "application/json") returns SLAPolicyResponse|error {
         string resourcePath = string `/api/v2/slas/policies/${getEncodedUri(sla_policy_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        SLAPolicyResponse response = check self.clientEp->put(resourcePath, request);
+        SLAPolicyResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete SLA Policy
     #
     # + sla_policy_id - The ID of the SLA Policy
     # + return - No Content response 
-    resource isolated function delete api/v2/slas/policies/[int sla_policy_id]() returns error? {
+    resource isolated function delete api/v2/slas/policies/[int sla_policy_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/slas/policies/${getEncodedUri(sla_policy_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Retrieve Supported Filter Definition Items
     #
@@ -2703,13 +3057,15 @@ public isolated client class Client {
     #
     # + sla_policy_ids - The IDs of the SLA Policies to reorder
     # + return - Success response 
-    resource isolated function put api/v2/slas/policies/reorder(int[]? sla_policy_ids = ()) returns string|error {
+    resource isolated function put api/v2/slas/policies/reorder(string accept = "application/json", int[]? sla_policy_ids = ()) returns string|error {
         string resourcePath = string `/api/v2/slas/policies/reorder`;
         map<anydata> queryParam = {"sla_policy_ids": sla_policy_ids};
         map<Encoding> queryParamEncoding = {"sla_policy_ids": {style: FORM, explode: true}};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam, queryParamEncoding);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        string response = check self.clientEp->put(resourcePath, request);
+        string response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # List Suspended Tickets
@@ -2717,59 +3073,71 @@ public isolated client class Client {
     # + sort_by - The field to sort the ticket by, being one of `author_email`, `cause`, `created_at`, or `subject`.
     # + sort_order - The order in which to sort the suspended tickets.  This can take value `asc` or `desc`.
     # + return - Success response 
-    resource isolated function get api/v2/suspended_tickets(string? sort_by = (), string? sort_order = ()) returns SuspendedTicketsResponse|error {
+    resource isolated function get api/v2/suspended_tickets(string accept = "application/json", string? sort_by = (), string? sort_order = ()) returns SuspendedTicketsResponse|error {
         string resourcePath = string `/api/v2/suspended_tickets`;
         map<anydata> queryParam = {"sort_by": sort_by, "sort_order": sort_order};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        SuspendedTicketsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SuspendedTicketsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Show Suspended Ticket
     #
     # + id - id of the suspended ticket
     # + return - Success response 
-    resource isolated function get api/v2/suspended_tickets/[decimal id]() returns SuspendedTicketsResponse|error {
+    resource isolated function get api/v2/suspended_tickets/[decimal id](string accept = "application/json") returns SuspendedTicketsResponse|error {
         string resourcePath = string `/api/v2/suspended_tickets/${getEncodedUri(id)}`;
-        SuspendedTicketsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SuspendedTicketsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Delete Suspended Ticket
     #
     # + id - id of the suspended ticket
     # + return - No Content response 
-    resource isolated function delete api/v2/suspended_tickets/[decimal id]() returns error? {
+    resource isolated function delete api/v2/suspended_tickets/[decimal id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/suspended_tickets/${getEncodedUri(id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Recover Suspended Ticket
     #
     # + id - id of the suspended ticket
     # + return - Success response 
-    resource isolated function put api/v2/suspended_tickets/[decimal id]/recover() returns RecoverSuspendedTicketResponse|error {
+    resource isolated function put api/v2/suspended_tickets/[decimal id]/recover(string accept = "application/json") returns RecoverSuspendedTicketResponse|error {
         string resourcePath = string `/api/v2/suspended_tickets/${getEncodedUri(id)}/recover`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        RecoverSuspendedTicketResponse response = check self.clientEp->put(resourcePath, request);
+        RecoverSuspendedTicketResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Suspended Ticket Attachments
     #
     # + id - id of the suspended ticket
     # + return - Success response 
-    resource isolated function post api/v2/suspended_tickets/attachments() returns SuspendedTicketsAttachmentsResponse|error {
+    resource isolated function post api/v2/suspended_tickets/attachments(string accept = "application/json") returns SuspendedTicketsAttachmentsResponse|error {
         string resourcePath = string `/api/v2/suspended_tickets/attachments`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        SuspendedTicketsAttachmentsResponse response = check self.clientEp->post(resourcePath, request);
+        SuspendedTicketsAttachmentsResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Multiple Suspended Tickets
     #
     # + ids - A comma separated list of ids of suspended tickets to delete.
     # + return - No Content response 
-    resource isolated function delete api/v2/suspended_tickets/destroy_many(string ids) returns error? {
+    resource isolated function delete api/v2/suspended_tickets/destroy_many(string ids, string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/suspended_tickets/destroy_many`;
         map<anydata> queryParam = {"ids": ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Export Suspended Tickets
     #
@@ -2784,12 +3152,14 @@ public isolated client class Client {
     #
     # + ids - A comma separated list of ids of suspended tickets to recover.
     # + return - Success response 
-    resource isolated function put api/v2/suspended_tickets/recover_many(string ids) returns RecoverSuspendedTicketsResponse|error {
+    resource isolated function put api/v2/suspended_tickets/recover_many(string ids, string accept = "application/json") returns RecoverSuspendedTicketsResponse|error {
         string resourcePath = string `/api/v2/suspended_tickets/recover_many`;
         map<anydata> queryParam = {"ids": ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        RecoverSuspendedTicketsResponse response = check self.clientEp->put(resourcePath, request);
+        RecoverSuspendedTicketsResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # List Tags
@@ -2820,9 +3190,11 @@ public isolated client class Client {
     #
     # + target_failure_id - The ID of the target failure
     # + return - Success response 
-    resource isolated function get api/v2/target_failures/[int target_failure_id]() returns TargetFailureResponse|error {
+    resource isolated function get api/v2/target_failures/[int target_failure_id](string accept = "application/json") returns TargetFailureResponse|error {
         string resourcePath = string `/api/v2/target_failures/${getEncodedUri(target_failure_id)}`;
-        TargetFailureResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TargetFailureResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Targets
@@ -2846,38 +3218,46 @@ public isolated client class Client {
     #
     # + target_id - The ID of the target
     # + return - Success response 
-    resource isolated function get api/v2/targets/[int target_id]() returns TargetResponse|error {
+    resource isolated function get api/v2/targets/[int target_id](string accept = "application/json") returns TargetResponse|error {
         string resourcePath = string `/api/v2/targets/${getEncodedUri(target_id)}`;
-        TargetResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TargetResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Target
     #
     # + target_id - The ID of the target
     # + return - Success response 
-    resource isolated function put api/v2/targets/[int target_id]() returns TargetResponse|error {
+    resource isolated function put api/v2/targets/[int target_id](string accept = "application/json") returns TargetResponse|error {
         string resourcePath = string `/api/v2/targets/${getEncodedUri(target_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        TargetResponse response = check self.clientEp->put(resourcePath, request);
+        TargetResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Target
     #
     # + target_id - The ID of the target
     # + return - No Content response 
-    resource isolated function delete api/v2/targets/[int target_id]() returns error? {
+    resource isolated function delete api/v2/targets/[int target_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/targets/${getEncodedUri(target_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # List All Ticket Audits
     #
     # + 'limit - Maximum number of results returned
     # + return - Success response 
-    resource isolated function get api/v2/ticket_audits(int? 'limit = ()) returns TicketAuditsResponse|error {
+    resource isolated function get api/v2/ticket_audits(string accept = "application/json", int? 'limit = ()) returns TicketAuditsResponse|error {
         string resourcePath = string `/api/v2/ticket_audits`;
         map<anydata> queryParam = {"limit": 'limit};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TicketAuditsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketAuditsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Ticket Fields
@@ -2889,11 +3269,13 @@ public isolated client class Client {
     # by an app, `creator_app_name` is the name of the app and `creator_user_id` is `-1`. If the ticket field
     # is not created by an app, `creator_app_name` is null
     # + return - Success response 
-    resource isolated function get api/v2/ticket_fields(string? locale = (), boolean? creator = ()) returns TicketFieldsResponse|error {
+    resource isolated function get api/v2/ticket_fields(string accept = "application/json", string? locale = (), boolean? creator = ()) returns TicketFieldsResponse|error {
         string resourcePath = string `/api/v2/ticket_fields`;
         map<anydata> queryParam = {"locale": locale, "creator": creator};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TicketFieldsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketFieldsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Ticket Field
@@ -2912,11 +3294,13 @@ public isolated client class Client {
     # by an app, `creator_app_name` is the name of the app and `creator_user_id` is `-1`. If the ticket field
     # is not created by an app, then `creator_app_name` is null
     # + return - Success response 
-    resource isolated function get api/v2/ticket_fields/[int ticket_field_id](boolean? creator = ()) returns TicketFieldResponse|error {
+    resource isolated function get api/v2/ticket_fields/[int ticket_field_id](string accept = "application/json", boolean? creator = ()) returns TicketFieldResponse|error {
         string resourcePath = string `/api/v2/ticket_fields/${getEncodedUri(ticket_field_id)}`;
         map<anydata> queryParam = {"creator": creator};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TicketFieldResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketFieldResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Ticket Field
@@ -2926,12 +3310,14 @@ public isolated client class Client {
     # by an app, `creator_app_name` is the name of the app and `creator_user_id` is `-1`. If the ticket field
     # is not created by an app, then `creator_app_name` is null
     # + return - Success response 
-    resource isolated function put api/v2/ticket_fields/[int ticket_field_id](boolean? creator = ()) returns TicketFieldResponse|error {
+    resource isolated function put api/v2/ticket_fields/[int ticket_field_id](string accept = "application/json", boolean? creator = ()) returns TicketFieldResponse|error {
         string resourcePath = string `/api/v2/ticket_fields/${getEncodedUri(ticket_field_id)}`;
         map<anydata> queryParam = {"creator": creator};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        TicketFieldResponse response = check self.clientEp->put(resourcePath, request);
+        TicketFieldResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Ticket Field
@@ -2941,29 +3327,35 @@ public isolated client class Client {
     # by an app, `creator_app_name` is the name of the app and `creator_user_id` is `-1`. If the ticket field
     # is not created by an app, then `creator_app_name` is null
     # + return - No Content response 
-    resource isolated function delete api/v2/ticket_fields/[int ticket_field_id](boolean? creator = ()) returns error? {
+    resource isolated function delete api/v2/ticket_fields/[int ticket_field_id](string accept = "application/json", boolean? creator = ()) returns error? {
         string resourcePath = string `/api/v2/ticket_fields/${getEncodedUri(ticket_field_id)}`;
         map<anydata> queryParam = {"creator": creator};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # List Ticket Field Options
     #
     # + ticket_field_id - The ID of the ticket field
     # + return - Success response 
-    resource isolated function get api/v2/ticket_fields/[int ticket_field_id]/options() returns CustomFieldOptionsResponse|error {
+    resource isolated function get api/v2/ticket_fields/[int ticket_field_id]/options(string accept = "application/json") returns CustomFieldOptionsResponse|error {
         string resourcePath = string `/api/v2/ticket_fields/${getEncodedUri(ticket_field_id)}/options`;
-        CustomFieldOptionsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CustomFieldOptionsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create or Update Ticket Field Option
     #
     # + ticket_field_id - The ID of the ticket field
     # + return - Success response 
-    resource isolated function post api/v2/ticket_fields/[int ticket_field_id]/options() returns CustomFieldOptionResponse|error {
+    resource isolated function post api/v2/ticket_fields/[int ticket_field_id]/options(string accept = "application/json") returns CustomFieldOptionResponse|error {
         string resourcePath = string `/api/v2/ticket_fields/${getEncodedUri(ticket_field_id)}/options`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        CustomFieldOptionResponse response = check self.clientEp->post(resourcePath, request);
+        CustomFieldOptionResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Show Ticket Field Option
@@ -2971,9 +3363,11 @@ public isolated client class Client {
     # + ticket_field_id - The ID of the ticket field
     # + ticket_field_option_id - The ID of the ticket field option
     # + return - Success response 
-    resource isolated function get api/v2/ticket_fields/[int ticket_field_id]/options/[int ticket_field_option_id]() returns CustomFieldOptionResponse|error {
+    resource isolated function get api/v2/ticket_fields/[int ticket_field_id]/options/[int ticket_field_option_id](string accept = "application/json") returns CustomFieldOptionResponse|error {
         string resourcePath = string `/api/v2/ticket_fields/${getEncodedUri(ticket_field_id)}/options/${getEncodedUri(ticket_field_option_id)}`;
-        CustomFieldOptionResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CustomFieldOptionResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Delete Ticket Field Option
@@ -2981,9 +3375,11 @@ public isolated client class Client {
     # + ticket_field_id - The ID of the ticket field
     # + ticket_field_option_id - The ID of the ticket field option
     # + return - No Content response 
-    resource isolated function delete api/v2/ticket_fields/[int ticket_field_id]/options/[int ticket_field_option_id]() returns error? {
+    resource isolated function delete api/v2/ticket_fields/[int ticket_field_id]/options/[int ticket_field_option_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/ticket_fields/${getEncodedUri(ticket_field_id)}/options/${getEncodedUri(ticket_field_option_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Count Ticket Fields
     #
@@ -3000,11 +3396,13 @@ public isolated client class Client {
     # + fallback_to_default - true returns the default ticket form when the criteria defined by the parameters results in a set without active and end-user visible ticket forms
     # + associated_to_brand - true returns the ticket forms of the brand specified by the url's subdomain
     # + return - Success response 
-    resource isolated function get api/v2/ticket_forms(boolean? active = (), boolean? end_user_visible = (), boolean? fallback_to_default = (), boolean? associated_to_brand = ()) returns TicketFormsResponse|error {
+    resource isolated function get api/v2/ticket_forms(string accept = "application/json", boolean? active = (), boolean? end_user_visible = (), boolean? fallback_to_default = (), boolean? associated_to_brand = ()) returns TicketFormsResponse|error {
         string resourcePath = string `/api/v2/ticket_forms`;
         map<anydata> queryParam = {"active": active, "end_user_visible": end_user_visible, "fallback_to_default": fallback_to_default, "associated_to_brand": associated_to_brand};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TicketFormsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketFormsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Ticket Form
@@ -3020,37 +3418,45 @@ public isolated client class Client {
     #
     # + ticket_form_id - The ID of the ticket form
     # + return - Success response 
-    resource isolated function get api/v2/ticket_forms/[int ticket_form_id]() returns TicketFormResponse|error {
+    resource isolated function get api/v2/ticket_forms/[int ticket_form_id](string accept = "application/json") returns TicketFormResponse|error {
         string resourcePath = string `/api/v2/ticket_forms/${getEncodedUri(ticket_form_id)}`;
-        TicketFormResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketFormResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Ticket Form
     #
     # + ticket_form_id - The ID of the ticket form
     # + return - Success response 
-    resource isolated function put api/v2/ticket_forms/[int ticket_form_id]() returns TicketFormResponse|error {
+    resource isolated function put api/v2/ticket_forms/[int ticket_form_id](string accept = "application/json") returns TicketFormResponse|error {
         string resourcePath = string `/api/v2/ticket_forms/${getEncodedUri(ticket_form_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        TicketFormResponse response = check self.clientEp->put(resourcePath, request);
+        TicketFormResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Ticket Form
     #
     # + ticket_form_id - The ID of the ticket form
     # + return - No Content response 
-    resource isolated function delete api/v2/ticket_forms/[int ticket_form_id]() returns error? {
+    resource isolated function delete api/v2/ticket_forms/[int ticket_form_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/ticket_forms/${getEncodedUri(ticket_form_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Clone an Already Existing Ticket Form
     #
     # + ticket_form_id - The ID of the ticket form
     # + return - Success response 
-    resource isolated function post api/v2/ticket_forms/[int ticket_form_id]/clone() returns TicketFormResponse|error {
+    resource isolated function post api/v2/ticket_forms/[int ticket_form_id]/clone(string accept = "application/json") returns TicketFormResponse|error {
         string resourcePath = string `/api/v2/ticket_forms/${getEncodedUri(ticket_form_id)}/clone`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        TicketFormResponse response = check self.clientEp->post(resourcePath, request);
+        TicketFormResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Reorder Ticket Forms
@@ -3070,11 +3476,13 @@ public isolated client class Client {
     # + fallback_to_default - true returns the default ticket form when the criteria defined by the parameters results in a set without active and end-user visible ticket forms
     # + associated_to_brand - true returns the ticket forms of the brand specified by the url's subdomain
     # + return - Success response 
-    resource isolated function get api/v2/ticket_forms/show_many(string ids, boolean? active = (), boolean? end_user_visible = (), boolean? fallback_to_default = (), boolean? associated_to_brand = ()) returns TicketFormsResponse|error {
+    resource isolated function get api/v2/ticket_forms/show_many(string ids, string accept = "application/json", boolean? active = (), boolean? end_user_visible = (), boolean? fallback_to_default = (), boolean? associated_to_brand = ()) returns TicketFormsResponse|error {
         string resourcePath = string `/api/v2/ticket_forms/show_many`;
         map<anydata> queryParam = {"ids": ids, "active": active, "end_user_visible": end_user_visible, "fallback_to_default": fallback_to_default, "associated_to_brand": associated_to_brand};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TicketFormsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketFormsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Ticket Metrics
@@ -3089,20 +3497,24 @@ public isolated client class Client {
     #
     # + ticket_metric_id - The id of the ticket metric to retrieve
     # + return - Success response 
-    resource isolated function get api/v2/ticket_metrics/[string ticket_metric_id]() returns TicketMetricsByTicketMetricIdResponse|error {
+    resource isolated function get api/v2/ticket_metrics/[string ticket_metric_id](string accept = "application/json") returns TicketMetricsByTicketMetricIdResponse|error {
         string resourcePath = string `/api/v2/ticket_metrics/${getEncodedUri(ticket_metric_id)}`;
-        TicketMetricsByTicketMetricIdResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketMetricsByTicketMetricIdResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Tickets
     #
     # + external_id - Lists tickets by external id. External ids don't have to be unique for each ticket. As a result, the request may return multiple tickets with the same external id.
     # + return - List tickets 
-    resource isolated function get api/v2/tickets(string? external_id = ()) returns TicketsResponse|error {
+    resource isolated function get api/v2/tickets(string accept = "application/json", string? external_id = ()) returns TicketsResponse|error {
         string resourcePath = string `/api/v2/tickets`;
         map<anydata> queryParam = {"external_id": external_id};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TicketsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Ticket
@@ -3120,38 +3532,46 @@ public isolated client class Client {
     #
     # + ticket_id - The ID of the ticket
     # + return - Ticket 
-    resource isolated function get api/v2/tickets/[int ticket_id]() returns TicketResponse|error {
+    resource isolated function get api/v2/tickets/[int ticket_id](string accept = "application/json") returns TicketResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}`;
-        TicketResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Ticket
     #
     # + ticket_id - The ID of the ticket
     # + return - Successful request 
-    resource isolated function put api/v2/tickets/[int ticket_id](TicketUpdateRequest payload) returns TicketUpdateResponse|error {
+    resource isolated function put api/v2/tickets/[int ticket_id](TicketUpdateRequest payload, string accept = "application/json") returns TicketUpdateResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        TicketUpdateResponse response = check self.clientEp->put(resourcePath, request);
+        TicketUpdateResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Ticket
     #
     # + ticket_id - The ID of the ticket
     # + return - No content 
-    resource isolated function delete api/v2/tickets/[int ticket_id]() returns error? {
+    resource isolated function delete api/v2/tickets/[int ticket_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # List Audits for a Ticket
     #
     # + ticket_id - The ID of the ticket
     # + return - OK response 
-    resource isolated function get api/v2/tickets/[int ticket_id]/audits() returns TicketAuditsResponseNoneCursor|error {
+    resource isolated function get api/v2/tickets/[int ticket_id]/audits(string accept = "application/json") returns TicketAuditsResponseNoneCursor|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/audits`;
-        TicketAuditsResponseNoneCursor response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketAuditsResponseNoneCursor response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Show Audit
@@ -3159,9 +3579,11 @@ public isolated client class Client {
     # + ticket_id - The ID of the ticket
     # + ticket_audit_id - The ID of the ticket audit
     # + return - OK response 
-    resource isolated function get api/v2/tickets/[int ticket_id]/audits/[int ticket_audit_id]() returns TicketAuditResponse|error {
+    resource isolated function get api/v2/tickets/[int ticket_id]/audits/[int ticket_audit_id](string accept = "application/json") returns TicketAuditResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/audits/${getEncodedUri(ticket_audit_id)}`;
-        TicketAuditResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketAuditResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Change a Comment From Public To Private
@@ -3169,28 +3591,34 @@ public isolated client class Client {
     # + ticket_id - The ID of the ticket
     # + ticket_audit_id - The ID of the ticket audit
     # + return - description 
-    resource isolated function put api/v2/tickets/[int ticket_id]/audits/[int ticket_audit_id]/make_private() returns string|error {
+    resource isolated function put api/v2/tickets/[int ticket_id]/audits/[int ticket_audit_id]/make_private(string accept = "application/json") returns string|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/audits/${getEncodedUri(ticket_audit_id)}/make_private`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        string response = check self.clientEp->put(resourcePath, request);
+        string response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Count Audits for a Ticket
     #
     # + ticket_id - The ID of the ticket
     # + return - Count of audits on a ticket 
-    resource isolated function get api/v2/tickets/[int ticket_id]/audits/count() returns TicketAuditsCountResponse|error {
+    resource isolated function get api/v2/tickets/[int ticket_id]/audits/count(string accept = "application/json") returns TicketAuditsCountResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/audits/count`;
-        TicketAuditsCountResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketAuditsCountResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Collaborators for a Ticket
     #
     # + ticket_id - The ID of the ticket
     # + return - Successful response 
-    resource isolated function get api/v2/tickets/[int ticket_id]/collaborators() returns ListTicketCollaboratorsResponse|error {
+    resource isolated function get api/v2/tickets/[int ticket_id]/collaborators(string accept = "application/json") returns ListTicketCollaboratorsResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/collaborators`;
-        ListTicketCollaboratorsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ListTicketCollaboratorsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Comments
@@ -3199,11 +3627,13 @@ public isolated client class Client {
     # + include_inline_images - Default is false. When true, inline images are also listed as attachments in the response
     # + include - Accepts "users". Use this parameter to list email CCs by side-loading users. Example: `?include=users`. **Note**: If the comment source is email, a deleted user will be represented as the CCd email address. If the comment source is anything else, a deleted user will be represented as the user name.
     # + return - Success response 
-    resource isolated function get api/v2/tickets/[int ticket_id]/comments(boolean? include_inline_images = (), string? include = ()) returns TicketCommentsResponse|error {
+    resource isolated function get api/v2/tickets/[int ticket_id]/comments(string accept = "application/json", boolean? include_inline_images = (), string? include = ()) returns TicketCommentsResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/comments`;
         map<anydata> queryParam = {"include_inline_images": include_inline_images, "include": include};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TicketCommentsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketCommentsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Redact Comment Attachment
@@ -3212,10 +3642,12 @@ public isolated client class Client {
     # + comment_id - The ID of the comment
     # + attachment_id - The ID of the attachment
     # + return - OK response 
-    resource isolated function put api/v2/tickets/[int ticket_id]/comments/[int comment_id]/attachments/[int attachment_id]/redact() returns AttachmentResponse|error {
+    resource isolated function put api/v2/tickets/[int ticket_id]/comments/[int comment_id]/attachments/[int attachment_id]/redact(string accept = "application/json") returns AttachmentResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/comments/${getEncodedUri(comment_id)}/attachments/${getEncodedUri(attachment_id)}/redact`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        AttachmentResponse response = check self.clientEp->put(resourcePath, request);
+        AttachmentResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Make Comment Private
@@ -3223,10 +3655,12 @@ public isolated client class Client {
     # + ticket_id - The ID of the ticket
     # + ticket_comment_id - The ID of the ticket comment
     # + return - description 
-    resource isolated function put api/v2/tickets/[int ticket_id]/comments/[int ticket_comment_id]/make_private() returns string|error {
+    resource isolated function put api/v2/tickets/[int ticket_id]/comments/[int ticket_comment_id]/make_private(string accept = "application/json") returns string|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/comments/${getEncodedUri(ticket_comment_id)}/make_private`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        string response = check self.clientEp->put(resourcePath, request);
+        string response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Redact String in Comment
@@ -3234,46 +3668,56 @@ public isolated client class Client {
     # + ticket_id - The ID of the ticket
     # + ticket_comment_id - The ID of the ticket comment
     # + return - Success response 
-    resource isolated function put api/v2/tickets/[int ticket_id]/comments/[int ticket_comment_id]/redact() returns TicketCommentResponse|error {
+    resource isolated function put api/v2/tickets/[int ticket_id]/comments/[int ticket_comment_id]/redact(string accept = "application/json") returns TicketCommentResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/comments/${getEncodedUri(ticket_comment_id)}/redact`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        TicketCommentResponse response = check self.clientEp->put(resourcePath, request);
+        TicketCommentResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Count Ticket Comments
     #
     # + ticket_id - The ID of the ticket
     # + return - Count of ticket comments 
-    resource isolated function get api/v2/tickets/[int ticket_id]/comments/count() returns TicketCommentsCountResponse|error {
+    resource isolated function get api/v2/tickets/[int ticket_id]/comments/count(string accept = "application/json") returns TicketCommentsCountResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/comments/count`;
-        TicketCommentsCountResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketCommentsCountResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Email CCs for a Ticket
     #
     # + ticket_id - The ID of the ticket
     # + return - Successful response 
-    resource isolated function get api/v2/tickets/[int ticket_id]/email_ccs() returns ListTicketEmailCCsResponse|error {
+    resource isolated function get api/v2/tickets/[int ticket_id]/email_ccs(string accept = "application/json") returns ListTicketEmailCCsResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/email_ccs`;
-        ListTicketEmailCCsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ListTicketEmailCCsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Followers for a Ticket
     #
     # + ticket_id - The ID of the ticket
     # + return - Successful response 
-    resource isolated function get api/v2/tickets/[int ticket_id]/followers() returns ListTicketFollowersResponse|error {
+    resource isolated function get api/v2/tickets/[int ticket_id]/followers(string accept = "application/json") returns ListTicketFollowersResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/followers`;
-        ListTicketFollowersResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ListTicketFollowersResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Ticket Incidents
     #
     # + ticket_id - The ID of the ticket
     # + return - Successful response 
-    resource isolated function get api/v2/tickets/[int ticket_id]/incidents() returns ListTicketIncidentsResponse|error {
+    resource isolated function get api/v2/tickets/[int ticket_id]/incidents(string accept = "application/json") returns ListTicketIncidentsResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/incidents`;
-        ListTicketIncidentsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ListTicketIncidentsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Show Ticket After Changes
@@ -3281,88 +3725,106 @@ public isolated client class Client {
     # + macro_id - The ID of the macro
     # + ticket_id - The ID of the ticket
     # + return - Success Response 
-    resource isolated function get api/v2/tickets/[int ticket_id]/macros/[int macro_id]/apply() returns MacroApplyTicketResponse|error {
+    resource isolated function get api/v2/tickets/[int ticket_id]/macros/[int macro_id]/apply(string accept = "application/json") returns MacroApplyTicketResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/macros/${getEncodedUri(macro_id)}/apply`;
-        MacroApplyTicketResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        MacroApplyTicketResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Mark Ticket as Spam and Suspend Requester
     #
     # + ticket_id - The ID of the ticket
     # + return - Successful response 
-    resource isolated function put api/v2/tickets/[int ticket_id]/mark_as_spam() returns string|error {
+    resource isolated function put api/v2/tickets/[int ticket_id]/mark_as_spam(string accept = "application/json") returns string|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/mark_as_spam`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        string response = check self.clientEp->put(resourcePath, request);
+        string response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Merge Tickets into Target Ticket
     #
     # + ticket_id - The ID of the ticket
     # + return - Successful response 
-    resource isolated function post api/v2/tickets/[int ticket_id]/merge(TicketMergeInput payload) returns JobStatusResponse|error {
+    resource isolated function post api/v2/tickets/[int ticket_id]/merge(TicketMergeInput payload, string accept = "application/json") returns JobStatusResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/merge`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        JobStatusResponse response = check self.clientEp->post(resourcePath, request);
+        JobStatusResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Ticket Related Information
     #
     # + ticket_id - The ID of the ticket
     # + return - Successful response 
-    resource isolated function get api/v2/tickets/[int ticket_id]/related() returns TicketRelatedInformation|error {
+    resource isolated function get api/v2/tickets/[int ticket_id]/related(string accept = "application/json") returns TicketRelatedInformation|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/related`;
-        TicketRelatedInformation response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketRelatedInformation response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create a Satisfaction Rating
     #
     # + ticket_id - The id of the ticket
     # + return - Success response 
-    resource isolated function post api/v2/tickets/[int ticket_id]/satisfaction_rating() returns SatisfactionRatingResponse|error {
+    resource isolated function post api/v2/tickets/[int ticket_id]/satisfaction_rating(string accept = "application/json") returns SatisfactionRatingResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/satisfaction_rating`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        SatisfactionRatingResponse response = check self.clientEp->post(resourcePath, request);
+        SatisfactionRatingResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # List Resource Tags
     #
     # + ticket_id - The ID of the ticket
     # + return - Success response 
-    resource isolated function get api/v2/tickets/[int ticket_id]/tags() returns TagsByObjectIdResponse|error {
+    resource isolated function get api/v2/tickets/[int ticket_id]/tags(string accept = "application/json") returns TagsByObjectIdResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/tags`;
-        TagsByObjectIdResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TagsByObjectIdResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Add Tags
     #
     # + ticket_id - The ID of the ticket
     # + return - Success response 
-    resource isolated function put api/v2/tickets/[int ticket_id]/tags() returns TagsByObjectIdResponse|error {
+    resource isolated function put api/v2/tickets/[int ticket_id]/tags(string accept = "application/json") returns TagsByObjectIdResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/tags`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        TagsByObjectIdResponse response = check self.clientEp->put(resourcePath, request);
+        TagsByObjectIdResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Set Tags
     #
     # + ticket_id - The ID of the ticket
     # + return - Created response 
-    resource isolated function post api/v2/tickets/[int ticket_id]/tags() returns TagsByObjectIdResponse|error {
+    resource isolated function post api/v2/tickets/[int ticket_id]/tags(string accept = "application/json") returns TagsByObjectIdResponse|error {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/tags`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        TagsByObjectIdResponse response = check self.clientEp->post(resourcePath, request);
+        TagsByObjectIdResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Remove Tags
     #
     # + ticket_id - The ID of the ticket
     # + return - No Content response 
-    resource isolated function delete api/v2/tickets/[int ticket_id]/tags() returns error? {
+    resource isolated function delete api/v2/tickets/[int ticket_id]/tags(string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/tickets/${getEncodedUri(ticket_id)}/tags`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Count Tickets
     #
@@ -3387,46 +3849,54 @@ public isolated client class Client {
     #
     # + ids - Comma-separated list of ticket ids
     # + return - Successful response 
-    resource isolated function delete api/v2/tickets/destroy_many(string ids) returns JobStatusResponse|error {
+    resource isolated function delete api/v2/tickets/destroy_many(string ids, string accept = "application/json") returns JobStatusResponse|error {
         string resourcePath = string `/api/v2/tickets/destroy_many`;
         map<anydata> queryParam = {"ids": ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        JobStatusResponse response = check self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        JobStatusResponse response = check self.clientEp->delete(resourcePath, headers = httpHeaders);
         return response;
     }
     # Bulk Mark Tickets as Spam
     #
     # + ids - Comma-separated list of ticket ids
     # + return - Successful response 
-    resource isolated function put api/v2/tickets/mark_many_as_spam(string ids) returns JobStatusResponse|error {
+    resource isolated function put api/v2/tickets/mark_many_as_spam(string ids, string accept = "application/json") returns JobStatusResponse|error {
         string resourcePath = string `/api/v2/tickets/mark_many_as_spam`;
         map<anydata> queryParam = {"ids": ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        JobStatusResponse response = check self.clientEp->put(resourcePath, request);
+        JobStatusResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Show Multiple Tickets
     #
     # + ids - Comma-separated list of ticket ids
     # + return - List tickets 
-    resource isolated function get api/v2/tickets/show_many(string ids) returns TicketsResponse|error {
+    resource isolated function get api/v2/tickets/show_many(string ids, string accept = "application/json") returns TicketsResponse|error {
         string resourcePath = string `/api/v2/tickets/show_many`;
         map<anydata> queryParam = {"ids": ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TicketsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Many Tickets
     #
     # + ids - Comma-separated list of ticket ids
     # + return - Successful response 
-    resource isolated function put api/v2/tickets/update_many(string? ids = ()) returns JobStatusResponse|error {
+    resource isolated function put api/v2/tickets/update_many(string accept = "application/json", string? ids = ()) returns JobStatusResponse|error {
         string resourcePath = string `/api/v2/tickets/update_many`;
         map<anydata> queryParam = {"ids": ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        JobStatusResponse response = check self.clientEp->put(resourcePath, request);
+        JobStatusResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # List Trigger Categories
@@ -3435,12 +3905,14 @@ public isolated client class Client {
     # + sort - Sort parameters
     # + include - Allowed sideloads
     # + return - A paged array of trigger categories 
-    resource isolated function get api/v2/trigger_categories(Page? page = (), "position"|"-position"|"name"|"-name"|"created_at"|"-created_at"|"updated_at"|"-updated_at"? sort = (), "rule_counts"? include = ()) returns Inline_response_200_6|error {
+    resource isolated function get api/v2/trigger_categories(string accept = "application/json", Page? page = (), "position"|"-position"|"name"|"-name"|"created_at"|"-created_at"|"updated_at"|"-updated_at"? sort = (), "rule_counts"? include = ()) returns Inline_response_200_6|error {
         string resourcePath = string `/api/v2/trigger_categories`;
         map<anydata> queryParam = {"page": page, "sort": sort, "include": include};
         map<Encoding> queryParamEncoding = {"page": {style: DEEPOBJECT, explode: true}};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam, queryParamEncoding);
-        Inline_response_200_6 response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        Inline_response_200_6 response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Trigger Category
@@ -3458,30 +3930,36 @@ public isolated client class Client {
     #
     # + trigger_category_id - The id of the trigger category to retrieve
     # + return - The requested trigger category 
-    resource isolated function get api/v2/trigger_categories/[string trigger_category_id]() returns TriggerCategoryResponse|error {
+    resource isolated function get api/v2/trigger_categories/[string trigger_category_id](string accept = "application/json") returns TriggerCategoryResponse|error {
         string resourcePath = string `/api/v2/trigger_categories/${getEncodedUri(trigger_category_id)}`;
-        TriggerCategoryResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TriggerCategoryResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Delete Trigger Category
     #
     # + trigger_category_id - The id of the trigger category to delete
     # + return - No content 
-    resource isolated function delete api/v2/trigger_categories/[string trigger_category_id]() returns http:Response|error {
+    resource isolated function delete api/v2/trigger_categories/[string trigger_category_id](string accept = "application/json") returns http:Response|error {
         string resourcePath = string `/api/v2/trigger_categories/${getEncodedUri(trigger_category_id)}`;
-        http:Response response = check self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        http:Response response = check self.clientEp->delete(resourcePath, headers = httpHeaders);
         return response;
     }
     # Update Trigger Category
     #
     # + trigger_category_id - The id of the trigger category to update
     # + return - The updated trigger category 
-    resource isolated function patch api/v2/trigger_categories/[string trigger_category_id](Trigger_categories_trigger_category_id_body payload) returns TriggerCategoryResponse|error {
+    resource isolated function patch api/v2/trigger_categories/[string trigger_category_id](Trigger_categories_trigger_category_id_body payload, string accept = "application/json") returns TriggerCategoryResponse|error {
         string resourcePath = string `/api/v2/trigger_categories/${getEncodedUri(trigger_category_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        TriggerCategoryResponse response = check self.clientEp->patch(resourcePath, request);
+        TriggerCategoryResponse response = check self.clientEp->patch(resourcePath, request, httpHeaders);
         return response;
     }
     # Create Batch Job for Trigger Categories
@@ -3503,11 +3981,13 @@ public isolated client class Client {
     # + sort_order - One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
     # + category_id - Filter triggers by category ID
     # + return - Success response 
-    resource isolated function get api/v2/triggers(boolean? active = (), string? sort = (), string? sort_by = (), string? sort_order = (), string? category_id = ()) returns TriggersResponse|error {
+    resource isolated function get api/v2/triggers(string accept = "application/json", boolean? active = (), string? sort = (), string? sort_by = (), string? sort_order = (), string? category_id = ()) returns TriggersResponse|error {
         string resourcePath = string `/api/v2/triggers`;
         map<anydata> queryParam = {"active": active, "sort": sort, "sort_by": sort_by, "sort_order": sort_order, "category_id": category_id};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TriggersResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TriggersResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Trigger
@@ -3525,38 +4005,46 @@ public isolated client class Client {
     #
     # + trigger_id - The ID of the trigger
     # + return - Success response 
-    resource isolated function get api/v2/triggers/[int trigger_id]() returns TriggerResponse|error {
+    resource isolated function get api/v2/triggers/[int trigger_id](string accept = "application/json") returns TriggerResponse|error {
         string resourcePath = string `/api/v2/triggers/${getEncodedUri(trigger_id)}`;
-        TriggerResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TriggerResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Trigger
     #
     # + trigger_id - The ID of the trigger
     # + return - Success response 
-    resource isolated function put api/v2/triggers/[int trigger_id](TriggerWithCategoryRequest payload) returns TriggerResponse|error {
+    resource isolated function put api/v2/triggers/[int trigger_id](TriggerWithCategoryRequest payload, string accept = "application/json") returns TriggerResponse|error {
         string resourcePath = string `/api/v2/triggers/${getEncodedUri(trigger_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        TriggerResponse response = check self.clientEp->put(resourcePath, request);
+        TriggerResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Trigger
     #
     # + trigger_id - The ID of the trigger
     # + return - No Content response 
-    resource isolated function delete api/v2/triggers/[int trigger_id]() returns error? {
+    resource isolated function delete api/v2/triggers/[int trigger_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/triggers/${getEncodedUri(trigger_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # List Trigger Revisions
     #
     # + trigger_id - The ID of the trigger
     # + return - Success response 
-    resource isolated function get api/v2/triggers/[int trigger_id]/revisions() returns TriggerRevisionsResponse|error {
+    resource isolated function get api/v2/triggers/[int trigger_id]/revisions(string accept = "application/json") returns TriggerRevisionsResponse|error {
         string resourcePath = string `/api/v2/triggers/${getEncodedUri(trigger_id)}/revisions`;
-        TriggerRevisionsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TriggerRevisionsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Show Trigger Revision
@@ -3564,9 +4052,11 @@ public isolated client class Client {
     # + trigger_id - The ID of the trigger
     # + trigger_revision_id - The ID of the revision for a particular trigger
     # + return - Success response 
-    resource isolated function get api/v2/triggers/[int trigger_id]/revisions/[int trigger_revision_id]() returns TriggerRevisionResponse|error {
+    resource isolated function get api/v2/triggers/[int trigger_id]/revisions/[int trigger_revision_id](string accept = "application/json") returns TriggerRevisionResponse|error {
         string resourcePath = string `/api/v2/triggers/${getEncodedUri(trigger_id)}/revisions/${getEncodedUri(trigger_revision_id)}`;
-        TriggerRevisionResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TriggerRevisionResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Active Triggers
@@ -3576,11 +4066,13 @@ public isolated client class Client {
     # + sort_order - One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
     # + category_id - Filter triggers by category ID
     # + return - Success response 
-    resource isolated function get api/v2/triggers/active(string? sort = (), string? sort_by = (), string? sort_order = (), string? category_id = ()) returns TriggersResponse|error {
+    resource isolated function get api/v2/triggers/active(string accept = "application/json", string? sort = (), string? sort_by = (), string? sort_order = (), string? category_id = ()) returns TriggersResponse|error {
         string resourcePath = string `/api/v2/triggers/active`;
         map<anydata> queryParam = {"sort": sort, "sort_by": sort_by, "sort_order": sort_order, "category_id": category_id};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TriggersResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TriggersResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Trigger Action and Condition Definitions
@@ -3595,11 +4087,13 @@ public isolated client class Client {
     #
     # + ids - A comma separated list of trigger IDs
     # + return - No content response 
-    resource isolated function delete api/v2/triggers/destroy_many(string ids) returns error? {
+    resource isolated function delete api/v2/triggers/destroy_many(string ids, string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/triggers/destroy_many`;
         map<anydata> queryParam = {"ids": ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Reorder Triggers
     #
@@ -3620,12 +4114,14 @@ public isolated client class Client {
     # + sort_order - One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
     # + include - A sideload to include in the response. See [Sideloads](#sideloads-2)
     # + return - Success response 
-    resource isolated function get api/v2/triggers/search(string query, Filter? filter = (), boolean? active = (), string? sort = (), string? sort_by = (), string? sort_order = (), string? include = ()) returns TriggersResponse|error {
+    resource isolated function get api/v2/triggers/search(string query, string accept = "application/json", Filter? filter = (), boolean? active = (), string? sort = (), string? sort_by = (), string? sort_order = (), string? include = ()) returns TriggersResponse|error {
         string resourcePath = string `/api/v2/triggers/search`;
         map<anydata> queryParam = {"query": query, "filter": filter, "active": active, "sort": sort, "sort_by": sort_by, "sort_order": sort_order, "include": include};
         map<Encoding> queryParamEncoding = {"filter": {style: FORM, explode: true}};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam, queryParamEncoding);
-        TriggersResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TriggersResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Many Triggers
@@ -3652,9 +4148,11 @@ public isolated client class Client {
     #
     # + token - The token of the uploaded attachment
     # + return - No Content response 
-    resource isolated function delete api/v2/uploads/[string token]() returns error? {
+    resource isolated function delete api/v2/uploads/[string token](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/uploads/${getEncodedUri(token)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # List User Fields
     #
@@ -3677,46 +4175,56 @@ public isolated client class Client {
     #
     # + user_field_id - The ID or key of the user field
     # + return - Success response 
-    resource isolated function get api/v2/user_fields/[User_field_id user_field_id]() returns UserFieldResponse|error {
+    resource isolated function get api/v2/user_fields/[User_field_id user_field_id](string accept = "application/json") returns UserFieldResponse|error {
         string resourcePath = string `/api/v2/user_fields/${getEncodedUri(user_field_id)}`;
-        UserFieldResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        UserFieldResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update User Field
     #
     # + user_field_id - The ID or key of the user field
     # + return - Success response 
-    resource isolated function put api/v2/user_fields/[User_field_id user_field_id]() returns UserFieldResponse|error {
+    resource isolated function put api/v2/user_fields/[User_field_id user_field_id](string accept = "application/json") returns UserFieldResponse|error {
         string resourcePath = string `/api/v2/user_fields/${getEncodedUri(user_field_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        UserFieldResponse response = check self.clientEp->put(resourcePath, request);
+        UserFieldResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete User Field
     #
     # + user_field_id - The ID or key of the user field
     # + return - No Content response 
-    resource isolated function delete api/v2/user_fields/[User_field_id user_field_id]() returns error? {
+    resource isolated function delete api/v2/user_fields/[User_field_id user_field_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/user_fields/${getEncodedUri(user_field_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # List User Field Options
     #
     # + user_field_id - The ID or key of the user field
     # + return - Success response 
-    resource isolated function get api/v2/user_fields/[User_field_id user_field_id]/options() returns CustomFieldOptionsResponse|error {
+    resource isolated function get api/v2/user_fields/[User_field_id user_field_id]/options(string accept = "application/json") returns CustomFieldOptionsResponse|error {
         string resourcePath = string `/api/v2/user_fields/${getEncodedUri(user_field_id)}/options`;
-        CustomFieldOptionsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CustomFieldOptionsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create or Update a User Field Option
     #
     # + user_field_id - The ID or key of the user field
     # + return - Success response 
-    resource isolated function post api/v2/user_fields/[User_field_id user_field_id]/options() returns CustomFieldOptionResponse|error {
+    resource isolated function post api/v2/user_fields/[User_field_id user_field_id]/options(string accept = "application/json") returns CustomFieldOptionResponse|error {
         string resourcePath = string `/api/v2/user_fields/${getEncodedUri(user_field_id)}/options`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        CustomFieldOptionResponse response = check self.clientEp->post(resourcePath, request);
+        CustomFieldOptionResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Show a User Field Option
@@ -3724,9 +4232,11 @@ public isolated client class Client {
     # + user_field_id - The ID or key of the user field
     # + user_field_option_id - The ID of the user field option
     # + return - Success response 
-    resource isolated function get api/v2/user_fields/[User_field_id user_field_id]/options/[int user_field_option_id]() returns CustomFieldOptionResponse|error {
+    resource isolated function get api/v2/user_fields/[User_field_id user_field_id]/options/[int user_field_option_id](string accept = "application/json") returns CustomFieldOptionResponse|error {
         string resourcePath = string `/api/v2/user_fields/${getEncodedUri(user_field_id)}/options/${getEncodedUri(user_field_option_id)}`;
-        CustomFieldOptionResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CustomFieldOptionResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Delete User Field Option
@@ -3734,9 +4244,11 @@ public isolated client class Client {
     # + user_field_id - The ID or key of the user field
     # + user_field_option_id - The ID of the user field option
     # + return - No Content response 
-    resource isolated function delete api/v2/user_fields/[User_field_id user_field_id]/options/[int user_field_option_id]() returns error? {
+    resource isolated function delete api/v2/user_fields/[User_field_id user_field_id]/options/[int user_field_option_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/user_fields/${getEncodedUri(user_field_id)}/options/${getEncodedUri(user_field_option_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Reorder User Field
     #
@@ -3754,11 +4266,13 @@ public isolated client class Client {
     # + permission_set - For custom roles which is available on the Enterprise plan and above. You can only filter by one role ID per request
     # + external_id - List users by external id. External id has to be unique for each user under the same account.
     # + return - Success response 
-    resource isolated function get api/v2/users("end-user"|"agent"|"admin"? role = (), string? roles = (), int? permission_set = (), string? external_id = ()) returns UsersResponse|error {
+    resource isolated function get api/v2/users(string accept = "application/json", "end-user"|"agent"|"admin"? role = (), string? roles = (), int? permission_set = (), string? external_id = ()) returns UsersResponse|error {
         string resourcePath = string `/api/v2/users`;
         map<anydata> queryParam = {"role": role, "roles": roles, "permission_set": permission_set, "external_id": external_id};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        UsersResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        UsersResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create User
@@ -3776,30 +4290,36 @@ public isolated client class Client {
     #
     # + user_id - The id of the user
     # + return - Success response 
-    resource isolated function get api/v2/users/[int user_id]() returns UserResponse|error {
+    resource isolated function get api/v2/users/[int user_id](string accept = "application/json") returns UserResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}`;
-        UserResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        UserResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update User
     #
     # + user_id - The id of the user
     # + return - Success response 
-    resource isolated function put api/v2/users/[int user_id](UserRequest payload) returns UserResponse|error {
+    resource isolated function put api/v2/users/[int user_id](UserRequest payload, string accept = "application/json") returns UserResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        UserResponse response = check self.clientEp->put(resourcePath, request);
+        UserResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete User
     #
     # + user_id - The id of the user
     # + return - Success response 
-    resource isolated function delete api/v2/users/[int user_id]() returns UserResponse|error {
+    resource isolated function delete api/v2/users/[int user_id](string accept = "application/json") returns UserResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}`;
-        UserResponse response = check self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        UserResponse response = check self.clientEp->delete(resourcePath, headers = httpHeaders);
         return response;
     }
     # Show Compliance Deletion Statuses
@@ -3807,20 +4327,24 @@ public isolated client class Client {
     # + user_id - The id of the user
     # + application - Area of compliance
     # + return - Success response 
-    resource isolated function get api/v2/users/[int user_id]/compliance_deletion_statuses(string? application = ()) returns ComplianceDeletionStatusesResponse|error {
+    resource isolated function get api/v2/users/[int user_id]/compliance_deletion_statuses(string accept = "application/json", string? application = ()) returns ComplianceDeletionStatusesResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/compliance_deletion_statuses`;
         map<anydata> queryParam = {"application": application};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        ComplianceDeletionStatusesResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ComplianceDeletionStatusesResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Memberships
     #
     # + user_id - The id of the user
     # + return - Success response 
-    resource isolated function get api/v2/users/[int user_id]/group_memberships() returns GroupMembershipsResponse|error {
+    resource isolated function get api/v2/users/[int user_id]/group_memberships(string accept = "application/json") returns GroupMembershipsResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/group_memberships`;
-        GroupMembershipsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        GroupMembershipsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Set Membership as Default
@@ -3828,29 +4352,35 @@ public isolated client class Client {
     # + user_id - The id of the user
     # + group_membership_id - The ID of the group membership
     # + return - Success response 
-    resource isolated function put api/v2/users/[int user_id]/group_memberships/[int group_membership_id]/make_default() returns GroupMembershipsResponse|error {
+    resource isolated function put api/v2/users/[int user_id]/group_memberships/[int group_membership_id]/make_default(string accept = "application/json") returns GroupMembershipsResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/group_memberships/${getEncodedUri(group_membership_id)}/make_default`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        GroupMembershipsResponse response = check self.clientEp->put(resourcePath, request);
+        GroupMembershipsResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # List Identities
     #
     # + user_id - The id of the user
     # + return - Success response 
-    resource isolated function get api/v2/users/[int user_id]/identities() returns UserIdentitiesResponse|error {
+    resource isolated function get api/v2/users/[int user_id]/identities(string accept = "application/json") returns UserIdentitiesResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/identities`;
-        UserIdentitiesResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        UserIdentitiesResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Identity
     #
     # + user_id - The id of the user
     # + return - Created response 
-    resource isolated function post api/v2/users/[int user_id]/identities() returns UserIdentityResponse|error {
+    resource isolated function post api/v2/users/[int user_id]/identities(string accept = "application/json") returns UserIdentityResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/identities`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        UserIdentityResponse response = check self.clientEp->post(resourcePath, request);
+        UserIdentityResponse response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Show Identity
@@ -3858,9 +4388,11 @@ public isolated client class Client {
     # + user_id - The id of the user
     # + user_identity_id - The ID of the user identity
     # + return - Success response 
-    resource isolated function get api/v2/users/[int user_id]/identities/[int user_identity_id]() returns UserIdentityResponse|error {
+    resource isolated function get api/v2/users/[int user_id]/identities/[int user_identity_id](string accept = "application/json") returns UserIdentityResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/identities/${getEncodedUri(user_identity_id)}`;
-        UserIdentityResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        UserIdentityResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Identity
@@ -3868,10 +4400,12 @@ public isolated client class Client {
     # + user_id - The id of the user
     # + user_identity_id - The ID of the user identity
     # + return - Success response 
-    resource isolated function put api/v2/users/[int user_id]/identities/[int user_identity_id]() returns UserIdentityResponse|error {
+    resource isolated function put api/v2/users/[int user_id]/identities/[int user_identity_id](string accept = "application/json") returns UserIdentityResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/identities/${getEncodedUri(user_identity_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        UserIdentityResponse response = check self.clientEp->put(resourcePath, request);
+        UserIdentityResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Identity
@@ -3879,19 +4413,23 @@ public isolated client class Client {
     # + user_id - The id of the user
     # + user_identity_id - The ID of the user identity
     # + return - No Content response 
-    resource isolated function delete api/v2/users/[int user_id]/identities/[int user_identity_id]() returns error? {
+    resource isolated function delete api/v2/users/[int user_id]/identities/[int user_identity_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/identities/${getEncodedUri(user_identity_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Make Identity Primary
     #
     # + user_id - The id of the user
     # + user_identity_id - The ID of the user identity
     # + return - Success response 
-    resource isolated function put api/v2/users/[int user_id]/identities/[int user_identity_id]/make_primary() returns UserIdentitiesResponse|error {
+    resource isolated function put api/v2/users/[int user_id]/identities/[int user_identity_id]/make_primary(string accept = "application/json") returns UserIdentitiesResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/identities/${getEncodedUri(user_identity_id)}/make_primary`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        UserIdentitiesResponse response = check self.clientEp->put(resourcePath, request);
+        UserIdentitiesResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Request User Verification
@@ -3899,10 +4437,12 @@ public isolated client class Client {
     # + user_id - The id of the user
     # + user_identity_id - The ID of the user identity
     # + return - Success description 
-    resource isolated function put api/v2/users/[int user_id]/identities/[int user_identity_id]/request_verification() returns string|error {
+    resource isolated function put api/v2/users/[int user_id]/identities/[int user_identity_id]/request_verification(string accept = "application/json") returns string|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/identities/${getEncodedUri(user_identity_id)}/request_verification`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        string response = check self.clientEp->put(resourcePath, request);
+        string response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Verify Identity
@@ -3910,22 +4450,26 @@ public isolated client class Client {
     # + user_id - The id of the user
     # + user_identity_id - The ID of the user identity
     # + return - Success response 
-    resource isolated function put api/v2/users/[int user_id]/identities/[int user_identity_id]/verify() returns UserIdentityResponse|error {
+    resource isolated function put api/v2/users/[int user_id]/identities/[int user_identity_id]/verify(string accept = "application/json") returns UserIdentityResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/identities/${getEncodedUri(user_identity_id)}/verify`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        UserIdentityResponse response = check self.clientEp->put(resourcePath, request);
+        UserIdentityResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Merge End Users
     #
     # + user_id - The id of the user
     # + return - Success response 
-    resource isolated function put api/v2/users/[int user_id]/merge(UserRequest payload) returns UserResponse|error {
+    resource isolated function put api/v2/users/[int user_id]/merge(UserRequest payload, string accept = "application/json") returns UserResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/merge`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        UserResponse response = check self.clientEp->put(resourcePath, request);
+        UserResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Set Membership as Default
@@ -3933,10 +4477,12 @@ public isolated client class Client {
     # + user_id - The id of the user
     # + organization_membership_id - The ID of the organization membership
     # + return - Success response 
-    resource isolated function put api/v2/users/[int user_id]/organization_memberships/[int organization_membership_id]/make_default() returns OrganizationMembershipsResponse|error {
+    resource isolated function put api/v2/users/[int user_id]/organization_memberships/[int organization_membership_id]/make_default(string accept = "application/json") returns OrganizationMembershipsResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/organization_memberships/${getEncodedUri(organization_membership_id)}/make_default`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        OrganizationMembershipsResponse response = check self.clientEp->put(resourcePath, request);
+        OrganizationMembershipsResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Unassign Organization
@@ -3944,75 +4490,91 @@ public isolated client class Client {
     # + organization_id - The ID of an organization
     # + user_id - The id of the user
     # + return - No Content response 
-    resource isolated function delete api/v2/users/[int user_id]/organizations/[int organization_id]() returns error? {
+    resource isolated function delete api/v2/users/[int user_id]/organizations/[int organization_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/organizations/${getEncodedUri(organization_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Set Organization as Default
     #
     # + user_id - The id of the user
     # + organization_id - The ID of an organization
     # + return - Success response 
-    resource isolated function put api/v2/users/[int user_id]/organizations/[int organization_id]/make_default() returns OrganizationMembershipResponse|error {
+    resource isolated function put api/v2/users/[int user_id]/organizations/[int organization_id]/make_default(string accept = "application/json") returns OrganizationMembershipResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/organizations/${getEncodedUri(organization_id)}/make_default`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        OrganizationMembershipResponse response = check self.clientEp->put(resourcePath, request);
+        OrganizationMembershipResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Change Your Password
     #
     # + user_id - The id of the user
     # + return - Success description 
-    resource isolated function put api/v2/users/[int user_id]/password() returns string|error {
+    resource isolated function put api/v2/users/[int user_id]/password(string accept = "application/json") returns string|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/password`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        string response = check self.clientEp->put(resourcePath, request);
+        string response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Set a User's Password
     #
     # + user_id - The id of the user
     # + return - Success description 
-    resource isolated function post api/v2/users/[int user_id]/password() returns string|error {
+    resource isolated function post api/v2/users/[int user_id]/password(string accept = "application/json") returns string|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/password`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        string response = check self.clientEp->post(resourcePath, request);
+        string response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # List password requirements
     #
     # + user_id - The id of the user
     # + return - Success response 
-    resource isolated function get api/v2/users/[int user_id]/password/requirements() returns UserPasswordRequirementsResponse|error {
+    resource isolated function get api/v2/users/[int user_id]/password/requirements(string accept = "application/json") returns UserPasswordRequirementsResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/password/requirements`;
-        UserPasswordRequirementsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        UserPasswordRequirementsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Show User Related Information
     #
     # + user_id - The id of the user
     # + return - Success response 
-    resource isolated function get api/v2/users/[int user_id]/related() returns UserRelatedResponse|error {
+    resource isolated function get api/v2/users/[int user_id]/related(string accept = "application/json") returns UserRelatedResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/related`;
-        UserRelatedResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        UserRelatedResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Bulk Delete Sessions
     #
     # + user_id - The id of the user
     # + return - No Content 
-    resource isolated function delete api/v2/users/[int user_id]/sessions() returns error? {
+    resource isolated function delete api/v2/users/[int user_id]/sessions(string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/sessions`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Show Session
     #
     # + session_id - The ID of the session
     # + user_id - The id of the user
     # + return - Success response 
-    resource isolated function get api/v2/users/[int user_id]/sessions/[int session_id]() returns SessionResponse|error {
+    resource isolated function get api/v2/users/[int user_id]/sessions/[int session_id](string accept = "application/json") returns SessionResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/sessions/${getEncodedUri(session_id)}`;
-        SessionResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SessionResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Delete Session
@@ -4020,9 +4582,11 @@ public isolated client class Client {
     # + session_id - The ID of the session
     # + user_id - The id of the user
     # + return - No Content 
-    resource isolated function delete api/v2/users/[int user_id]/sessions/[int session_id]() returns error? {
+    resource isolated function delete api/v2/users/[int user_id]/sessions/[int session_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/sessions/${getEncodedUri(session_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # List Ticket Skips
     #
@@ -4030,11 +4594,13 @@ public isolated client class Client {
     # + sort_order - Sort order. Defaults to "asc"
     # + ticket_id - The ID of the ticket
     # + return - Success response 
-    resource isolated function get api/v2/users/[int user_id]/skips("asc"|"desc"? sort_order = ()) returns TicketSkipsResponse|error {
+    resource isolated function get api/v2/users/[int user_id]/skips(string accept = "application/json", "asc"|"desc"? sort_order = ()) returns TicketSkipsResponse|error {
         string resourcePath = string `/api/v2/users/${getEncodedUri(user_id)}/skips`;
         map<anydata> queryParam = {"sort_order": sort_order};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TicketSkipsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketSkipsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Autocomplete Users
@@ -4045,11 +4611,13 @@ public isolated client class Client {
     # + 'source - If a `field_id` is provided, this specifies the type of the field.
     # For example, if the field is on a "zen:user", it references a field on a user
     # + return - Success response 
-    resource isolated function get api/v2/users/autocomplete(string name, string? field_id = (), string? 'source = ()) returns UsersResponse|error {
+    resource isolated function get api/v2/users/autocomplete(string name, string accept = "application/json", string? field_id = (), string? 'source = ()) returns UsersResponse|error {
         string resourcePath = string `/api/v2/users/autocomplete`;
         map<anydata> queryParam = {"name": name, "field_id": field_id, "source": 'source};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        UsersResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        UsersResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Count Users
@@ -4058,11 +4626,13 @@ public isolated client class Client {
     # + roles - Filters the results by more than one role using the format `role[]={role}&role[]={role}`
     # + permission_set - For custom roles which is available on the Enterprise plan and above. You can only filter by one role ID per request
     # + return - Success response 
-    resource isolated function get api/v2/users/count("end-user"|"agent"|"admin"? role = (), string? roles = (), int? permission_set = ()) returns CountResponse|error {
+    resource isolated function get api/v2/users/count(string accept = "application/json", "end-user"|"agent"|"admin"? role = (), string? roles = (), int? permission_set = ()) returns CountResponse|error {
         string resourcePath = string `/api/v2/users/count`;
         map<anydata> queryParam = {"role": role, "roles": roles, "permission_set": permission_set};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        CountResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        CountResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create Many Users
@@ -4103,23 +4673,27 @@ public isolated client class Client {
     # + ids - Id of the users to delete. Comma separated
     # + external_ids - External Id of the users to delete. Comma separated
     # + return - Success response 
-    resource isolated function delete api/v2/users/destroy_many(string? ids = (), string? external_ids = ()) returns JobStatusResponse|error {
+    resource isolated function delete api/v2/users/destroy_many(string accept = "application/json", string? ids = (), string? external_ids = ()) returns JobStatusResponse|error {
         string resourcePath = string `/api/v2/users/destroy_many`;
         map<anydata> queryParam = {"ids": ids, "external_ids": external_ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        JobStatusResponse response = check self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        JobStatusResponse response = check self.clientEp->delete(resourcePath, headers = httpHeaders);
         return response;
     }
     # Logout many users
     #
     # + ids - Accepts a comma-separated list of up to 100 user ids.
     # + return - Accepted response 
-    resource isolated function post api/v2/users/logout_many(string? ids = ()) returns string|error {
+    resource isolated function post api/v2/users/logout_many(string accept = "application/json", string? ids = ()) returns string|error {
         string resourcePath = string `/api/v2/users/logout_many`;
         map<anydata> queryParam = {"ids": ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        string response = check self.clientEp->post(resourcePath, request);
+        string response = check self.clientEp->post(resourcePath, request, httpHeaders);
         return response;
     }
     # Show Self
@@ -4173,11 +4747,13 @@ public isolated client class Client {
     # See the [Search API](/api-reference/ticketing/ticket-management/search/).
     # + external_id - The `external_id` parameter does not support the search syntax. It only accepts ids.
     # + return - Success response 
-    resource isolated function get api/v2/users/search(string? query = (), string? external_id = ()) returns UsersResponse|error {
+    resource isolated function get api/v2/users/search(string accept = "application/json", string? query = (), string? external_id = ()) returns UsersResponse|error {
         string resourcePath = string `/api/v2/users/search`;
         map<anydata> queryParam = {"query": query, "external_id": external_id};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        UsersResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        UsersResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Show Many Users
@@ -4185,11 +4761,13 @@ public isolated client class Client {
     # + ids - Accepts a comma-separated list of up to 100 user ids.
     # + external_ids - Accepts a comma-separated list of up to 100 external ids.
     # + return - Success response 
-    resource isolated function get api/v2/users/show_many(string? ids = (), string? external_ids = ()) returns UsersResponse|error {
+    resource isolated function get api/v2/users/show_many(string accept = "application/json", string? ids = (), string? external_ids = ()) returns UsersResponse|error {
         string resourcePath = string `/api/v2/users/show_many`;
         map<anydata> queryParam = {"ids": ids, "external_ids": external_ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        UsersResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        UsersResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Many Users
@@ -4197,14 +4775,16 @@ public isolated client class Client {
     # + ids - Id of the users to update. Comma separated
     # + external_ids - External Id of the users to update. Comma separated
     # + return - Successful response 
-    resource isolated function put api/v2/users/update_many(Users_update_many_body payload, string? ids = (), string? external_ids = ()) returns JobStatusResponse|error {
+    resource isolated function put api/v2/users/update_many(Users_update_many_body payload, string accept = "application/json", string? ids = (), string? external_ids = ()) returns JobStatusResponse|error {
         string resourcePath = string `/api/v2/users/update_many`;
         map<anydata> queryParam = {"ids": ids, "external_ids": external_ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        JobStatusResponse response = check self.clientEp->put(resourcePath, request);
+        JobStatusResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # List Views
@@ -4215,11 +4795,13 @@ public isolated client class Client {
     # + sort_by - Possible values are "alphabetical", "created_at", or "updated_at". Defaults to "position"
     # + sort_order - One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
     # + return - Success response 
-    resource isolated function get api/v2/views(string? access = (), boolean? active = (), int? group_id = (), string? sort_by = (), string? sort_order = ()) returns ViewsResponse|error {
+    resource isolated function get api/v2/views(string accept = "application/json", string? access = (), boolean? active = (), int? group_id = (), string? sort_by = (), string? sort_order = ()) returns ViewsResponse|error {
         string resourcePath = string `/api/v2/views`;
         map<anydata> queryParam = {"access": access, "active": active, "group_id": group_id, "sort_by": sort_by, "sort_order": sort_order};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        ViewsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ViewsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Create View
@@ -4235,36 +4817,44 @@ public isolated client class Client {
     #
     # + view_id - The ID of the view
     # + return - Success response 
-    resource isolated function get api/v2/views/[int view_id]() returns ViewResponse|error {
+    resource isolated function get api/v2/views/[int view_id](string accept = "application/json") returns ViewResponse|error {
         string resourcePath = string `/api/v2/views/${getEncodedUri(view_id)}`;
-        ViewResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ViewResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update View
     #
     # + view_id - The ID of the view
     # + return - Success response 
-    resource isolated function put api/v2/views/[int view_id]() returns ViewResponse|error {
+    resource isolated function put api/v2/views/[int view_id](string accept = "application/json") returns ViewResponse|error {
         string resourcePath = string `/api/v2/views/${getEncodedUri(view_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
-        ViewResponse response = check self.clientEp->put(resourcePath, request);
+        ViewResponse response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete View
     #
     # + view_id - The ID of the view
     # + return - No Content response 
-    resource isolated function delete api/v2/views/[int view_id]() returns error? {
+    resource isolated function delete api/v2/views/[int view_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/views/${getEncodedUri(view_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Count Tickets in View
     #
     # + view_id - The ID of the view
     # + return - Success response 
-    resource isolated function get api/v2/views/[int view_id]/count() returns ViewCountResponse|error {
+    resource isolated function get api/v2/views/[int view_id]/count(string accept = "application/json") returns ViewCountResponse|error {
         string resourcePath = string `/api/v2/views/${getEncodedUri(view_id)}/count`;
-        ViewCountResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ViewCountResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Execute View
@@ -4273,20 +4863,24 @@ public isolated client class Client {
     # + sort_by - The ticket field used for sorting. This will either be a title or a custom field id.
     # + sort_order - The direction the tickets are sorted. May be one of 'asc' or 'desc'
     # + return - Success response 
-    resource isolated function get api/v2/views/[int view_id]/execute(string? sort_by = (), string? sort_order = ()) returns ViewResponse|error {
+    resource isolated function get api/v2/views/[int view_id]/execute(string accept = "application/json", string? sort_by = (), string? sort_order = ()) returns ViewResponse|error {
         string resourcePath = string `/api/v2/views/${getEncodedUri(view_id)}/execute`;
         map<anydata> queryParam = {"sort_by": sort_by, "sort_order": sort_order};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        ViewResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ViewResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Export View
     #
     # + view_id - The ID of the view
     # + return - Success response 
-    resource isolated function get api/v2/views/[int view_id]/export() returns ViewExportResponse|error {
+    resource isolated function get api/v2/views/[int view_id]/export(string accept = "application/json") returns ViewExportResponse|error {
         string resourcePath = string `/api/v2/views/${getEncodedUri(view_id)}/export`;
-        ViewExportResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ViewExportResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Tickets From a View
@@ -4295,11 +4889,13 @@ public isolated client class Client {
     # + sort_by - Sort or group the tickets by a column in the [View columns](#view-columns) table. The `subject` and `submitter` columns are not supported
     # + sort_order - One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
     # + return - Success response 
-    resource isolated function get api/v2/views/[int view_id]/tickets(string? sort_by = (), string? sort_order = ()) returns TicketsResponse|error {
+    resource isolated function get api/v2/views/[int view_id]/tickets(string accept = "application/json", string? sort_by = (), string? sort_order = ()) returns TicketsResponse|error {
         string resourcePath = string `/api/v2/views/${getEncodedUri(view_id)}/tickets`;
         map<anydata> queryParam = {"sort_by": sort_by, "sort_order": sort_order};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        TicketsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        TicketsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Active Views
@@ -4309,11 +4905,13 @@ public isolated client class Client {
     # + sort_by - Possible values are "alphabetical", "created_at", or "updated_at". Defaults to "position"
     # + sort_order - One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
     # + return - Success response 
-    resource isolated function get api/v2/views/active(string? access = (), int? group_id = (), string? sort_by = (), string? sort_order = ()) returns ViewsResponse|error {
+    resource isolated function get api/v2/views/active(string accept = "application/json", string? access = (), int? group_id = (), string? sort_by = (), string? sort_order = ()) returns ViewsResponse|error {
         string resourcePath = string `/api/v2/views/active`;
         map<anydata> queryParam = {"access": access, "group_id": group_id, "sort_by": sort_by, "sort_order": sort_order};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        ViewsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ViewsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Views - Compact
@@ -4336,22 +4934,26 @@ public isolated client class Client {
     #
     # + ids - List of view's ids separated by commas.
     # + return - Success response 
-    resource isolated function get api/v2/views/count_many(string ids) returns ViewCountsResponse|error {
+    resource isolated function get api/v2/views/count_many(string ids, string accept = "application/json") returns ViewCountsResponse|error {
         string resourcePath = string `/api/v2/views/count_many`;
         map<anydata> queryParam = {"ids": ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        ViewCountsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ViewCountsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Bulk Delete Views
     #
     # + ids - The IDs of the views to delete
     # + return - No Content response 
-    resource isolated function delete api/v2/views/destroy_many(string ids) returns error? {
+    resource isolated function delete api/v2/views/destroy_many(string ids, string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/views/destroy_many`;
         map<anydata> queryParam = {"ids": ids};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Preview Views
     #
@@ -4381,11 +4983,13 @@ public isolated client class Client {
     # + sort_order - One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
     # + include - A sideload to include in the response. See [Sideloads](#sideloads-3)
     # + return - Success response 
-    resource isolated function get api/v2/views/search(string query, string? access = (), boolean? active = (), int? group_id = (), string? sort_by = (), string? sort_order = (), string? include = ()) returns ViewsResponse|error {
+    resource isolated function get api/v2/views/search(string query, string accept = "application/json", string? access = (), boolean? active = (), int? group_id = (), string? sort_by = (), string? sort_order = (), string? include = ()) returns ViewsResponse|error {
         string resourcePath = string `/api/v2/views/search`;
         map<anydata> queryParam = {"query": query, "access": access, "active": active, "group_id": group_id, "sort_by": sort_by, "sort_order": sort_order, "include": include};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        ViewsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ViewsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # List Views By ID
@@ -4393,11 +4997,13 @@ public isolated client class Client {
     # + ids - List of view's ids separated by commas.
     # + active - Only active views if true, inactive views if false
     # + return - Success response 
-    resource isolated function get api/v2/views/show_many(string ids, boolean? active = ()) returns ViewsResponse|error {
+    resource isolated function get api/v2/views/show_many(string ids, string accept = "application/json", boolean? active = ()) returns ViewsResponse|error {
         string resourcePath = string `/api/v2/views/show_many`;
         map<anydata> queryParam = {"ids": ids, "active": active};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam);
-        ViewsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        ViewsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Many Views
@@ -4432,41 +5038,49 @@ public isolated client class Client {
     #
     # + workspace_id - The id of the workspace
     # + return - Successful response 
-    resource isolated function get api/v2/workspaces/[int workspace_id]() returns Inline_response_201|error {
+    resource isolated function get api/v2/workspaces/[int workspace_id](string accept = "application/json") returns Inline_response_201|error {
         string resourcePath = string `/api/v2/workspaces/${getEncodedUri(workspace_id)}`;
-        Inline_response_201 response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        Inline_response_201 response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Update Workspace
     #
     # + workspace_id - The id of the workspace
     # + return - OK 
-    resource isolated function put api/v2/workspaces/[int workspace_id](Workspaces_workspace_id_body payload) returns Inline_response_201|error {
+    resource isolated function put api/v2/workspaces/[int workspace_id](Workspaces_workspace_id_body payload, string accept = "application/json") returns Inline_response_201|error {
         string resourcePath = string `/api/v2/workspaces/${getEncodedUri(workspace_id)}`;
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
-        Inline_response_201 response = check self.clientEp->put(resourcePath, request);
+        Inline_response_201 response = check self.clientEp->put(resourcePath, request, httpHeaders);
         return response;
     }
     # Delete Workspace
     #
     # + workspace_id - The id of the workspace
     # + return - No Content 
-    resource isolated function delete api/v2/workspaces/[int workspace_id]() returns error? {
+    resource isolated function delete api/v2/workspaces/[int workspace_id](string accept = "application/json") returns error? {
         string resourcePath = string `/api/v2/workspaces/${getEncodedUri(workspace_id)}`;
-        return self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
     # Bulk Delete Workspaces
     #
     # + ids - The ids of the workspaces to delete
     # + return - Succesful response 
-    resource isolated function delete api/v2/workspaces/destroy_many(int[] ids) returns string|error {
+    resource isolated function delete api/v2/workspaces/destroy_many(int[] ids, string accept = "application/json") returns string|error {
         string resourcePath = string `/api/v2/workspaces/destroy_many`;
         map<anydata> queryParam = {"ids": ids};
         map<Encoding> queryParamEncoding = {"ids": {style: FORM, explode: true}};
         resourcePath = resourcePath + check getPathForQueryParam(queryParam, queryParamEncoding);
-        string response = check self.clientEp->delete(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        string response = check self.clientEp->delete(resourcePath, headers = httpHeaders);
         return response;
     }
     # Reorder Workspaces
