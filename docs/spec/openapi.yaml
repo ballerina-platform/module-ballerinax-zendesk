@@ -7269,6 +7269,8 @@ paths:
                 default:
                   $ref: '#/components/examples/SkillBasedRoutingTicketAttributesResponseExample'
   /api/v2/satisfaction_ratings:
+    parameters:
+      - $ref: '#/components/parameters/AcceptHeader'
     get:
       operationId: ListSatisfactionRatings
       tags:
