@@ -13,6 +13,7 @@
 // KIND, either express or implied.  See the License for the
 // specific language governing permissions and limitations
 // under the License.
+
 import ballerina/io;
 import ballerinax/zendesk;
 
@@ -36,7 +37,7 @@ public function main() returns error? {
         io:println("Processing Ticket: ", ticketId);
 
         // Send satisfaction survey for each solved ticket
-        if (ticket.status == "solved") {
+        if ticket.status == "solved" {
             zendesk:SatisfactionRatingResponse _ = check zendesk->/api/v2/tickets/[ticketId]/satisfaction_rating.post;
         }
     }
