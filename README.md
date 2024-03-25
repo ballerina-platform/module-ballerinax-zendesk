@@ -2,25 +2,17 @@
 
 [![Build](https://github.com/ballerina-platform/module-ballerinax-zendesk/actions/workflows/ci.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-zendesk/actions/workflows/ci.yml)
 [![Trivy](https://github.com/ballerina-platform/module-ballerinax-zendesk/actions/workflows/trivy-scan.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-zendesk/actions/workflows/trivy-scan.yml)
-[![codecov](https://codecov.io/gh/ballerina-platform/module-ballerinax-zendesk/branch/master/graph/badge.svg)](https://codecov.io/gh/ballerina-platform/module-ballerinax-zendesk)
 [![GraalVM Check](https://github.com/ballerina-platform/module-ballerinax-zendesk/actions/workflows/build-with-bal-test-graalvm.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-zendesk/actions/workflows/build-with-bal-test-graalvm.yml)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/ballerina-platform/module-ballerinax-zendesk.svg)](https://github.com/ballerina-platform/module-ballerinax-zendesk/commits/master)
 [![GitHub Issues](https://img.shields.io/github/issues/ballerina-platform/ballerina-library/module/github.svg?label=Open%20Issues)](https://github.com/ballerina-platform/ballerina-library/labels/module%2Fgithub)
 
-Zendesk is a customer service software company that provides a cloud-based customer support platform. It is designed to
-offer a seamless and efficient customer service experience, enabling businesses to manage customer interactions across
-multiple channels, including email, chat, phone, and social media.
+[Zendesk](https://www.zendesk.com/) is a customer service software company that provides a cloud-based customer support platform. It is designed to offer a seamless and efficient customer service experience, enabling businesses to manage customer interactions across multiple channels, including email, chat, phone, and social media.
 
-The Ballerina Zendesk Connector allows developers to interact with
-the [Zendesk API V2](https://developer.zendesk.com/api-reference/ticketing/introduction/), making it easier to
-integrate customer support features into Ballerina applications. This connector enables the automation of Zendesk
-Support operations such as ticket management, user and organization management, and more.
+The Ballerina Zendesk Connector allows developers to interact with the [Zendesk REST API V2](https://developer.zendesk.com/api-reference/ticketing/introduction/), making it easier to integrate customer support features into Ballerina applications. This connector enables the automation of Zendesk Support operations such as ticket management, user and organization management, and more.
 
 ## Setup guide
 
-To use the Zendesk Connector in Ballerina, you must have a Zendesk account and an API token for authentication. Follow
-the steps below to set up the connector with your Zendesk account. If you don't have an account, you can create one by
-visiting [Zendesk's Sign Up page](https://www.zendesk.com/register/) and completing the registration process.
+To use the Zendesk Connector in Ballerina, you must have a Zendesk account and an API token for authentication. Follow the steps below to set up the connector with your Zendesk account. If you don't have an account, you can create one by visiting [Zendesk Sign Up page](https://www.zendesk.com/register/) and completing the registration process.
 
 ### Step 1: Log in to Zendesk
 
@@ -109,12 +101,11 @@ zendesk:TicketsResponse tickets = check zendesk->/api/v2/tickets;
 
 ## Examples
 
-The `Zendesk` connector provides practical examples illustrating usage in various scenarios. Explore these
-[examples](https://github.com/ballerina-platform/module-ballerinax-zendesk/tree/master/examples/), covering the following
-use cases:
+The `Zendesk` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-zendesk/tree/master/examples/), covering the following use cases:
 
 1. [Multi channel support integration](https://github.com/ballerina-platform/module-ballerinax-zendesk/tree/master/examples/multi-channel-support-integration) - Integrate Zendesk with multiple customer support channels to streamline ticket management.
 2. [Customer satisfaction survey analysis](https://github.com/ballerina-platform/module-ballerinax-zendesk/tree/master/examples/customer-satisfaction-survey-analysis) - Analyze customer satisfaction survey responses to improve support services.
+
 
 ## Issues and projects
 
