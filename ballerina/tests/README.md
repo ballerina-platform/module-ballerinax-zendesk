@@ -1,8 +1,8 @@
 # Running Tests
 
-There are two test environments for running the Zendesk connector tests. The default test environment is the mock server
-for Zendesk API. The other test environment is the actual Zendesk API. You can run the tests in either of these
-environments and each has its own compatible set of tests.
+There are two test environments for running the Zendesk connector tests. The default test environment is the mock server for Zendesk API. The other test environment is the actual Zendesk API. 
+
+You can run the tests in either of these environments and each has its own compatible set of tests.
 
  Test Groups | Environment                                       
 -------------|---------------------------------------------------
@@ -11,14 +11,13 @@ environments and each has its own compatible set of tests.
 
 ## Running Tests in the Mock Server
 
-To execute the tests on the mock server, ensure that the `IS_LIVE_SERVER` environment variable is either set to
-false or unset before initiating the tests. This environment variable can be configured within the `Config.toml` file
-located in the tests directory or specified as an environmental variable.
+To execute the tests on the mock server, ensure that the `IS_LIVE_SERVER` environment variable is either set to `false` or unset before initiating the tests. 
+
+This environment variable can be configured within the `Config.toml` file located in the tests directory or specified as an environmental variable.
 
 #### Using a Config.toml File
 
-Create a `Config.toml` file in the tests directory and add your authentication credentials and phone number for the
-authorized user:
+Create a `Config.toml` file in the tests directory and the following content:
 
 ```toml
 isLiveServer = false

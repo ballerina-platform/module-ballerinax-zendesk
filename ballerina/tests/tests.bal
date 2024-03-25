@@ -18,7 +18,7 @@ import ballerina/log;
 import ballerina/os;
 import ballerina/test;
 
-configurable boolean isLiveServer = os:getEnv("IS_LIVE_SERVER") == "true";
+configurable boolean isLiveServer = os:getEnv("IS_LIVE_SERVER") == "false";
 
 configurable string username = isLiveServer ? os:getEnv("ZENDESK_USERNAME") : "test";
 configurable string password = isLiveServer ? os:getEnv("ZENDESK_PASSWORD") : "test";
