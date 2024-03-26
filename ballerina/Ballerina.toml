@@ -2,7 +2,7 @@
 distribution = "2201.8.6"
 org = "ballerinax"
 name = "zendesk"
-version = "1.0.0"
+version = "0.1.0"
 license = ["Apache-2.0"]
 authors = ["Ballerina"]
 keywords = ["zendesk", "CRM", "CSM", "Support/Customer Support", "Cost/Freemium"]
@@ -10,7 +10,4 @@ icon = "icon.png"
 repository = "https://github.com/ballerina-platform/module-ballerinax-zendesk"
 
 [build-options]
-observabilityIncluded = false
-
-[platform.java17]
-graalvmCompatible = true
+observabilityIncluded = true
