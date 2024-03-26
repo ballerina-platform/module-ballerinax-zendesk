@@ -2839,9 +2839,11 @@ public isolated client class Client {
     # List Satisfaction Ratings
     #
     # + return - Success response
-    resource isolated function get api/v2/satisfaction_ratings() returns SatisfactionRatingsResponse|error {
+    resource isolated function get api/v2/satisfaction_ratings(string accept = "application/json") returns SatisfactionRatingsResponse|error {
         string resourcePath = string `/api/v2/satisfaction_ratings`;
-        SatisfactionRatingsResponse response = check self.clientEp->get(resourcePath);
+        map<any> headerValues = {"Accept": accept};
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        SatisfactionRatingsResponse response = check self.clientEp->get(resourcePath, httpHeaders);
         return response;
     }
     # Show Satisfaction Rating
