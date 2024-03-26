@@ -8,7 +8,7 @@ of actions that leverage the Zendesk REST API to automate and streamline these e
 
 ### 1. Setup Zendesk account
 
-Refer to the [Setup Guide](https://central.ballerina.io/ballerinax/zendesk/latest#setup-guide) to set up your zendesk
+Refer to the [Setup guide](https://central.ballerina.io/ballerinax/zendesk/latest#setup-guide) to set up your zendesk
 account, if you do not have one.
 
 ### 2. Configuration
