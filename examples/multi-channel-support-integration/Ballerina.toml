@@ -1,0 +1,5 @@
+[package]
+org = "zendesk"
+name = "multi_channel_support_integration"
+version = "0.1.0"
+distribution = "2201.8.6"
