@@ -10,7 +10,4 @@ icon = "icon.png"
 repository = "https://github.com/ballerina-platform/module-ballerinax-zendesk"
 
 [build-options]
-observabilityIncluded = false
-
-[platform.java17]
-graalvmCompatible = true
+observabilityIncluded = true
