@@ -27,7 +27,7 @@ http:Service mockService = service object {
     # Create Ticket
     #
     # + return - Create ticket
-    resource isolated function post api/v2/tickets(TicketCreateRequest payload) returns TicketResponse => {
+    resource isolated function post api/v2/tickets(@http:Payload TicketCreateRequest payload) returns TicketResponse => {
         ticket: {
             requester_id: 1,
             subject: "Test Ticket",
