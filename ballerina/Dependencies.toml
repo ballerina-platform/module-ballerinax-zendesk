@@ -314,7 +314,7 @@ modules = [
 [[package]]
 org = "ballerinax"
 name = "zendesk"
-version = "0.1.0"
+version = "2.0.0"
 dependencies = [
 	{org = "ballerina", name = "http"},
 	{org = "ballerina", name = "log"},
