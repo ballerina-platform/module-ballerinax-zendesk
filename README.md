@@ -71,7 +71,7 @@ zendesk:ConnectionConfig zendeskConfig = {
     }
 };
 
-zendesk:Client zendesk = check new (zendeskConfig);
+zendesk:Client zendesk = check new (zendeskConfig, "https://<your-domain>.zendesk.com");
 ```
 
 ### Step 3: Invoke the connector operation
