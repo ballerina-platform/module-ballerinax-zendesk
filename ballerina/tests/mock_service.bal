@@ -29,11 +29,9 @@ http:Service mockService = service object {
             'id: 1,
             requester_id: 1,
             subject: payload?.ticket?.subject,
-            comment: {
-                "body": "This is a test ticket"
-            },
-            'type: "problem",
-            priority: "normal"
+            comment: payload?.ticket?.comment,
+            'type: payload?.ticket?.'type,
+            priority: payload?.ticket?.priority
         }
     };
 
