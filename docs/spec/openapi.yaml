@@ -72,13 +72,6 @@ tags:
   - name: Custom Object Records
   - name: Essentials Card
   - name: Omnichannel Routing Queues
-servers:
-  - url: https://{subdomain}.{domain}.com
-    variables:
-      domain:
-        default: zendesk
-      subdomain:
-        default: example
 paths:
   /api/lotus/assignables/autocomplete.json:
     get:

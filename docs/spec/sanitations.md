@@ -16,21 +16,22 @@ These changes are done in order to improve the overall usability, and as workaro
 
 2. Use `--nullable` option when generating the client using the Ballerina OpenAPI tool. 
     * The ZenDesk API reference does not properly include the "nullable" property for some the request and response schemas. 
-    * Therefore, the `--nullable` option is used as a precaution to avoid potential data-binding issues in the runtime,  
-      which will generate all the request/response type fields with the support to handle null values.
+    * Therefore, the `--nullable` option is used as a precaution to avoid potential data-binding issues in the runtime, which will generate all the request/response type fields with the support to handle null values.
     * This workaround can be removed once https://github.com/ballerina-platform/ballerina-library/issues/4870 is addressed.
 
 3. Change the types `Organization_field_id` and `User_field_id` from `int|string?` to `int|string`.
     * This is done as a post-workaround after using the `--nullable` option to generate the client, as nilable types are not supported for path parameters in Ballerina
 
 4. Add `Accept` header (as `application/json`) to all the operations.
-    * The ZenDesk OpenAPI reference does not include the `Accept` header in the operations, but the server returns an 
-    unsupported media type error if the `Accept` header is not included in the requests.
+    * The ZenDesk OpenAPI reference does not include the `Accept` header in the operations, but the server returns an unsupported media type error if the `Accept` header is not included in the requests.
+
+5. Remove `servers` from the OpenAPI specification.
+    * Zendesk users are required to use their subdomain in the URL path to access the API.
+    * Therefore, the `servers` field is removed from the OpenAPI specification to make the server a required field when initializing the client.
 
 ## OpenAPI cli command
 
-The following command was used to generate the Ballerina client from the OpenAPI specification. The command should be 
-executed from the repository root directory.
+The following command was used to generate the Ballerina client from the OpenAPI specification. The command should be executed from the repository root directory.
 
 ```bash
 bal openapi -i docs/spec/openapi.yaml --mode client  --license docs/license.txt -o ballerina/ --nullable
