@@ -1,4 +1,4 @@
-# Ballerina Zendesk connector
+## Overview
 
 [Zendesk](https://www.zendesk.com/) is a customer service software company that provides a cloud-based customer support platform. It is designed to offer a seamless and efficient customer service experience, enabling businesses to manage customer interactions across multiple channels, including email, chat, phone, and social media.
 
