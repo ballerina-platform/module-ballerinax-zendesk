@@ -6,6 +6,8 @@
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/ballerina-platform/module-ballerinax-zendesk.svg)](https://github.com/ballerina-platform/module-ballerinax-zendesk/commits/master)
 [![GitHub Issues](https://img.shields.io/github/issues/ballerina-platform/ballerina-library/module/github.svg?label=Open%20Issues)](https://github.com/ballerina-platform/ballerina-library/labels/module%2Fgithub)
 
+## Overview
+
 [Zendesk](https://www.zendesk.com/) is a customer service software company that provides a cloud-based customer support platform. It is designed to offer a seamless and efficient customer service experience, enabling businesses to manage customer interactions across multiple channels, including email, chat, phone, and social media.
 
 The Ballerina Zendesk Connector allows developers to interact with the [Zendesk REST API V2](https://developer.zendesk.com/api-reference/ticketing/introduction/), making it easier to integrate customer support features into Ballerina applications. This connector enables the automation of Zendesk Support operations such as ticket management, user and organization management, and more.
