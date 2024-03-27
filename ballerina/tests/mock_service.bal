@@ -16,11 +16,8 @@
 
 import ballerina/http;
 import ballerina/log;
-import ballerina/os;
 
-configurable boolean isTestOnLiveServer = os:getEnv("IS_TEST_ON_LIVE_SERVER") == "true";
-
-listener http:Listener httpListener = new (9090, config = {host: "localhost"});
+listener http:Listener httpListener = new (9090);
 
 http:Service mockService = service object {
 
@@ -29,8 +26,9 @@ http:Service mockService = service object {
     # + return - Create ticket
     resource isolated function post api/v2/tickets(@http:Payload TicketCreateRequest payload) returns TicketResponse => {
         ticket: {
+            'id: 1,
             requester_id: 1,
-            subject: "Test Ticket",
+            subject: payload?.ticket?.subject,
             comment: {
                 "body": "This is a test ticket"
             },
@@ -45,6 +43,7 @@ http:Service mockService = service object {
     # + return - Ticket
     resource isolated function get api/v2/tickets/[int ticket_id](string accept = "application/json") returns TicketResponse|error => {
         ticket: {
+            'id: 1,
             requester_id: 1,
             subject: "Test Ticket",
             comment: {
@@ -73,7 +72,7 @@ http:Service mockService = service object {
 };
 
 function init() returns error? {
-    if isTestOnLiveServer {
+    if isLiveServer {
         log:printInfo("Skiping mock server initialization as the tests are running on live server");
         return;
     }
