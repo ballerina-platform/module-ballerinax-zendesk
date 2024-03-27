@@ -59,7 +59,7 @@ function createTicketTest() returns error? {
     };
 
     TicketResponse response = check zendesk->/api/v2/tickets.post(ticket);
-    test:assertTrue(response?.ticket?.id != ());
+    test:assertTrue(response?.ticket?.id != (), "Ticket creation failed");
     createdTicketId = response?.ticket?.id ?: -1;
 }
 
