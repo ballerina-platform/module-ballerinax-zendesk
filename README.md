@@ -26,15 +26,15 @@ To use the Zendesk Connector in Ballerina, you must have a Zendesk account and a
 
    ![Zendesk Admin Center](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-zendesk/master/docs/setup/resources/1-admin-center.png)
 
-### Step 3: Manage API tokens
+### Step 3: Create a new connection
 
 1. In the Admin Center, click on **Apps and integrations**.
 2. Click on **Connections** under the **Connections** section.
 3. Click on **Create connection** to create a new connection.
 
-   ![Zendesk Connection Settings](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-zendesk/master/docs/setup/resources/2-connection-settings.png)
+   ![Zendesk Connection Settings](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-zendesk/master/docs/setup/resources/2-create-connection.png)
 
-### Step 4: Configure & generate the token
+### Step 4: Configure connection settings
 
 When creating a new connection, you will be prompted to provide the following details:
 
