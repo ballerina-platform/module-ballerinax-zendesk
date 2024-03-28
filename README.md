@@ -63,7 +63,7 @@ import ballerinax/zendesk;
 
 ### Step 2: Instantiate a new connector
 
-Create a `zendesk:Configuration` object with your domain and API token, and initialize the connector.
+Create a `zendesk:ConnectionConfig` object with your domain and API token, and initialize the connector.
 
 ```ballerina
 zendesk:ConnectionConfig zendeskConfig = {
