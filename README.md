@@ -4,7 +4,7 @@
 [![Trivy](https://github.com/ballerina-platform/module-ballerinax-zendesk/actions/workflows/trivy-scan.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-zendesk/actions/workflows/trivy-scan.yml)
 [![GraalVM Check](https://github.com/ballerina-platform/module-ballerinax-zendesk/actions/workflows/build-with-bal-test-graalvm.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-zendesk/actions/workflows/build-with-bal-test-graalvm.yml)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/ballerina-platform/module-ballerinax-zendesk.svg)](https://github.com/ballerina-platform/module-ballerinax-zendesk/commits/master)
-[![GitHub Issues](https://img.shields.io/github/issues/ballerina-platform/ballerina-library/module/github.svg?label=Open%20Issues)](https://github.com/ballerina-platform/ballerina-library/labels/module%2Fgithub)
+[![GitHub Issues](https://img.shields.io/github/issues/ballerina-platform/ballerina-library/module/zendesk.svg?label=Open%20Issues)](https://github.com/ballerina-platform/ballerina-library/labels/module%2Fzendesk)
 
 ## Overview
 
