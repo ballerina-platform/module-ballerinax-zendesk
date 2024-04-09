@@ -2,9 +2,9 @@
 
 The `ballerinax/zendesk` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-zendesk/tree/main/examples), covering use cases like cache management, session management, and rate limiting.
 
-1. [Multi channel support integration](https://github.com/ballerina-platform/module-ballerinax-zendesk/tree/mqin/examples/multi-channel-support-integration) - Integrate Zendesk with multiple customer support channels to streamline ticket management.
+1. [Multi channel support integration](https://github.com/ballerina-platform/module-ballerinax-zendesk/tree/main/examples/multi-channel-support-integration) - Integrate Zendesk with multiple customer support channels to streamline ticket management.
 
-2. [Customer satisfaction survey analysis](https://github.com/ballerina-platform/module-ballerinax-zendesk/tree/mqin/examples/customer-satisfaction-survey-analysis) - Analyze customer satisfaction survey responses to improve support services.
+2. [Customer satisfaction survey analysis](https://github.com/ballerina-platform/module-ballerinax-zendesk/tree/main/examples/customer-satisfaction-survey-analysis) - Analyze customer satisfaction survey responses to improve support services.
 
 
 ## Prerequisites

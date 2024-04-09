@@ -18,7 +18,7 @@ To use the Zendesk Connector in Ballerina, you must have a Zendesk account and a
 1. Click on the **Settings** icon in the sidebar.
 2. Click on **Go to Admin Center**.
 
-   ![Zendesk Admin Center](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-zendesk/master/docs/setup/resources/1-admin-center.png)
+   ![Zendesk Admin Center](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-zendesk/main/docs/setup/resources/1-admin-center.png)
 
 ### Step 3: Create a new connection
 
@@ -26,7 +26,7 @@ To use the Zendesk Connector in Ballerina, you must have a Zendesk account and a
 2. Click on **Connections** under the **Connections** section.
 3. Click on **Create connection** to create a new connection.
 
-   ![Zendesk Connection Settings](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-zendesk/master/docs/setup/resources/2-create-connection.png)
+   ![Zendesk Connection Settings](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-zendesk/main/docs/setup/resources/2-create-connection.png)
 
 ### Step 4: Configure connection settings
 
@@ -37,7 +37,7 @@ When creating a new connection, you will be prompted to provide the following de
 - **Allowed domain**: The domain that the connection is allowed to access. You can use a wildcard to allow requests made
   to any subdomain by adding an asterisk (*) at the start.
 
-  ![Zendesk Connection Configuration](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-zendesk/master/docs/setup/resources/3-connection-configuration.png)
+  ![Zendesk Connection Configuration](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-zendesk/main/docs/setup/resources/3-connection-configuration.png)
 
 > **Note:** The rest of the fields (e.g. `username`, `password`, `token`) will appear based on the selected authentication type.
 
@@ -95,7 +95,7 @@ zendesk:TicketsResponse tickets = check zendesk->/api/v2/tickets;
 
 ## Examples
 
-The `Zendesk` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-zendesk/tree/master/examples/), covering the following use cases:
+The `Zendesk` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-zendesk/tree/main/examples/), covering the following use cases:
 
-1. [Multi channel support integration](https://github.com/ballerina-platform/module-ballerinax-zendesk/tree/master/examples/multi-channel-support-integration) - Integrate Zendesk with multiple customer support channels to streamline ticket management.
-2. [Customer satisfaction survey analysis](https://github.com/ballerina-platform/module-ballerinax-zendesk/tree/master/examples/customer-satisfaction-survey-analysis) - Analyze customer satisfaction survey responses to improve support services.
+1. [Multi channel support integration](https://github.com/ballerina-platform/module-ballerinax-zendesk/tree/main/examples/multi-channel-support-integration) - Integrate Zendesk with multiple customer support channels to streamline ticket management.
+2. [Customer satisfaction survey analysis](https://github.com/ballerina-platform/module-ballerinax-zendesk/tree/main/examples/customer-satisfaction-survey-analysis) - Analyze customer satisfaction survey responses to improve support services.
