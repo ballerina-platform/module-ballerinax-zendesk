@@ -26,7 +26,7 @@ To use the Zendesk Connector in Ballerina, you must have a Zendesk account and a
 1. Click on the **Settings** icon in the sidebar.
 2. Click on **Go to Admin Center**.
 
-   ![Zendesk Admin Center](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-zendesk/main/docs/setup/resources/1-admin-center.png)
+    <img src=https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-zendesk/main/docs/setup/resources/1-admin-center.png alt="Zendesk Admin Center" style="width: 70%;">   
 
 ### Step 3: Create a new connection
 
@@ -34,7 +34,7 @@ To use the Zendesk Connector in Ballerina, you must have a Zendesk account and a
 2. Click on **Connections** under the **Connections** section.
 3. Click on **Create connection** to create a new connection.
 
-   ![Zendesk Connection Settings](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-zendesk/main/docs/setup/resources/2-create-connection.png)
+    <img src=https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-zendesk/main/docs/setup/resources/2-create-connection.png alt="Zendesk Connection Settings" style="width: 70%;">
 
 ### Step 4: Configure connection settings
 
@@ -45,7 +45,7 @@ When creating a new connection, you will be prompted to provide the following de
 - **Allowed domain**: The domain that the connection is allowed to access. You can use a wildcard to allow requests made
   to any subdomain by adding an asterisk (*) at the start.
 
-  ![Zendesk Connection Configuration](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-zendesk/main/docs/setup/resources/3-connection-configuration.png)
+    <img src=https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-zendesk/main/docs/setup/resources/3-connection-configuration.png alt="Zendesk Connection Configuration" style="width: 70%;">
 
 > **Note:** The rest of the fields (e.g. `username`, `password`, `token`) will appear based on the selected authentication type.
 
