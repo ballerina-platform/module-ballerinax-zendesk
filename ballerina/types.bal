@@ -17,862 +17,637 @@
 // specific language governing permissions and limitations
 // under the License.
 
+import ballerina/data.jsondata;
 import ballerina/http;
 
-# Provides a set of configurations for controlling the behaviours when communicating with a remote HTTP endpoint.
-@display {label: "Connection Config"}
-public type ConnectionConfig record {|
-    # Configurations related to client authentication
-    http:CredentialsConfig auth;
-    # The HTTP version understood by the client
-    http:HttpVersion httpVersion = http:HTTP_2_0;
-    # Configurations related to HTTP/1.x protocol
-    ClientHttp1Settings http1Settings?;
-    # Configurations related to HTTP/2 protocol
-    http:ClientHttp2Settings http2Settings?;
-    # The maximum time to wait (in seconds) for a response before closing the connection
-    decimal timeout = 60;
-    # The choice of setting `forwarded`/`x-forwarded` header
-    string forwarded = "disable";
-    # Configurations associated with request pooling
-    http:PoolConfiguration poolConfig?;
-    # HTTP caching related configurations
-    http:CacheConfig cache?;
-    # Specifies the way of handling compression (`accept-encoding`) header
-    http:Compression compression = http:COMPRESSION_AUTO;
-    # Configurations associated with the behaviour of the Circuit Breaker
-    http:CircuitBreakerConfig circuitBreaker?;
-    # Configurations associated with retrying
-    http:RetryConfig retryConfig?;
-    # Configurations associated with inbound response size limits
-    http:ResponseLimitConfigs responseLimits?;
-    # SSL/TLS-related options
-    http:ClientSecureSocket secureSocket?;
-    # Proxy server related options
-    http:ProxyConfig proxy?;
-    # Enables the inbound payload validation functionality which provided by the constraint package. Enabled by default
-    boolean validation = true;
-|};
+# Represents the Headers record for the operation: ShowMonitoredTwitterHandle
+public type ShowMonitoredTwitterHandleHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
 
-# Provides settings related to HTTP/1.x protocol.
-public type ClientHttp1Settings record {|
-    # Specifies whether to reuse a connection for multiple requests
-    http:KeepAlive keepAlive = http:KEEPALIVE_AUTO;
-    # The chunking behaviour of the request
-    http:Chunking chunking = http:CHUNKING_AUTO;
-    # Proxy server related options
-    ProxyConfig proxy?;
-|};
-
-# Proxy server configurations to be used with the HTTP client endpoint.
-public type ProxyConfig record {|
-    # Host name of the proxy server
-    string host = "";
-    # Proxy server port
-    int port = 0;
-    # Proxy server username
-    string userName = "";
-    # Proxy server password
-    @display {label: "", kind: "password"}
-    string password = "";
-|};
-
-public type TicketMetricEventBreachObject record {
-    *TicketMetricEventBaseObject;
-    # Available if `type` is `breach`. In general, you can ignore any breach event when `deleted` is true. See [deleted](#deleted)
-    boolean? deleted?;
+# Represents the Headers record for the operation: TicketsUpdateMany
+public type TicketsUpdateManyHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TicketRelatedInformation record {
-    string[]? followup_source_ids?;
-    # Is true if the current ticket is archived
-    boolean? from_archive?;
-    # A count of related incident occurrences
-    int? incidents?;
-    # Related topic in the Web portal (deprecated feature)
-    string? topic_id?;
     # X (formerly Twitter) information associated with the ticket
-    record {}? twitter?;
+    record {} twitter?;
+    @jsondata:Name {value: "followup_source_ids"}
+    string[] followupSourceIds?;
+    # A count of related incident occurrences
+    int incidents?;
+    # Related topic in the Web portal (deprecated feature)
+    @jsondata:Name {value: "topic_id"}
+    string? topicId?;
+    # Is true if the current ticket is archived
+    @jsondata:Name {value: "from_archive"}
+    boolean fromArchive?;
 };
 
-# Google Apps configuration. See [G Suite](#g-suite)
-public type AccountSettingsGoogleAppsObject record {
-    boolean? has_google_apps?;
-    boolean? has_google_apps_admin?;
+# Represents the Headers record for the operation: ReorderGroupSLAPolicies
+public type ReorderGroupSLAPoliciesHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type TargetCampfire record {
-    boolean? preserve_format?;
-    string? room;
-    boolean? ssl?;
-    string? subdomain;
-    string? token;
+# Represents the Headers record for the operation: CreateCustomObjectField
+public type CreateCustomObjectFieldHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type TriggerCategoryRuleCounts record {
-    int? active_count?;
-    int? inactive_count?;
+# Represents the Headers record for the operation: ShowGroupSLAPolicy
+public type ShowGroupSLAPolicyHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type SLAPolicyFilterDefinitionResponse_definitions record {
-    SLAPolicyFilterDefinitionResponse_definitions_all[]? all?;
-    SLAPolicyFilterDefinitionResponse_definitions_all[]? 'any?;
-};
-
-public type UserIdentityObject record {
-    # The time the identity was created
-    string? created_at?;
-    # Email identity type only. Indicates if Zendesk sends notifications to the email address. See [Deliverable state](#deliverable-state)
-    string? deliverable_state?;
-    # Automatically assigned on creation
-    int? id?;
-    # If the identity is the primary identity. *Writable only when creating, not when updating. Use the [Make Identity Primary](#make-identity-primary) endpoint instead
-    boolean? primary?;
-    # The type of this identity
-    "email"|"twitter"|"facebook"|"google"|"phone_number"|"agent_forwarding"|"any_channel"|"foreign"|"sdk" 'type;
-    # The number of times a soft-bounce response was received at that address
-    int? undeliverable_count?;
-    # The time the identity was updated
-    string? updated_at?;
-    # The API url of this identity
-    string? url?;
-    # The id of the user
-    int? user_id;
-    # The identifier for this identity, such as an email address
-    string? value;
-    # If the identity has been verified
-    boolean? verified?;
-};
-
-public type TargetResponse record {
-    TargetObject? target?;
+# Represents the Headers record for the operation: ShowUserComplianceDeletionStatuses
+public type ShowUserComplianceDeletionStatusesHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type CustomRolesResponse record {
-    CustomRoleObject[]? custom_roles?;
+    @jsondata:Name {value: "custom_roles"}
+    CustomRoleObject[] customRoles?;
 };
 
-public type CustomFieldObject record {
-    # If true, this field is available for use
-    boolean? active?;
-    # The time of the last update of the ticket field
-    string? created_at?;
-    # Required and presented for a custom field of type "dropdown". Each option is represented by an object with a `name` and `value` property
-    CustomFieldOptionObject[]? custom_field_options?;
-    # User-defined description of this field's purpose
-    string? description?;
-    # Automatically assigned upon creation
-    int? id?;
-    # A unique key that identifies this custom field. This is used for updating the field and referencing in placeholders. The key must consist of only letters, numbers, and underscores. It can't be only numbers and can't be reused if deleted.
-    string? 'key;
-    # Ordering of the field relative to other fields
-    int? position?;
-    # The dynamic content placeholder, if present, or the `description` value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? raw_description?;
-    # The dynamic content placeholder, if present, or the `title` value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? raw_title?;
-    # Regular expression field only. The validation pattern for a field value to be deemed valid
-    string? regexp_for_validation?;
-    # A filter definition that allows your autocomplete to filter down results
-    record {}? relationship_filter?;
-    # A representation of what type of object the field references. Options are "zen:user", "zen:organization", "zen:ticket", and "zen:custom_object:{key}" where key is a custom object key. For example "zen:custom_object:apartment".
-    string? relationship_target_type?;
-    # If true, only active and position values of this field can be changed
-    boolean? system?;
-    # Optional for custom field of type "checkbox"; not presented otherwise.
-    string? tag?;
-    # The title of the custom field
-    string? title;
-    # The custom field type: "checkbox", "date", "decimal", "dropdown", "integer", ["lookup"](/api-reference/ticketing/lookup_relationships/lookup_relationships/), "regexp", "text", or "textarea"
-    string? 'type;
-    # The time of the last update of the ticket field
-    string? updated_at?;
-    # The URL for this resource
-    string? url?;
+# Represents the Headers record for the operation: DeleteSuspendedTicket
+public type DeleteSuspendedTicketHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: DeleteCustomObjectRecordByExternalId
+public type DeleteCustomObjectRecordByExternalIdQueries record {
+    # The external id of a custom object record
+    @http:Query {name: "external_id"}
+    string externalId;
+};
+
+# Represents the Headers record for the operation: UpdateRequest
+public type UpdateRequestHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type RecoverSuspendedTicketResponse record {
-    SuspendedTicketObject[]? ticket?;
+    SuspendedTicketObject[] ticket?;
+};
+
+# Represents the Headers record for the operation: BulkDeleteTickets
+public type BulkDeleteTicketsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TicketCommentResponse record {
-    TicketCommentObject? comment?;
+    TicketCommentObject comment?;
 };
 
-public type DeletedUserResponse record {
-    DeletedUserObject? deleted_user?;
+# Represents the Headers record for the operation: ShowAttributeValue
+public type ShowAttributeValueHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-# Metadata for the export query response.
-public type SearchExportResponse_meta record {
-    # The cursor id for the next object.
-    string? after_cursor?;
-    # The cursor id for the previous object.
-    string? before_cursor?;
-    # Whether there are more items yet to be returned by the cursor.
-    boolean? has_more?;
+# Represents the Headers record for the operation: UpdateTriggerCategory
+public type UpdateTriggerCategoryHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type TagCountResponse record {
-    TagCountObject? count?;
-};
-
-public type OrganizationsResponse record {
-    int? count?;
-    string? next_page?;
-    OrganizationObject[]? organizations?;
-    string? previous_page?;
+# Represents the Headers record for the operation: OpenTicketInAgentBrowser
+public type OpenTicketInAgentBrowserHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TriggerCategoryResponse record {
-    TriggerCategory? trigger_category?;
+    @jsondata:Name {value: "trigger_category"}
+    TriggerCategory triggerCategory?;
 };
 
-public type TicketObject record {
-    # Permission for agents to add add attachments to a comment. Defaults to true
-    boolean? allow_attachments?;
-    # Is false if channelback is disabled, true otherwise. Only applicable for channels framework ticket
-    boolean? allow_channelback?;
-    # Write only. The email address of the agent to assign the ticket to
-    string? assignee_email?;
-    # The agent currently assigned to the ticket
-    int? assignee_id?;
-    # Write only. An array of the IDs of attribute values to be associated with the ticket
-    int[]? attribute_value_ids?;
-    # The id of the brand this ticket is associated with. See [Setting up multiple brands](https://support.zendesk.com/hc/en-us/articles/4408829476378)
-    int? brand_id?;
-    # The ids of users currently CC'ed on the ticket
-    int[]? collaborator_ids?;
-    # POST requests only. Users to add as cc's when creating a ticket. See [Setting Collaborators](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-collaborators)
-    CollaboratorObject[]? collaborators?;
-    # Write only. An object that adds a comment to the ticket. See [Ticket comments](/api-reference/ticketing/tickets/ticket_comments/). To include an attachment with the comment, see [Attaching files](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#attaching-files)
-    record {}? comment?;
-    # When this record was created
-    string? created_at?;
-    # Custom fields for the ticket. See [Setting custom field values](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-custom-field-values)
-    TicketObject_custom_fields[]? custom_fields?;
-    # The custom ticket status id of the ticket. See [custom ticket statuses](#custom-ticket-statuses)
-    int? custom_status_id?;
-    # Read-only first comment on the ticket. When [creating a ticket](#create-ticket), use `comment` to set the description. See [Description and first comment](#description-and-first-comment)
-    string? description?;
-    # If this is a ticket of type "task" it has a due date.  Due date format uses [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601) format.
-    string? due_at?;
-    # The ids of agents or end users currently CC'ed on the ticket. See [CCs and followers resources](https://support.zendesk.com/hc/en-us/articles/360020585233) in the Support Help Center
-    int[]? email_cc_ids?;
-    # Write only. An array of objects that represent agent or end users email CCs to add or delete from the ticket. See [Setting email CCs](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#setting-email-ccs)
-    record {}? email_ccs?;
-    # An id you can use to link Zendesk Support tickets to local records
-    string? external_id?;
-    # The ids of agents currently following the ticket. See [CCs and followers resources](https://support.zendesk.com/hc/en-us/articles/360020585233)
-    int[]? follower_ids?;
-    # Write only. An array of objects that represent agent followers to add or delete from the ticket. See [Setting followers](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#setting-followers)
-    record {}? followers?;
-    # The ids of the followups created from this ticket. Ids are only visible once the ticket is closed
-    int[]? followup_ids?;
-    # The topic in the Zendesk Web portal this ticket originated from, if any. The Web portal is deprecated
-    int? forum_topic_id?;
-    # If true, the ticket's [via type](/documentation/ticketing/reference-guides/via-object-reference/) is a messaging channel.
-    boolean? from_messaging_channel?;
-    # The group this ticket is assigned to
-    int? group_id?;
-    # Is true if a ticket is a problem type and has one or more incidents linked to it. Otherwise, the value is false.
-    boolean? has_incidents?;
-    # Automatically assigned when the ticket is created
-    int? id?;
-    # Is true if any comments are public, false otherwise
-    boolean? is_public?;
-    # Write only. A macro ID to be recorded in the ticket audit
-    int? macro_id?;
-    # POST requests only. List of macro IDs to be recorded in the ticket audit
-    int[]? macro_ids?;
-    # Write only. Metadata for the audit. In the `audit` object, the data is specified in the `custom` property of the `metadata` object. See [Setting Metadata](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#setting-metadata)
-    record {}? metadata?;
-    # The organization of the requester. You can only specify the ID of an organization associated with the requester. See [Organization Memberships](/api-reference/ticketing/organizations/organization_memberships/)
-    int? organization_id?;
-    # The urgency with which the ticket should be addressed
-    "urgent"|"high"|"normal"|"low" priority?;
-    # For tickets of type "incident", the ID of the problem the incident is linked to
-    int? problem_id?;
-    # The dynamic content placeholder, if present, or the "subject" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? raw_subject?;
-    # The original recipient e-mail address of the ticket. Notification emails for the ticket are sent from this address
-    string? recipient?;
-    # Write only. See [Creating a ticket with a new requester](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#creating-a-ticket-with-a-new-requester)
-    record {}? requester?;
-    # The user who requested this ticket
-    int? requester_id;
-    # Write only. Optional boolean. When true and an `update_stamp` date is included, protects against ticket update collisions and returns a message to let you know if one occurs. See [Protecting against ticket update collisions](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#protecting-against-ticket-update-collisions). A value of false has the same effect as true. Omit the property to force the updates to not be safe
-    boolean? safe_update?;
-    # The satisfaction rating of the ticket, if it exists, or the state of satisfaction, "offered" or "unoffered". The value is null for plan types that don't support CSAT
-    record {}? satisfaction_rating?;
-    # The ids of the sharing agreements used for this ticket
-    int[]? sharing_agreement_ids?;
-    # The state of the ticket.
-    # 
-    # If your account has activated custom ticket statuses, this is the ticket's
-    # status category. See [custom ticket statuses](#custom-ticket-statuses)
-    "new"|"open"|"pending"|"hold"|"solved"|"closed" status?;
-    # The value of the subject field for this ticket. See [Subject](/api-reference/ticketing/tickets/tickets/#subject)
-    string? subject?;
-    # The user who submitted the ticket. The submitter always becomes the author of the first comment on the ticket
-    int? submitter_id?;
-    # The array of tags applied to this ticket
-    string[]? tags?;
-    # Enterprise only. The id of the ticket form to render for the ticket
-    int? ticket_form_id?;
-    # The type of this ticket
-    "problem"|"incident"|"question"|"task" 'type?;
-    # When this record last got updated. It is updated only if the update generates a [ticket event](#incremental-ticket-event-export)
-    string? updated_at?;
-    # Write only. Datetime of last update received from API. See the `safe_update` property
-    string? updated_stamp?;
-    # The API url of this ticket
-    string? url?;
-    # For more information, see the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
-    TicketObject_via? via?;
-    # POST requests only. The id of a closed ticket when creating a follow-up ticket. See [Creating a follow-up ticket](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#creating-a-follow-up-ticket)
-    int? via_followup_source_id?;
-    # Write only. For more information, see the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference/)
-    int? via_id?;
-    # Write only. See [Creating voicemail ticket](/api-reference/voice/talk-partner-edition-api/reference/#creating-voicemail-tickets)
-    record {}? voice_comment?;
+public type MacrosmacroIdBody record {
+    MacroInput macro?;
 };
 
-public type TrialAccountResponse record {
-    TrialAccountObject? account?;
+public type TicketCommentsCountResponseCount record {
+    @jsondata:Name {value: "refreshed_at"}
+    string refreshedAt?;
+    int value?;
+};
+
+# Represents the Headers record for the operation: UpdateCustomObjectField
+public type UpdateCustomObjectFieldHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TicketFieldsResponse record {
-    TicketFieldObject[]? ticket_fields?;
+    @jsondata:Name {value: "ticket_fields"}
+    TicketFieldObject[] ticketFields?;
 };
 
 public type TicketAuditsResponseNoneCursor record {
-    TicketAuditObject[]? audits?;
-    int? count?;
-    string? next_page?;
-    string? previous_page?;
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    int count?;
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
+    TicketAuditObject[] audits?;
 };
 
 public type CursorBasedExportIncrementalUsersResponse record {
-    string? after_cursor?;
-    string? after_url?;
-    string? before_cursor?;
-    string? before_url?;
-    boolean? end_of_stream?;
-    UserObject[]? users?;
+    @jsondata:Name {value: "before_url"}
+    string? beforeUrl?;
+    @jsondata:Name {value: "end_of_stream"}
+    boolean endOfStream?;
+    @jsondata:Name {value: "after_cursor"}
+    string? afterCursor?;
+    @jsondata:Name {value: "after_url"}
+    string? afterUrl?;
+    @jsondata:Name {value: "before_cursor"}
+    string? beforeCursor?;
+    UserObject[] users?;
 };
 
 public type RequestsResponse record {
-    RequestObject[]? requests?;
+    RequestObject[] requests?;
 };
 
-public type ReverseLookupResponse UsersResponse?;
-
 public type WorkspaceResponse record {
-    WorkspaceObject[]? workspaces?;
+    *WorkspaceResponseAllOf1;
     *OffsetPaginationObject;
 };
 
-public type AssigneeFieldAssignableAgentObject record {
-    # URL of Agent's avatar
-    string? avatar_url?;
-    # Agent Support ID
-    int? id?;
-    # Name of the agent
-    string? name?;
+# Represents the Headers record for the operation: SetTagsTicket
+public type SetTagsTicketHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type CustomFieldOptionsResponse record {
-    # Total count of records retrieved
-    int? count?;
-    CustomFieldOptionObject[]? custom_field_options?;
     # URL of the next page
-    string? next_page?;
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    @jsondata:Name {value: "custom_field_options"}
+    CustomFieldOptionObject[] customFieldOptions?;
+    # Total count of records retrieved
+    int count?;
     # URL of the previous page
-    string? previous_page?;
-};
-
-public type TicketMetricEventGroupSLAObject record {
-    *TicketMetricEventBaseObject;
-    # Available if `type` is "apply_group_sla". The Group SLA policy and target being enforced on the ticket and metric in question, if any. See [group_sla](#group_sla)
-    record {}? group_sla?;
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
 };
 
 public type MacroAttachmentsResponse record {
-    MacroAttachmentObject[]? macro_attachments?;
+    @jsondata:Name {value: "macro_attachments"}
+    MacroAttachmentObject[] macroAttachments?;
 };
 
-public type CountResponse_count record {
-    string? refreshed_at?;
-    int? value?;
-};
-
-public type SkillBasedRoutingAttributesResponse record {
-    SkillBasedRoutingAttributeObject[]? attributes?;
-    int? count?;
-    string? next_page?;
-    string? previous_page?;
+# Represents the Queries record for the operation: TicketsUpdateMany
+public type TicketsUpdateManyQueries record {
+    # Comma-separated list of ticket ids
+    string ids?;
 };
 
 public type TargetFailureResponse record {
-    TargetFailureObject? target_failure?;
+    @jsondata:Name {value: "target_failure"}
+    TargetFailureObject targetFailure?;
 };
 
 public type ListTicketProblemsResponse record {
 };
 
-public type Inline_response_200_1_count record {
-    # The time the last count was performed
-    string? refreshed_at?;
-    # Number of records at the time of the latest count operation
-    int? value?;
-};
-
-public type TriggerCategoriesResponse record {
-    TriggerCategory[]? trigger_categories?;
+# Represents the Queries record for the operation: BulkDeleteTickets
+public type BulkDeleteTicketsQueries record {
+    # Comma-separated list of ticket ids
+    string ids;
 };
 
 public type TicketCommentObject record {
-    # Attachments, if any. See [Attachment](/api-reference/ticketing/tickets/ticket-attachments/)
-    AttachmentObject[]? attachments?;
-    # The id of the ticket audit record. See [Show Audit](/api-reference/ticketing/tickets/ticket_audits/#show-audit)
-    int? audit_id?;
-    # The id of the comment author. See [Author id](#author-id)
-    int? author_id?;
-    # The comment string. See [Bodies](#bodies)
-    string? body?;
-    # The time the comment was created
-    string? created_at?;
-    # The comment formatted as HTML. See [Bodies](#bodies)
-    string? html_body?;
-    # Automatically assigned when the comment is created
-    int? id?;
     # System information (web client, IP address, etc.) and comment flags, if any. See [Comment flags](#comment-flags)
-    record {}? metadata?;
+    record {} metadata?;
+    # Attachments, if any. See [Attachment](/api-reference/ticketing/tickets/ticket-attachments/)
+    AttachmentObject[] attachments?;
+    # The comment formatted as HTML. See [Bodies](#bodies)
+    @jsondata:Name {value: "html_body"}
+    string htmlBody?;
+    # The time the comment was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
     # The comment presented as plain text. See [Bodies](#bodies)
-    string? plain_body?;
-    # true if a public comment; false if an internal note. The initial value set on ticket creation persists for any additional comment unless you change it
-    boolean? 'public?;
+    @jsondata:Name {value: "plain_body"}
+    string plainBody?;
+    # The comment string. See [Bodies](#bodies)
+    string body?;
     # `Comment` or `VoiceComment`. The JSON object for adding voice comments to tickets is different. See [Adding voice comments to tickets](/documentation/ticketing/managing-tickets/adding-voice-comments-to-tickets)
-    string? 'type?;
+    string 'type?;
     # List of tokens received from [uploading files](/api-reference/ticketing/tickets/ticket-attachments/#upload-files) for comment attachments. The files are attached by creating or updating tickets with the tokens. See [Attaching files](/api-reference/ticketing/tickets/tickets/#attaching-files) in Tickets
-    string[]? uploads?;
-    # Describes how the object was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
-    TicketAuditViaObject? via?;
+    string[] uploads?;
+    TicketAuditViaObject via?;
+    # The id of the ticket audit record. See [Show Audit](/api-reference/ticketing/tickets/ticket_audits/#show-audit)
+    @jsondata:Name {value: "audit_id"}
+    int auditId?;
+    # true if a public comment; false if an internal note. The initial value set on ticket creation persists for any additional comment unless you change it
+    boolean 'public?;
+    # Automatically assigned when the comment is created
+    int id?;
+    # The id of the comment author. See [Author id](#author-id)
+    @jsondata:Name {value: "author_id"}
+    int authorId?;
 };
 
-public type TicketImportInput record {
-    # The agent currently assigned to the ticket
-    int? assignee_id?;
-    # The conversation between requesters, collaborators, and agents
-    record {}? comments?;
-    # Read-only first comment on the ticket. When [creating a ticket](#create-ticket), use `comment` to set the description. See [Description and first comment](#description-and-first-comment)
-    string? description?;
-    # The user who requested this ticket
-    int? requester_id?;
-    # The value of the subject field for this ticket
-    string? subject?;
-    # The array of tags applied to this ticket
-    string[]? tags?;
+# Represents the Headers record for the operation: ShowUserIdentity
+public type ShowUserIdentityHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: DeleteTicket
+public type DeleteTicketHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TwitterChannelTwicketStatusResponse record {
-    TwitterChannelTwicketStatusResponse_statuses[]? statuses?;
-};
-
-# The active features for an account. See [Active Features](#active-features)
-public type AccountSettingsActiveFeaturesObject record {
-    boolean? advanced_analytics?;
-    boolean? agent_forwarding?;
-    boolean? allow_ccs?;
-    boolean? allow_email_template_customization?;
-    boolean? automatic_answers?;
-    boolean? bcc_archiving?;
-    boolean? benchmark_opt_out?;
-    boolean? business_hours?;
-    boolean? chat?;
-    boolean? chat_about_my_ticket?;
-    boolean? csat_reason_code?;
-    boolean? custom_dkim_domain?;
-    boolean? customer_context_as_default?;
-    boolean? customer_satisfaction?;
-    boolean? dynamic_contents?;
-    boolean? explore?;
-    boolean? explore_on_support_ent_plan?;
-    boolean? explore_on_support_pro_plan?;
-    boolean? facebook?;
-    boolean? facebook_login?;
-    boolean? fallback_composer?;
-    boolean? forum_analytics?;
-    boolean? good_data_and_explore?;
-    boolean? google_login?;
-    boolean? insights?;
-    boolean? is_abusive?;
-    boolean? light_agents?;
-    boolean? markdown?;
-    boolean? on_hold_status?;
-    boolean? organization_access_enabled?;
-    boolean? rich_content_in_emails?;
-    boolean? sandbox?;
-    boolean? satisfaction_prediction?;
-    boolean? suspended_ticket_notification?;
-    boolean? ticket_forms?;
-    boolean? ticket_tagging?;
-    boolean? topic_suggestion?;
-    boolean? twitter?;
-    boolean? twitter_login?;
-    boolean? user_org_fields?;
-    boolean? user_tagging?;
-    boolean? voice?;
+    TwitterChannelTwicketStatusResponseStatuses[] statuses?;
 };
 
 public type BookmarkInput record {
-    # The id of the ticket the bookmark is for.
-    int? ticket_id?;
+    # The id of the ticket the bookmark is for
+    @jsondata:Name {value: "ticket_id"}
+    int ticketId?;
 };
 
-public type BookmarkResponse record {
-    BookmarkObject? bookmark?;
-};
-
-public type CountOrganizationObject record {
-    string? refreshed_at?;
-    int? value?;
+# Represents the Queries record for the operation: ExecuteView
+public type ExecuteViewQueries record {
+    # The ticket field used for sorting. This will either be a title or a custom field id
+    @http:Query {name: "sort_by"}
+    string sortBy?;
+    # The direction the tickets are sorted. May be one of 'asc' or 'desc'
+    @http:Query {name: "sort_order"}
+    string sortOrder?;
 };
 
 public type IncrementalSkillBasedRoutingInstanceValue record {
-    # Id of the associated attribute value
-    string? attribute_value_id?;
-    # Automatically assigned when an instance value is created
-    string? id?;
     # Id of the associated agent or ticket
-    string? instance_id?;
+    @jsondata:Name {value: "instance_id"}
+    string instanceId?;
+    # Automatically assigned when an instance value is created
+    string id?;
     # The time the instance value was created or deleted
-    string? time?;
+    string time?;
+    # Id of the associated attribute value
+    @jsondata:Name {value: "attribute_value_id"}
+    string attributeValueId?;
     # One of "associate_agent", "unassociate_agent", "associate_ticket", or "unassociate_ticket"
-    string? 'type?;
+    string 'type?;
 };
 
-# For some channels a source object gives more information about how or why the ticket or event was created
-public type ViaObject_source record {
-    ViaObject_source_from? 'from?;
-    string? rel?;
-    ViaObject_source_to? to?;
+# Represents the Headers record for the operation: DeleteAttributeValue
+public type DeleteAttributeValueHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type ChannelFrameworkPushResultsResponse record {
-    # An array of [result objects](#result-object)
-    ChannelFrameworkResultObject[]? results?;
+# Represents the Headers record for the operation: ListDeletedTickets
+public type ListDeletedTicketsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type AutomationObject record {
-    # An object describing what the automation will do. See [Actions reference](/documentation/ticketing/reference-guides/actions-reference)
-    ActionObject[]? actions?;
-    # Whether the automation is active
-    boolean? active?;
-    # An object that describes the conditions under which the automation will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
-    ConditionsObject? conditions?;
-    # The time the automation was created
-    string? created_at?;
-    # If true, the automation is a default automation
-    boolean? default?;
-    # Automatically assigned when created
-    int? id?;
-    # The position of the automation which specifies the order it will be executed
-    int? position?;
-    # The raw title of the automation
-    string? raw_title?;
-    # The title of the automation
-    string? title?;
-    # The time of the last update of the automation
-    string? updated_at?;
+# Represents the Headers record for the operation: SearchAutomations
+public type SearchAutomationsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type SearchExportResponse record {
-    # The facets corresponding to the search query
-    string? facets?;
-    # The links to the previous and next entries via the cursor ids in the metadata.
-    SearchExportResponse_links? links?;
-    # Metadata for the export query response.
-    SearchExportResponse_meta? meta?;
-    # May consist of tickets, users, groups, or organizations, as specified by the `result_type` property in each result object
-    SearchResultObject[]? results?;
+public type TriggerCategoriesResponseTriggerCategories TriggerCategory;
+
+public type SatisfactionRatingsCountResponseCount record {
+    @jsondata:Name {value: "refreshed_at"}
+    string refreshedAt?;
+    int value?;
 };
 
-public type ComplianceDeletionStatusObject record {
-    string? account_subdomain;
-    string? action;
-    string? application;
-    string? created_at;
-    int? executer_id;
-    int? user_id;
+public type TicketObjectCustomFields record {
+    # The id of the custom field
+    int id?;
+    # The value of the custom field
+    string value?;
 };
 
 public type UserRelatedResponse record {
-    UserRelatedObject? user_related?;
+    @jsondata:Name {value: "user_related"}
+    UserRelatedObject userRelated?;
 };
 
 public type TriggerConditionObject record {
-    string? 'field?;
-    string? operator?;
-    string|int|(string|int?)[]? value?;
+    string 'field?;
+    string|int|(string|int)[] value?;
+    string operator?;
 };
 
 # Zendesk Talk settings. See [Voice](#voice)
 public type AccountSettingsVoiceObject record {
-    boolean? agent_confirmation_when_forwarding?;
-    boolean? agent_wrap_up_after_calls?;
-    boolean? enabled?;
-    boolean? logging?;
-    int? maximum_queue_size?;
-    int? maximum_queue_wait_time?;
-    boolean? only_during_business_hours?;
-    boolean? outbound_enabled?;
-    boolean? recordings_public?;
-    boolean? uk_mobile_forwarding?;
+    @jsondata:Name {value: "agent_wrap_up_after_calls"}
+    boolean agentWrapUpAfterCalls?;
+    @jsondata:Name {value: "outbound_enabled"}
+    boolean outboundEnabled?;
+    @jsondata:Name {value: "only_during_business_hours"}
+    boolean onlyDuringBusinessHours?;
+    @jsondata:Name {value: "maximum_queue_wait_time"}
+    int maximumQueueWaitTime?;
+    boolean logging?;
+    @jsondata:Name {value: "maximum_queue_size"}
+    int maximumQueueSize?;
+    @jsondata:Name {value: "recordings_public"}
+    boolean recordingsPublic?;
+    @jsondata:Name {value: "uk_mobile_forwarding"}
+    boolean ukMobileForwarding?;
+    @jsondata:Name {value: "agent_confirmation_when_forwarding"}
+    boolean agentConfirmationWhenForwarding?;
+    boolean enabled?;
 };
 
 public type SupportAddressObject record {
-    # The ID of the [brand](/api-reference/ticketing/account-configuration/brands/)
-    int? brand_id?;
     # Whether all of the required CNAME records are set. Possible values: "unknown", "verified", "failed"
-    "unknown"|"verified"|"failed" cname_status?;
-    # When the address was created
-    string? created_at?;
-    # Whether the address is the account's default support address
-    boolean? default?;
-    # Verification statuses for the domain and CNAME records. Possible types: "verified", "failed"
-    "verified"|"failed" dns_results?;
-    # Verification string to be added as a TXT record to the domain. Possible types: string or null.
-    string? domain_verification_code?;
-    # Whether the domain verification record is valid. Possible values: "unknown", "verified", "failed"
-    "unknown"|"verified"|"failed" domain_verification_status?;
-    # The email address. You can't change the email address of an existing support address.
-    string? email;
+    @jsondata:Name {value: "cname_status"}
+    "unknown"|"verified"|"failed" cnameStatus?;
     # Status of email forwarding. Possible values: "unknown", "waiting", "verified", or "failed"
-    "unknown"|"waiting"|"verified"|"failed" forwarding_status?;
-    # Automatically assigned when created
-    int? id?;
-    # The name for the address
-    string? name?;
+    @jsondata:Name {value: "forwarding_status"}
+    "unknown"|"waiting"|"verified"|"failed" forwardingStatus?;
+    # When the address was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
     # Whether the SPF record is set up correctly. Possible values: "unknown", "verified", "failed"
-    "unknown"|"verified"|"failed" spf_status?;
+    @jsondata:Name {value: "spf_status"}
+    "unknown"|"verified"|"failed" spfStatus?;
+    # The ID of the [brand](/api-reference/ticketing/account-configuration/brands/)
+    @jsondata:Name {value: "brand_id"}
+    int brandId?;
+    # Whether the address is the account's default support address
+    boolean default?;
     # When the address was updated
-    string? updated_at?;
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # The name for the address
+    string name?;
+    # Automatically assigned when created
+    int id?;
+    # Whether the domain verification record is valid. Possible values: "unknown", "verified", "failed"
+    @jsondata:Name {value: "domain_verification_status"}
+    "unknown"|"verified"|"failed" domainVerificationStatus?;
+    # Verification statuses for the domain and CNAME records. Possible types: "verified", "failed"
+    @jsondata:Name {value: "dns_results"}
+    "verified"|"failed" dnsResults?;
+    # Verification string to be added as a TXT record to the domain. Possible types: string or null
+    @jsondata:Name {value: "domain_verification_code"}
+    string domainVerificationCode?;
+    # The email address. You can't change the email address of an existing support address
+    string email;
 };
 
-public type ViaObject_source_to record {
-    string? address?;
-    string? name?;
+# Represents the Queries record for the operation: GetRelationshipFilterDefinitions
+public type GetRelationshipFilterDefinitionsQueries record {
+    # The source type for which you would like to see filter definitions.
+    # The options are "zen:user", "zen:ticket", and "zen:organization"
+    @http:Query {name: "source_type"}
+    string sourceType?;
 };
 
-public type TicketUpdateRequest record {
-    TicketUpdateInput? ticket?;
+# Represents the Headers record for the operation: ListTicketFieldOptions
+public type ListTicketFieldOptionsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type ActionsObject record {
-    ActionObject[]? actions?;
+# Represents the Headers record for the operation: SetOrganizationAsDefault
+public type SetOrganizationAsDefaultHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type ViewsCountResponseCount record {
+    @jsondata:Name {value: "refreshed_at"}
+    string refreshedAt?;
+    int value?;
 };
 
 public type TicketBulkImportRequest record {
-    TicketImportInput[]? tickets?;
+    TicketImportInput[] tickets?;
 };
 
-public type ViaObject_source_from record {
-    string? address?;
-    int? id?;
-    string? name?;
-    string? title?;
+# For more information, see the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
+public type TicketObjectVia record {
+    # This tells you how the ticket or event was created. Examples: "web", "mobile", "rule", "system"
+    string channel?;
+    # For some channels a source object gives more information about how or why the ticket or event was created
+    record {} 'source?;
 };
 
-# Brand settings. See [Brands](#brands)
-public type AccountSettingsBrandsObject record {
-    int? default_brand_id?;
-    boolean? require_brand_on_new_tickets?;
-};
+public type organization_field_id int|string;
 
 public type TicketAuditObject record {
-    # The user who created the audit
-    int? author_id?;
-    # The time the audit was created
-    string? created_at?;
-    # An array of the events that happened in this audit. See the [Ticket Audit events reference](/documentation/ticketing/reference-guides/ticket-audit-events-reference)
-    record {}[]? events?;
-    # Automatically assigned when creating audits
-    int? id?;
     # Metadata for the audit, custom and system data
-    record {}? metadata?;
+    record {} metadata?;
+    # The time the audit was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Automatically assigned when creating audits
+    int id?;
+    # The user who created the audit
+    @jsondata:Name {value: "author_id"}
+    int authorId?;
     # The ID of the associated ticket
-    int? ticket_id?;
-    # Describes how the object was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
-    TicketAuditViaObject? via?;
+    @jsondata:Name {value: "ticket_id"}
+    int ticketId?;
+    # An array of the events that happened in this audit. See the [Ticket Audit events reference](/documentation/ticketing/reference-guides/ticket-audit-events-reference)
+    record {}[] events?;
+    TicketAuditViaObject via?;
 };
 
-public type OrganizationMembershipObject record {
-    # When this record was created
-    string? created_at?;
-    # Denotes whether this is the default organization membership for the user. If false, returns `null`
-    boolean? default;
-    # Automatically assigned when the membership is created
-    int? id?;
-    # The ID of the organization associated with this user, in this membership
-    int? organization_id;
-    # The name of the organization associated with this user, in this membership
-    string? organization_name?;
-    # When this record last got updated
-    string? updated_at?;
-    # The API url of this membership
-    string? url?;
-    # The ID of the user for whom this memberships belongs
-    int? user_id;
-    # Denotes whether the user can or cannot have access to all organization's tickets.
-    boolean? view_tickets?;
+# Represents the Headers record for the operation: ShowUserRelated
+public type ShowUserRelatedHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type TicketMetricEventBaseObject record {
-    # Automatically assigned when the record is created
-    int? id?;
-    # The instance of the metric associated with the event. See [instance_id](#instance_id)
-    int? instance_id?;
-    # The metric being tracked
-    "agent_work_time"|"pausable_update_time"|"periodic_update_time"|"reply_time"|"requester_wait_time"|"resolution_time" metric?;
-    # Id of the associated ticket
-    int? ticket_id?;
-    # The time the event occurred
-    string? time?;
-    # The type of the metric event. See [Ticket metric event types reference](/documentation/ticketing/reference-guides/ticket-metric-event-types-reference)
-    "activate"|"pause"|"fulfill"|"apply_sla"|"breach"|"update_status"|"measure" 'type?;
+# Represents the Headers record for the operation: ShowCustomObject
+public type ShowCustomObjectHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type UserMergeByIdInput record {
-    int? id?;
+public type SkillBasedRoutingAttributeDefinitionsDefinitionsConditionsAny record {
+    string subject?;
+    string title?;
 };
 
-public type AssigneeFieldAssignableGroupsAndAgentsSearchResponse record {
-    AssigneeFieldAssignableSearchAgentObject[]? agents?;
-    # Number of agents + groups listed from search result.
-    int? count?;
-    AssigneeFieldAssignableSearchGroupObject[]? groups?;
+# Represents the Headers record for the operation: ListActiveViews
+public type ListActiveViewsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-# See [Tickets](/api-reference/ticketing/tickets/tickets/) for a detailed example.
+# See [Tickets](/api-reference/ticketing/tickets/tickets/) for a detailed example
 public type TimeBasedExportIncrementalTicketsResponse record {
-    int? count?;
-    boolean? end_of_stream?;
-    int? end_time?;
-    string? next_page?;
-    TicketObject[]? tickets?;
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    @jsondata:Name {value: "end_of_stream"}
+    boolean endOfStream?;
+    TicketObject[] tickets?;
+    int count?;
+    @jsondata:Name {value: "end_time"}
+    int endTime?;
 };
 
-public type TargetYammer record {
-    string? group_id?;
-    string? token?;
+# Represents the Queries record for the operation: IncrementalUserExportTime
+public type IncrementalUserExportTimeQueries record {
+    # The time to start the incremental export from. Must be at least one minute in the past. Data isn't provided for the most recent minute
+    @http:Query {name: "start_time"}
+    int startTime;
+    # The number of records to return per page
+    @http:Query {name: "per_page"}
+    int perPage?;
 };
 
-public type AuditObject record {
-    int? author_id?;
-    string? created_at?;
-    AuditObject_events[]? events?;
-    int? id?;
-    record {}? metadata?;
-    int? ticket_id?;
-    # An object explaining how the ticket was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
-    ViaObject? via?;
+public type EmailCCObjectAllOf2 record {
+    @jsondata:Name {value: "user_email"}
+    string userEmail?;
+    @jsondata:Name {value: "user_id"}
+    string userId?;
+    @jsondata:Name {value: "user_name"}
+    string userName?;
+    "put"|"delete" action?;
 };
 
 public type TriggerCategoryBatchRequest record {
-    string? id;
-    int? position;
+    string id;
+    int position;
 };
 
-public type TicketObject_custom_fields record {
-    # The id of the custom field
-    int? id?;
-    # The value of the custom field
-    string? value?;
-};
-
-public type OrganizationResponse record {
-    OrganizationObject? organization?;
-};
-
-public type TargetCommonFields record {
-    # Whether or not the target is activated
-    boolean? active?;
-    # The time the target was created
-    string? created_at?;
-    # Automatically assigned when created
-    int? id?;
-    # A name for the target
-    string? title;
-    # A pre-defined target, such as "basecamp_target". See the additional attributes for the type that follow
-    string? 'type;
+# Represents the Headers record for the operation: ShowWorkspace
+public type ShowWorkspaceHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TicketsCreateRequest record {
-    TicketCreateInput[]? tickets?;
+    TicketCreateInput[] tickets?;
 };
 
-public type Macros_macro_id_body record {
-    MacroInput? macro?;
+# Represents the Headers record for the operation: DeleteUserIdentity
+public type DeleteUserIdentityHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TriggersResponse record {
-    int? count?;
-    string? next_page?;
-    string? previous_page?;
-    TriggerObject[]? triggers?;
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    int count?;
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
+    TriggerObject[] triggers?;
+};
+
+# Represents the Headers record for the operation: GetRelationshipFilterDefinitions
+public type GetRelationshipFilterDefinitionsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: UpdateOrganization
+public type UpdateOrganizationHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TriggerCategoryRequestRequired record {
 };
 
+# Represents the Queries record for the operation: SearchMacro
+public type SearchMacroQueries record {
+    # A sideload to include in the response. See [Sideloads](#sideloads-2)
+    string include?;
+    # Filter macros by access. Possible values are "personal", "agents", "shared", or "account". The "agents" value returns all personal macros for the account's agents and is only available to admins
+    string access?;
+    # Filter macros by group
+    @http:Query {name: "group_id"}
+    int groupId?;
+    # Query string used to find macros with matching titles
+    string query;
+    # Filter by active macros if true or inactive macros if false
+    boolean active?;
+    # If true, returns only macros that can be applied to tickets. If false, returns all macros the current user can manage. Default is false
+    @http:Query {name: "only_viewable"}
+    boolean onlyViewable?;
+    # Possible values are alphabetical, "created_at", "updated_at", "usage_1h", "usage_24h", "usage_7d", or "usage_30d". Defaults to alphabetical
+    @http:Query {name: "sort_by"}
+    string sortBy?;
+    # Filter macros by category
+    int category?;
+    # One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
+    @http:Query {name: "sort_order"}
+    string sortOrder?;
+};
+
+# Represents the Headers record for the operation: SetOrganizationMembershipAsDefault
+public type SetOrganizationMembershipAsDefaultHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
 public type UserForAdmin record {
-    # false if the user has been deleted
-    boolean? active?;
-    # An alias displayed to end users
-    string? alias?;
-    # Whether or not the user is a chat-only agent
-    boolean? chat_only?;
-    # The time the user was created
-    string? created_at?;
-    # A custom role if the user is an agent on the Enterprise plan or above
-    int? custom_role_id?;
-    # The id of the user's default group
-    int? default_group_id?;
-    # Any details you want to store about the user, such as an address
-    string? details?;
-    # The user's primary email address. *Writeable on create only. On update, a secondary email is added. See [Email Address](#email-address)
-    string? email?;
-    # A unique identifier from another system. The API treats the id as case insensitive. Example: "ian1" and "IAN1" are the same value.
-    string? external_id?;
-    # The time zone for the user
-    string? iana_time_zone?;
-    # Automatically assigned when the user is created
-    int? id?;
+    # If the user is shared from a different Zendesk Support instance. Ticket sharing accounts only
+    boolean shared?;
     # Last time the user signed in to Zendesk Support or made an API request
     # using an API token or basic authentication
-    string? last_login_at?;
-    # The user's locale. A BCP-47 compliant tag for the locale. If both "locale" and "locale_id" are present on create or update, "locale_id" is ignored and only "locale" is used.
-    string? locale?;
-    # The user's language identifier
-    int? locale_id?;
-    # Designates whether the user has forum moderation capabilities
-    boolean? moderator?;
-    # The user's name
-    string? name;
+    @jsondata:Name {value: "last_login_at"}
+    string lastLoginAt?;
     # Any notes you want to store about the user
-    string? notes?;
-    # true if the user can only create private comments
-    boolean? only_private_comments?;
-    # The id of the user's organization. If the user has more than one [organization memberships](/api-reference/ticketing/organizations/organization_memberships/), the id of the user's default organization. If updating, see [Organization ID](#organization-id)
-    int? organization_id?;
-    # The user's primary phone number. See [Phone Number](#phone-number) below
-    string? phone?;
-    # The user's profile picture represented as an [Attachment](/api-reference/ticketing/tickets/ticket-attachments/) object
-    record {}? photo?;
-    # A URL pointing to the user's profile picture.
-    string? remote_photo_url?;
+    string notes?;
+    # The user's role. Possible values are "end-user", "agent", or "admin"
+    string role?;
+    # The user's signature. Only agents and admins can have signatures
+    string signature?;
+    # A custom role if the user is an agent on the Enterprise plan or above
+    @jsondata:Name {value: "custom_role_id"}
+    int? customRoleId?;
+    # Designates whether the user has forum moderation capabilities
+    boolean moderator?;
+    # If the user is a shared agent from a different Zendesk Support instance. Ticket sharing accounts only
+    @jsondata:Name {value: "shared_agent"}
+    boolean sharedAgent?;
+    # The time the user was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # A unique identifier from another system. The API treats the id as case insensitive. Example: "ian1" and "IAN1" are the same value
+    @jsondata:Name {value: "external_id"}
+    string? externalId?;
+    # The user's locale. A BCP-47 compliant tag for the locale. If both "locale" and "locale_id" are present on create or update, "locale_id" is ignored and only "locale" is used
+    string locale?;
+    # The id of the user's default group
+    @jsondata:Name {value: "default_group_id"}
+    int defaultGroupId?;
+    # The user's language identifier
+    @jsondata:Name {value: "locale_id"}
+    int localeId?;
+    # A URL pointing to the user's profile picture
+    @jsondata:Name {value: "remote_photo_url"}
+    string remotePhotoUrl?;
+    # Values of custom fields in the user's profile. See [User Fields](#user-fields)
+    @jsondata:Name {value: "user_fields"}
+    record {} userFields?;
+    # The time the user was last updated
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
     # This parameter is inert and has no effect. It may be deprecated in the
     # future.
     # 
@@ -880,3225 +655,2909 @@ public type UserForAdmin record {
     # report in a legacy Guide dashboard. This dashboard has been removed. See
     # [Announcing Guide legacy reporting upgrade to
     # Explore](https://support.zendesk.com/hc/en-us/articles/4762263171610-Announcing-Guide-legacy-reporting-upgrade-to-Explore-)
-    boolean? report_csv?;
+    @jsondata:Name {value: "report_csv"}
+    boolean reportCsv?;
+    # An alias displayed to end users
+    string alias?;
+    # Any details you want to store about the user, such as an address
+    string details?;
+    # Automatically assigned when the user is created
+    int id?;
+    # The user's primary email address. *Writeable on create only. On update, a secondary email is added. See [Email Address](#email-address)
+    string email?;
     # If the agent has any restrictions; false for admins and unrestricted agents, true for other agents
-    boolean? restricted_agent?;
-    # The user's role. Possible values are "end-user", "agent", or "admin"
-    string? role?;
-    # The user's role id. 0 for a custom agent, 1 for a light agent, 2 for a chat agent, 3 for a chat agent added to the Support account as a contributor ([Chat Phase 4](https://support.zendesk.com/hc/en-us/articles/360022365373#topic_djh_1zk_4fb)), 4 for an admin, and 5 for a billing admin
-    int? role_type?;
-    # If the user is shared from a different Zendesk Support instance. Ticket sharing accounts only
-    boolean? shared?;
-    # If the user is a shared agent from a different Zendesk Support instance. Ticket sharing accounts only
-    boolean? shared_agent?;
-    # Whether the `phone` number is shared or not. See [Phone Number](#phone-number) below
-    boolean? shared_phone_number?;
-    # The user's signature. Only agents and admins can have signatures
-    string? signature?;
-    # If the agent is suspended. Tickets from suspended users are also suspended, and these users cannot sign in to the end user portal
-    boolean? suspended?;
-    # The user's tags. Only present if your account has user tagging enabled
-    string[]? tags?;
-    # Specifies which tickets the user has access to. Possible values are: "organization", "groups", "assigned", "requested", null. "groups" and "assigned" are valid only for agents. If you pass an invalid value to an end user (for example, "groups"), they will be assigned to "requested", regardless of their previous access
-    string? ticket_restriction?;
-    # The user's time zone. See [Time Zone](#time-zone)
-    string? time_zone?;
+    @jsondata:Name {value: "restricted_agent"}
+    boolean restrictedAgent?;
     # If two factor authentication is enabled
-    boolean? two_factor_auth_enabled?;
-    # The time the user was last updated
-    string? updated_at?;
-    # The user's API url
-    string? url?;
-    # Values of custom fields in the user's profile. See [User Fields](#user-fields)
-    record {}? user_fields?;
+    @jsondata:Name {value: "two_factor_auth_enabled"}
+    boolean? twoFactorAuthEnabled?;
+    # The user's role id. 0 for a custom agent, 1 for a light agent, 2 for a chat agent, 3 for a chat agent added to the Support account as a contributor ([Chat Phase 4](https://support.zendesk.com/hc/en-us/articles/360022365373#topic_djh_1zk_4fb)), 4 for an admin, and 5 for a billing admin
+    @jsondata:Name {value: "role_type"}
+    int? roleType?;
+    # true if the user can only create private comments
+    @jsondata:Name {value: "only_private_comments"}
+    boolean onlyPrivateComments?;
+    # The time zone for the user
+    @jsondata:Name {value: "iana_time_zone"}
+    string ianaTimeZone?;
+    # Whether the `phone` number is shared or not. See [Phone Number](#phone-number) below
+    @jsondata:Name {value: "shared_phone_number"}
+    boolean? sharedPhoneNumber?;
     # Any of the user's identities is verified. See [User Identities](/api-reference/ticketing/users/user_identities)
-    boolean? verified?;
-};
-
-public type BulkUpdateDefaultCustomStatusResponse record {
+    boolean verified?;
+    # false if the user has been deleted
+    boolean active?;
+    # The user's profile picture represented as an [Attachment](/api-reference/ticketing/tickets/ticket-attachments/) object
+    record {}? photo?;
+    # The user's time zone. See [Time Zone](#time-zone)
+    @jsondata:Name {value: "time_zone"}
+    string timeZone?;
+    # If the agent is suspended. Tickets from suspended users are also suspended, and these users cannot sign in to the end user portal
+    boolean suspended?;
+    # The user's API url
+    string url?;
+    # The user's tags. Only present if your account has user tagging enabled
+    string[] tags?;
+    # The user's primary phone number. See [Phone Number](#phone-number) below
+    string? phone?;
+    # The id of the user's organization. If the user has more than one [organization memberships](/api-reference/ticketing/organizations/organization_memberships/), the id of the user's default organization. If updating, see [Organization ID](#organization-id)
+    @jsondata:Name {value: "organization_id"}
+    int? organizationId?;
+    # The user's name
+    string name;
+    # Whether or not the user is a chat-only agent
+    @jsondata:Name {value: "chat_only"}
+    boolean chatOnly?;
+    # Specifies which tickets the user has access to. Possible values are: "organization", "groups", "assigned", "requested", null. "groups" and "assigned" are valid only for agents. If you pass an invalid value to an end user (for example, "groups"), they will be assigned to "requested", regardless of their previous access
+    @jsondata:Name {value: "ticket_restriction"}
+    string? ticketRestriction?;
 };
 
 public type TwitterChannelsResponse record {
-    TwitterChannelObject[]? monitored_twitter_handles?;
+    @jsondata:Name {value: "monitored_twitter_handles"}
+    TwitterChannelObject[] monitoredTwitterHandles?;
+};
+
+public type SLAPolicyFilterDefinitionResponseDefinitionsValues1List record {
+    string title?;
+    string? value?;
 };
 
 public type UserRelatedObject record {
-    # Count of assigned tickets
-    int? assigned_tickets?;
-    # Count of collaborated tickets
-    int? ccd_tickets?;
     # Count of organization subscriptions
-    int? organization_subscriptions?;
+    @jsondata:Name {value: "organization_subscriptions"}
+    int organizationSubscriptions?;
     # Count of requested tickets
-    int? requested_tickets?;
+    @jsondata:Name {value: "requested_tickets"}
+    int requestedTickets?;
+    # Count of assigned tickets
+    @jsondata:Name {value: "assigned_tickets"}
+    int assignedTickets?;
+    # Count of collaborated tickets
+    @jsondata:Name {value: "ccd_tickets"}
+    int ccdTickets?;
 };
 
-# For more information, see the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
-public type TicketObject_via record {
-    # This tells you how the ticket or event was created. Examples: "web", "mobile", "rule", "system"
-    string? channel?;
-    # For some channels a source object gives more information about how or why the ticket or event was created
-    record {}? 'source?;
+# Represents the Headers record for the operation: DeleteCustomObjectRecordByExternalId
+public type DeleteCustomObjectRecordByExternalIdHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type TriggerBulkUpdateItem record {
-    # The active status of the trigger (true or false)
-    boolean? active?;
-    # The ID of the new category the trigger is to be moved to
-    string? category_id?;
-    # The ID of the trigger to update
-    int? id;
-    # The new position of the trigger
-    int? position?;
+public type SkillBasedRoutingAttributeDefinitionsDefinitionsConditionsAll record {
+    string subject?;
+    string title?;
+};
+
+# Represents the Headers record for the operation: RedactChatComment
+public type RedactChatCommentHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TicketFormResponse record {
-    TicketFormObject? ticket_form?;
+    @jsondata:Name {value: "ticket_form"}
+    TicketFormObject ticketForm?;
 };
 
-public type SuspendedTicketsExportResponse record {
-    SuspendedTicketsExportResponse_export? export?;
+# Represents the Headers record for the operation: CreateTicketOrVoicemailTicket
+public type CreateTicketOrVoicemailTicketHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: UpdateCustomObjectRecord
+public type UpdateCustomObjectRecordHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TicketMetricObject record {
-    # Number of minutes the agent spent waiting during calendar and business hours
-    TicketMetricTimeObject?? agent_wait_time_in_minutes?;
-    # When the ticket was assigned
-    string? assigned_at?;
-    # Number of assignees the ticket had
-    int? assignee_stations?;
-    # When the assignee last updated the ticket
-    string? assignee_updated_at?;
-    # When the record was created
-    string? created_at?;
-    # The date and time the ticket's custom status was last updated
-    string? custom_status_updated_at?;
-    # Number of minutes to the first resolution time during calendar and business hours
-    TicketMetricTimeObject?? first_resolution_time_in_minutes?;
-    # Number of minutes to the full resolution during calendar and business hours
-    TicketMetricTimeObject?? full_resolution_time_in_minutes?;
     # Number of groups the ticket passed through
-    int? group_stations?;
-    # Automatically assigned when the client is created
-    int? id?;
-    # When the ticket was initially assigned
-    string? initially_assigned_at?;
-    # When the latest comment was added
-    string? latest_comment_added_at?;
+    @jsondata:Name {value: "group_stations"}
+    int groupStations?;
     # Number of minutes on hold
-    TicketMetricTimeObject?? on_hold_time_in_minutes?;
+    @jsondata:Name {value: "on_hold_time_in_minutes"}
+    TicketMetricTimeObject onHoldTimeInMinutes?;
     # Total number of times the ticket was reopened
-    int? reopens?;
-    # The number of public replies added to a ticket by an agent
-    int? replies?;
-    # Number of minutes to the first reply during calendar and business hours
-    TicketMetricTimeObject?? reply_time_in_minutes?;
-    # Number of seconds to the first reply during calendar hours, only available for Messaging tickets
-    TicketMetricTimeObject?? reply_time_in_seconds?;
+    int reopens?;
     # When the requester last updated the ticket
-    string? requester_updated_at?;
-    # Number of minutes the requester spent waiting during calendar and business hours
-    TicketMetricTimeObject?? requester_wait_time_in_minutes?;
-    # When the ticket was solved
-    string? solved_at?;
-    # When the status of the ticket was last updated
-    string? status_updated_at?;
+    @jsondata:Name {value: "requester_updated_at"}
+    string requesterUpdatedAt?;
+    # Number of minutes to the first reply during calendar and business hours
+    @jsondata:Name {value: "reply_time_in_minutes"}
+    TicketMetricTimeObject replyTimeInMinutes?;
+    # Number of assignees the ticket had
+    @jsondata:Name {value: "assignee_stations"}
+    int assigneeStations?;
+    # When the record was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The date and time the ticket's custom status was last updated
+    @jsondata:Name {value: "custom_status_updated_at"}
+    string customStatusUpdatedAt?;
     # Id of the associated ticket
-    int? ticket_id?;
-    # When the record was last updated
-    string? updated_at?;
+    @jsondata:Name {value: "ticket_id"}
+    int ticketId?;
     # The API url of the ticket metric
-    string? url?;
+    string url?;
+    # When the ticket was initially assigned
+    @jsondata:Name {value: "initially_assigned_at"}
+    string initiallyAssignedAt?;
+    # When the latest comment was added
+    @jsondata:Name {value: "latest_comment_added_at"}
+    string latestCommentAddedAt?;
+    # The number of public replies added to a ticket by an agent
+    int replies?;
+    # When the record was last updated
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # When the ticket was solved
+    @jsondata:Name {value: "solved_at"}
+    string solvedAt?;
+    # When the ticket was assigned
+    @jsondata:Name {value: "assigned_at"}
+    string assignedAt?;
+    # Automatically assigned when the client is created
+    int id?;
+    # Number of minutes the agent spent waiting during calendar and business hours
+    @jsondata:Name {value: "agent_wait_time_in_minutes"}
+    TicketMetricTimeObject agentWaitTimeInMinutes?;
+    # Number of minutes to the full resolution during calendar and business hours
+    @jsondata:Name {value: "full_resolution_time_in_minutes"}
+    TicketMetricTimeObject fullResolutionTimeInMinutes?;
+    # Number of seconds to the first reply during calendar hours, only available for Messaging tickets
+    @jsondata:Name {value: "reply_time_in_seconds"}
+    TicketMetricTimeObject replyTimeInSeconds?;
+    # Number of minutes the requester spent waiting during calendar and business hours
+    @jsondata:Name {value: "requester_wait_time_in_minutes"}
+    TicketMetricTimeObject requesterWaitTimeInMinutes?;
+    # Number of minutes to the first resolution time during calendar and business hours
+    @jsondata:Name {value: "first_resolution_time_in_minutes"}
+    TicketMetricTimeObject firstResolutionTimeInMinutes?;
+    # When the assignee last updated the ticket
+    @jsondata:Name {value: "assignee_updated_at"}
+    string assigneeUpdatedAt?;
+    # When the status of the ticket was last updated
+    @jsondata:Name {value: "status_updated_at"}
+    string statusUpdatedAt?;
 };
 
 public type CountOrganizationResponse record {
-    CountOrganizationObject? count?;
+    CountOrganizationObject count?;
 };
 
-public type Problems_autocomplete_body record {
-    # The text to search for
-    string? text?;
+# Represents the Headers record for the operation: DeleteSuspendedTickets
+public type DeleteSuspendedTicketsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type Inline_response_200_5 record {
-    ActivitiesCountResponse_count? count?;
+# Represents the Headers record for the operation: ListTicketFollowers
+public type ListTicketFollowersHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type Inline_response_200_6 record {
-    *TriggerCategoriesResponse;
-    *Pagination;
+# Represents the Headers record for the operation: ExecuteView
+public type ExecuteViewHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
+
+public type GroupSLAPolicyFilterConditionObjectValue ValueOneOf1|ValueValueOneOf12;
 
 public type TicketSkipCreation record {
-    TicketSkipObject? skip?;
+    TicketSkipObject skip?;
 };
 
-public type UserInput UserCreateInput|UserMergePropertiesInput|UserMergeByIdInput?;
+public type UserInput UserCreateInput|UserMergePropertiesInput|UserMergeByIdInput;
+
+# Represents the Headers record for the operation: UpdateMacro
+public type UpdateMacroHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: DeleteUserFieldOption
+public type DeleteUserFieldOptionHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: ListDeletedTickets
+public type ListDeletedTicketsQueries record {
+    # Sort by
+    @http:Query {name: "sort_by"}
+    "id"|"subject"|"deleted_at" sortBy?;
+    # Sort order. Defaults to "asc"
+    @http:Query {name: "sort_order"}
+    "asc"|"desc" sortOrder?;
+};
+
+# Represents the Queries record for the operation: SearchAutomations
+public type SearchAutomationsQueries record {
+    # A sideload to include in the response. See [Sideloads](#sideloads-2)
+    string include?;
+    # Query string used to find all automations with matching title
+    string query;
+    # Filter by active automations if true or inactive automations if false
+    boolean active?;
+    # Possible values are "alphabetical", "created_at", "updated_at", and "position". If unspecified, the automations are sorted by relevance
+    @http:Query {name: "sort_by"}
+    string sortBy?;
+    # One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
+    @http:Query {name: "sort_order"}
+    string sortOrder?;
+};
 
 public type TicketAuditsCountResponse record {
-    ActivitiesCountResponse_count? count?;
+    TicketAuditsCountResponseCount count?;
 };
 
 # Ticket sharing partners settings. See [Ticket Sharing Partners](#ticket-sharing-partners)
 public type AccountSettingsTicketSharingPartnersObject record {
-    string[]? support_addresses?;
+    @jsondata:Name {value: "support_addresses"}
+    string[] supportAddresses?;
+};
+
+# Represents the Headers record for the operation: DeleteGroupSLAPolicy
+public type DeleteGroupSLAPolicyHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type ExportIncrementalOrganizationsResponse record {
-    int? count?;
-    boolean? end_of_stream?;
-    int? end_time?;
-    string? next_page?;
-    OrganizationObject[]? organizations?;
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    @jsondata:Name {value: "end_of_stream"}
+    boolean endOfStream?;
+    int count?;
+    @jsondata:Name {value: "end_time"}
+    int endTime?;
+    OrganizationObject[] organizations?;
 };
 
 public type OffsetPaginationObject record {
-    # the total record count
-    int? count?;
     # the URL of the next page
-    string? next_page?;
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    # the total record count
+    int count?;
     # the URL of the previous page
-    string? previous_page?;
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
+};
+
+# Represents the Headers record for the operation: RestoreDeletedTicket
+public type RestoreDeletedTicketHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type OrganizationFieldResponse record {
-    OrganizationFieldObject? organization_field?;
+    @jsondata:Name {value: "organization_field"}
+    OrganizationFieldObject organizationField?;
 };
 
 # Account statistics settings. See [Statistics](#statistics)
 public type AccountSettingsStatisticsObject record {
-    boolean? forum?;
-    boolean? rule_usage?;
-    boolean? search?;
+    boolean forum?;
+    boolean search?;
+    @jsondata:Name {value: "rule_usage"}
+    boolean ruleUsage?;
 };
 
-# Account limits configuration. See [Limits](#limits)
-public type AccountSettingsLimitsObject record {
-    int? attachment_size?;
-};
-
-public type Inline_response_200_3 record {
-    record {}[]? actions?;
-};
-
-public type Inline_response_200_4 record {
-    Inline_response_200_3? definitions?;
-};
-
-public type Inline_response_200_1 record {
-    record {|Inline_response_200_1_count?...;|}? count?;
+# Represents the Queries record for the operation: UpsertCustomObjectRecord
+public type UpsertCustomObjectRecordQueries record {
+    # The external id of a custom object record
+    @http:Query {name: "external_id"}
+    string externalId;
 };
 
 public type TriggerActionObject record {
-    string? 'field?;
-    string|int|(string|int?)[]? value?;
-};
-
-public type Inline_response_200_2 record {
-    MacroObject? macro?;
+    string 'field?;
+    string|int|(string|int)[] value?;
 };
 
 public type SharingAgreementObject record {
-    # The time the record was created
-    string? created_at?;
-    # Automatically assigned upon creation
-    int? id?;
-    # Name of this sharing agreement
-    string? name?;
     # Can be one of the following: "jira", null
-    string? partner_name?;
+    @jsondata:Name {value: "partner_name"}
+    string? partnerName?;
     # Subdomain of the remote account or null if not associated with an account
-    string? remote_subdomain?;
-    # Can be one of the following: "accepted", "declined", "pending", "inactive", "failed", "ssl_error", "configuration_error"
-    string? status?;
+    @jsondata:Name {value: "remote_subdomain"}
+    string remoteSubdomain?;
+    # Name of this sharing agreement
+    string name?;
+    # The time the record was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Automatically assigned upon creation
+    int id?;
     # Can be one of the following: "inbound", "outbound"
-    string? 'type?;
+    string 'type?;
     # URL of the sharing agreement record
-    string? url?;
+    string url?;
+    # Can be one of the following: "accepted", "declined", "pending", "inactive", "failed", "ssl_error", "configuration_error"
+    string status?;
+};
+
+public type ListDeletedTicketsResponseActor record {
+    string name?;
+    int id?;
+};
+
+# Represents the Headers record for the operation: ListAGentAttributeValues
+public type ListAGentAttributeValuesHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type MacroCommonObject record {
-    # Each action describes what the macro will do. See [Actions reference](/documentation/ticketing/reference-guides/actions-reference)
-    ActionObject[]? actions;
-    # Useful for determining if the macro should be displayed
-    boolean? active?;
-    # The time the macro was created
-    string? created_at?;
     # If true, the macro is a default macro
-    boolean? default?;
+    boolean default?;
+    # The time of the last update of the macro
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # Access to this macro. A null value allows unrestricted access for all users in the account
+    record {}? restriction?;
+    # Useful for determining if the macro should be displayed
+    boolean active?;
+    # The time the macro was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
     # The description of the macro
     string? description?;
     # The ID automatically assigned when a macro is created
-    int? id?;
+    int id?;
     # The position of the macro
-    int? position?;
-    # Access to this macro. A null value allows unrestricted access for all users in the account
-    record {}? restriction?;
+    int position?;
     # The title of the macro
-    string? title;
-    # The time of the last update of the macro
-    string? updated_at?;
+    string title;
+    # Each action describes what the macro will do. See [Actions reference](/documentation/ticketing/reference-guides/actions-reference)
+    ActionObject[] actions;
     # A URL to access the macro's details
-    string? url?;
+    string url?;
 };
 
-public type OrganizationFieldObject CustomFieldObject?;
+public type OrganizationFieldObject CustomFieldObject;
+
+# Represents the Headers record for the operation: DeleteAttribute
+public type DeleteAttributeHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: DeleteDynamicContentItem
+public type DeleteDynamicContentItemHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
 
 public type TriggerActionDefinitionObject record {
-    string? group?;
-    boolean? nullable?;
-    boolean? repeatable?;
-    string? subject?;
-    string? title?;
-    string? 'type?;
-    DefinitionsResponse_definitions_values[]? values?;
+    boolean nullable?;
+    boolean repeatable?;
+    string subject?;
+    TriggerActionDefinitionObjectValues[] values?;
+    string title?;
+    string 'type?;
+    string group?;
 };
 
-public type SLAPolicyFilterDefinitionResponse_definitions_values record {
-    SLAPolicyFilterDefinitionResponse_definitions_values_list[]? list?;
-    string? 'type?;
+# Represents the Headers record for the operation: PermanentlyDeleteUser
+public type PermanentlyDeleteUserHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: ListGroups
+public type ListGroupsQueries record {
+    # Whether to exclude deleted entities
+    @http:Query {name: "exclude_deleted"}
+    boolean excludeDeleted?;
 };
 
 public type EmailCCObject record {
     *FollowerObject;
-    "put"|"delete" action?;
-    string? user_email?;
-    string? user_id?;
-    string? user_name?;
+    *EmailCCObjectAllOf2;
 };
 
-# Who may access this macro. Will be null when everyone in the account can access it
-public type MacroInput_restriction record {
-    # The numeric ID of the group or user
-    int? id?;
-    # The numeric IDs of the groups
-    int[]? ids?;
-    # Allowed values are Group or User
-    string? 'type?;
+# Represents the Headers record for the operation: ListTicketAttributeValues
+public type ListTicketAttributeValuesHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type GroupMembershipsResponse record {
-    GroupMembershipObject[]? group_memberships?;
+public type GroupSLAPolicyFilterDefinitionResponseDefinitionsOperators record {
+    string title?;
+    string value?;
 };
 
-public type TriggerBulkUpdateRequest record {
-    TriggerBulkUpdateItem[]? triggers?;
+# Represents the Headers record for the operation: DeleteQueue
+public type DeleteQueueHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type ViewExportResponse_export record {
-    string? status?;
-    int? view_id?;
-};
-
-public type SLAPolicyFilterConditionObject record {
-    # The name of a ticket field
-    string? 'field?;
-    # A comparison operator
-    string? operator?;
-    # The value of a ticket field
-    string|(string|int?)[]? value?;
+# Represents the Headers record for the operation: ShowView
+public type ShowViewHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type ChannelFrameworkResultObject record {
     # The external ID of the resource, as passed in
-    string? external_resource_id?;
-    # The status of the import for the indicated resource
-    ChannelFrameworkResultStatusObject? status?;
+    @jsondata:Name {value: "external_resource_id"}
+    string externalResourceId?;
+    ChannelFrameworkResultStatusObject status?;
 };
 
-# Billing configuration options. See [Billing](#billing)
-public type AccountSettingsBillingObject record {
-    string? backend?;
+# Represents the Headers record for the operation: UpdateOrganizationField
+public type UpdateOrganizationFieldHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type AccountSettingsCdnObject_hosts record {
-    string? name?;
-    string? url?;
+public type V2TriggerCategoriesBody record {
+    @jsondata:Name {value: "trigger_category"}
+    record {*TriggerCategoryRequest; *TriggerCategoryRequestRequired;} triggerCategory?;
 };
 
-public type CustomObjectField CustomFieldObject?;
+public type TicketMetricEventsResponseAllOf1 record {
+    @jsondata:Name {value: "ticket_metric_events"}
+    TicketMetricEventBaseObject[] ticketMetricEvents?;
+};
 
-public type CustomStatusCreateInput record {
-    *CustomStatusUpdateInput;
-    # The status category the custom ticket status belongs to
-    "new"|"open"|"pending"|"hold"|"solved" status_category?;
+# Represents the Headers record for the operation: ShowOrganizationMembershipById
+public type ShowOrganizationMembershipByIdHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type CustomObjectField CustomFieldObject;
+
+# Represents the Headers record for the operation: ShowAttribute
+public type ShowAttributeHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type CustomObjectRecord record {
-    # The time the object was created
-    string? created_at?;
-    # Id of a user who created the object
-    string? created_by_user_id?;
-    record {}? custom_object_fields?;
-    # A user-defined unique identifier
-    string? custom_object_key?;
-    # An id you can use to link custom object records to external data
-    string? external_id?;
-    # Automatically assigned upon creation
-    string? id?;
-    # User-defined display name for the object
-    string? name;
     # The time of the last update of the object
-    string? updated_at?;
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
     # Id of the last user who updated the object
-    string? updated_by_user_id?;
+    @jsondata:Name {value: "updated_by_user_id"}
+    string updatedByUserId?;
+    # A user-defined unique identifier
+    @jsondata:Name {value: "custom_object_key"}
+    string customObjectKey?;
+    # User-defined display name for the object
+    string name;
+    # The time the object was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # An id you can use to link custom object records to external data
+    @jsondata:Name {value: "external_id"}
+    string? externalId?;
+    @jsondata:Name {value: "custom_object_fields"}
+    record {} customObjectFields?;
+    # Automatically assigned upon creation
+    string id?;
+    # Id of a user who created the object
+    @jsondata:Name {value: "created_by_user_id"}
+    string createdByUserId?;
     # Direct link to the specific custom object
-    string? url?;
+    string url?;
+};
+
+# Represents the Queries record for the operation: AutocompleteTags
+public type AutocompleteTagsQueries record {
+    # A substring of a tag to search for
+    string name?;
+};
+
+# Represents the Headers record for the operation: RetrieveResourceCollection
+public type RetrieveResourceCollectionHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: UpdateResourceCollection
+public type UpdateResourceCollectionHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TriggerCategoryRequest record {
-    string? name?;
-    int? position?;
-};
-
-# An object explaining how the ticket was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
-public type ViaObject record {
-    # This tells you how the ticket or event was created. Examples: "web", "mobile", "rule", "system"
-    string? channel?;
-    # For some channels a source object gives more information about how or why the ticket or event was created
-    ViaObject_source? 'source?;
+    string name?;
+    int position?;
 };
 
 public type CustomStatusResponse record {
-    CustomStatusObject? custom_status?;
+    @jsondata:Name {value: "custom_status"}
+    CustomStatusObject customStatus?;
 };
 
-public type Trigger_categories_trigger_category_id_body record {
-    TriggerCategoryRequest? trigger_category?;
+public type BatchJobResponseResults record {
+    @jsondata:Name {value: "trigger_categories"}
+    TriggerCategory[] triggerCategories?;
+    TriggerObject[] triggers?;
+};
+
+# Represents the Headers record for the operation: MakeUserIdentityPrimary
+public type MakeUserIdentityPrimaryHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TicketCreateVoicemailTicketInput record {
-    TicketCommentObject? comment?;
-    # The urgency with which the ticket should be addressed.
+    # Required if creating voicemail ticket
+    @jsondata:Name {value: "voice_comment"}
+    TicketCreateVoicemailTicketVoiceCommentInput voiceComment?;
+    TicketCommentObject comment?;
+    # The urgency with which the ticket should be addressed
     "urgent"|"high"|"normal"|"low" priority?;
     # Required for Create Ticket operation
-    44|45|46 via_id?;
-    # Required if creating voicemail ticket
-    TicketCreateVoicemailTicketVoiceCommentInput?? voice_comment?;
-};
-
-public type TriggerConditionsDiffObject record {
-    TriggerConditionDiffObject[]? all?;
-    TriggerConditionDiffObject[]? 'any?;
+    @jsondata:Name {value: "via_id"}
+    44|45|46 viaId?;
 };
 
 public type UserFieldResponse record {
-    UserFieldObject? user_field?;
-};
-
-public type GroupSLAPolicyObject record {
-    # The time the Group SLA policy was created
-    string? created_at?;
-    # The description of the Group SLA policy
-    string? description?;
-    # An object that describes the conditions a ticket must match for a Group SLA policy to be applied to the ticket. See [Filter](#filter).
-    GroupSLAPolicyFilterObject? filter;
-    # Automatically assigned when created
-    string? id?;
-    # Array of [policy metric](#policy-metric) objects
-    GroupSLAPolicyMetricObject[]? policy_metrics?;
-    # Position of the Group SLA policy. This position determines the order in which policies are matched to tickets. If not specified, the Group SLA policy is added at the last position
-    int? position?;
-    # The title of the Group SLA policy
-    string? title;
-    # The time of the last update of the Group SLA policy
-    string? updated_at?;
-    # URL of the Group SLA policy record
-    string? url?;
-};
-
-public type TicketMetricTimeObject record {
-    # Time in business hours
-    int? business?;
-    # Time in calendar hours
-    int? calendar?;
+    @jsondata:Name {value: "user_field"}
+    UserFieldObject userField?;
 };
 
 public type TicketFieldObject record {
-    # Whether this field is available
-    boolean? active?;
-    # A description of the ticket field that only agents can see
-    string? agent_description?;
-    # If true, the field is shown to agents by default. If false, the field is hidden alongside infrequently used fields. Classic interface only
-    boolean? collapsed_for_agents?;
-    # The time the custom ticket field was created
-    string? created_at?;
-    # Name of the app that created the ticket field, or a null value if no app created the ticket field
-    string? creator_app_name?;
-    # The id of the user that created the ticket field, or a value of "-1" if an app created the ticket field
-    int? creator_user_id?;
-    # Required and presented for a custom ticket field of type "multiselect" or "tagger"
-    CustomFieldOptionObject[]? custom_field_options?;
-    # List of customized ticket statuses. Only presented for a system ticket field of type "custom_status"
-    TicketFieldCustomStatusObject[]? custom_statuses?;
-    # Describes the purpose of the ticket field to users
-    string? description?;
-    # Whether this field is editable by end users in Help Center
-    boolean? editable_in_portal?;
-    # Automatically assigned when created
-    int? id?;
-    # The relative position of the ticket field on a ticket. Note that for accounts with ticket forms, positions are controlled by the different forms
-    int? position?;
-    # The dynamic content placeholder if present, or the `description` value if not. See [Dynamic Content](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? raw_description?;
     # The dynamic content placeholder if present, or the `title` value if not. See [Dynamic Content](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? raw_title?;
-    # The dynamic content placeholder if present, or the "title_in_portal" value if not. See [Dynamic Content](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? raw_title_in_portal?;
-    # For "regexp" fields only. The validation pattern for a field value to be deemed valid
-    string? regexp_for_validation?;
-    # A filter definition that allows your autocomplete to filter down results
-    record {}? relationship_filter?;
-    # A representation of what type of object the field references. Options are "zen:user", "zen:organization", "zen:ticket", or "zen:custom_object:{key}" where key is a custom object key. For example "zen:custom_object:apartment".
-    string? relationship_target_type?;
-    # If false, this field is a system field that must be present on all tickets
-    boolean? removable?;
+    @jsondata:Name {value: "raw_title"}
+    string rawTitle?;
+    # Name of the app that created the ticket field, or a null value if no app created the ticket field
+    @jsondata:Name {value: "creator_app_name"}
+    string creatorAppName?;
+    # Required and presented for a custom ticket field of type "multiselect" or "tagger"
+    @jsondata:Name {value: "custom_field_options"}
+    CustomFieldOptionObject[] customFieldOptions?;
+    # Whether this field is visible to end users in Help Center
+    @jsondata:Name {value: "visible_in_portal"}
+    boolean visibleInPortal?;
+    # The time the custom ticket field was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Describes the purpose of the ticket field to users
+    string description?;
+    # The title of the ticket field
+    string title;
+    # System or custom field type. Editable for custom field types and only on creation. See [Create Ticket Field](#create-ticket-field)
+    string 'type;
     # If true, agents must enter a value in the field to change the ticket status to solved
-    boolean? required?;
-    # If true, end users must enter a value in the field to create the request
-    boolean? required_in_portal?;
-    # For system ticket fields of type "priority" and "status". Defaults to 0. A "priority" sub type of 1 removes the "Low" and "Urgent" options. A "status" sub type of 1 adds the "On-Hold" option
-    int? sub_type_id?;
+    boolean required?;
+    # Whether this field is editable by end users in Help Center
+    @jsondata:Name {value: "editable_in_portal"}
+    boolean editableInPortal?;
+    # List of customized ticket statuses. Only presented for a system ticket field of type "custom_status"
+    @jsondata:Name {value: "custom_statuses"}
+    TicketFieldCustomStatusObject[] customStatuses?;
+    # The time the custom ticket field was last updated
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
     # Presented for a system ticket field of type "tickettype", "priority" or "status"
-    SystemFieldOptionObject[]? system_field_options?;
+    @jsondata:Name {value: "system_field_options"}
+    SystemFieldOptionObject[] systemFieldOptions?;
+    # A representation of what type of object the field references. Options are "zen:user", "zen:organization", "zen:ticket", or "zen:custom_object:{key}" where key is a custom object key. For example "zen:custom_object:apartment"
+    @jsondata:Name {value: "relationship_target_type"}
+    string relationshipTargetType?;
+    # For "regexp" fields only. The validation pattern for a field value to be deemed valid
+    @jsondata:Name {value: "regexp_for_validation"}
+    string? regexpForValidation?;
+    # A filter definition that allows your autocomplete to filter down results
+    @jsondata:Name {value: "relationship_filter"}
+    record {} relationshipFilter?;
+    # Automatically assigned when created
+    int id?;
     # For "checkbox" fields only. A tag added to tickets when the checkbox field is selected
     string? tag?;
-    # The title of the ticket field
-    string? title;
-    # The title of the ticket field for end users in Help Center
-    string? title_in_portal?;
-    # System or custom field type. Editable for custom field types and only on creation. See [Create Ticket Field](#create-ticket-field)
-    string? 'type;
-    # The time the custom ticket field was last updated
-    string? updated_at?;
+    # The id of the user that created the ticket field, or a value of "-1" if an app created the ticket field
+    @jsondata:Name {value: "creator_user_id"}
+    int creatorUserId?;
+    # If true, the field is shown to agents by default. If false, the field is hidden alongside infrequently used fields. Classic interface only
+    @jsondata:Name {value: "collapsed_for_agents"}
+    boolean collapsedForAgents?;
+    # Whether this field is available
+    boolean active?;
+    # A description of the ticket field that only agents can see
+    @jsondata:Name {value: "agent_description"}
+    string agentDescription?;
+    # The dynamic content placeholder if present, or the "title_in_portal" value if not. See [Dynamic Content](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "raw_title_in_portal"}
+    string rawTitleInPortal?;
+    # The dynamic content placeholder if present, or the `description` value if not. See [Dynamic Content](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "raw_description"}
+    string rawDescription?;
     # The URL for this resource
-    string? url?;
-    # Whether this field is visible to end users in Help Center
-    boolean? visible_in_portal?;
+    string url?;
+    # If true, end users must enter a value in the field to create the request
+    @jsondata:Name {value: "required_in_portal"}
+    boolean requiredInPortal?;
+    # If false, this field is a system field that must be present on all tickets
+    boolean removable?;
+    # For system ticket fields of type "priority" and "status". Defaults to 0. A "priority" sub type of 1 removes the "Low" and "Urgent" options. A "status" sub type of 1 adds the "On-Hold" option
+    @jsondata:Name {value: "sub_type_id"}
+    int subTypeId?;
+    # The relative position of the ticket field on a ticket. Note that for accounts with ticket forms, positions are controlled by the different forms
+    int position?;
+    # The title of the ticket field for end users in Help Center
+    @jsondata:Name {value: "title_in_portal"}
+    string titleInPortal?;
+};
+
+# Represents the Headers record for the operation: CountGroups
+public type CountGroupsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: DeleteCustomObject
+public type DeleteCustomObjectHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type RequestResponse record {
-    RequestObject? request?;
+    RequestObject request?;
+};
+
+# Represents the Headers record for the operation: UpdateTrigger
+public type UpdateTriggerHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type ComplianceDeletionStatusesResponse record {
-    ComplianceDeletionStatusObject[]? compliance_deletion_statuses?;
-};
-
-public type V2_workspaces_body record {
-    WorkspaceInput? workspace?;
+    @jsondata:Name {value: "compliance_deletion_statuses"}
+    ComplianceDeletionStatusObject[] complianceDeletionStatuses?;
 };
 
 public type TicketFieldCustomStatusObject record {
-    # If true, if the custom status is set to active. If false, the custom status is set to inactive
-    boolean? active?;
-    # The label displayed to agents
-    string? agent_label?;
-    # The date and time at which the custom ticket status was created
-    string? created_at?;
     # If true, the custom status is set to default. If false, the custom status is set to non-default
-    boolean? default?;
-    # The description of when the user should select this custom ticket status
-    string? description?;
-    # The description displayed to end users
-    string? end_user_description?;
+    boolean default?;
     # The label displayed to end users
-    string? end_user_label?;
-    # Automatically assigned when the custom ticket status is created
-    int? id?;
+    @jsondata:Name {value: "end_user_label"}
+    string endUserLabel?;
     # The status category the custom ticket status belongs to
-    "new"|"open"|"pending"|"hold"|"solved" status_category?;
+    @jsondata:Name {value: "status_category"}
+    "new"|"open"|"pending"|"hold"|"solved" statusCategory?;
     # The date and time at which the custom ticket status was last updated
-    string? updated_at?;
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # The description displayed to end users
+    @jsondata:Name {value: "end_user_description"}
+    string endUserDescription?;
+    # If true, if the custom status is set to active. If false, the custom status is set to inactive
+    boolean active?;
+    # The date and time at which the custom ticket status was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The description of when the user should select this custom ticket status
+    string description?;
+    # Automatically assigned when the custom ticket status is created
+    int id?;
+    # The label displayed to agents
+    @jsondata:Name {value: "agent_label"}
+    string agentLabel?;
 };
 
 public type AccountSettingsResponse record {
-    AccountSettingsObject? settings?;
+    AccountSettingsObject settings?;
 };
 
 public type CustomObjectResponse record {
-    CustomObject? custom_object?;
-};
-
-public type AttachmentUploadResponse_upload record {
-    # A file represented as an [Attachment](/api-reference/ticketing/tickets/ticket-attachments/) object
-    AttachmentObject? attachment?;
-    AttachmentObject[]? attachments?;
-    # Token for subsequent request
-    string? token?;
+    @jsondata:Name {value: "custom_object"}
+    CustomObject customObject?;
 };
 
 # X (formerly Twitter) settings. See [X](#x-formerly-twitter)
 public type AccountSettingsTwitterObject record {
-    string? shorten_url?;
-};
-
-public type CustomObjectRecordsJobsResponse record {
-    CustomObjectRecordsJobsResponse_job_status? job_status?;
-};
-
-public type IncrementalSkillBasedRouting record {
-    # Routing attribute values
-    IncrementalSkillBasedRoutingAttributeValue[]? attribute_values?;
-    # Routing attributes
-    IncrementalSkillBasedRoutingAttribute[]? attributes?;
-    # The number of results returned for the current request
-    int? count?;
-    # The most recent resource creation time present in this result set in Unix epoch time
-    int? end_time?;
-    # Routing instance values
-    IncrementalSkillBasedRoutingInstanceValue[]? instance_values?;
-    # The URL that should be called to get the next set of results
-    string? next_page?;
-};
-
-public type ResourceCollectionObject_resources record {
-    boolean? deleted?;
-    string? identifier?;
-    int? resource_id?;
-    string? 'type?;
+    @jsondata:Name {value: "shorten_url"}
+    string shortenUrl?;
 };
 
 public type AssigneeFieldAssignableGroupAgentsResponse record {
-    AssigneeFieldAssignableAgentObject[]? agents?;
-    # Number of agents listed in `agents` property.
-    int? count?;
-    string? next_page?;
-    string? previous_page?;
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    # Number of agents listed in `agents` property
+    int count?;
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
+    AssigneeFieldAssignableAgentObject[] agents?;
 };
 
 public type SkillBasedRoutingAttributeDefinitions record {
-    SkillBasedRoutingAttributeDefinitions_definitions? definitions?;
+    SkillBasedRoutingAttributeDefinitionsDefinitions definitions?;
 };
 
 public type CustomRoleResponse record {
-    CustomRoleObject? custom_role?;
+    @jsondata:Name {value: "custom_role"}
+    CustomRoleObject customRole?;
 };
 
 public type UsersRequest record {
-    UserInput[]? users;
-};
-
-public type TriggerDefinitionObject record {
-    TriggerActionDefinitionObject[]? actions?;
-    TriggerConditionDefinitionObjectAll[]? conditions_all?;
-    TriggerConditionDefinitionObjectAny[]? conditions_any?;
+    UserInput[] users;
 };
 
 public type ListTicketFollowersResponse record {
 };
 
 public type AttachmentUpdateRequest record {
-    AttachmentUpdateInput? attachment?;
+    AttachmentUpdateInput attachment?;
 };
 
 public type DynamicContentResponse record {
-    DynamicContentObject? item?;
-};
-
-# Internationalization configuration settings. See [Localization](#localization)
-public type AccountSettingsLocalizationObject record {
-    int[]? locale_ids?;
+    DynamicContentObject item?;
 };
 
 public type UserForEndUser record {
-    # The time the user was created
-    string? created_at?;
-    # The primary email address of this user. If the primary email address is not [verified](https://support.zendesk.com/hc/en-us/articles/4408886752410), the secondary email address is used
-    string? email?;
-    # The time zone for the user
-    string? iana_time_zone?;
-    # Automatically assigned when creating users
-    int? id?;
-    # The locale for this user
-    string? locale?;
-    # The language identifier for this user
-    int? locale_id?;
-    # The name of the user
-    string? name;
-    # The id of the user's organization. If the user has more than one [organization memberships](/api-reference/ticketing/organizations/organization_memberships/), the id of the user's default organization. If updating, see [Organization ID](/api-reference/ticketing/users/users/#organization-id)
-    int? organization_id?;
-    # The primary phone number of this user. See [Phone Number](/api-reference/ticketing/users/users/#phone-number) in the Users API
-    string? phone?;
-    # The user's profile picture represented as an [Attachment](/api-reference/ticketing/tickets/ticket-attachments/) object
-    record {}? photo?;
     # The role of the user. Possible values: `"end-user"`, `"agent"`, `"admin"`
-    string? role?;
+    string role?;
+    # The time zone for the user
+    @jsondata:Name {value: "iana_time_zone"}
+    string ianaTimeZone?;
     # Whether the `phone` number is shared or not. See [Phone Number](/api-reference/ticketing/users/users/#phone-number) in the Users API
-    boolean? shared_phone_number?;
-    # The time-zone of this user
-    string? time_zone?;
-    # The time of the last update of the user
-    string? updated_at?;
-    # The API url of this user
-    string? url?;
+    @jsondata:Name {value: "shared_phone_number"}
+    boolean sharedPhoneNumber?;
     # Any of the user's identities is verified. See [User Identities](/api-reference/ticketing/users/user_identities)
-    boolean? verified?;
-};
-
-public type SkillBasedRoutingTicketFulfilledResponse record {
-    int[]? fulfilled_ticket_ids?;
+    boolean verified?;
+    # The time the user was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The user's profile picture represented as an [Attachment](/api-reference/ticketing/tickets/ticket-attachments/) object
+    record {} photo?;
+    # The locale for this user
+    string locale?;
+    # The time-zone of this user
+    @jsondata:Name {value: "time_zone"}
+    string timeZone?;
+    # The API url of this user
+    string url?;
+    # The language identifier for this user
+    @jsondata:Name {value: "locale_id"}
+    int localeId?;
+    # The time of the last update of the user
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # The primary phone number of this user. See [Phone Number](/api-reference/ticketing/users/users/#phone-number) in the Users API
+    string phone?;
+    # The id of the user's organization. If the user has more than one [organization memberships](/api-reference/ticketing/organizations/organization_memberships/), the id of the user's default organization. If updating, see [Organization ID](/api-reference/ticketing/users/users/#organization-id)
+    @jsondata:Name {value: "organization_id"}
+    int organizationId?;
+    # The name of the user
+    string name;
+    # Automatically assigned when creating users
+    int id?;
+    # The primary email address of this user. If the primary email address is not [verified](https://support.zendesk.com/hc/en-us/articles/4408886752410), the secondary email address is used
+    string email?;
 };
 
 public type BrandUpdateRequest record {
-    BrandObject? brand?;
+    BrandObject brand?;
 };
 
-public type OrganizationFieldsResponse record {
-    # Total count of records retrieved
-    int? count?;
-    # URL of the next page
-    string? next_page?;
-    OrganizationFieldObject[]? organization_fields?;
-    # URL of the previous page
-    string? previous_page?;
+# Represents the Headers record for the operation: UpdateTicketField
+public type UpdateTicketFieldHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-# Cross Sell settings
-public type AccountSettingsCrossSellObject record {
-    boolean? show_chat_tooltip?;
-    string? xsell_source?;
+# Represents the Headers record for the operation: ListUserFieldOptions
+public type ListUserFieldOptionsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type DeletedUsersResponse record {
-    DeletedUserObject[]? deleted_users?;
-};
-
-# An object that describes the conditions a ticket must match for a Group SLA policy to be applied to the ticket. See [Filter](#filter).
+# An object that describes the conditions a ticket must match for a Group SLA policy to be applied to the ticket. See [Filter](#filter)
 public type GroupSLAPolicyFilterObject record {
-    GroupSLAPolicyFilterConditionObject[]? all?;
+    GroupSLAPolicyFilterConditionObject[] all?;
 };
 
-public type SuspendedTicketsAttachmentsResponse record {
-    SuspendedTicketsAttachmentsResponse_upload? upload?;
+# Represents the Headers record for the operation: ShowSuspendedTickets
+public type ShowSuspendedTicketsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TwitterChannelObject record {
     # If replies are allowed for this handle
-    boolean? allow_reply?;
-    # The profile image url of the handle
-    string? avatar_url?;
-    # What brand the handle is associated with
-    int? brand_id?;
-    # If replies are allowed for this handle
-    boolean? can_reply?;
-    # The time the handle was created
-    string? created_at?;
-    # Automatically assigned upon creation
-    int? id;
-    # The profile name of the handle
-    string? name?;
-    # The Twitter handle
-    string? screen_name;
+    @jsondata:Name {value: "can_reply"}
+    boolean canReply?;
     # The country's code
-    int? twitter_user_id;
+    @jsondata:Name {value: "twitter_user_id"}
+    int twitterUserId;
+    # The profile image url of the handle
+    @jsondata:Name {value: "avatar_url"}
+    string avatarUrl?;
     # The time of the last update of the handle
-    string? updated_at?;
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # The Twitter handle
+    @jsondata:Name {value: "screen_name"}
+    string screenName;
+    # If replies are allowed for this handle
+    @jsondata:Name {value: "allow_reply"}
+    boolean allowReply?;
+    # The profile name of the handle
+    string name?;
+    # The time the handle was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Automatically assigned upon creation
+    int id;
+    # What brand the handle is associated with
+    @jsondata:Name {value: "brand_id"}
+    int brandId?;
 };
 
 public type GroupSLAPolicyFilterConditionObject record {
     # The name of a ticket field
-    string? 'field?;
-    # A comparison operator
-    string? operator?;
+    string 'field?;
     # The value of a ticket field
-    (string|int?)[]? value?;
+    GroupSLAPolicyFilterConditionObjectValue[] value?;
+    # A comparison operator
+    string operator?;
+};
+
+# Conditions when queue could be applied
+public type QueueObjectDefinition record {
+    QueueObjectDefinitionAll[] all?;
+    QueueObjectDefinitionAny[] 'any?;
 };
 
 public type SharingAgreementResponse record {
-    SharingAgreementObject? sharing_agreement?;
+    @jsondata:Name {value: "sharing_agreement"}
+    SharingAgreementObject sharingAgreement?;
 };
 
-public type QueueObject record {
-    # The time the queue was created
-    string? created_at?;
-    # Conditions when queue could be applied
-    QueueObject_definition? definition?;
-    # The description of the queue
-    string? description?;
-    # Automatically assigned when creating queue
-    string? id?;
-    # The name of the queue
-    string? name?;
-    # The queue-applied order
-    int? 'order?;
-    # Primary group ids linked to the queue
-    QueueObject_primary_groups? primary_groups?;
-    # The queue-applied priority
-    int? priority?;
-    # Secondary group ids linked to the queue
-    QueueObject_secondary_groups? secondary_groups?;
-    # The time of the queue's last update
-    string? updated_at?;
-    # The API URL of the queue
-    string? url?;
+# Represents the Queries record for the operation: DeleteSuspendedTickets
+public type DeleteSuspendedTicketsQueries record {
+    # A comma separated list of ids of suspended tickets to delete
+    string ids;
 };
 
-public type TriggerWithCategoryRequest record {
-    TriggerObject?? trigger?;
+# Represents the Headers record for the operation: BulkDeleteSessionsByUserId
+public type BulkDeleteSessionsByUserIdHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type GroupsResponse record {
-    GroupObject[]? groups?;
-};
-
-public type Inline_response_201 record {
-    WorkspaceObject? workspace?;
-};
-
-public type Inline_response_200 record {
-    boolean? success?;
-};
-
-public type SkillBasedRoutingAttributeDefinitions_definitions_conditions_all record {
-    string? subject?;
-    string? title?;
-};
-
-public type AuditLogObject record {
-    # Type of change made. Possible values are "create", "destroy", "exported", "login", and "update"
-    string? action?;
-    # Localized string of action field
-    string? action_label?;
-    # id of the user or system that initiated the change
-    int? actor_id?;
-    # Name of the user or system that initiated the change
-    string? actor_name?;
-    # The description of the change that occurred
-    string? change_description?;
-    # The time the audit got created
-    string? created_at?;
-    # The id automatically assigned upon creation
-    int? id?;
-    # The IP address of the user doing the audit
-    string? ip_address?;
-    # The id of the item being audited
-    int? source_id?;
-    # The name of the item being audited
-    string? source_label?;
-    # Item type being audited. Typically describes the system where the change
-    # was initiated. Possible values vary based on your account's Zendesk
-    # products and activity. Common values include "apitoken", "rule", "ticket",
-    # "user", and "zendesk/app_market/app". The "rule" value is used for
-    # [automations](https://support.zendesk.com/hc/en-us/articles/4408832701850),
-    # [macros](https://support.zendesk.com/hc/en-us/articles/4408844187034),
-    # [triggers](https://support.zendesk.com/hc/en-us/articles/4408822236058),
-    # [views](https://support.zendesk.com/hc/en-us/articles/4408888828570),
-    # and other automated business rules
-    string? source_type?;
-    # The URL to access the audit log
-    string? url?;
-};
-
-public type GroupSLAPolicyFilterDefinitionResponse_definitions_operators record {
-    string? title?;
-    string? value?;
-};
-
-public type ActivityResponse record {
-    ActivityObject? activity?;
-};
-
-public type CustomObjectRecordsUpsertRequest record {
-    CustomObjectRecord? custom_object_record?;
-};
-
-public type CustomStatusUpdateRequest record {
-    CustomStatusUpdateInput? custom_status?;
-};
-
-public type Workspaces_reorder_body record {
-    decimal[]? ids?;
-};
-
-public type Users_update_many_body UserRequest|UsersRequest?;
-
-public type TicketsResponse record {
-    TicketObject[]? tickets?;
-};
-
-public type ViewObject record {
-    # Whether the view is active
-    boolean? active?;
-    # Describes how the view is constructed. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
-    record {}? conditions?;
-    # The time the view was created
-    string? created_at?;
-    # If true, the view is a default view
-    boolean? default?;
-    # The description of the view
-    string? description?;
-    # Describes how the view should be executed. See [Execution](#execution)
-    record {}? execution?;
-    # Automatically assigned when created
-    int? id?;
-    # The position of the view
-    int? position?;
-    # Who may access this account. Is null when everyone in the account can access it
-    record {}? restriction?;
-    # The title of the view
-    string? title?;
-    # The time the view was last updated
-    string? updated_at?;
-};
-
-public type SuspendedTicketResponse record {
-    SuspendedTicketObject[]? suspended_ticket?;
-};
-
-# An object that describes the conditions under which the automation will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
-public type ConditionsObject record {
-    # Logical AND. Tickets must fulfill all of the conditions to be considered matching
-    ConditionObject[]? all?;
-    # Logical OR. Tickets may satisfy any of the conditions to be considered matching
-    ConditionObject[]? 'any?;
-};
-
-public type OrganizationsRelatedResponse record {
-    OrganizationMetadataObject? organization_related?;
-};
-
-public type TriggerRevisionResponse_trigger_revision record {
-    int? author_id?;
-    string? created_at?;
-    int? id?;
-    TriggerRevisionResponse_trigger_revision_snapshot? snapshot?;
-    string? url?;
-};
-
-public type BatchJobRequest_job_items record {
-    TriggerCategoryBatchRequest[]? trigger_categories?;
-    TriggerBatchRequest[]? triggers?;
-};
-
-# Side conversations settings
-public type AccountSettingsSideConversationsObject record {
-    boolean? email_channel?;
-    boolean? msteams_channel?;
-    boolean? show_in_context_panel?;
-    boolean? slack_channel?;
-    boolean? tickets_channel?;
-};
-
-public type GroupSLAPoliciesResponse record {
-    int? count?;
-    GroupSLAPolicyObject[]? group_sla_policies?;
-    string? next_page?;
-    string? previous_page?;
-};
-
-# API configuration options. See [API](#api)
-public type AccountSettingsApiObject record {
-    boolean? accepted_api_agreement?;
-    string? api_password_access?;
-    string? api_token_access?;
-};
-
-public type OrganizationMembershipResponse record {
-    OrganizationMembershipObject? organization_membership?;
-};
-
-public type CustomObjectRecordsBulkCreateRequest_job record {
-    string? action?;
-    # An array of record objects for job actions that create, update, or set. An array of strings for job actions that delete.
-    CustomObjectRecord[]? items?;
-};
-
-# User settings. See [Users](#users)
-public type AccountSettingsUserObject record {
-    boolean? agent_created_welcome_emails?;
-    boolean? end_user_phone_number_validation?;
-    boolean? have_gravatars_enabled?;
-    boolean? language_selection?;
-    boolean? multiple_organizations?;
-    boolean? tagging?;
-    boolean? time_zone_selection?;
-};
-
-public type GroupsCountObject record {
-    GroupsCountObject_count? count?;
-};
-
-public type MacroAttachmentObject record {
-    # The content type of the image. Example value: "image/png"
-    string? content_type?;
-    # A full URL where the attachment image file can be downloaded
-    string? content_url?;
-    # The time when this attachment was created
-    string? created_at?;
-    # The name of the image file
-    string? filename?;
-    # Automatically assigned when created
-    int? id?;
-    # The size of the image file in bytes
-    int? size?;
-};
-
-public type CustomObjectsResponse record {
-    CustomObject[]? custom_objects?;
-};
-
-public type UsersResponse record {
-    UserObject[]? users?;
-};
-
-public type CustomObjectRecordsResponse_meta record {
-    string? after_cursor;
-    string? before_cursor;
-    boolean? has_more;
-};
-
-public type GroupSLAPolicyFilterDefinitionResponse record {
-    GroupSLAPolicyFilterDefinitionResponse_definitions? definitions?;
-};
-
-public type DefinitionsResponse_definitions_operators record {
-    boolean? terminal?;
-    string? title?;
-    string? value?;
-};
-
-public type PushNotificationDevicesRequest record {
-    PushNotificationDevicesInput? push_notification_devices?;
-};
-
-public type SLAPolicyFilterDefinitionResponse_definitions_values_list record {
-    string? title?;
-    string? value?;
-};
-
-public type CustomStatusCreateRequest record {
-    CustomStatusCreateInput? custom_status?;
-};
-
-# An object that describes the conditions that a ticket must match in order for an SLA policy to be applied to that ticket. See [Filter](#filter).
-public type SLAPolicyFilterObject record {
-    SLAPolicyFilterConditionObject[]? all?;
-    SLAPolicyFilterConditionObject[]? 'any?;
-};
-
-public type AssigneeFieldAssignableSearchAgentObject record {
-    # Name of the agent's group
-    string? group?;
-    # Agent's Group ID
-    int? group_id?;
-    # Agent ID
-    int? id?;
-    # Name of the agent
-    string? name?;
-    # URL of Avatar
-    string? photo_url?;
-};
-
-public type TargetTwitter record {
-    # only writable
-    string? secret?;
-    string? token?;
-};
-
-public type DynamicContentsResponse record {
-    DynamicContentObject[]? items?;
-};
-
-public type TriggerCategoryId string?;
-
-public type TargetEmail record {
-    string? email;
-    string? subject;
-};
-
-public type TwitterChannelTwicketStatusResponse_statuses record {
-    boolean? favorited?;
-    int? id?;
-    boolean? retweeted?;
-    boolean? user_followed?;
-};
-
-public type JobStatusesResponse record {
-    JobStatusObject[]? job_statuses;
-};
-
-public type Error record {
-    string? code;
-    string? detail?;
-    string? id?;
-    record {}? links?;
-    record {}? 'source?;
-    string? status?;
-    string? title;
-};
-
-public type TicketMetricEventUpdateStatusObject record {
-    *TicketMetricEventBaseObject;
-    # Available if `type` is `update_status`. Minutes since the metric has been open. See [status](#status)
-    record {}? status?;
-};
-
-public type AuditLogResponse record {
-    AuditLogObject? audit_log?;
-};
-
-public type ResourceCollectionResponse record {
-    ResourceCollectionObject? resource_collection?;
-};
-
-public type TargetObject TargetCommonFields?;
-
-public type SystemFieldOptionObject record {
-    # Name of the system field option
-    string? name?;
-    # Value of the system field option
-    string? value?;
-};
-
-public type QueuesResponse record {
-    QueueObject[]? queues?;
-};
-
-public type AuditLogsResponse record {
-    AuditLogObject[]? audit_logs?;
-};
-
-public type TagListTagObject record {
-    # The number of tags
-    int? count?;
-    # A name for the tag
-    string? name?;
-};
-
-public type CurrentUserResponse record {
-    UserObject?? user?;
-};
-
-public type ViewResponse record {
-    record {}[]? columns?;
-    record {}[]? groups?;
-    record {}[]? rows?;
-    ViewObject? view?;
-};
-
-public type CustomObjectFieldsResponse record {
-    CustomObjectField[]? custom_object_fields?;
-};
-
-public type V2_trigger_categories_body record {
-    record {*TriggerCategoryRequest; *TriggerCategoryRequestRequired;}? trigger_category?;
-};
-
-public type UserIdentitiesResponse record {
-    UserIdentityObject[]? identities?;
-};
-
-public type TriggerCategory record {
-    string? created_at?;
-    string? id?;
-    string? name?;
-    int? position?;
-    string? updated_at?;
-};
-
-public type TriggerResponse record {
-    TriggerObject? trigger?;
-};
-
-public type DefinitionsResponse_definitions record {
-    DefinitionsResponse_definitions_conditions_all[]? conditions_all?;
-    DefinitionsResponse_definitions_conditions_all[]? conditions_any?;
-};
-
-public type DynamicContentObject record {
-    # When this record was created
-    string? created_at?;
-    # The default locale for the item. Must be one of the [locales the account has active](/api-reference/ticketing/account-configuration/locales/#list-locales).
-    int? default_locale_id;
-    # Automatically assigned when creating items
-    int? id?;
-    # The unique name of the item
-    string? name;
-    # Indicates the item has outdated variants within it
-    boolean? outdated?;
-    # Automatically generated placeholder for the item, derived from name
-    string? placeholder?;
-    # When this record was last updated
-    string? updated_at?;
-    # The API url of this item
-    string? url?;
-    # All variants within this item. See [Dynamic Content Item Variants](/api-reference/ticketing/ticket-management/dynamic_content_item_variants/)
-    DynamicContentVariantObject[]? variants;
-};
-
-public type RequestObject record {
-    # The id of the assignee if the field is visible to end users
-    int? assignee_id?;
-    # If true, an end user can mark the request as solved. See [Update Request](/api-reference/ticketing/tickets/ticket-requests/#update-request)
-    boolean? can_be_solved_by_me?;
-    # The ids of users currently CC'ed on the ticket
-    int[]? collaborator_ids?;
-    # When this record was created
-    string? created_at?;
-    # Custom fields for the request. See [Setting custom field values](/api-reference/ticketing/tickets/tickets/#setting-custom-field-values) in the Tickets doc
-    MacroApplyTicketResponse_result_ticket_fields[]? custom_fields?;
-    # The custom ticket status id of the ticket
-    int? custom_status_id?;
-    # Read-only first comment on the request. When [creating a request](#create-request), use `comment` to set the description
-    string? description?;
-    # When the task is due (only applies if the request is of type "task")
-    string? due_at?;
-    # The ids of users who are currently email CCs on the ticket. See [CCs and followers resources](https://support.zendesk.com/hc/en-us/articles/360020585233) in the Support Help Center
-    int[]? email_cc_ids?;
-    # The id of the original ticket if this request is a follow-up ticket. See [Create Request](#create-request)
-    int? followup_source_id?;
-    # The id of the assigned group if the field is visible to end users
-    int? group_id?;
-    # Automatically assigned when creating requests
-    int? id?;
-    # Is true if any comments are public, false otherwise
-    boolean? is_public?;
-    # The organization of the requester
-    int? organization_id?;
-    # The priority of the request, "low", "normal", "high", "urgent"
-    string? priority?;
-    # The original recipient e-mail address of the request
-    string? recipient?;
-    # The id of the requester
-    int? requester_id?;
-    # Whether or not request is solved (an end user can set this if "can_be_solved_by_me", above, is true for that user)
-    boolean? solved?;
-    # The state of the request, "new", "open", "pending", "hold", "solved", "closed"
-    string? status?;
-    # The value of the subject field for this request if the subject field is visible to end users; a truncated version of the description otherwise
-    string? subject;
-    # The numeric id of the ticket form associated with this request if the form is visible to end users - only applicable for enterprise accounts
-    int? ticket_form_id?;
-    # The type of the request, "question", "incident", "problem", "task"
-    string? 'type?;
-    # When this record last got updated
-    string? updated_at?;
-    # The API url of this request
-    string? url?;
-    # Describes how the object was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
-    TicketAuditViaObject? via?;
-};
-
-public type TicketAuditsResponse record {
-    string? after_cursor?;
-    string? after_url?;
-    TicketAuditObject[]? audits?;
-    string? before_cursor?;
-    string? before_url?;
-};
-
-public type OrganizationMembershipsResponse record {
-    OrganizationMembershipObject[]? organization_memberships?;
-};
-
-public type SessionObject record {
-    # When the session was created
-    string? authenticated_at?;
-    # Automatically assigned when the session is created
-    int? id;
-    # The last approximate time this session was seen. This does not update on every request.
-    string? last_seen_at?;
-    # The API URL of this session
-    string? url?;
-    # The id of the user
-    int? user_id?;
-};
-
-public type RelationshipFilterDefinitionResponse record {
-    RelationshipFilterDefinition? definitions?;
-};
-
-public type SatisfactionReasonObject record {
-    # The time the reason was created
-    string? created_at?;
-    # The time the reason was deleted
-    string? deleted_at?;
-    # Automatically assigned upon creation
-    int? id?;
-    # The dynamic content placeholder, if present, or the current "value", if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? raw_value?;
-    # An account-level code for referencing the reason. Custom reasons are assigned an auto-incrementing integer (non-system reason codes begin at 1000). See [Reason codes](#reason-codes)
-    int? reason_code?;
-    # The time the reason was updated
-    string? updated_at?;
-    # API URL for the resource
-    string? url?;
-    # Translated value of the reason in the account locale
-    string? value;
-};
-
-public type Workspaces_workspace_id_body record {
-    WorkspaceInput? workspace?;
-};
-
-public type TagCountObject record {
-    # The time that the count value was last refreshed
-    string? refreshed_at?;
-    # The count of tags created in the last 24 hours
-    int? value?;
-};
-
-public type ActivitiesResponse record {
-    ActivityObject[]? activities?;
-    record {}[]? actors?;
-    int? count?;
-    string? next_page?;
-    string? previous_page?;
-    record {}[]? users?;
-};
-
-public type ListTicketIncidentsResponse record {
-};
-
-# Support UI settings. See [Lotus](#lotus)
-public type AccountSettingsLotusObject record {
-    int? pod_id?;
-    boolean? prefer_lotus?;
-    boolean? reporting?;
-};
-
-public type DefinitionsResponse record {
-    DefinitionsResponse_definitions? definitions?;
-};
-
-public type TriggerChangeObject record {
-    # One of `-`, `+`, `=` representing the type of change
-    string? change?;
-    # The value of the item it represents
-    boolean|string|int|(string|int|boolean?)[]? content?;
-};
-
-public type TriggerConditionDefinitionObjectAny record {
-    string? group?;
-    boolean? nullable?;
-    DefinitionsResponse_definitions_operators[]? operators?;
-    boolean? repeatable?;
-    string? subject?;
-    string? title?;
-    string? 'type?;
-};
-
-public type MacroResponse record {
-    MacroObject? macro?;
-};
-
-public type AttachmentThumbnails record {
-    # An array of attachment objects. Note that photo thumbnails do not have thumbnails
-    AttachmentBaseObject[]? thumbnails?;
-};
-
-public type TicketSkipsResponse record {
-    TicketSkipObject[]? skips?;
-};
-
-public type SuspendedTicketsExportResponse_export record {
-    string? status?;
-    string? view_id?;
-};
-
-public type ResourceCollectionsResponse record {
-    int? count?;
-    string? next_page?;
-    string? previous_page?;
-    ResourceCollectionObject[]? resource_collections?;
-};
-
-public type CustomObjectRecordsResponse_links record {
+public type CustomObjectRecordsResponseLinks record {
     string? next;
     string? prev;
 };
 
-public type JobStatusResponse record {
-    JobStatusObject? job_status?;
+public type QueueObject record {
+    # The time of the queue's last update
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    @jsondata:Name {value: "primary_groups"}
+    QueueObjectPrimaryGroups primaryGroups?;
+    # The name of the queue
+    string name?;
+    # The time the queue was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The description of the queue
+    string description?;
+    QueueObjectDefinition definition?;
+    # Automatically assigned when creating queue
+    string id?;
+    # The queue-applied priority
+    int priority?;
+    # The API URL of the queue
+    string url?;
+    # The queue-applied order
+    int 'order?;
+    @jsondata:Name {value: "secondary_groups"}
+    QueueObjectSecondaryGroups secondaryGroups?;
 };
 
-public type ViewsResponse record {
-    int? count?;
-    string? next_page?;
-    string? previous_page?;
-    ViewObject[]? views?;
+public type TriggerWithCategoryRequest record {
+    TriggerObject trigger?;
+};
+
+public type MacroApplyTicketResponseResultTicket record {
+    @jsondata:Name {value: "group_id"}
+    int groupId?;
+    MacroApplyTicketResponseResultTicketComment comment?;
+    int id?;
+    MacroApplyTicketResponseResultTicketFields fields?;
+    string url?;
+    @jsondata:Name {value: "assignee_id"}
+    int assigneeId?;
+};
+
+# Represents the Queries record for the operation: IncrementalOrganizationExport
+public type IncrementalOrganizationExportQueries record {
+    # The time to start the incremental export from. Must be at least one minute in the past. Data isn't provided for the most recent minute
+    @http:Query {name: "start_time"}
+    int startTime;
+};
+
+# Represents the Headers record for the operation: ShowManyUsers
+public type ShowManyUsersHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type CustomStatusUpdateRequest record {
+    @jsondata:Name {value: "custom_status"}
+    CustomStatusUpdateInput customStatus?;
+};
+
+# Represents the Headers record for the operation: UpdateDynamicContentItem
+public type UpdateDynamicContentItemHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: DeleteManyTriggers
+public type DeleteManyTriggersQueries record {
+    # A comma separated list of trigger IDs
+    string ids;
+};
+
+public type ViewObject record {
+    # Describes how the view should be executed. See [Execution](#execution)
+    record {} execution?;
+    # If true, the view is a default view
+    boolean default?;
+    # The time the view was last updated
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # Who may access this account. Is null when everyone in the account can access it
+    record {} restriction?;
+    # Whether the view is active
+    boolean active?;
+    # The time the view was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The description of the view
+    string description?;
+    # Automatically assigned when created
+    int id?;
+    # The position of the view
+    int position?;
+    # Describes how the view is constructed. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
+    record {} conditions?;
+    # The title of the view
+    string title?;
+};
+
+# Represents the Headers record for the operation: ListActivities
+public type ListActivitiesHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: CreateManyDynamicContentVariants
+public type CreateManyDynamicContentVariantsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: UpdateManyOrganizations
+public type UpdateManyOrganizationsQueries record {
+    # A list of organization ids
+    string ids?;
+    # A list of external ids
+    @http:Query {name: "external_ids"}
+    string externalIds?;
+};
+
+public type OrganizationsRelatedResponse record {
+    @jsondata:Name {value: "organization_related"}
+    OrganizationMetadataObject organizationRelated?;
+};
+
+# Represents the Headers record for the operation: UpdateManyOrganizations
+public type UpdateManyOrganizationsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type GroupSLAPoliciesResponse record {
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    int count?;
+    @jsondata:Name {value: "group_sla_policies"}
+    GroupSLAPolicyObject[] groupSlaPolicies?;
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
+};
+
+# Represents the Headers record for the operation: ShowAttachment
+public type ShowAttachmentHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# API configuration options. See [API](#api)
+public type AccountSettingsApiObject record {
+    @jsondata:Name {value: "api_token_access"}
+    string apiTokenAccess?;
+    @jsondata:Name {value: "accepted_api_agreement"}
+    boolean acceptedApiAgreement?;
+    @jsondata:Name {value: "api_password_access"}
+    string apiPasswordAccess?;
+};
+
+# Represents the Queries record for the operation: ShowDerivedMacro
+public type ShowDerivedMacroQueries record {
+    # The ID of the macro to replicate
+    @http:Query {name: "macro_id"}
+    int macroId;
+    # The ID of the ticket from which to build a macro replica
+    int ticket_id;
+};
+
+# Represents the Headers record for the operation: ListAttributeValues
+public type ListAttributeValuesHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type DefinitionsResponseDefinitionsValues1 record {
+    string title?;
+    string value?;
+    boolean enabled?;
+};
+
+# Represents the Headers record for the operation: IncrementalOrganizationExport
+public type IncrementalOrganizationExportHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: ShowUserComplianceDeletionStatuses
+public type ShowUserComplianceDeletionStatusesQueries record {
+    # Area of compliance
+    string application?;
+};
+
+public type UsersResponse record {
+    UserObject[] users?;
+};
+
+public type OrganizationSubscriptionsResponseAllOf2 record {
+    # An array of organization subscriptions
+    @jsondata:Name {value: "organization_subscriptions"}
+    OrganizationSubscriptionObject[] organizationSubscriptions?;
+};
+
+# Represents the Queries record for the operation: ReorderGroupSLAPolicies
+public type ReorderGroupSLAPoliciesQueries record {
+    # The ids of the Group SLA policies to reorder
+    @http:Query {name: "group_sla_policy_ids"}
+    string[] groupSlaPolicyIds?;
+};
+
+public type PushNotificationDevicesRequest record {
+    @jsondata:Name {value: "push_notification_devices"}
+    PushNotificationDevicesInput pushNotificationDevices?;
+};
+
+public type GroupSLAPolicyFilterDefinitionResponseDefinitionsAll record {
+    GroupSLAPolicyFilterDefinitionResponseDefinitionsOperators[] operators?;
+    GroupSLAPolicyFilterDefinitionResponseDefinitionsValues values?;
+    string title?;
+    string value?;
+    string group?;
+};
+
+# Represents the Headers record for the operation: CreateOrUpdateUserFieldOption
+public type CreateOrUpdateUserFieldOptionHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type CustomStatusCreateRequest record {
+    @jsondata:Name {value: "custom_status"}
+    CustomStatusCreateInput customStatus?;
+};
+
+# An object that describes the conditions that a ticket must match in order for an SLA policy to be applied to that ticket. See [Filter](#filter)
+public type SLAPolicyFilterObject record {
+    SLAPolicyFilterConditionObject[] all?;
+    SLAPolicyFilterConditionObject[] 'any?;
+};
+
+# Represents the Headers record for the operation: ShowActivity
+public type ShowActivityHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: VerifySupportAddressForwarding
+public type VerifySupportAddressForwardingHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type AssigneeFieldAssignableSearchAgentObject record {
+    # Agent's Group ID
+    @jsondata:Name {value: "group_id"}
+    int groupId?;
+    # Name of the agent
+    string name?;
+    # Agent ID
+    int id?;
+    # URL of Avatar
+    @jsondata:Name {value: "photo_url"}
+    string? photoUrl?;
+    # Name of the agent's group
+    string group?;
+};
+
+# Represents the Headers record for the operation: ShowDynamicContentVariant
+public type ShowDynamicContentVariantHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: DeleteManyTriggers
+public type DeleteManyTriggersHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 # Primary group ids linked to the queue
-public type QueueObject_primary_groups record {
-    int? count?;
-    ListDeletedTicketsResponse_actor[]? groups?;
+public type QueueObjectPrimaryGroups record {
+    int count?;
+    QueueObjectPrimaryGroupsGroups[] groups?;
+};
+
+# Represents the Headers record for the operation: UpdateSupportAddress
+public type UpdateSupportAddressHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: TicketBulkImport
+public type TicketBulkImportQueries record {
+    # If `true`, any ticket created with a `closed` status bypasses the normal ticket lifecycle and will be created directly in your ticket archive
+    @http:Query {name: "archive_immediately"}
+    boolean archiveImmediately?;
+};
+
+# Represents the Headers record for the operation: DeleteTarget
+public type DeleteTargetHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: UpdateTicket
+public type UpdateTicketHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type AuditLogResponse record {
+    @jsondata:Name {value: "audit_log"}
+    AuditLogObject auditLog?;
+};
+
+# Represents the Headers record for the operation: SearchOrganizations
+public type SearchOrganizationsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type ResourceCollectionResponse record {
+    @jsondata:Name {value: "resource_collection"}
+    ResourceCollectionObject resourceCollection?;
+};
+
+public type SystemFieldOptionObject record {
+    # Name of the system field option
+    string name?;
+    # Value of the system field option
+    string value?;
+};
+
+public type AuditLogsResponse record {
+    @jsondata:Name {value: "audit_logs"}
+    AuditLogObject[] auditLogs?;
+};
+
+public type TagListTagObject record {
+    # The number of tags
+    int count?;
+    # A name for the tag
+    string name?;
+};
+
+public type TriggerConditionDefinitionObjectAllOperators record {
+    boolean terminal?;
+    string title?;
+    string value?;
+};
+
+public type CurrentUserResponse record {
+    UserObject user?;
+};
+
+public type ViewResponse record {
+    ViewObject view?;
+    record {}[] columns?;
+    record {}[] groups?;
+    record {}[] rows?;
+};
+
+public type UserIdentitiesResponse record {
+    UserIdentityObject[] identities?;
+};
+
+# Represents the Headers record for the operation: UpdateTicketForm
+public type UpdateTicketFormHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type TriggerResponse record {
+    TriggerObject trigger?;
+};
+
+public type DynamicContentObject record {
+    # Indicates the item has outdated variants within it
+    boolean outdated?;
+    # When this record was last updated
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # The default locale for the item. Must be one of the [locales the account has active](/api-reference/ticketing/account-configuration/locales/#list-locales)
+    @jsondata:Name {value: "default_locale_id"}
+    int defaultLocaleId;
+    # The unique name of the item
+    string name;
+    # When this record was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Automatically assigned when creating items
+    int id?;
+    # Automatically generated placeholder for the item, derived from name
+    string placeholder?;
+    # All variants within this item. See [Dynamic Content Item Variants](/api-reference/ticketing/ticket-management/dynamic_content_item_variants/)
+    DynamicContentVariantObject[] variants;
+    # The API url of this item
+    string url?;
+};
+
+# Represents the Headers record for the operation: UpdateGroup
+public type UpdateGroupHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type RequestObject record {
+    # The ids of users who are currently email CCs on the ticket. See [CCs and followers resources](https://support.zendesk.com/hc/en-us/articles/360020585233) in the Support Help Center
+    @jsondata:Name {value: "email_cc_ids"}
+    int[] emailCcIds?;
+    # The value of the subject field for this request if the subject field is visible to end users; a truncated version of the description otherwise
+    string subject;
+    # When this record was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The custom ticket status id of the ticket
+    @jsondata:Name {value: "custom_status_id"}
+    int customStatusId?;
+    # Read-only first comment on the request. When [creating a request](#create-request), use `comment` to set the description
+    string description?;
+    # Whether or not request is solved (an end user can set this if "can_be_solved_by_me", above, is true for that user)
+    boolean solved?;
+    # The type of the request, "question", "incident", "problem", "task"
+    string 'type?;
+    TicketAuditViaObject via?;
+    # When this record last got updated
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # When the task is due (only applies if the request is of type "task")
+    @jsondata:Name {value: "due_at"}
+    string dueAt?;
+    # Automatically assigned when creating requests
+    int id?;
+    # The id of the assignee if the field is visible to end users
+    @jsondata:Name {value: "assignee_id"}
+    int assigneeId?;
+    # Custom fields for the request. See [Setting custom field values](/api-reference/ticketing/tickets/tickets/#setting-custom-field-values) in the Tickets doc
+    @jsondata:Name {value: "custom_fields"}
+    RequestObjectCustomFields[] customFields?;
+    # The ids of users currently CC'ed on the ticket
+    @jsondata:Name {value: "collaborator_ids"}
+    int[] collaboratorIds?;
+    # The priority of the request, "low", "normal", "high", "urgent"
+    string priority?;
+    # The API url of this request
+    string url?;
+    # The numeric id of the ticket form associated with this request if the form is visible to end users - only applicable for enterprise accounts
+    @jsondata:Name {value: "ticket_form_id"}
+    int ticketFormId?;
+    # The id of the original ticket if this request is a follow-up ticket. See [Create Request](#create-request)
+    @jsondata:Name {value: "followup_source_id"}
+    int followupSourceId?;
+    # The id of the assigned group if the field is visible to end users
+    @jsondata:Name {value: "group_id"}
+    int groupId?;
+    # If true, an end user can mark the request as solved. See [Update Request](/api-reference/ticketing/tickets/ticket-requests/#update-request)
+    @jsondata:Name {value: "can_be_solved_by_me"}
+    boolean canBeSolvedByMe?;
+    # The organization of the requester
+    @jsondata:Name {value: "organization_id"}
+    int organizationId?;
+    # Is true if any comments are public, false otherwise
+    @jsondata:Name {value: "is_public"}
+    boolean isPublic?;
+    # The original recipient e-mail address of the request
+    string recipient?;
+    # The id of the requester
+    @jsondata:Name {value: "requester_id"}
+    int requesterId?;
+    # The state of the request, "new", "open", "pending", "hold", "solved", "closed"
+    string status?;
+};
+
+public type TicketAuditsResponse record {
+    @jsondata:Name {value: "before_url"}
+    string beforeUrl?;
+    @jsondata:Name {value: "after_cursor"}
+    string afterCursor?;
+    @jsondata:Name {value: "after_url"}
+    string afterUrl?;
+    @jsondata:Name {value: "before_cursor"}
+    string beforeCursor?;
+    TicketAuditObject[] audits?;
+};
+
+# Represents the Headers record for the operation: AutocompleteProblems
+public type AutocompleteProblemsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: ListTicketFields
+public type ListTicketFieldsQueries record {
+    # Displays the `creator_user_id` and `creator_app_name` properties. If the ticket field is created
+    #  by an app, `creator_app_name` is the name of the app and `creator_user_id` is `-1`. If the ticket field
+    #  is not created by an app, `creator_app_name` is null
+    boolean creator?;
+    # Forces the `title_in_portal` property to return a dynamic content variant for the specified locale.
+    #  Only accepts [active locale ids](/api-reference/ticketing/account-configuration/locales/#list-locales).
+    # Example: `locale="de"`
+    string locale?;
+};
+
+public type OrganizationMembershipsResponse record {
+    @jsondata:Name {value: "organization_memberships"}
+    OrganizationMembershipObject[] organizationMemberships?;
+};
+
+# Represents the Headers record for the operation: GetTrigger
+public type GetTriggerHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: ShowManyTicketForms
+public type ShowManyTicketFormsQueries record {
+    # true returns the ticket forms of the brand specified by the url's subdomain
+    @http:Query {name: "associated_to_brand"}
+    boolean associatedToBrand?;
+    # true returns ticket forms where `end_user_visible`; false returns ticket forms that are not end-user visible. If not present, returns both
+    @http:Query {name: "end_user_visible"}
+    boolean endUserVisible?;
+    # IDs of the ticket forms to be shown
+    string ids;
+    # true returns active ticket forms; false returns inactive ticket forms. If not present, returns both
+    boolean active?;
+    # true returns the default ticket form when the criteria defined by the parameters results in a set without active and end-user visible ticket forms
+    @http:Query {name: "fallback_to_default"}
+    boolean fallbackToDefault?;
+};
+
+# Represents the Headers record for the operation: ShowGroupById
+public type ShowGroupByIdHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type TagCountObject record {
+    # The time that the count value was last refreshed
+    @jsondata:Name {value: "refreshed_at"}
+    string refreshedAt?;
+    # The count of tags created in the last 24 hours
+    int value?;
+};
+
+public type AttachmentThumbnails record {
+    # An array of attachment objects. Note that photo thumbnails do not have thumbnails
+    AttachmentBaseObject[] thumbnails?;
+};
+
+public type ResourceCollectionsResponse record {
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    int count?;
+    @jsondata:Name {value: "resource_collections"}
+    ResourceCollectionObject[] resourceCollections?;
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
+};
+
+# Represents the Queries record for the operation: ListTicketForms
+public type ListTicketFormsQueries record {
+    # true returns the ticket forms of the brand specified by the url's subdomain
+    @http:Query {name: "associated_to_brand"}
+    boolean associatedToBrand?;
+    # true returns ticket forms where `end_user_visible`; false returns ticket forms that are not end-user visible. If not present, returns both
+    @http:Query {name: "end_user_visible"}
+    boolean endUserVisible?;
+    # true returns active ticket forms; false returns inactive ticket forms. If not present, returns both
+    boolean active?;
+    # true returns the default ticket form when the criteria defined by the parameters results in a set without active and end-user visible ticket forms
+    @http:Query {name: "fallback_to_default"}
+    boolean fallbackToDefault?;
+};
+
+public type JobStatusResponse record {
+    @jsondata:Name {value: "job_status"}
+    JobStatusObject jobStatus?;
+};
+
+public type ViewsResponse record {
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    int count?;
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
+    ViewObject[] views?;
+};
+
+# Represents the Queries record for the operation: ListRequests
+public type ListRequestsQueries record {
+    # Possible values are "updated_at", "created_at"
+    @http:Query {name: "sort_by"}
+    string sortBy?;
+    # One of "asc", "desc". Defaults to "asc"
+    @http:Query {name: "sort_order"}
+    string sortOrder?;
 };
 
 public type SessionsResponse record {
-    SessionObject[]? sessions?;
+    SessionObject[] sessions?;
 };
 
-public type SkillBasedRoutingAttributeDefinitions_definitions record {
-    SkillBasedRoutingAttributeDefinitions_definitions_conditions_all[]? conditions_all?;
-    SkillBasedRoutingAttributeDefinitions_definitions_conditions_all[]? conditions_any?;
+public type UserCreateInputIdentities record {
+    string 'type;
+    string value;
 };
 
 public type DynamicContentVariantResponse record {
-    DynamicContentVariantObject? variant?;
+    DynamicContentVariantObject variant?;
 };
 
-public type AuditObject_events record {
-    string? body?;
-    string? field_name?;
-    int? id?;
-    string? 'type?;
-    string|int? value?;
+# Represents the Headers record for the operation: DeleteOrganizationMembership
+public type DeleteOrganizationMembershipHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type SatisfactionReasonsResponse record {
-    SatisfactionReasonObject[]? reasons?;
+# Represents the Headers record for the operation: ListRequests
+public type ListRequestsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-# Zendesk Chat settings. See [Chat](#chat)
-public type AccountSettingsChatObject record {
-    boolean? available?;
-    boolean? enabled?;
-    boolean? integrated?;
-    int? maximum_request_count?;
-    string? welcome_message?;
+public type BookmarksResponseAllOf2 record {
+    BookmarkObject[] bookmarks?;
 };
 
-public type OrganizationSubscriptionsResponse record {
-    *OffsetPaginationObject;
-    # An array of organization subscriptions
-    OrganizationSubscriptionObject[]? organization_subscriptions?;
-};
+public type ValueValueOneOf12 int;
 
 public type LocaleObject record {
-    # The ISO 8601 formatted date-time the locale was created
-    string? created_at?;
-    # The unique ID of the locale
-    int? id?;
-    # The name of the locale
-    string? locale?;
-    # The name of the language
-    string? name?;
     # The ISO 8601 formatted date-time when the locale was last updated
-    string? updated_at?;
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # The name of the language
+    string name?;
+    # The ISO 8601 formatted date-time the locale was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The unique ID of the locale
+    int id?;
+    # The name of the locale
+    string locale?;
     # The URL of the locale record
-    string? url?;
+    string url?;
 };
 
 public type AttachmentUploadResponse record {
-    AttachmentUploadResponse_upload? upload?;
+    AttachmentUploadResponseUpload upload?;
 };
 
 public type CreateResourceResult record {
-    # the id of the new resource
-    int? id;
     # the index number of the resul
-    int? index;
+    int index;
+    # the id of the new resource
+    int id;
 };
 
-public type SatisfactionRatingResponse record {
-    SatisfactionRatingObject[]? satisfaction_rating?;
+public type V2WorkspacesBody record {
+    WorkspaceInput workspace?;
 };
 
-public type TagUrlObject record {
-    # The url associated to the api request
-    string? url?;
-};
-
-public type CustomStatusUpdateInput record {
-    # True if the custom status is set as active; inactive if false
-    boolean? active?;
-    # The dynamic content placeholder, if present, or the "agent_label" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? agent_label?;
-    # The dynamic content placeholder, if present, or the "description" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? description?;
-    # The dynamic content placeholder, if present, or the "end_user_description" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? end_user_description?;
-    # The dynamic content placeholder, if present, or the "end_user_label" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? end_user_label?;
-};
-
-public type SessionResponse record {
-    SessionObject[]? session?;
+public type WorkspacesworkspaceIdBody record {
+    WorkspaceInput workspace?;
 };
 
 public type ActivityObject record {
     # The full user record of the user responsible for the ticket activity. See [Users](/api-reference/ticketing/users/users/)
-    UserObject?? actor?;
-    # The id of the user responsible for the ticket activity. An `actor_id` of "-1" is a Zendesk system user, such as an automations action.
-    int? actor_id?;
-    # When the record was created
-    string? created_at?;
-    # Automatically assigned on creation
-    int? id?;
-    # The content of the activity. Can be a ticket, comment, or change.
-    record {}? 'object?;
-    # The target of the activity, a ticket.
-    record {}? target?;
-    # Description of the activity
-    string? title?;
+    UserObject actor?;
     # When the record was last updated
-    string? updated_at?;
-    # The API url of the activity
-    string? url?;
-    # The full user record of the agent making the request. See [Users](/api-reference/ticketing/users/users/)
-    UserObject?? user?;
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
     # The id of the agent making the request
-    int? user_id?;
+    @jsondata:Name {value: "user_id"}
+    int userId?;
     # The type of activity. Can be "tickets.assignment", "tickets.comment", or "tickets.priority_increase"
-    string? verb?;
+    string verb?;
+    # When the record was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The id of the user responsible for the ticket activity. An `actor_id` of "-1" is a Zendesk system user, such as an automations action
+    @jsondata:Name {value: "actor_id"}
+    int actorId?;
+    # Automatically assigned on creation
+    int id?;
+    # Description of the activity
+    string title?;
+    # The full user record of the agent making the request. See [Users](/api-reference/ticketing/users/users/)
+    UserObject user?;
+    # The API url of the activity
+    string url?;
+    # The content of the activity. Can be a ticket, comment, or change
+    record {} 'object?;
+    # The target of the activity, a ticket
+    record {} target?;
 };
 
-public type GroupSLAPolicyFilterDefinitionResponse_definitions_values_list record {
-    string? title?;
-    int? value?;
+# Represents the Headers record for the operation: ListTicketFields
+public type ListTicketFieldsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type SLAPolicyFilterDefinitionResponseDefinitionsValues record {
+    SLAPolicyFilterDefinitionResponseDefinitionsValuesList[] list?;
+    string 'type?;
 };
 
 public type TwitterChannelResponse record {
-    TwitterChannelObject? monitored_twitter_handle?;
+    @jsondata:Name {value: "monitored_twitter_handle"}
+    TwitterChannelObject monitoredTwitterHandle?;
 };
 
-public type UserCreateInput_organization record {
-    string? name;
-};
-
-public type DynamicContentVariantObject record {
-    # If the variant is active and useable
-    boolean? active?;
-    # The content of the variant
-    string? content;
-    # When the variant was created
-    string? created_at?;
-    # If the variant is the default for the item it belongs to
-    boolean? default?;
-    # Automatically assigned when the variant is created
-    int? id?;
-    # An active locale
-    int? locale_id;
-    # If the variant is outdated
-    boolean? outdated?;
-    # When the variant was last updated
-    string? updated_at?;
-    # The API url of the variant
-    string? url?;
+# Represents the Headers record for the operation: ShowManyTicketForms
+public type ShowManyTicketFormsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type IncrementalSkillBasedRoutingAttribute record {
-    # Automatically assigned when an attribute is created
-    string? id?;
     # The name of the attribute
-    string? name?;
+    string name?;
+    # Automatically assigned when an attribute is created
+    string id?;
     # The time the attribute was created, updated, or deleted
-    string? time?;
+    string time?;
     # One of "create", "update", or "delete"
-    string? 'type?;
-};
-
-public type SLAPolicyFilterDefinitionResponse record {
-    SLAPolicyFilterDefinitionResponse_definitions? definitions?;
+    string 'type?;
 };
 
 public type ViewCountObject record {
-    # Only active views if true, inactive views if false, all views if null.
-    boolean? active?;
-    # false if the cached data is stale and the system is still loading and caching new data
-    boolean? fresh?;
     # A pretty-printed text approximation of the view count
-    string? pretty?;
-    # The API url of the count
-    string? url?;
+    string pretty?;
+    # The id of the view
+    @jsondata:Name {value: "view_id"}
+    int viewId?;
+    # Only active views if true, inactive views if false, all views if null
+    boolean active?;
+    # false if the cached data is stale and the system is still loading and caching new data
+    boolean fresh?;
     # The cached number of tickets in the view. Can also be null if the system is loading and caching new data. Not to be confused with 0 tickets
     int? value?;
-    # The id of the view
-    int? view_id?;
+    # The API url of the count
+    string url?;
 };
 
-public type QueueResponse record {
-    QueueObject? queue?;
+# Represents the Headers record for the operation: MakeTicketCommentPrivateFromAudits
+public type MakeTicketCommentPrivateFromAuditsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type FollowerObject record {
-    "put"|"delete" action?;
-    string? user_email?;
-    string? user_id?;
-};
-
-public type TicketMetricsResponse record {
-    TicketMetricObject[]? ticket_metrics?;
-};
-
-public type LocaleResponse record {
-    LocaleObject? locale?;
+# Represents the Queries record for the operation: ListTriggerCategories
+public type ListTriggerCategoriesQueries record {
+    # Allowed sideloads
+    "rule_counts" include?;
+    # Pagination parameters
+    Page page?;
+    # Sort parameters
+    "position"|"-position"|"name"|"-name"|"created_at"|"-created_at"|"updated_at"|"-updated_at" sort?;
 };
 
 public type OrganizationObject record {
-    # The time the organization was created
-    string? created_at?;
-    # Any details obout the organization, such as the address
-    string? details?;
-    # An array of domain names associated with this organization
-    string[]? domain_names?;
-    # A unique external id to associate organizations to an external record. The id is case-insensitive. For example, "company1" and "Company1" are considered the same
-    string? external_id?;
-    # New tickets from users in this organization are automatically put in this group
-    int? group_id?;
-    # Automatically assigned when the organization is created
-    int? id?;
-    # A unique name for the organization
-    string? name?;
+    # End users in this organization are able to see each other's tickets
+    @jsondata:Name {value: "shared_tickets"}
+    boolean sharedTickets?;
     # Any notes you have about the organization
     string? notes?;
-    # Custom fields for this organization. See [Custom organization fields](/api-reference/ticketing/organizations/organizations/#custom-organization-fields)
-    record {}? organization_fields?;
-    # End users in this organization are able to comment on each other's tickets
-    boolean? shared_comments?;
-    # End users in this organization are able to see each other's tickets
-    boolean? shared_tickets?;
-    # The tags of the organization
-    string[]? tags?;
-    # The time of the last update of the organization
-    string? updated_at?;
+    # The time the organization was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # A unique external id to associate organizations to an external record. The id is case-insensitive. For example, "company1" and "Company1" are considered the same
+    @jsondata:Name {value: "external_id"}
+    string? externalId?;
     # The API url of this organization
-    string? url?;
+    string url?;
+    # An array of domain names associated with this organization
+    @jsondata:Name {value: "domain_names"}
+    string[] domainNames?;
+    # The tags of the organization
+    string[] tags?;
+    # Custom fields for this organization. See [Custom organization fields](/api-reference/ticketing/organizations/organizations/#custom-organization-fields)
+    @jsondata:Name {value: "organization_fields"}
+    record {}? organizationFields?;
+    # The time of the last update of the organization
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # New tickets from users in this organization are automatically put in this group
+    @jsondata:Name {value: "group_id"}
+    int? groupId?;
+    # A unique name for the organization
+    string name?;
+    # Any details obout the organization, such as the address
+    string? details?;
+    # Automatically assigned when the organization is created
+    int id?;
+    # End users in this organization are able to comment on each other's tickets
+    @jsondata:Name {value: "shared_comments"}
+    boolean sharedComments?;
 };
 
-public type ActivitiesCountResponse_count record {
-    string? refreshed_at?;
-    int? value?;
+public type LocaleResponse record {
+    LocaleObject locale?;
 };
 
-public type GroupSLAPolicyFilterDefinitionResponse_definitions_values record {
-    GroupSLAPolicyFilterDefinitionResponse_definitions_values_list[]? list?;
-    string? 'type?;
+# Represents the Headers record for the operation: DeleteTicketForm
+public type DeleteTicketFormHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type CollaboratorObject record {
-    string? email?;
-    string? name?;
+public type MacrosResponseAllOf1 record {
+    MacroObject[] macros?;
+};
+
+# Represents the Headers record for the operation: RecoverSuspendedTicket
+public type RecoverSuspendedTicketHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type WorkspaceResponseAllOf1 record {
+    WorkspaceObject[] workspaces?;
 };
 
 public type SupportAddressResponse record {
-    SupportAddressObject? recipient_address?;
-};
-
-# Ticket form settings. See [Ticket Form](#ticket-form)
-public type AccountSettingsTicketFormObject record {
-    string? raw_ticket_forms_instructions?;
-    string? ticket_forms_instructions?;
+    @jsondata:Name {value: "recipient_address"}
+    SupportAddressObject recipientAddress?;
 };
 
 public type SatisfactionRatingObject record {
-    # The id of agent assigned to at the time of rating
-    int? assignee_id;
-    # The comment received with this rating, if available
-    string? comment?;
-    # The time the satisfaction rating got created
-    string? created_at?;
-    # The id of group assigned to at the time of rating
-    int? group_id;
-    # Automatically assigned upon creation
-    int? id?;
     # The reason for a bad rating given by the requester in a follow-up question. Satisfaction reasons must be [enabled](https://support.zendesk.com/hc/en-us/articles/223152967)
-    string? reason?;
-    # The default reasons the user can select from a list menu for giving a negative rating. See [Reason codes](/api-reference/ticketing/ticket-management/satisfaction_reasons/#reason-codes) in the Satisfaction Reasons API. Can only be set on ratings with a `score` of "bad". Responses don't include this property
-    int? reason_code?;
-    # id for the reason the user gave a negative rating. Can only be set on ratings with a `score` of "bad". To get a descriptive value for the id, use the [Show Reason for Satisfaction Rating](/api-reference/ticketing/ticket-management/satisfaction_reasons/#show-reason-for-satisfaction-rating) endpoint
-    int? reason_id?;
-    # The id of ticket requester submitting the rating
-    int? requester_id;
-    # The rating "offered", "unoffered", "good" or "bad"
-    string? score;
+    string reason?;
+    # The time the satisfaction rating got created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
     # The id of ticket being rated
-    int? ticket_id;
-    # The time the satisfaction rating got updated
-    string? updated_at?;
+    @jsondata:Name {value: "ticket_id"}
+    int ticketId;
     # The API url of this rating
-    string? url?;
-};
-
-public type GroupSLAPolicyFilterDefinitionResponse_definitions_all record {
-    string? group?;
-    GroupSLAPolicyFilterDefinitionResponse_definitions_operators[]? operators?;
-    string? title?;
-    string? value?;
-    GroupSLAPolicyFilterDefinitionResponse_definitions_values? values?;
-};
-
-public type ListDeletedTicketsResponse_actor record {
-    int? id?;
-    string? name?;
-};
-
-public type SkillBasedRoutingAttributeObject record {
-    # When this record was created
-    string? created_at?;
-    # Automatically assigned when an attribute is created
-    string? id?;
-    # The name of the attribute
-    string? name;
-    # When this record was last updated
-    string? updated_at?;
-    # URL of the attribute
-    string? url?;
+    string url?;
+    # id for the reason the user gave a negative rating. Can only be set on ratings with a `score` of "bad". To get a descriptive value for the id, use the [Show Reason for Satisfaction Rating](/api-reference/ticketing/ticket-management/satisfaction_reasons/#show-reason-for-satisfaction-rating) endpoint
+    @jsondata:Name {value: "reason_id"}
+    int reasonId?;
+    # The default reasons the user can select from a list menu for giving a negative rating. See [Reason codes](/api-reference/ticketing/ticket-management/satisfaction_reasons/#reason-codes) in the Satisfaction Reasons API. Can only be set on ratings with a `score` of "bad". Responses don't include this property
+    @jsondata:Name {value: "reason_code"}
+    int reasonCode?;
+    # The rating "offered", "unoffered", "good" or "bad"
+    string score;
+    # The time the satisfaction rating got updated
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # The id of group assigned to at the time of rating
+    @jsondata:Name {value: "group_id"}
+    int groupId;
+    # The comment received with this rating, if available
+    string comment?;
+    # Automatically assigned upon creation
+    int id?;
+    # The id of agent assigned to at the time of rating
+    @jsondata:Name {value: "assignee_id"}
+    int assigneeId;
+    # The id of ticket requester submitting the rating
+    @jsondata:Name {value: "requester_id"}
+    int requesterId;
 };
 
 public type UserMergePropertiesInput record {
-    string? email?;
-    string? name?;
-    int? organization_id?;
-    string? password?;
+    string password?;
+    @jsondata:Name {value: "organization_id"}
+    int organizationId?;
+    string name?;
+    string email?;
 };
 
 # Branding settings. See [Branding](#branding)
 public type AccountSettingsBrandingObject record {
-    string? favicon_url?;
-    string? header_color?;
-    string? header_logo_url?;
-    string? page_background_color?;
-    string? tab_background_color?;
-    string? text_color?;
+    @jsondata:Name {value: "tab_background_color"}
+    string tabBackgroundColor?;
+    @jsondata:Name {value: "favicon_url"}
+    string? faviconUrl?;
+    @jsondata:Name {value: "header_color"}
+    string headerColor?;
+    @jsondata:Name {value: "page_background_color"}
+    string pageBackgroundColor?;
+    @jsondata:Name {value: "text_color"}
+    string textColor?;
+    @jsondata:Name {value: "header_logo_url"}
+    string? headerLogoUrl?;
 };
 
-public type AttachmentUpdateInput record {
-    # If true, allows access to attachments with detected malware.
-    boolean? malware_access_override?;
+# Represents the Queries record for the operation: SearchOrganizations
+public type SearchOrganizationsQueries record {
+    # The name of an organization
+    string name?;
+    # The external id of an organization
+    @http:Query {name: "external_id"}
+    int externalId?;
+};
+
+# Represents the Queries record for the operation: ListTicketAudits
+public type ListTicketAuditsQueries record {
+    # Maximum number of results returned
+    int 'limit?;
+};
+
+# Represents the Headers record for the operation: GetViewCount
+public type GetViewCountHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type MacroCategoriesResponse record {
-    string[]? categories?;
+    string[] categories?;
 };
 
-public type BatchJobRequest_job record {
-    "patch" action?;
-    BatchJobRequest_job_items? items?;
-};
-
-public type TicketCreateRequest record {
-    TicketCreateInput? ticket?;
+public type TicketMetricEventsResponseTicketMetricEventsResponseAllOf12 record {
+    @jsondata:Name {value: "next_page"}
+    string nextPage?;
+    int count?;
+    @jsondata:Name {value: "end_time"}
+    int endTime?;
 };
 
 public type GroupResponse record {
-    GroupObject? group?;
+    GroupObject group?;
+};
+
+# Represents the Headers record for the operation: OrganizationRelated
+public type OrganizationRelatedHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type SkillBasedRoutingAttributeValueObject record {
-    # Id of the associated attribute
-    string? attribute_id?;
-    # When this record was created
-    string? created_at?;
-    # Automatically assigned when an attribute value is created
-    string? id?;
-    # The name of the attribute value
-    string? name?;
     # When this record was last updated
-    string? updated_at?;
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # Id of the associated attribute
+    @jsondata:Name {value: "attribute_id"}
+    string attributeId?;
+    # The name of the attribute value
+    string name?;
+    # When this record was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Automatically assigned when an attribute value is created
+    string id?;
     # URL of the attribute value
-    string? url?;
+    string url?;
 };
 
 public type CustomObjectsCreateRequest record {
-    CustomObjectCreateInput? custom_object?;
+    @jsondata:Name {value: "custom_object"}
+    CustomObjectCreateInput customObject?;
 };
 
 public type SuspendedTicketObject record {
     # The attachments, if any associated to this suspended ticket. See [Attachments](/api-reference/ticketing/tickets/ticket-attachments/)
     AttachmentObject[]? attachments?;
     # The author id (if available), name and email
-    AuthorObject?? author?;
-    # The id of the brand this ticket is associated with. Only applicable for Enterprise accounts
-    int? brand_id?;
-    # Why the ticket was suspended
-    string? cause?;
-    # The ID of the cause
-    int? cause_id?;
-    # The content that was flagged
-    string? content?;
-    # The ticket ID this suspended email is associated with, if available
-    string? created_at?;
-    # The error messages if any associated to this suspended ticket
-    record {}[]? error_messages?;
-    # Automatically assigned
-    int? id?;
-    # The ID of the email, if available
-    string? message_id?;
-    # The original recipient e-mail address of the ticket
-    string? recipient?;
+    AuthorObject author?;
     # The value of the subject field for this ticket
-    string? subject?;
+    string subject?;
+    # Why the ticket was suspended
+    string cause?;
     # The ticket ID this suspended email is associated with, if available
-    int? ticket_id?;
-    # When the ticket was assigned
-    string? updated_at?;
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The ID of the cause
+    @jsondata:Name {value: "cause_id"}
+    int causeId?;
+    # The ID of the email, if available
+    @jsondata:Name {value: "message_id"}
+    string messageId?;
+    # The ticket ID this suspended email is associated with, if available
+    @jsondata:Name {value: "ticket_id"}
+    int ticketId?;
+    # The content that was flagged
+    string content?;
+    # The error messages if any associated to this suspended ticket
+    @jsondata:Name {value: "error_messages"}
+    record {}[]? errorMessages?;
     # The API url of this ticket
-    string? url?;
-    # An object explaining how the ticket was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
-    ViaObject? via?;
+    string url?;
+    # The id of the brand this ticket is associated with. Only applicable for Enterprise accounts
+    @jsondata:Name {value: "brand_id"}
+    int brandId?;
+    ViaObject via?;
+    # When the ticket was assigned
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # The original recipient e-mail address of the ticket
+    string recipient?;
+    # Automatically assigned
+    int id?;
 };
 
-public type OrganizationSubscriptionResponse record {
-    OrganizationSubscriptionObject? organization_subscription?;
+# Represents the Headers record for the operation: ListAssigneeFieldAssignableGroupsAndAgentsSearch
+public type ListAssigneeFieldAssignableGroupsAndAgentsSearchHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type ResourceCollectionObject record {
-    # When the resource collection was created
-    string? created_at?;
-    # id for the resource collection. Automatically assigned upon creation
-    int? id?;
-    # Array of resource metadata objects. See [Resource objects](#resource-objects)
-    ResourceCollectionObject_resources[]? resources?;
     # Last time the resource collection was updated
-    string? updated_at?;
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # When the resource collection was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Array of resource metadata objects. See [Resource objects](#resource-objects)
+    ResourceCollectionObjectResources[] resources?;
+    # id for the resource collection. Automatically assigned upon creation
+    int id?;
 };
 
-public type TargetHTTP record {
-    # "application/json", "application/xml", or "application/x-www-form-urlencoded"
-    string? content_type;
-    # "get", "patch", "put", "post", or "delete"
-    string? method;
-    # only writable
-    string? password?;
-    string? target_url;
-    string? username?;
+# Represents the Queries record for the operation: RecoverSuspendedTickets
+public type RecoverSuspendedTicketsQueries record {
+    # A comma separated list of ids of suspended tickets to recover
+    string ids;
 };
 
-public type TicketCreateInput record {
-    *TicketUpdateInput;
-    # Enterprise only. The id of the brand this ticket is associated with
-    int? brand_id?;
-    # POST requests only. Users to add as cc's when creating a ticket. See [Setting Collaborators](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-collaborators)
-    CollaboratorObject[]? collaborators?;
-    # The ids of agents or end users currently CC'ed on the ticket. See [CCs and followers resources](https://support.zendesk.com/hc/en-us/articles/360020585233) in the Support Help Center
-    int[]? email_cc_ids?;
-    # The ids of agents currently following the ticket. See [CCs and followers resources](https://support.zendesk.com/hc/en-us/articles/360020585233)
-    int[]? follower_ids?;
-    # POST requests only. List of macro IDs to be recorded in the ticket audit
-    int[]? macro_ids?;
-    # The dynamic content placeholder, if present, or the "subject" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? raw_subject?;
-    # The original recipient e-mail address of the ticket
-    string? recipient?;
-    # The user who submitted the ticket. The submitter always becomes the author of the first comment on the ticket
-    int? submitter_id?;
-    # Enterprise only. The id of the ticket form to render for the ticket
-    int? ticket_form_id?;
-    # An object explaining how the ticket was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
-    ViaObject? via?;
-    # POST requests only. The id of a closed ticket when creating a follow-up ticket. See [Creating a follow-up ticket](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#creating-a-follow-up-ticket)
-    int? via_followup_source_id?;
-};
-
-public type TrialAccountObject record {
-    # The name of the account
-    string? name?;
-    # The subdomain of the account
-    string? subdomain?;
-    # The URL of the account
-    string? url?;
-};
-
-public type SLAPolicyFilterDefinitionResponse_definitions_all record {
-    string? group?;
-    GroupSLAPolicyFilterDefinitionResponse_definitions_operators[]? operators?;
-    string? target?;
-    string? title?;
-    string? value?;
-    SLAPolicyFilterDefinitionResponse_definitions_values? values?;
-};
-
-public type WorkspaceObject record {
-    # If true, this workspace is available for use
-    boolean? activated?;
-    # The apps associated to this workspace
-    record {}[]? apps?;
-    # An object that describes the conditions under which the automation will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
-    ConditionsObject? conditions?;
-    # The time the workspace was created
-    string? created_at?;
-    # User-defined description of this workspace's purpose
-    string? description?;
-    # Automatically assigned upon creation
-    int? id?;
-    # The ids of the macros associated to this workspace
-    int[]? macro_ids?;
-    # The ids of the macros associated to this workspace
-    int[]? macros?;
-    # Ordering of the workspace relative to other workspaces
-    int? position?;
-    # If true, the order of apps within the workspace will be preserved
-    boolean? prefer_workspace_app_order?;
-    # An array of the macro objects that will be used in this workspace. See [Macros](/api-reference/ticketing/business-rules/macros/)
-    MacroObject[]? selected_macros?;
-    # The id of the ticket web form associated to this workspace
-    int? ticket_form_id?;
-    # The title of the workspace
-    string? title?;
-    # The time of the last update of the workspace
-    string? updated_at?;
-    # The URL for this resource
-    string? url?;
+public type SLAPolicyFilterDefinitionResponseDefinitionsOperators record {
+    string title?;
+    string value?;
 };
 
 public type ConditionObject record {
     # The name of a ticket field
-    string? 'field?;
-    # A comparison operator
-    string? operator?;
+    string 'field?;
     # The value of a ticket field
-    string? value?;
+    string value?;
+    # A comparison operator
+    string operator?;
 };
 
-public type SLAPolicyObject record {
-    # The time the SLA policy was created
-    string? created_at?;
-    # The description of the SLA policy
-    string? description?;
-    # An object that describes the conditions that a ticket must match in order for an SLA policy to be applied to that ticket. See [Filter](#filter).
-    SLAPolicyFilterObject? filter;
-    # Automatically assigned when created
-    int? id?;
-    # Array of [Policy Metric](#policy-metric) objects
-    SLAPolicyMetricObject[]? policy_metrics?;
-    # Position of the SLA policy that determines the order they will be matched. If not specified, the SLA policy is added as the last position
-    int? position?;
-    # The title of the SLA policy
-    string? title;
-    # The time of the last update of the SLA policy
-    string? updated_at?;
-    # URL of the SLA Policy reacord
-    string? url?;
-};
-
-public type ListDeletedTicketsResponse_deleted_tickets record {
-    ListDeletedTicketsResponse_actor? actor?;
-    string? deleted_at?;
-    int? id?;
-    string? previous_state?;
-    string? subject?;
+# Represents the Queries record for the operation: DeleteManyOrganizationMemberships
+public type DeleteManyOrganizationMembershipsQueries record {
+    # The IDs of the organization memberships to delete
+    int[] ids?;
 };
 
 public type OrganizationMetadataObject record {
     # The number of tickets for the organization
-    int? tickets_count?;
+    @jsondata:Name {value: "tickets_count"}
+    int ticketsCount?;
     # The number of users for the organization
-    int? users_count?;
+    @jsondata:Name {value: "users_count"}
+    int usersCount?;
 };
 
-public type PushNotificationDevicesInput string[]?;
-
-public type TargetGetSatisfaction record {
-    string? account_name;
-    string? email;
-    # only writable
-    string? password;
-    string? target_url?;
+# Represents the Queries record for the operation: ListActiveMacros
+public type ListActiveMacrosQueries record {
+    # A sideload to include in the response. See [Sideloads](#sideloads-2)
+    string include?;
+    # Filter macros by access. Possible values are "personal", "agents", "shared", or "account". The "agents" value returns all personal macros for the account's agents and is only available to admins
+    string access?;
+    # Filter macros by group
+    @http:Query {name: "group_id"}
+    int groupId?;
+    # Possible values are alphabetical, "created_at", "updated_at", "usage_1h", "usage_24h", "usage_7d", or "usage_30d". Defaults to alphabetical
+    @http:Query {name: "sort_by"}
+    string sortBy?;
+    # Filter macros by category
+    int category?;
+    # One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
+    @http:Query {name: "sort_order"}
+    string sortOrder?;
 };
 
-public type MacroApplyTicketResponse_result record {
-    MacroApplyTicketResponse_result_ticket? ticket?;
-};
-
-public type BrandCreateRequest record {
-    BrandObject? brand?;
-};
-
-public type Page record {
-    string? after?;
-    string? before?;
-    int? size?;
+# Represents the Headers record for the operation: ShowTicket
+public type ShowTicketHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type CustomObjectLimitsResponse record {
     # The current numnber of the requested resource
-    int? count?;
+    int count?;
     # The maximum allowed number for the requested resource
-    int? 'limit?;
+    int 'limit?;
 };
 
-public type CustomRoleObject record {
-    # Configuration settings for the role. See [Configuration](#configuration)
-    CustomRoleConfigurationObject? configuration?;
-    # The time the record was created
-    string? created_at?;
-    # A description of the role
-    string? description?;
-    # Automatically assigned on creation
-    int? id?;
-    # Name of the custom role
-    string? name;
-    # The user's role. 0 stands for a custom agent, 1 for a light agent, 2 for a chat agent, 3 for a contributor, 4 for an admin and 5 for a billing admin. See [Understanding standard agent roles in Zendesk Support](https://support.zendesk.com/hc/en-us/articles/4409155971354-Understanding-standard-agent-roles-in-Zendesk-Support) in Zendesk help
-    int? role_type;
-    # The number of team members assigned to this role
-    int? team_member_count?;
-    # The time the record was last updated
-    string? updated_at?;
+# Represents the Headers record for the operation: CreateCustomObjectRecord
+public type CreateCustomObjectRecordHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type EssentialsCardObject record {
+    # layout type
+    string layout?;
+    # Maximum number of fields allowed in the essentials card
+    @jsondata:Name {value: "max_count"}
+    int maxCount?;
+    # If true, the system has used the first twenty fields for the custom object type as the essentials card
+    boolean default?;
+    # Date and time the essentials card were last updated
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
     # Date and time the essentials card were created
-    string? created_at?;
-    # If true, the system has used the first twenty fields for the custom object type as the essentials card.
-    boolean? default?;
-    # Fields that are displayed in the essentials card details. The order is defined by the order of the fields in the array
-    record {}[]? fields;
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
     # id of the essentials card
     string? id?;
+    # Fields that are displayed in the essentials card details. The order is defined by the order of the fields in the array
+    record {}[] fields;
     # Object type. Example: `zen:user` refers to `User` type
-    string? 'key?;
-    # layout type
-    string? layout?;
-    # Maximum number of fields allowed in the essentials card
-    int? max_count?;
-    # Date and time the essentials card were last updated
-    string? updated_at?;
+    string 'key?;
 };
 
-public type CustomObjectRecordsResponse record {
-    # The number of results returned for the current request
-    int? count?;
-    CustomObjectRecord[]? custom_object_records?;
-    CustomObjectRecordsResponse_links? links?;
-    CustomObjectRecordsResponse_meta? meta?;
-};
-
-public type Organization_field_id int|string;
-
-public type MacroUpdateManyInput_macros record {
-    # The active status of the macro (true or false)
-    boolean? active?;
-    # The ID of the macro to update
-    int? id;
-    # The new position of the macro
-    int? position?;
+# Represents the Headers record for the operation: UpdateAutomation
+public type UpdateAutomationHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type ListTicketCollaboratorsResponse record {
 };
 
-public type TriggerRevisionResponse_trigger_revision_snapshot record {
-    TriggerActionObject[]? actions?;
-    boolean? active?;
-    # An object that describes the conditions under which the trigger will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
-    TriggerConditionsObject? conditions?;
-    string? description?;
-    string? title?;
+# Represents the Queries record for the operation: GroupMembershipBulkDelete
+public type GroupMembershipBulkDeleteQueries record {
+    # Id of the group memberships to delete. Comma separated
+    string ids?;
+};
+
+# Represents the Headers record for the operation: MakeTicketCommentPrivate
+public type MakeTicketCommentPrivateHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: RedactChatCommentAttachment
+public type RedactChatCommentAttachmentHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 # Describes how the object was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
 public type TicketAuditViaObject record {
     # This tells you how the ticket or event was created. Examples: "web", "mobile", "rule", "system"
-    string? channel?;
+    string channel?;
     # For some channels a source object gives more information about how or why the ticket or event was created
-    record {}? 'source?;
-};
-
-public type UserRequest record {
-    UserInput? user;
-};
-
-public type OrganizationSubscriptionObject record {
-    # The date the organization subscription was created
-    string? created_at?;
-    # The ID of the organization subscription
-    int? id?;
-    # The ID of the organization
-    int? organization_id?;
-    # The ID of the user
-    int? user_id?;
-};
-
-# Account metrics settings. See [Metrics](#metrics)
-public type AccountSettingsMetricsObject record {
-    string? account_size?;
-};
-
-public type MacrosResponse record {
-    MacroObject[]? macros?;
-    *OffsetPaginationObject;
-};
-
-public type TicketMetricEventSLAObject record {
-    *TicketMetricEventBaseObject;
-    # Available if `type` is `apply_sla`. The SLA policy and target being enforced on the ticket and metric in question, if any. See [sla](#sla)
-    record {}? sla?;
+    record {} 'source?;
 };
 
 public type SkillBasedRoutingAttributeValueResponse record {
-    SkillBasedRoutingAttributeValueObject? attribute_value?;
+    @jsondata:Name {value: "attribute_value"}
+    SkillBasedRoutingAttributeValueObject attributeValue?;
 };
 
 public type SLAPoliciesResponse record {
-    int? count?;
-    string? next_page?;
-    string? previous_page?;
-    SLAPolicyObject[]? sla_policies?;
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    int count?;
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
+    @jsondata:Name {value: "sla_policies"}
+    SLAPolicyObject[] slaPolicies?;
 };
 
-public type CountResponse record {
-    CountResponse_count? count?;
+# Represents the Queries record for the operation: ShowManyDynamicContents
+public type ShowManyDynamicContentsQueries record {
+    # Identifiers for the dynamic contents
+    string identifiers?;
 };
 
 public type GroupObject record {
-    # The time the group was created
-    string? created_at?;
     # If the group is the default one for the account
-    boolean? default?;
+    boolean default?;
     # Deleted groups get marked as such
-    boolean? deleted?;
-    # The description of the group
-    string? description?;
-    # Automatically assigned when creating groups
-    int? id?;
+    boolean deleted?;
+    # The time of the last update of the group
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
     # If true, the group is public.
     # If false, the group is private.
     # You can't change a private group to a public group
-    boolean? is_public?;
+    @jsondata:Name {value: "is_public"}
+    boolean isPublic?;
     # The name of the group
-    string? name;
-    # The time of the last update of the group
-    string? updated_at?;
+    string name;
+    # The time the group was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The description of the group
+    string description?;
+    # Automatically assigned when creating groups
+    int id?;
     # The API url of the group
-    string? url?;
+    string url?;
 };
 
-# Onboarding settings
-public type AccountSettingsOnboardingObject record {
-    int? checklist_onboarding_version?;
-    string? onboarding_segments?;
-    string? product_sign_up?;
+# Represents the Headers record for the operation: GroupMembershipBulkDelete
+public type GroupMembershipBulkDeleteHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type InlineResponse2006Count record {
+    @jsondata:Name {value: "refreshed_at"}
+    string refreshedAt?;
+    int value?;
 };
 
 public type SearchResponse record {
+    # URL to the next page of results
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
     # The number of resources returned by the query corresponding to this page of results in the paginated response
-    int? count?;
+    int count?;
+    # URL to the previous page of results
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
+    # May consist of tickets, users, groups, or organizations, as specified by the `result_type` property in each result object
+    SearchResultObject[] results?;
     # The facets corresponding to the search query
     string? facets?;
-    # URL to the next page of results
-    string? next_page?;
-    # URL to the previous page of results
-    string? previous_page?;
-    # May consist of tickets, users, groups, or organizations, as specified by the `result_type` property in each result object
-    SearchResultObject[]? results?;
 };
 
 public type ViewExportResponse record {
-    ViewExportResponse_export? export?;
+    ViewExportResponseExport export?;
 };
 
-public type UserCreateInput_identities record {
-    string? 'type;
-    string? value;
+# Represents the Headers record for the operation: UpdateManyDynamicContentVariants
+public type UpdateManyDynamicContentVariantsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type AttachmentBaseObject record {
-    # The content type of the image. Example value: "image/png"
-    string? content_type?;
-    # A full URL where the attachment image file can be downloaded. The file may be hosted externally so take care not to inadvertently send Zendesk authentication credentials. See [Working with url properties](/documentation/ticketing/managing-tickets/working-with-url-properties)
-    string? content_url?;
-    # If true, the attachment has been deleted
-    boolean? deleted?;
-    # The name of the image file
-    string? file_name?;
-    # The height of the image file in pixels. If height is unknown, returns null
-    string? height?;
-    # Automatically assigned when created
-    int? id?;
-    # If true, the attachment is excluded from the attachment list and the attachment's URL
-    # can be referenced within the comment of a ticket. Default is false
-    boolean? inline?;
-    # If true, you can download an attachment flagged as malware. If false, you can't download such an attachment.
-    boolean? malware_access_override?;
-    # The result of the malware scan. There is a delay between the time the attachment is uploaded and when the malware scan is completed. Usually the scan is done within a few seconds, but high load conditions can delay the scan results. Possible values: "malware_found", "malware_not_found", "failed_to_scan", "not_scanned"
-    string? malware_scan_result?;
-    # The URL the attachment image file has been mapped to
-    string? mapped_content_url?;
-    # The size of the image file in bytes
-    int? size?;
-    # A URL to access the attachment details
-    string? url?;
-    # The width of the image file in pixels. If width is unknown, returns null
-    string? width?;
+public type DefinitionsResponseDefinitionsValues record {
+    string title?;
+    string value?;
+    boolean enabled?;
 };
 
-public type UpdateResourceResult record {
-    # the action the job attempted (`"action": "update"`)
-    string? action;
-    # the id of the resource the job attempted to update
-    int? id;
-    # the status (`"status": "Updated"`)
-    string? status;
-    # whether the action was successful or not (`"success": true`)
-    boolean? success;
+# Represents the Headers record for the operation: ListMacroAttachments
+public type ListMacroAttachmentsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type QueueObject_definition_all record {
-    string? 'field?;
-    string? operator?;
-    string? value?;
+public type SLAPolicyFilterDefinitionResponseDefinitionsValues1 record {
+    SLAPolicyFilterDefinitionResponseDefinitionsValues1List[] list?;
+    string 'type?;
 };
 
-public type UserPasswordRequirementsResponse record {
-    string[]? requirements?;
+# Represents the Headers record for the operation: ShowSatisfactionRating
+public type ShowSatisfactionRatingHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TicketCommentsCountResponse record {
-    ActivitiesCountResponse_count? count?;
-};
-
-public type SuspendedTicketsAttachmentsResponse_upload record {
-    AttachmentObject[]? attachments?;
-    # Token for subsequent request
-    string? token?;
+    TicketCommentsCountResponseCount count?;
 };
 
 public type SatisfactionRatingsResponse record {
-    SatisfactionRatingObject[]? satisfaction_ratings?;
+    @jsondata:Name {value: "satisfaction_ratings"}
+    SatisfactionRatingObject[] satisfactionRatings?;
+};
+
+# Represents the Headers record for the operation: ExportView
+public type ExportViewHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TicketCreateVoicemailTicketVoiceCommentInput record {
-    # The agent who answered the call
-    int? answered_by_id?;
-    # Duration in seconds of the call
-    int? call_duration?;
-    # Incoming phone number
-    string? 'from?;
-    # Location of the caller (optional)
-    string? location?;
-    # Incoming phone number
-    string? recording_url?;
-    # [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp of the call starting time
-    string? started_at?;
-    # Dialed phone number
-    string? to?;
     # Transcription of the call (optional)
-    string? transcription_text?;
-};
-
-public type SearchResultObject record {
-    # When the resource was created
-    string? created_at?;
-    # Flag to indicate whether this is the default resource
-    boolean? default?;
-    # Flag to indicate whether or not resource has been deleted
-    boolean? deleted?;
-    # The description of the resource
-    string? description?;
-    # The ID of the resource
-    int? id?;
-    # The name of the resource
-    string? name?;
-    # The type of the resource
-    string? result_type?;
-    # When the resource was last updated
-    string? updated_at?;
-    # The url of the resource
-    string? url?;
+    @jsondata:Name {value: "transcription_text"}
+    string transcriptionText?;
+    # Incoming phone number
+    @jsondata:Name {value: "recording_url"}
+    string recordingUrl?;
+    # The agent who answered the call
+    @jsondata:Name {value: "answered_by_id"}
+    int answeredById?;
+    # [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp of the call starting time
+    @jsondata:Name {value: "started_at"}
+    string startedAt?;
+    # Incoming phone number
+    string 'from?;
+    # Location of the caller (optional)
+    string location?;
+    # Dialed phone number
+    string to?;
+    # Duration in seconds of the call
+    @jsondata:Name {value: "call_duration"}
+    int callDuration?;
 };
 
 public type SupportAddressesResponse record {
-    SupportAddressObject[]? recipient_addresses?;
+    @jsondata:Name {value: "recipient_addresses"}
+    SupportAddressObject[] recipientAddresses?;
 };
 
-public type TriggerConditionDefinitionObjectAll record {
-    string? group?;
-    boolean? nullable?;
-    DefinitionsResponse_definitions_operators[]? operators?;
-    boolean? repeatable?;
-    string? subject?;
-    string? title?;
-    string? 'type?;
-    DefinitionsResponse_definitions_values[]? values?;
+public type SearchResultObject record {
+    # The type of the resource
+    @jsondata:Name {value: "result_type"}
+    string resultType?;
+    # Flag to indicate whether this is the default resource
+    boolean default?;
+    # Flag to indicate whether or not resource has been deleted
+    boolean deleted?;
+    # When the resource was last updated
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # The name of the resource
+    string name?;
+    # When the resource was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The description of the resource
+    string description?;
+    # The ID of the resource
+    int id?;
+    # The url of the resource
+    string url?;
+};
+
+public type CustomStatusCreateInputAllOf2 record {
+    # The status category the custom ticket status belongs to
+    @jsondata:Name {value: "status_category"}
+    "new"|"open"|"pending"|"hold"|"solved" statusCategory?;
+};
+
+# Represents the Headers record for the operation: ShowCustomStatus
+public type ShowCustomStatusHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 # Ticket settings. See [Tickets](#tickets)
 public type AccountSettingsTicketObject record {
-    boolean? accepted_new_collaboration_tos?;
-    boolean? agent_collision?;
-    boolean? agent_invitation_enabled?;
-    boolean? agent_ticket_deletion?;
-    boolean? allow_group_reset?;
-    boolean? assign_default_organization?;
-    boolean? assign_tickets_upon_solve?;
-    boolean? auto_translation_enabled?;
-    boolean? auto_updated_ccs_followers_rules?;
-    boolean? chat_sla_enablement?;
-    boolean? collaboration?;
-    boolean? comments_public_by_default?;
-    boolean? email_attachments?;
-    boolean? emoji_autocompletion?;
-    boolean? follower_and_email_cc_collaborations?;
-    boolean? has_color_text?;
-    boolean? is_first_comment_private_enabled?;
-    boolean? light_agent_email_ccs_allowed?;
-    boolean? list_empty_views?;
-    boolean? list_newest_comments_first?;
-    boolean? markdown_ticket_comments?;
-    int? maximum_personal_views_to_list?;
-    boolean? private_attachments?;
-    boolean? rich_text_comments?;
-    boolean? status_hold?;
-    boolean? tagging?;
-    boolean? using_skill_based_routing?;
+    @jsondata:Name {value: "auto_translation_enabled"}
+    boolean autoTranslationEnabled?;
+    @jsondata:Name {value: "agent_ticket_deletion"}
+    boolean agentTicketDeletion?;
+    boolean tagging?;
+    @jsondata:Name {value: "using_skill_based_routing"}
+    boolean usingSkillBasedRouting?;
+    @jsondata:Name {value: "has_color_text"}
+    boolean hasColorText?;
+    @jsondata:Name {value: "allow_group_reset"}
+    boolean allowGroupReset?;
+    @jsondata:Name {value: "rich_text_comments"}
+    boolean richTextComments?;
+    @jsondata:Name {value: "comments_public_by_default"}
+    boolean commentsPublicByDefault?;
+    @jsondata:Name {value: "follower_and_email_cc_collaborations"}
+    boolean followerAndEmailCcCollaborations?;
+    @jsondata:Name {value: "light_agent_email_ccs_allowed"}
+    boolean lightAgentEmailCcsAllowed?;
+    @jsondata:Name {value: "is_first_comment_private_enabled"}
+    boolean isFirstCommentPrivateEnabled?;
+    @jsondata:Name {value: "list_empty_views"}
+    boolean listEmptyViews?;
+    @jsondata:Name {value: "chat_sla_enablement"}
+    boolean chatSlaEnablement?;
+    @jsondata:Name {value: "agent_invitation_enabled"}
+    boolean agentInvitationEnabled?;
+    @jsondata:Name {value: "accepted_new_collaboration_tos"}
+    boolean acceptedNewCollaborationTos?;
+    @jsondata:Name {value: "assign_default_organization"}
+    boolean assignDefaultOrganization?;
+    @jsondata:Name {value: "emoji_autocompletion"}
+    boolean emojiAutocompletion?;
+    @jsondata:Name {value: "private_attachments"}
+    boolean privateAttachments?;
+    @jsondata:Name {value: "auto_updated_ccs_followers_rules"}
+    boolean autoUpdatedCcsFollowersRules?;
+    @jsondata:Name {value: "email_attachments"}
+    boolean emailAttachments?;
+    @jsondata:Name {value: "list_newest_comments_first"}
+    boolean listNewestCommentsFirst?;
+    @jsondata:Name {value: "status_hold"}
+    boolean statusHold?;
+    @jsondata:Name {value: "markdown_ticket_comments"}
+    boolean markdownTicketComments?;
+    @jsondata:Name {value: "agent_collision"}
+    boolean agentCollision?;
+    @jsondata:Name {value: "maximum_personal_views_to_list"}
+    int maximumPersonalViewsToList?;
+    @jsondata:Name {value: "assign_tickets_upon_solve"}
+    boolean assignTicketsUponSolve?;
+    boolean collaboration?;
+};
+
+# Represents the Headers record for the operation: ShowChangesToTicket
+public type ShowChangesToTicketHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TagsByObjectIdResponse record {
     # An array of strings
-    string[]? tags;
+    string[] tags;
 };
 
-public type TicketResponse record {
-    TicketObject? ticket?;
-};
-
-# An object that describes the conditions under which the trigger will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
-public type TriggerConditionsObject record {
-    TriggerConditionObject[]? all?;
-    TriggerConditionObject[]? 'any?;
-};
-
-# Secondary group ids linked to the queue
-public type QueueObject_secondary_groups record {
-    int? count?;
-    ListDeletedTicketsResponse_actor[]? groups?;
+public type CountResponseCount record {
+    @jsondata:Name {value: "refreshed_at"}
+    string refreshedAt?;
+    int value?;
 };
 
 # Configuration for the agent workspace. See [Agents](#agents)
 public type AccountSettingsAgentObject record {
-    boolean? agent_home?;
-    boolean? agent_workspace?;
-    boolean? aw_self_serve_migration_enabled?;
-    boolean? focus_mode?;
-    boolean? idle_timeout_enabled?;
-    boolean? unified_agent_statuses?;
+    @jsondata:Name {value: "agent_workspace"}
+    boolean agentWorkspace?;
+    @jsondata:Name {value: "aw_self_serve_migration_enabled"}
+    boolean awSelfServeMigrationEnabled?;
+    @jsondata:Name {value: "agent_home"}
+    boolean agentHome?;
+    @jsondata:Name {value: "idle_timeout_enabled"}
+    boolean idleTimeoutEnabled?;
+    @jsondata:Name {value: "unified_agent_statuses"}
+    boolean unifiedAgentStatuses?;
+    @jsondata:Name {value: "focus_mode"}
+    boolean focusMode?;
 };
 
-public type TicketMetricsByTicketMetricIdResponse record {
-    TicketMetricObject[]? ticket_metric?;
+# Represents the Headers record for the operation: ShowRequest
+public type ShowRequestHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type TicketFormObject record {
-    # If the form is set as active
-    boolean? active?;
-    # Array of condition sets for agent workspaces
-    record {}[]? agent_conditions?;
-    # The time the ticket form was created
-    string? created_at?;
-    # Is the form the default form for this account
-    boolean? default?;
-    # The name of the form that is displayed to an end user
-    string? display_name?;
-    # Array of condition sets for end user products
-    record {}[]? end_user_conditions?;
-    # Is the form visible to the end user
-    boolean? end_user_visible?;
-    # Automatically assigned when creating ticket form
-    int? id?;
-    # Is the form available for use in all brands on this account
-    boolean? in_all_brands?;
-    # The name of the form
-    string? name;
-    # The position of this form among other forms in the account, i.e. dropdown
-    int? position?;
-    # The dynamic content placeholder, if present, or the "display_name" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? raw_display_name?;
-    # The dynamic content placeholder, if present, or the "name" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? raw_name?;
-    # ids of all brands that this ticket form is restricted to
-    int[]? restricted_brand_ids?;
-    # ids of all ticket fields which are in this ticket form. The products use the order of the ids to show the field values in the tickets
-    int[]? ticket_field_ids?;
-    # The time of the last update of the ticket form
-    string? updated_at?;
-    # URL of the ticket form
-    string? url?;
-};
-
-public type BatchJobResponse_results record {
-    TriggerCategory[]? trigger_categories?;
-    TriggerObject[]? triggers?;
-};
-
-public type ListDeletedTicketsResponse record {
-    ListDeletedTicketsResponse_deleted_tickets[]? deleted_tickets?;
-    *OffsetPaginationObject;
-};
-
-public type MacroApplyTicketResponse_result_ticket record {
-    int? assignee_id?;
-    MacroApplyTicketResponse_result_ticket_comment? comment?;
-    MacroApplyTicketResponse_result_ticket_fields? fields?;
-    int? group_id?;
-    int? id?;
-    string? url?;
-};
-
-public type TargetsResponse record {
-    TargetObject[]? targets?;
-};
-
-public type UserObject UserForAdmin|UserForEndUser?;
-
-public type WorkspaceInput record {
-    # An object that describes the conditions under which the automation will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
-    ConditionsObject? conditions?;
-    # User-defined description of this workspace's purpose
-    string? description?;
-    decimal[]? macros?;
-    decimal? ticket_form_id?;
-    # The title of the workspace
-    string? title?;
+# Represents the Headers record for the operation: ListTicketAudits
+public type ListTicketAuditsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type ActionObject record {
     # The name of a ticket field to modify
-    string? 'field?;
+    string 'field?;
     # The new value of the field
-    string? value?;
+    string value?;
 };
 
 public type UserResponse record {
-    UserObject? user?;
+    UserObject user?;
 };
 
-public type Pagination_meta record {
-    string? after_cursor?;
-    string? before_cursor?;
-    boolean? has_more?;
+# Represents the Queries record for the operation: UpdateTicketField
+public type UpdateTicketFieldQueries record {
+    # If true, displays the `creator_user_id` and `creator_app_name` properties. If the ticket field is created
+    #  by an app, `creator_app_name` is the name of the app and `creator_user_id` is `-1`. If the ticket field
+    #  is not created by an app, then `creator_app_name` is null
+    boolean creator?;
 };
 
-public type Filter record {
-    TriggerObject? 'json?;
+public type TriggerRevisionsResponseTriggerRevisions record {
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    TriggerRevisionsResponseDiff diff?;
+    int id?;
+    @jsondata:Name {value: "author_id"}
+    int authorId?;
+    TriggerSnapshotObject snapshot?;
+    string url?;
 };
 
-# Configuration settings for the role. See [Configuration](#configuration)
-public type CustomRoleConfigurationObject record {
-    # Whether or not the agent can assign tickets to any group
-    boolean? assign_tickets_to_any_group?;
-    # Whether or not the agent has access to Chat
-    boolean? chat_access?;
-    # Whether or not the agent can view lists of user profiles. Allowed values: "full", "none"
-    string? end_user_list_access?;
-    # What the agent can do with end-user profiles. Allowed values: "edit", "edit-within-org", "full", "readonly"
-    string? end_user_profile_access?;
-    # Allowed values: "edit", "full", "none", "readonly"
-    string? explore_access?;
-    # The kind of access the agent has to Guide. Allowed values: "edit-topics", "full", "readonly"
-    string? forum_access?;
-    boolean? forum_access_restricted_content?;
-    # Whether or not the agent can add or modify groups
-    boolean? group_access?;
-    boolean? light_agent?;
-    # What the agent can do with macros. Allowed values: "full", "manage-group", "manage-personal", "readonly"
-    string? macro_access?;
-    # Whether or not the agent can manage business rules
-    boolean? manage_business_rules?;
-    # Whether or not the agent can view, add, and edit contextual workspaces
-    boolean? manage_contextual_workspaces?;
-    # Whether or not the agent can access dynamic content
-    boolean? manage_dynamic_content?;
-    # Whether or not the agent can manage channels and extensions
-    boolean? manage_extensions_and_channels?;
-    # Whether or not the agent can manage Facebook pages
-    boolean? manage_facebook?;
-    # Whether or not the agent can create and manage organization fields
-    boolean? manage_organization_fields?;
-    # Whether or not the agent can create and manage ticket fields
-    boolean? manage_ticket_fields?;
-    # Whether or not the agent can create and manage ticket forms
-    boolean? manage_ticket_forms?;
-    # Whether or not the agent can create and manage user fields
-    boolean? manage_user_fields?;
-    boolean? moderate_forums?;
-    # Whether or not the agent can add or modify organizations
-    boolean? organization_editing?;
-    # Whether or not the agent can add or modify organization notes
-    boolean? organization_notes_editing?;
-    # What the agent can do with reports. Allowed values: "full", "none", "readonly"
-    string? report_access?;
-    # Whether or not the agent can contribute to side conversations
-    boolean? side_conversation_create?;
-    # What kind of tickets the agent can access. Allowed values: "all", "assigned-only", "within-groups", "within-groups-and-public-groups", "within-organization"
-    string? ticket_access?;
-    # What type of comments the agent can make. Allowed values: "public", "none"
-    string? ticket_comment_access?;
-    # Whether or not the agent can delete tickets
-    boolean? ticket_deletion?;
-    # Whether or not the agent can edit ticket properties
-    boolean? ticket_editing?;
-    # Whether or not the agent can merge tickets
-    boolean? ticket_merge?;
-    # Whether or not the agent can edit ticket tags
-    boolean? ticket_tag_editing?;
-    boolean? twitter_search_access?;
-    # What the agent can do with customer lists. Allowed values: "full", "manage-group", "manage-personal", "none", "readonly"
-    string? user_view_access?;
-    # What the agent can do with views. Allowed values: "full", "manage-group", "manage-personal", "playonly", "readonly"
-    string? view_access?;
-    # Whether or not the agent can view deleted tickets
-    boolean? view_deleted_tickets?;
-    # Whether or not the agent can answer and place calls to end users
-    boolean? voice_access?;
-    # Whether or not the agent can view details about calls on the Talk dashboard
-    boolean? voice_dashboard_access?;
+public type SLAPolicyFilterDefinitionResponseDefinitions record {
+    SLAPolicyFilterDefinitionResponseDefinitionsAll[] all?;
+    SLAPolicyFilterDefinitionResponseDefinitionsAny[] 'any?;
 };
 
-public type SLAPolicyResponse record {
-    SLAPolicyObject? sla_policy?;
+# Represents the Headers record for the operation: RecoverSuspendedTickets
+public type RecoverSuspendedTicketsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type GroupsCountObjectCount record {
+    # Timestamp that indicates when the count was last updated
+    @jsondata:Name {value: "refreshed_at"}
+    string refreshedAt?;
+    # Approximate count of groups
+    int value?;
 };
 
 public type TriggerConditionDiffObject record {
     # An array of [change](#change) objects
-    TriggerChangeObject[]? 'field?;
+    TriggerChangeObject[] 'field?;
     # An array of [change](#change) objects
-    TriggerChangeObject[]? operator?;
+    TriggerChangeObject[] value?;
     # An array of [change](#change) objects
-    TriggerChangeObject[]? value?;
+    TriggerChangeObject[] operator?;
 };
 
-# The value of the chat event object
-public type TicketChatCommentRedactionResponse_chat_event_value record {
-    # Id of the chat session
-    string? chat_id?;
-    # Chat events within the chat session
-    record {}[]? history?;
-    # Id assigned to the visitor
-    string? visitor_id?;
+# Represents the Headers record for the operation: CountTicketComments
+public type CountTicketCommentsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type MacroApplyTicketResponse_result_ticket_comment record {
-    string? body?;
-    boolean? 'public?;
-    string[][]? scoped_body?;
+# Represents the Headers record for the operation: PutTagsTicket
+public type PutTagsTicketHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: TicketsShowMany
+public type TicketsShowManyHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type UserFieldsResponse record {
-    # Total count of records retrieved
-    int? count?;
     # URL of the next page
-    string? next_page?;
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    @jsondata:Name {value: "user_fields"}
+    UserFieldObject[] userFields?;
+    # Total count of records retrieved
+    int count?;
     # URL of the previous page
-    string? previous_page?;
-    UserFieldObject[]? user_fields?;
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
 };
 
 public type ViewsCountResponse record {
-    ActivitiesCountResponse_count? count?;
+    ViewsCountResponseCount count?;
 };
 
-public type TicketMergeInput record {
-    # Ids of tickets to merge into the target ticket
-    int[]? ids;
-    # Private comment to add to the source ticket
-    string? source_comment?;
-    # Whether comment in source tickets are public or private
-    boolean? source_comment_is_public?;
-    # Private comment to add to the target ticket
-    string? target_comment?;
-    # Whether comment in target ticket is public or private
-    boolean? target_comment_is_public?;
+# Represents the Headers record for the operation: ListTicketsFullfilledByUser
+public type ListTicketsFullfilledByUserHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type User_field_id int|string;
-
-public type AssigneeFieldAssignableGroupObject record {
-    # Description of the group
-    string? description?;
-    # Group ID
-    int? id?;
-    # Name of the group
-    string? name?;
+public type TriggerActionDefinitionObjectValues record {
+    string title?;
+    string value?;
+    boolean enabled?;
 };
 
 public type CustomFieldOptionResponse record {
-    CustomFieldOptionObject? custom_field_option?;
+    @jsondata:Name {value: "custom_field_option"}
+    CustomFieldOptionObject customFieldOption?;
 };
 
-public type SLAPolicyMetricObject record {
-    # Whether the metric targets are being measured in business hours or calendar hours
-    boolean? business_hours?;
-    # The definition of the time that is being measured
-    string? metric?;
-    # Priority that a ticket must match
-    string? priority?;
-    # The time within which the end-state for a metric should be met
-    int? target?;
-};
-
-public type HostMappingObject record {
-    # The canonical name record for a host mapping
-    string? cname?;
-    # Array of expected CNAME records for host mapping(s) of a given brand
-    string[]? expected_cnames?;
-    # Whether a host mapping is valid or not for a given brand
-    boolean? is_valid?;
-    # Reason why a host mapping is valid or not
-    string? reason?;
+# Represents the Queries record for the operation: ShowTicketfield
+public type ShowTicketfieldQueries record {
+    # If true, displays the `creator_user_id` and `creator_app_name` properties. If the ticket field is created
+    #  by an app, `creator_app_name` is the name of the app and `creator_user_id` is `-1`. If the ticket field
+    #  is not created by an app, then `creator_app_name` is null
+    boolean creator?;
 };
 
 public type AssigneeFieldAssignableSearchGroupObject record {
-    # Group ID
-    int? id?;
     # Name of the group
-    string? name?;
+    string name?;
+    # Group ID
+    int id?;
 };
 
-public type CustomObject record {
-    # The time the object type was created
-    string? created_at?;
-    # Id of a user who created the object
-    string? created_by_user_id?;
-    # User-defined description of the object
-    string? description?;
-    # A user-defined unique identifier. Writable on create only. Cannot be reused if deleted.
-    string? 'key;
-    # The dynamic content placeholder, if present, or the "raw_description" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? raw_description?;
-    # The dynamic content placeholder, if present, or the "title" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? raw_title?;
-    # The dynamic content placeholder, if present, or the "raw_title_pluralized" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? raw_title_pluralized?;
-    # User-defined display name for the object
-    string? title;
-    # User-defined pluralized version of the object's title
-    string? title_pluralized;
-    # The time of the last update of the object
-    string? updated_at?;
-    # Id of the last user who updated the object
-    string? updated_by_user_id?;
-    # Direct link to the specific custom object
-    string? url?;
-};
-
-public type Pagination_links record {
-    string? next?;
-    string? prev?;
-};
-
-public type TicketFieldResponse record {
-    TicketFieldObject? ticket_field?;
-};
-
-public type DefinitionsResponse_definitions_values record {
-    boolean? enabled?;
-    string? title?;
-    string? value?;
+# Represents the Headers record for the operation: CustomObjectFieldsLimit
+public type CustomObjectFieldsLimitHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type BrandObject record {
-    # If the brand is set as active
-    boolean? active?;
-    # The url of the brand
-    string? brand_url?;
-    # The time the brand was created
-    string? created_at?;
-    # Is the brand the default brand for this account
-    boolean? default?;
-    # If the brand has a Help Center
-    boolean? has_help_center?;
-    # The state of the Help Center
-    "enabled"|"disabled"|"restricted" help_center_state?;
-    # The hostmapping to this brand, if any. Only admins view this property.
-    string? host_mapping?;
-    # The ID automatically assigned when the brand is created
-    int? id?;
-    # If the brand object is deleted or not
-    boolean? is_deleted?;
-    # A file represented as an [Attachment](/api-reference/ticketing/tickets/ticket-attachments/) object
-    AttachmentObject? logo?;
-    # The name of the brand
-    string? name;
-    # The signature template for a brand
-    string? signature_template?;
-    # The subdomain of the brand
-    string? subdomain;
+    # The hostmapping to this brand, if any. Only admins view this property
+    @jsondata:Name {value: "host_mapping"}
+    string hostMapping?;
     # The ids of ticket forms that are available for use by a brand
-    int[]? ticket_form_ids?;
-    # The time of the last update of the brand
-    string? updated_at?;
+    @jsondata:Name {value: "ticket_form_ids"}
+    int[] ticketFormIds?;
+    # If the brand is set as active
+    boolean active?;
+    # The time the brand was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The state of the Help Center
+    @jsondata:Name {value: "help_center_state"}
+    "enabled"|"disabled"|"restricted" helpCenterState?;
     # The API url of this brand
-    string? url?;
+    string url?;
+    # The url of the brand
+    @jsondata:Name {value: "brand_url"}
+    string brandUrl?;
+    # Is the brand the default brand for this account
+    boolean default?;
+    # If the brand has a Help Center
+    @jsondata:Name {value: "has_help_center"}
+    boolean hasHelpCenter?;
+    # If the brand object is deleted or not
+    @jsondata:Name {value: "is_deleted"}
+    boolean isDeleted?;
+    # The time of the last update of the brand
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # The signature template for a brand
+    @jsondata:Name {value: "signature_template"}
+    string signatureTemplate?;
+    # The name of the brand
+    string name;
+    AttachmentObject logo?;
+    # The subdomain of the brand
+    string subdomain;
+    # The ID automatically assigned when the brand is created
+    int id?;
 };
 
 # Apps configuration options. See [Apps](#apps)
 public type AccountSettingsAppsObject record {
-    boolean? create_private?;
-    boolean? create_public?;
-    boolean? use?;
+    @jsondata:Name {value: "create_public"}
+    boolean createPublic?;
+    @jsondata:Name {value: "create_private"}
+    boolean createPrivate?;
+    boolean use?;
 };
 
-public type TargetURL record {
-    string? attribute;
-    # "get"
-    string? method?;
-    # only writable
-    string? password?;
-    string? target_url;
-    string? username?;
-};
-
-public type ViewCountResponse record {
-    ViewCountObject? view_count?;
-};
-
-# See [Tickets](/api-reference/ticketing/tickets/tickets/) for a detailed example.
-public type CursorBasedExportIncrementalTicketsResponse record {
-    string? after_cursor?;
-    string? after_url?;
-    string? before_cursor?;
-    string? before_url?;
-    boolean? end_of_stream?;
-    TicketObject[]? tickets?;
-};
-
-public type OrganizationSubscriptionCreateRequest record {
-    OrganizationSubscriptionInput? organization_subscription?;
-};
-
-public type TargetJira record {
-    # only writable
-    string? password;
-    string? target_url;
-    string? username;
+# Represents the Headers record for the operation: CountCustomObjectRecords
+public type CountCustomObjectRecordsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type IncrementalSkillBasedRoutingAttributeValue record {
     # Id of the associated attribute
-    string? attribute_id?;
-    # Automatically assigned when an attribute value is created
-    string? id?;
+    @jsondata:Name {value: "attribute_id"}
+    string attributeId?;
     # The name of the attribute value
-    string? name?;
+    string name?;
+    # Automatically assigned when an attribute value is created
+    string id?;
     # The time the attribute value was created, updated, or deleted
-    string? time?;
+    string time?;
     # One of "create", "update", or "delete"
-    string? 'type?;
-};
-
-public type ActivitiesCountResponse record {
-    ActivitiesCountResponse_count? count?;
-};
-
-public type TicketFieldCountResponse record {
-    ActivitiesCountResponse_count? count?;
+    string 'type?;
 };
 
 public type TicketImportRequest record {
-    TicketImportInput? ticket?;
-};
-
-public type BulkUpdateDefaultCustomStatusRequest record {
-    # The comma-separated list of custom ticket status ids to be set as default for their status categories
-    string? ids?;
-};
-
-public type UserIdentityResponse record {
-    UserIdentityObject? identity?;
-};
-
-public type MacroInput record {
-    # Each action describes what the macro will do
-    ActionObject[]? actions;
-    # Useful for determining if the macro should be displayed
-    boolean? active?;
-    # The description of the macro
-    string? description?;
-    # Who may access this macro. Will be null when everyone in the account can access it
-    MacroInput_restriction? restriction?;
-    # The title of the macro
-    string? title;
+    TicketImportInput ticket?;
 };
 
 public type TicketChatCommentRedactionResponse record {
-    # Chat event object
-    TicketChatCommentRedactionResponse_chat_event? chat_event?;
+    @jsondata:Name {value: "chat_event"}
+    TicketChatCommentRedactionResponseChatEvent chatEvent?;
 };
 
-public type TriggerBatchRequest record {
-    boolean? active?;
-    string? category_id?;
-    string? id;
-    int? position?;
+public type MacroInput record {
+    MacroInputRestriction restriction?;
+    # Useful for determining if the macro should be displayed
+    boolean active?;
+    # The description of the macro
+    string? description?;
+    # The title of the macro
+    string title;
+    # Each action describes what the macro will do
+    ActionObject[] actions;
+};
+
+public type DefinitionsResponseDefinitionsOperators1 record {
+    boolean terminal?;
+    string title?;
+    string value?;
+};
+
+# For some channels a source object gives more information about how or why the ticket or event was created
+public type ViaObjectSource record {
+    ViaObjectSourceFrom 'from?;
+    string? rel?;
+    ViaObjectSourceTo to?;
 };
 
 public type CustomObjectRecordResponse record {
-    CustomObjectRecord? custom_object_record?;
+    @jsondata:Name {value: "custom_object_record"}
+    CustomObjectRecord customObjectRecord?;
 };
 
-public type MacroApplyTicketResponse_result_ticket_fields record {
-    int? id?;
-    string? value?;
+# Represents the Queries record for the operation: SearchRequests
+public type SearchRequestsQueries record {
+    # The syntax and matching logic for the string is detailed in the [Zendesk Support search reference](https://support.zendesk.com/hc/en-us/articles/203663226). See also [Query basics](/api-reference/ticketing/ticket-management/search/#query-basics) in the Tickets API doc
+    string query?;
 };
 
-public type OrganizationSubscriptionInput record {
-    # The ID of the organization
-    int? organization_id?;
-    # The ID of the user
-    int? user_id?;
+# Represents the Headers record for the operation: DeleteOrganization
+public type DeleteOrganizationHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type SkillBasedRoutingAttributeValuesResponse record {
-    SkillBasedRoutingAttributeValueObject[]? attribute_values?;
-};
-
-public type TargetClickatell record {
-    string? api_id;
-    # Read-only
-    string? attribute?;
-    string? 'from?;
-    # Read-only
-    string? method?;
-    # only writable
-    string? password;
-    # Read-only
-    string? target_url?;
-    string? to;
-    string? us_small_business_account?;
-    string? username;
+# Represents the Headers record for the operation: ShowBrand
+public type ShowBrandHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TriggerObject record {
-    # An array of actions describing what the trigger will do. See [Actions reference](/documentation/ticketing/reference-guides/actions-reference)
-    TriggerActionObject[]? actions;
-    # Whether the trigger is active
-    boolean? active?;
-    # The ID of the category the trigger belongs to
-    string? category_id?;
-    # An object that describes the conditions under which the trigger will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
-    TriggerConditionsObject? conditions;
-    # The time the trigger was created
-    string? created_at?;
-    # If true, the trigger is a default trigger
-    boolean? default?;
-    # The description of the trigger
-    string? description?;
-    # Automatically assigned when created
-    int? id?;
-    # Position of the trigger, determines the order they will execute in
-    int? position?;
     # The raw format of the title of the trigger
-    string? raw_title?;
+    @jsondata:Name {value: "raw_title"}
+    string rawTitle?;
+    # Whether the trigger is active
+    boolean active?;
+    # The time the trigger was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The description of the trigger
+    string description?;
     # The title of the trigger
-    string? title;
-    # The time of the last update of the trigger
-    string? updated_at?;
+    string title;
     # The url of the trigger
-    string? url?;
-};
-
-public type TicketUpdateResponse record {
-    AuditObject? audit?;
-    TicketObject? ticket?;
-};
-
-public type TriggerRevisionsResponse_diff record {
-    # An array that contain [action diff objects](#Action Diffs)
-    TriggerActionDiffObject[]? actions?;
-    # An array of [change](#change) objects
-    TriggerChangeObject[]? active?;
-    TriggerConditionDiffObject? conditions?;
-    # An array of [change](#change) objects
-    TriggerChangeObject[]? description?;
-    # ID of the source revision
-    int? source_id?;
-    # ID of the target revision
-    int? target_id?;
-    # An array of [change](#change) objects
-    TriggerChangeObject[]? title?;
+    string url?;
+    # If true, the trigger is a default trigger
+    boolean default?;
+    # The ID of the category the trigger belongs to
+    @jsondata:Name {value: "category_id"}
+    string categoryId?;
+    # The time of the last update of the trigger
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # Automatically assigned when created
+    int id?;
+    # Position of the trigger, determines the order they will execute in
+    int position?;
+    TriggerConditionsObject conditions;
+    # An array of actions describing what the trigger will do. See [Actions reference](/documentation/ticketing/reference-guides/actions-reference)
+    TriggerActionObject[] actions;
 };
 
 public type UserCreateInput record {
-    int? custom_role_id?;
-    string? email;
-    string? external_id?;
-    UserCreateInput_identities[]? identities?;
-    string? name;
-    UserCreateInput_organization? organization?;
-    int? organization_id?;
-    string? role?;
+    UserCreateInputIdentities[] identities?;
+    string role?;
+    @jsondata:Name {value: "custom_role_id"}
+    int customRoleId?;
+    UserCreateInputOrganization organization?;
+    @jsondata:Name {value: "organization_id"}
+    int organizationId?;
+    string name;
+    @jsondata:Name {value: "external_id"}
+    string externalId?;
+    string email;
 };
 
-public type TargetFlowdock record {
-    string? api_token;
+# Represents the Queries record for the operation: CheckHostMappingValidity
+public type CheckHostMappingValidityQueries record {
+    # The hostmapping to a brand, if any (only admins view this key)
+    @http:Query {name: "host_mapping"}
+    string hostMapping;
+    # Subdomain for a given Zendesk account address
+    string subdomain;
 };
 
-public type AccountSettingsObject record {
-    # The active features for an account. See [Active Features](#active-features)
-    AccountSettingsActiveFeaturesObject? active_features?;
-    # Configuration for the agent workspace. See [Agents](#agents)
-    AccountSettingsAgentObject? agents?;
-    # API configuration options. See [API](#api)
-    AccountSettingsApiObject? api?;
-    # Apps configuration options. See [Apps](#apps)
-    AccountSettingsAppsObject? apps?;
-    # Billing configuration options. See [Billing](#billing)
-    AccountSettingsBillingObject? billing?;
-    # Branding settings. See [Branding](#branding)
-    AccountSettingsBrandingObject? branding?;
-    # Brand settings. See [Brands](#brands)
-    AccountSettingsBrandsObject? brands?;
-    # CDN settings
-    AccountSettingsCdnObject? cdn?;
-    # Zendesk Chat settings. See [Chat](#chat)
-    AccountSettingsChatObject? chat?;
-    # Cross Sell settings
-    AccountSettingsCrossSellObject? cross_sell?;
-    # GoodData settings, used for insights. Legacy configuration prior to Zendesk Explore. See [GoodData Advanced Analytics](#gooddata-advanced-analytics)
-    AccountSettingsGooddataAdvancedAnalyticsObject? gooddata_advanced_analytics?;
-    # Google Apps configuration. See [G Suite](#g-suite)
-    AccountSettingsGoogleAppsObject? google_apps?;
-    # Group configuration
-    AccountSettingsGroupObject? groups?;
-    # Account limits configuration. See [Limits](#limits)
-    AccountSettingsLimitsObject? limits?;
-    # Internationalization configuration settings. See [Localization](#localization)
-    AccountSettingsLocalizationObject? localization?;
-    # Support UI settings. See [Lotus](#lotus)
-    AccountSettingsLotusObject? lotus?;
-    # Account metrics settings. See [Metrics](#metrics)
-    AccountSettingsMetricsObject? metrics?;
-    # Onboarding settings
-    AccountSettingsOnboardingObject? onboarding?;
-    # Configuration for routing. See [Routing](#routing)
-    AccountSettingsRoutingObject? routing?;
-    # Rules settings for triggers, macros, views, and automations. See [Rules](#rules)
-    AccountSettingsRuleObject? rule?;
-    # Side conversations settings
-    AccountSettingsSideConversationsObject? side_conversations?;
-    # Account statistics settings. See [Statistics](#statistics)
-    AccountSettingsStatisticsObject? statistics?;
-    # Ticket form settings. See [Ticket Form](#ticket-form)
-    AccountSettingsTicketFormObject? ticket_form?;
-    # Ticket sharing partners settings. See [Ticket Sharing Partners](#ticket-sharing-partners)
-    AccountSettingsTicketSharingPartnersObject? ticket_sharing_partners?;
-    # Ticket settings. See [Tickets](#tickets)
-    AccountSettingsTicketObject? tickets?;
-    # X (formerly Twitter) settings. See [X](#x-formerly-twitter)
-    AccountSettingsTwitterObject? twitter?;
-    # User settings. See [Users](#users)
-    AccountSettingsUserObject? user?;
-    # Zendesk Talk settings. See [Voice](#voice)
-    AccountSettingsVoiceObject? voice?;
+# Represents the Headers record for the operation: ListActiveMacros
+public type ListActiveMacrosHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type BrandsResponse record {
     *OffsetPaginationObject;
-    # Array of brands
-    BrandObject[]? brands?;
+    *BrandsResponseAllOf2;
+};
+
+# Represents the Headers record for the operation: ShowSLAPolicy
+public type ShowSLAPolicyHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TagsResponse record {
-    # The number of pages
-    int? count?;
     # The url of the previous page
-    string? next_page?;
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    # The number of pages
+    int count?;
     # The url of the next page
-    string? previous_page?;
-    TagListTagObject[]? tags?;
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
+    TagListTagObject[] tags?;
 };
 
 public type EssentialsCardsResponse record {
-    EssentialsCardObject[]? object_layouts?;
+    @jsondata:Name {value: "object_layouts"}
+    EssentialsCardObject[] objectLayouts?;
 };
 
-public type CustomObjectFieldResponse record {
-    CustomObjectField? custom_object_field?;
+# Secondary group ids linked to the queue
+public type QueueObjectSecondaryGroups record {
+    int count?;
+    QueueObjectSecondaryGroupsGroups[] groups?;
 };
 
-public type GroupSLAPolicyFilterDefinitionResponse_definitions record {
-    GroupSLAPolicyFilterDefinitionResponse_definitions_all[]? all?;
+# Represents the Headers record for the operation: ShowTicketfield
+public type ShowTicketfieldHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type TriggerRevisionsResponse_trigger_revisions record {
-    int? author_id?;
-    string? created_at?;
-    TriggerRevisionsResponse_diff? diff?;
-    int? id?;
-    TriggerSnapshotObject? snapshot?;
-    string? url?;
+# Represents the Headers record for the operation: AutocompleteOrganizations
+public type AutocompleteOrganizationsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type TicketMetricEventsResponse record {
-    TicketMetricEventBaseObject[]? ticket_metric_events?;
-    int? count?;
-    int? end_time?;
-    string? next_page?;
+# Represents the Headers record for the operation: IncrementalSampleExport
+public type IncrementalSampleExportHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type BatchJobResponse record {
-    BatchErrorItem[]? errors?;
-    BatchJobResponse_results? results?;
+    BatchJobResponseResults results?;
+    BatchErrorItem[] errors?;
     "complete"|"failed" status?;
 };
 
 public type GroupSLAPolicyResponse record {
-    GroupSLAPolicyObject? group_sla_policy?;
+    @jsondata:Name {value: "group_sla_policy"}
+    GroupSLAPolicyObject groupSlaPolicy?;
 };
 
-public type MacroApplyTicketResponse record {
-    MacroApplyTicketResponse_result? result?;
+public type TriggerConditionDefinitionObjectAnyOperators record {
+    boolean terminal?;
+    string title?;
+    string value?;
 };
 
-public type CustomObjectRecordsJobsResponse_job_status record {
-    string? id?;
-    string? message?;
-    int? progress?;
-    CustomObjectRecord[]? results?;
-    string? status?;
-    int? total?;
-    string? url?;
+# Represents the Headers record for the operation: CustomObjectRecordBulkJobs
+public type CustomObjectRecordBulkJobsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type GroupsCountObject_count record {
-    # Timestamp that indicates when the count was last updated
-    string? refreshed_at?;
-    # Approximate count of groups
-    int? value?;
+# Represents the Headers record for the operation: UpdateEssentialsCard
+public type UpdateEssentialsCardHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type TargetBasecamp record {
-    # Can be filled if it is a "message" resource
-    string? message_id?;
-    # The 37Signals password for the Basecamp account (only writable)
-    string? password?;
-    # The ID of the project in Basecamp where updates should be pushed
-    string? project_id;
-    # "todo" or "message"
-    string? 'resource;
-    # The URL of your Basecamp account, including protocol and path
-    string? target_url;
-    # Can be filled if it is a "todo" resource
-    string? todo_list_id?;
-    # Get the API token from My info > Show your tokens > Token for feed readers or the Basecamp API in your Basecamp account
-    string? token;
-    # The 37Signals username of the account you use to log in to Basecamp
-    string? username?;
-};
-
-public type TimeBasedExportIncrementalUsersResponse record {
-    int? count?;
-    boolean? end_of_stream?;
-    int? end_time?;
-    string? next_page?;
-    UserObject[]? users?;
-};
-
-public type ExportIncrementalTicketEventsResponse record {
-    int? count?;
-    boolean? end_of_stream?;
-    int? end_time?;
-    string? next_page?;
-    TicketMetricEventBaseObject[]? ticket_events?;
-};
-
-public type TargetFailureObject record {
-    # Number of times the target failed consecutively
-    int? consecutive_failure_count?;
-    # Time of the failure
-    string? created_at?;
-    # The ID of the target failure
-    int? id?;
-    # The raw message of the target request
-    string? raw_request?;
-    # The raw response of the failure
-    string? raw_response?;
-    # HTTP status code of the target failure
-    int? status_code?;
-    # Name of the target failure
-    string? target_name?;
-    # The API url of the failure record
-    string? url?;
-};
-
-public type TargetPivotal record {
-    string? owner_by?;
-    string? project_id;
-    string? requested_by?;
-    string? story_labels?;
-    string? story_title;
-    string? story_type;
-    string? token;
-};
-
-public type CustomObjectCreateInput record {
-    # Unique identifier. Writable on create only
-    string? 'key?;
-    # Display name for the object
-    string? title?;
-    # Pluralized version of the object's title
-    string? title_pluralized?;
+# Represents the Headers record for the operation: DeleteCustomObjectField
+public type DeleteCustomObjectFieldHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TriggerActionDiffObject record {
-    # An array of [change](#change) objects.
-    TriggerChangeObject[]? 'field?;
-    # An array of [change](#change) objects.
-    TriggerChangeObject[]? value?;
+    # An array of [change](#change) objects
+    TriggerChangeObject[] 'field?;
+    # An array of [change](#change) objects
+    TriggerChangeObject[] value?;
 };
 
 public type CustomFieldOptionObject record {
-    # Automatically assigned upon creation
-    int? id?;
-    # Name of the dropdown option
-    string? name;
-    # Position of the dropdown option
-    int? position?;
     # Raw name of the dropdown option
-    string? raw_name?;
-    # URL of the dropdown option
-    string? url?;
+    @jsondata:Name {value: "raw_name"}
+    string rawName?;
+    # Name of the dropdown option
+    string name;
+    # Automatically assigned upon creation
+    int id?;
+    # Position of the dropdown option
+    int position?;
     # Value of the dropdown option
-    string? value;
+    string value;
+    # URL of the dropdown option
+    string url?;
 };
 
-public type BookmarkCreateRequest record {
-    BookmarkInput? bookmark?;
+# Represents the Headers record for the operation: ListSessions
+public type ListSessionsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type TicketFormsResponse record {
-    TicketFormObject[]? ticket_forms?;
+public type SuspendedTicketsExportResponseExport record {
+    @jsondata:Name {value: "view_id"}
+    string viewId?;
+    string status?;
 };
 
 public type SharingAgreementsResponse record {
-    SharingAgreementObject[]? sharing_agreements?;
+    @jsondata:Name {value: "sharing_agreements"}
+    SharingAgreementObject[] sharingAgreements?;
+};
+
+# Represents the Queries record for the operation: BulkPermanentlyDeleteTickets
+public type BulkPermanentlyDeleteTicketsQueries record {
+    # Comma-separated list of ticket ids
+    string ids;
+};
+
+# Represents the Headers record for the operation: SearchRequests
+public type SearchRequestsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type SatisfactionReasonResponse record {
-    SatisfactionReasonObject[]? reason?;
-};
-
-# The links to the previous and next entries via the cursor ids in the metadata.
-public type SearchExportResponse_links record {
-    # The url to the next entry via the cursor.
-    string? next?;
-    # The url to the previous entry via the cursor.
-    string? prev?;
+    SatisfactionReasonObject[] reason?;
 };
 
 public type BookmarkObject record {
+    TicketObject ticket?;
     # The time the bookmark was created
-    string? created_at?;
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
     # Automatically assigned when the bookmark is created
-    int? id?;
-    TicketObject?? ticket?;
+    int id?;
     # The API url of this bookmark
-    string? url?;
+    string url?;
 };
 
 public type CustomStatusObject record {
-    # If true, the custom status is set to active, If false, the custom status is set to inactive
-    boolean? active?;
-    # The label displayed to agents. Maximum length is 48 characters
-    string? agent_label;
-    # The date and time the custom ticket status was created
-    string? created_at?;
-    # If true, the custom status is set to default. If false, the custom status is set to non-default
-    boolean? default?;
-    # The description of when the user should select this custom ticket status
-    string? description?;
     # The description displayed to end users
-    string? end_user_description?;
-    # The label displayed to end users. Maximum length is 48 characters
-    string? end_user_label?;
-    # Automatically assigned when the custom ticket status is created
-    int? id?;
-    # The dynamic content placeholder. If the dynamic content placeholder is not available, this is the "agent_label" value. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? raw_agent_label?;
+    @jsondata:Name {value: "end_user_description"}
+    string endUserDescription?;
+    # If true, the custom status is set to active, If false, the custom status is set to inactive
+    boolean active?;
+    # The date and time the custom ticket status was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The description of when the user should select this custom ticket status
+    string description?;
     # The dynamic content placeholder. If the dynamic content placeholder is not available, this is the "description" value. [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? raw_description?;
-    # The dynamic content placeholder. If the dynamic content placeholder is not available, this is the "end_user_description" value. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? raw_end_user_description?;
-    # The dynamic content placeholder. If the dynamic content placeholder is not available, this is the "end_user_label" value. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
-    string? raw_end_user_label?;
+    @jsondata:Name {value: "raw_description"}
+    string rawDescription?;
+    # If true, the custom status is set to default. If false, the custom status is set to non-default
+    boolean default?;
+    # The label displayed to end users. Maximum length is 48 characters
+    @jsondata:Name {value: "end_user_label"}
+    string endUserLabel?;
+    # The dynamic content placeholder. If the dynamic content placeholder is not available, this is the "agent_label" value. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "raw_agent_label"}
+    string rawAgentLabel?;
     # The status category the custom ticket status belongs to
-    "new"|"open"|"pending"|"hold"|"solved" status_category;
+    @jsondata:Name {value: "status_category"}
+    "new"|"open"|"pending"|"hold"|"solved" statusCategory;
     # The date and time the custom ticket status was last updated
-    string? updated_at?;
-};
-
-public type AutomationResponse record {
-    AutomationObject? automation?;
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # The dynamic content placeholder. If the dynamic content placeholder is not available, this is the "end_user_description" value. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "raw_end_user_description"}
+    string rawEndUserDescription?;
+    # Automatically assigned when the custom ticket status is created
+    int id?;
+    # The dynamic content placeholder. If the dynamic content placeholder is not available, this is the "end_user_label" value. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "raw_end_user_label"}
+    string rawEndUserLabel?;
+    # The label displayed to agents. Maximum length is 48 characters
+    @jsondata:Name {value: "agent_label"}
+    string agentLabel;
 };
 
 public type SearchCountResponse record {
-    int? count?;
-};
-
-public type TicketAuditResponse record {
-    TicketAuditObject? audit?;
-};
-
-# Configuration for routing. See [Routing](#routing)
-public type AccountSettingsRoutingObject record {
-    string? autorouting_tag?;
-    boolean? enabled?;
-    int? max_email_capacity?;
-    int? max_messaging_capacity?;
-    boolean? reassignment_messaging_enabled?;
-    int? reassignment_messaging_timeout?;
-    int? reassignment_talk_timeout?;
+    int count?;
 };
 
 public type JobStatusObject record {
-    # Automatically assigned when the job is queued
-    string? id?;
     # The type of the job
-    string? job_type?;
-    # Message from the job worker, if any
-    string? message?;
-    # Number of tasks that have already been completed
-    int? progress?;
-    # Result data from processed tasks. See [Results](#results) below
-    JobStatusResultObject[]|record {
-        # Whether the action was successful or not
-        boolean? success;
-    }? results?;
-    # The current status. One of the following: "queued", "working", "failed", "completed"
-    string? status?;
+    @jsondata:Name {value: "job_type"}
+    string jobType?;
     # The total number of tasks this job is batching through
     int? total?;
+    # Number of tasks that have already been completed
+    int? progress?;
+    # Automatically assigned when the job is queued
+    string id?;
+    # Message from the job worker, if any
+    string? message?;
+    # Result data from processed tasks. See [Results](#results) below
+    JobStatusResultObject[]|record {boolean success;}? results?;
     # The URL to poll for status updates
-    string? url?;
-};
-
-# Group configuration
-public type AccountSettingsGroupObject record {
-    boolean? check_group_name_uniqueness?;
+    string url?;
+    # The current status. One of the following: "queued", "working", "failed", "completed"
+    string status?;
 };
 
 # GoodData settings, used for insights. Legacy configuration prior to Zendesk Explore. See [GoodData Advanced Analytics](#gooddata-advanced-analytics)
 public type AccountSettingsGooddataAdvancedAnalyticsObject record {
-    boolean? enabled?;
+    boolean enabled?;
 };
 
 public type AuthorObject record {
-    # The author email
-    string? email?;
-    # The author id
-    int? id?;
     # The author name
-    string? name?;
+    string name?;
+    # The author id
+    int id?;
+    # The author email
+    string email?;
 };
 
-# Chat event object
-public type TicketChatCommentRedactionResponse_chat_event record {
-    # Id assigned to the chat event object
-    int? id?;
-    # Type of chat event
-    string? 'type?;
-    # The value of the chat event object
-    TicketChatCommentRedactionResponse_chat_event_value? value?;
-};
-
-public type CustomStatusesResponse record {
-    CustomStatusObject[]? custom_statuses?;
-};
-
-public type Pagination record {
-    Pagination_links? links?;
-    Pagination_meta? meta?;
-};
-
-public type RecoverSuspendedTicketUnprocessableContentResponse record {
-    SuspendedTicketObject[]? ticket?;
+# Represents the Headers record for the operation: ShowManyDynamicContents
+public type ShowManyDynamicContentsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TriggerDefinitionResponse record {
-    TriggerDefinitionObject? definitions?;
+    TriggerDefinitionObject definitions?;
+};
+
+# Represents the Headers record for the operation: CreateAttributeValue
+public type CreateAttributeValueHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: GetViewCounts
+public type GetViewCountsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 # A file represented as an [Attachment](/api-reference/ticketing/tickets/ticket-attachments/) object
@@ -4108,339 +3567,4482 @@ public type AttachmentObject record {
 };
 
 public type LocalesResponse record {
-    LocaleObject[]? locales?;
+    LocaleObject[] locales?;
 };
 
-public type MacroObject record {
-    *MacroCommonObject;
-    # The app installation that requires each macro, if present
-    string? app_installation?;
-    # The macro categories
-    string? categories?;
-    # Permissions for each macro
-    string? permissions?;
-    # The number of times each macro has been used in the past hour
-    int? usage_1h?;
-    # The number of times each macro has been used in the past week
-    int? usage_7d?;
-    # The number of times each macro has been used in the past day
-    int? usage_24h?;
-    # The number of times each macro has been used in the past thirty days
-    int? usage_30d?;
+# Represents the Queries record for the operation: ListSuspendedTickets
+public type ListSuspendedTicketsQueries record {
+    # The field to sort the ticket by, being one of `author_email`, `cause`, `created_at`, or `subject`
+    @http:Query {name: "sort_by"}
+    string sortBy?;
+    # The order in which to sort the suspended tickets.  This can take value `asc` or `desc`
+    @http:Query {name: "sort_order"}
+    string sortOrder?;
 };
 
-public type SkillBasedRoutingAttributeResponse record {
-    SkillBasedRoutingAttributeObject? attribute?;
+# Represents the Headers record for the operation: ShowTargetFailure
+public type ShowTargetFailureHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type AttachmentResponse record {
-    # A file represented as an [Attachment](/api-reference/ticketing/tickets/ticket-attachments/) object
-    AttachmentObject? attachment?;
+    AttachmentObject attachment?;
 };
 
 public type MacroUpdateManyInput record {
-    MacroUpdateManyInput_macros[]? macros?;
+    MacroUpdateManyInputMacros[] macros?;
 };
 
-public type AutomationsResponse record {
-    AutomationObject[]? automations?;
-    int? count?;
-    string? next_page?;
-    string? previous_page?;
+# Represents the Headers record for the operation: ChangeOwnPassword
+public type ChangeOwnPasswordHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type GroupMembershipObject record {
-    # The time the group was created
-    string? created_at?;
-    # If true, tickets assigned directly to the agent will assume this membership's group
-    boolean? default?;
-    # The id of a group
-    int? group_id;
-    # Automatically assigned upon creation
-    int? id?;
-    # The time of the last update of the group
-    string? updated_at?;
-    # The API url of this record
-    string? url?;
-    # The id of an agent
-    int? user_id;
-};
+public type JobStatusResultObject CreateResourceResult|UpdateResourceResult;
 
-public type JobStatusResultObject CreateResourceResult|UpdateResourceResult?;
+public type ActivitiesCountResponseCount record {
+    @jsondata:Name {value: "refreshed_at"}
+    string refreshedAt?;
+    int value?;
+};
 
 public type GroupMembershipResponse record {
-    GroupMembershipObject? group_membership?;
+    @jsondata:Name {value: "group_membership"}
+    GroupMembershipObject groupMembership?;
 };
 
 public type ListTicketEmailCCsResponse record {
 };
 
 public type DeletedUserObject record {
-    boolean? active;
-    string? created_at;
-    string? email;
-    int? id;
-    string? locale;
-    int? locale_id;
-    string? name;
-    int? organization_id;
-    string? phone;
+    string role;
+    @jsondata:Name {value: "shared_phone_number"}
+    string? sharedPhoneNumber;
+    boolean active;
+    @jsondata:Name {value: "created_at"}
+    string createdAt;
     record {}? photo;
-    string? role;
-    string? shared_phone_number;
-    string? time_zone;
-    string? updated_at;
-    string? url;
+    string locale;
+    @jsondata:Name {value: "time_zone"}
+    string timeZone;
+    string url;
+    @jsondata:Name {value: "locale_id"}
+    int localeId;
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt;
+    string? phone;
+    @jsondata:Name {value: "organization_id"}
+    int organizationId;
+    string name;
+    int id;
+    string email;
 };
 
-public type UserFieldObject CustomFieldObject?;
+# Represents the Queries record for the operation: ListTicketComments
+public type ListTicketCommentsQueries record {
+    # Accepts "users". Use this parameter to list email CCs by side-loading users. Example: `?include=users`. **Note**: If the comment source is email, a deleted user will be represented as the CCd email address. If the comment source is anything else, a deleted user will be represented as the user name
+    string include?;
+    # Default is false. When true, inline images are also listed as attachments in the response
+    @http:Query {name: "include_inline_images"}
+    boolean includeInlineImages?;
+};
 
 public type BrandResponse record {
-    BrandObject? brand?;
+    BrandObject brand?;
 };
 
-public type Errors record {
-    Error[]? errors?;
-};
-
-public type RenewSessionResponse record {
-    # A token of authenticity for the request
-    string? authenticity_token?;
+# Represents the Headers record for the operation: DeleteAutomation
+public type DeleteAutomationHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type DynamicContentVariantsResponse record {
-    DynamicContentVariantObject[]? variants?;
+    DynamicContentVariantObject[] variants?;
 };
 
 public type RelationshipFilterDefinition record {
-    TriggerConditionDefinitionObjectAll[]? conditions_all?;
-    TriggerConditionDefinitionObjectAny[]? conditions_any?;
+    @jsondata:Name {value: "conditions_any"}
+    TriggerConditionDefinitionObjectAny[] conditionsAny?;
+    @jsondata:Name {value: "conditions_all"}
+    TriggerConditionDefinitionObjectAll[] conditionsAll?;
+};
+
+# Represents the Headers record for the operation: UpdateCustomStatus
+public type UpdateCustomStatusHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type TriggerRevisionsResponse record {
-    string? after_cursor?;
-    string? after_url?;
-    string? before_cursor?;
-    string? before_url?;
-    int? count?;
-    TriggerRevisionsResponse_trigger_revisions[]? trigger_revisions?;
-};
-
-public type MacroAttachmentResponse record {
-    MacroAttachmentObject? macro_attachment?;
+    @jsondata:Name {value: "trigger_revisions"}
+    TriggerRevisionsResponseTriggerRevisions[] triggerRevisions?;
+    @jsondata:Name {value: "before_url"}
+    string beforeUrl?;
+    @jsondata:Name {value: "after_cursor"}
+    string afterCursor?;
+    int count?;
+    @jsondata:Name {value: "after_url"}
+    string afterUrl?;
+    @jsondata:Name {value: "before_cursor"}
+    string beforeCursor?;
 };
 
 public type GroupSLAPolicyMetricObject record {
     # Whether the metric targets are being measured in business hours or calendar hours
-    boolean? business_hours?;
+    @jsondata:Name {value: "business_hours"}
+    boolean businessHours?;
     # The definition of the time that is being measured
-    string? metric?;
+    string metric?;
     # Priority that a ticket must match
-    string? priority?;
+    string priority?;
     # The time within which the end-state for a metric should be met
-    int? target?;
+    int target?;
+};
+
+# The value of the chat event object
+public type TicketChatCommentRedactionResponseChatEventValue record {
+    # Id assigned to the visitor
+    @jsondata:Name {value: "visitor_id"}
+    string visitorId?;
+    # Chat events within the chat session
+    record {}[] history?;
+    # Id of the chat session
+    @jsondata:Name {value: "chat_id"}
+    string chatId?;
+};
+
+public type GroupSLAPolicyFilterDefinitionResponseDefinitions record {
+    GroupSLAPolicyFilterDefinitionResponseDefinitionsAll[] all?;
 };
 
 public type TargetFailuresResponse record {
-    TargetFailureObject[]? target_failures?;
+    @jsondata:Name {value: "target_failures"}
+    TargetFailureObject[] targetFailures?;
 };
 
-public type TicketCommentsResponse record {
-    TicketCommentObject[]? comments?;
+# Represents the Headers record for the operation: DeleteMacro
+public type DeleteMacroHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 # Rules settings for triggers, macros, views, and automations. See [Rules](#rules)
 public type AccountSettingsRuleObject record {
-    boolean? macro_most_used?;
-    string? macro_order?;
-    record {}[]? skill_based_filtered_views?;
-    boolean? using_skill_based_routing?;
+    @jsondata:Name {value: "using_skill_based_routing"}
+    boolean usingSkillBasedRouting?;
+    @jsondata:Name {value: "macro_order"}
+    string macroOrder?;
+    @jsondata:Name {value: "skill_based_filtered_views"}
+    record {}[] skillBasedFilteredViews?;
+    @jsondata:Name {value: "macro_most_used"}
+    boolean macroMostUsed?;
 };
 
-# Conditions when queue could be applied
-public type QueueObject_definition record {
-    QueueObject_definition_all[]? all?;
-    QueueObject_definition_all[]? 'any?;
+# Represents the Queries record for the operation: GetViewCounts
+public type GetViewCountsQueries record {
+    # List of view's ids separated by commas
+    string ids;
 };
 
-public type AssigneeFieldAssignableGroupsResponse record {
-    # Number of groups listed in `groups` property.
-    int? count?;
-    AssigneeFieldAssignableGroupObject[]? groups?;
-    string? next_page?;
-    string? previous_page?;
+# Represents the Headers record for the operation: DeleteDynamicContentVariant
+public type DeleteDynamicContentVariantHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type BatchJobRequestJob record {
+    "patch" action?;
+    BatchJobRequestJobItems items?;
+};
+
+# Represents the Headers record for the operation: ListTicketComments
+public type ListTicketCommentsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: ListTicketsFullfilledByUser
+public type ListTicketsFullfilledByUserQueries record {
+    # The IDs of the relevant tickets to check for matching attributes
+    @http:Query {name: "ticket_ids"}
+    int ticketIds;
+};
+
+public type user_field_id int|string;
+
+# Represents the Headers record for the operation: ListTicketForms
+public type ListTicketFormsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ListSuspendedTickets
+public type ListSuspendedTicketsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
 public type CustomObjectRecordsCreateRequest record {
-    CustomObjectRecord? custom_object_record?;
+    @jsondata:Name {value: "custom_object_record"}
+    CustomObjectRecord customObjectRecord?;
+};
+
+# Metadata for the export query response
+public type SearchExportResponseMeta record {
+    # The cursor id for the next object
+    @jsondata:Name {value: "after_cursor"}
+    string? afterCursor?;
+    # The cursor id for the previous object
+    @jsondata:Name {value: "before_cursor"}
+    string? beforeCursor?;
+    # Whether there are more items yet to be returned by the cursor
+    @jsondata:Name {value: "has_more"}
+    boolean hasMore?;
+};
+
+# Represents the Queries record for the operation: IncrementalSampleExport
+public type IncrementalSampleExportQueries record {
+    # The time to start the incremental export from. Must be at least one minute in the past. Data isn't provided for the most recent minute
+    @http:Query {name: "start_time"}
+    int startTime;
 };
 
 public type SuspendedTicketsResponse record {
-    SuspendedTicketObject[]? suspended_tickets?;
+    @jsondata:Name {value: "suspended_tickets"}
+    SuspendedTicketObject[] suspendedTickets?;
 };
 
 public type TicketUpdateInput record {
-    # An array of numeric IDs, emails, or objects containing name and email properties. See [Setting Collaborators](/api-reference/ticketing/tickets/tickets/#setting-collaborators). An email notification is sent to them when the ticket is updated
-    CollaboratorObject[]? additional_collaborators?;
-    # The email address of the agent to assign the ticket to
-    string? assignee_email?;
-    # The agent currently assigned to the ticket
-    int? assignee_id?;
-    # An array of the IDs of attribute values to be associated with the ticket
-    int[]? attribute_value_ids?;
-    # The ids of users currently CC'ed on the ticket
-    int[]? collaborator_ids?;
-    TicketCommentObject? comment?;
-    # Custom fields for the ticket. See [Setting custom field values](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-custom-field-values)
-    CustomFieldObject[]? custom_fields?;
-    # The custom ticket status id of the ticket. See [custom ticket statuses](#custom-ticket-statuses)
-    int? custom_status_id?;
-    # If this is a ticket of type "task" it has a due date.  Due date format uses [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601) format.
-    string? due_at?;
-    # An array of objects that represent agent or end users email CCs to add or delete from the ticket. See [Setting email CCs](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-email-ccs)
-    EmailCCObject[]? email_ccs?;
-    # An id you can use to link Zendesk Support tickets to local records
-    string? external_id?;
-    # An array of objects that represent agent followers to add or delete from the ticket. See [Setting followers](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-followers)
-    FollowerObject[]? followers?;
-    # The group this ticket is assigned to
-    int? group_id?;
-    # The organization of the requester. You can only specify the ID of an organization associated with the requester. See [Organization Memberships](/api-reference/ticketing/organizations/organization_memberships/)
-    int? organization_id?;
-    # The urgency with which the ticket should be addressed.
-    "urgent"|"high"|"normal"|"low" priority?;
-    # For tickets of type "incident", the ID of the problem the incident is linked to
-    int? problem_id?;
-    # The user who requested this ticket
-    int? requester_id?;
     # Optional boolean. Prevents updates with outdated ticket data (`updated_stamp` property required when true)
-    boolean? safe_update?;
+    @jsondata:Name {value: "safe_update"}
+    boolean safeUpdate?;
+    # Custom fields for the ticket. See [Setting custom field values](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-custom-field-values)
+    @jsondata:Name {value: "custom_fields"}
+    CustomFieldObject[] customFields?;
+    # The value of the subject field for this ticket
+    string subject?;
+    # The custom ticket status id of the ticket. See [custom ticket statuses](#custom-ticket-statuses)
+    @jsondata:Name {value: "custom_status_id"}
+    int customStatusId?;
+    # An id you can use to link Zendesk Support tickets to local records
+    @jsondata:Name {value: "external_id"}
+    string externalId?;
+    # An array of numeric IDs, emails, or objects containing name and email properties. See [Setting Collaborators](/api-reference/ticketing/tickets/tickets/#setting-collaborators). An email notification is sent to them when the ticket is updated
+    @jsondata:Name {value: "additional_collaborators"}
+    CollaboratorObject[] additionalCollaborators?;
+    # The ids of users currently CC'ed on the ticket
+    @jsondata:Name {value: "collaborator_ids"}
+    int[] collaboratorIds?;
+    # The urgency with which the ticket should be addressed
+    "urgent"|"high"|"normal"|"low" priority?;
+    # The type of this ticket
+    "problem"|"incident"|"question"|"task" 'type?;
+    # Datetime of last update received from API. See the safe_update property
+    @jsondata:Name {value: "updated_stamp"}
+    string updatedStamp?;
+    # The array of tags applied to this ticket
+    string[] tags?;
+    # The email address of the agent to assign the ticket to
+    @jsondata:Name {value: "assignee_email"}
+    string assigneeEmail?;
+    # An array of objects that represent agent followers to add or delete from the ticket. See [Setting followers](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-followers)
+    FollowerObject[] followers?;
     # An array of the numeric IDs of sharing agreements. Note that this replaces any existing agreements
-    int[]? sharing_agreement_ids?;
+    @jsondata:Name {value: "sharing_agreement_ids"}
+    int[] sharingAgreementIds?;
+    # The group this ticket is assigned to
+    @jsondata:Name {value: "group_id"}
+    int groupId?;
+    # For tickets of type "incident", the ID of the problem the incident is linked to
+    @jsondata:Name {value: "problem_id"}
+    int problemId?;
+    # An array of objects that represent agent or end users email CCs to add or delete from the ticket. See [Setting email CCs](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-email-ccs)
+    @jsondata:Name {value: "email_ccs"}
+    EmailCCObject[] emailCcs?;
+    # The organization of the requester. You can only specify the ID of an organization associated with the requester. See [Organization Memberships](/api-reference/ticketing/organizations/organization_memberships/)
+    @jsondata:Name {value: "organization_id"}
+    int organizationId?;
+    TicketCommentObject comment?;
+    # If this is a ticket of type "task" it has a due date.  Due date format uses [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601) format
+    @jsondata:Name {value: "due_at"}
+    string? dueAt?;
+    # An array of the IDs of attribute values to be associated with the ticket
+    @jsondata:Name {value: "attribute_value_ids"}
+    int[] attributeValueIds?;
+    # The agent currently assigned to the ticket
+    @jsondata:Name {value: "assignee_id"}
+    int assigneeId?;
+    # The user who requested this ticket
+    @jsondata:Name {value: "requester_id"}
+    int requesterId?;
     # The state of the ticket.
     # 
     # If your account has activated custom ticket statuses, this is the ticket's
-    # status category. See [custom ticket statuses](#custom-ticket-statuses).
+    # status category. See [custom ticket statuses](#custom-ticket-statuses)
     "new"|"open"|"pending"|"hold"|"solved"|"closed" status?;
-    # The value of the subject field for this ticket
-    string? subject?;
-    # The array of tags applied to this ticket
-    string[]? tags?;
-    # The type of this ticket.
-    "problem"|"incident"|"question"|"task" 'type?;
-    # Datetime of last update received from API. See the safe_update property
-    string? updated_stamp?;
-};
-
-public type V2_macros_body record {
-    MacroInput? macro?;
-};
-
-public type TriggerRevisionResponse record {
-    TriggerRevisionResponse_trigger_revision? trigger_revision?;
 };
 
 # CDN settings
 public type AccountSettingsCdnObject record {
-    string? cdn_provider?;
-    string? fallback_cdn_provider?;
-    AccountSettingsCdnObject_hosts[]? hosts?;
-};
-
-public type BatchErrorItem record {
-    *Error;
-    string? trigger_id?;
-};
-
-public type TicketSkipObject record {
-    # Time the skip was created
-    string? created_at?;
-    # Automatically assigned upon creation
-    int? id?;
-    # Reason for skipping the ticket
-    string? reason?;
-    # The skipped ticket. See the [Ticket object reference](/api-reference/ticketing/tickets/tickets/#json-format)
-    TicketObject?? ticket?;
-    # ID of the skipped ticket
-    int? ticket_id?;
-    # Time the skip was last updated
-    string? updated_at?;
-    # ID of the skipping agent
-    int? user_id?;
-};
-
-public type ViewCountsResponse record {
-    ViewCountObject[]? view_counts?;
-};
-
-public type UrlObject record {
-    string? url?;
-};
-
-public type BookmarksResponse record {
-    *OffsetPaginationObject;
-    BookmarkObject[]? bookmarks?;
+    @jsondata:Name {value: "cdn_provider"}
+    string cdnProvider?;
+    AccountSettingsCdnObjectHosts[] hosts?;
+    @jsondata:Name {value: "fallback_cdn_provider"}
+    string fallbackCdnProvider?;
 };
 
 public type RecoverSuspendedTicketsResponse record {
-    SuspendedTicketObject[]? tickets?;
+    SuspendedTicketObject[] tickets?;
 };
 
-public type TriggerSnapshotObject record {
-    # An array of [Actions](#actions) describing what the trigger will do
-    TriggerActionObject[]? actions?;
-    # Whether the trigger is active
-    boolean? active?;
-    # An object that describes the conditions under which the trigger will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
-    TriggerConditionsObject? conditions?;
-    # The description of the trigger
-    string? description?;
-    # The title of the trigger
-    string? title?;
+# Represents the Headers record for the operation: ShowTicketAfterChanges
+public type ShowTicketAfterChangesHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
 };
 
-public type SatisfactionRatingsCountResponse record {
-    ActivitiesCountResponse_count? count?;
+# Represents the Headers record for the operation: ListUserIdentities
+public type ListUserIdentitiesHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ShowUserFieldOption
+public type ShowUserFieldOptionHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: ListAssigneeFieldAssignableGroupsAndAgentsSearch
+public type ListAssigneeFieldAssignableGroupsAndAgentsSearchQueries record {
+    # Query string used to search assignable groups & agents in the AssigneeField
+    string name;
+};
+
+public type CustomObjectRecordsJobsResponseJobStatus record {
+    int total?;
+    int? progress?;
+    string id?;
+    string? message?;
+    CustomObjectRecord[]? results?;
+    string url?;
+    string status?;
 };
 
 public type EssentialsCardResponse record {
-    EssentialsCardObject? object_layout?;
+    @jsondata:Name {value: "object_layout"}
+    EssentialsCardObject objectLayout?;
 };
 
 # The status of the import for the indicated resource
 public type ChannelFrameworkResultStatusObject record {
     # A code indicating the status of the import of the resource, as described in [status codes](#status-codes)
-    string? code?;
-    # In the case of an exception, a description of the exception. Otherwise, not present.
-    string? description?;
-};
-
-public type BatchJobRequest record {
-    BatchJobRequest_job? job?;
+    string code?;
+    # In the case of an exception, a description of the exception. Otherwise, not present
+    string description?;
 };
 
 public type CustomObjectFieldsCreateRequest record {
-    CustomObjectField? custom_object_field?;
+    @jsondata:Name {value: "custom_object_field"}
+    CustomObjectField customObjectField?;
 };
 
-public type TicketCreateVoicemailTicketRequest record {
-    # Optional value such as the ID of the agent that will see the newly created ticket.
-    int? display_to_agent?;
-    # Ticket object that lists the values to set when the ticket is created
-    TicketCreateVoicemailTicketInput?? ticket?;
+public type BatchJobRequest record {
+    BatchJobRequestJob job?;
+};
+
+public type ViewExportResponseExport record {
+    @jsondata:Name {value: "view_id"}
+    int viewId?;
+    string status?;
 };
 
 public type CustomObjectRecordsBulkCreateRequest record {
-    CustomObjectRecordsBulkCreateRequest_job? job?;
+    CustomObjectRecordsBulkCreateRequestJob job?;
 };
 
-public type DefinitionsResponse_definitions_conditions_all record {
-    string? group?;
-    boolean? nullable?;
-    DefinitionsResponse_definitions_operators[]? operators?;
-    boolean? repeatable?;
-    string? subject?;
+# Represents the Queries record for the operation: AutocompleteOrganizations
+public type AutocompleteOrganizationsQueries record {
+    # The id of a lookup relationship field.  The type of field is determined
+    # by the `source` param
+    @http:Query {name: "field_id"}
+    string fieldId?;
+    # A substring of an organization to search for
+    string name;
+    # If a `field_id` is provided, this specifies the type of the field.
+    # For example, if the field is on a "zen:user", it references a field on a user
+    string 'source?;
+};
+
+public type SLAPolicyFilterDefinitionResponseDefinitionsOperators1 record {
+    string title?;
+    string value?;
+};
+
+# Google Apps configuration. See [G Suite](#g-suite)
+public type AccountSettingsGoogleAppsObject record {
+    @jsondata:Name {value: "has_google_apps_admin"}
+    boolean hasGoogleAppsAdmin?;
+    @jsondata:Name {value: "has_google_apps"}
+    boolean hasGoogleApps?;
+};
+
+# Represents the Headers record for the operation: DeleteSession
+public type DeleteSessionHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type UserIdentityObject record {
+    # The time the identity was updated
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # Email identity type only. Indicates if Zendesk sends notifications to the email address. See [Deliverable state](#deliverable-state)
+    @jsondata:Name {value: "deliverable_state"}
+    string deliverableState?;
+    # The id of the user
+    @jsondata:Name {value: "user_id"}
+    int userId;
+    # The number of times a soft-bounce response was received at that address
+    @jsondata:Name {value: "undeliverable_count"}
+    int undeliverableCount?;
+    # If the identity has been verified
+    boolean verified?;
+    # The time the identity was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Automatically assigned on creation
+    int id?;
+    # The type of this identity
+    "email"|"twitter"|"facebook"|"google"|"phone_number"|"agent_forwarding"|"any_channel"|"foreign"|"sdk" 'type;
+    # The identifier for this identity, such as an email address
+    string value;
+    # The API url of this identity
+    string url?;
+    # If the identity is the primary identity. *Writable only when creating, not when updating. Use the [Make Identity Primary](#make-identity-primary) endpoint instead
+    boolean primary?;
+};
+
+public type TargetResponse record {
+    TargetObject target?;
+};
+
+# Represents the Queries record for the operation: ListViews
+public type ListViewsQueries record {
+    # Only views with given access. May be "personal", "shared", or "account"
+    string access?;
+    # Only views belonging to given group
+    @http:Query {name: "group_id"}
+    int groupId?;
+    # Only active views if true, inactive views if false
+    boolean active?;
+    # Possible values are "alphabetical", "created_at", or "updated_at". Defaults to "position"
+    @http:Query {name: "sort_by"}
+    string sortBy?;
+    # One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
+    @http:Query {name: "sort_order"}
+    string sortOrder?;
+};
+
+public type MacroApplyTicketResponseResultTicketComment record {
+    boolean 'public?;
+    @jsondata:Name {value: "scoped_body"}
+    string[][] scopedBody?;
+    string body?;
+};
+
+# Represents the Headers record for the operation: SetAgentAttributeValues
+public type SetAgentAttributeValuesHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: VerifyUserIdentity
+public type VerifyUserIdentityHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ShowTicketMetrics
+public type ShowTicketMetricsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type PaginationMeta record {
+    @jsondata:Name {value: "after_cursor"}
+    string afterCursor?;
+    @jsondata:Name {value: "before_cursor"}
+    string beforeCursor?;
+    @jsondata:Name {value: "has_more"}
+    boolean hasMore?;
+};
+
+public type CustomFieldObject record {
+    # The dynamic content placeholder, if present, or the `title` value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "raw_title"}
+    string rawTitle?;
+    # Required and presented for a custom field of type "dropdown". Each option is represented by an object with a `name` and `value` property
+    @jsondata:Name {value: "custom_field_options"}
+    CustomFieldOptionObject[] customFieldOptions?;
+    # If true, this field is available for use
+    boolean active?;
+    # The time of the last update of the ticket field
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # User-defined description of this field's purpose
+    string description?;
+    # The title of the custom field
+    string title;
+    # The custom field type: "checkbox", "date", "decimal", "dropdown", "integer", ["lookup"](/api-reference/ticketing/lookup_relationships/lookup_relationships/), "regexp", "text", or "textarea"
+    string 'type;
+    # The dynamic content placeholder, if present, or the `description` value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "raw_description"}
+    string rawDescription?;
+    # The URL for this resource
+    string url?;
+    # If true, only active and position values of this field can be changed
+    boolean system?;
+    # The time of the last update of the ticket field
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # A representation of what type of object the field references. Options are "zen:user", "zen:organization", "zen:ticket", and "zen:custom_object:{key}" where key is a custom object key. For example "zen:custom_object:apartment"
+    @jsondata:Name {value: "relationship_target_type"}
+    string relationshipTargetType?;
+    # Regular expression field only. The validation pattern for a field value to be deemed valid
+    @jsondata:Name {value: "regexp_for_validation"}
+    string? regexpForValidation?;
+    # A filter definition that allows your autocomplete to filter down results
+    @jsondata:Name {value: "relationship_filter"}
+    record {} relationshipFilter?;
+    # Automatically assigned upon creation
+    int id?;
+    # Ordering of the field relative to other fields
+    int position?;
+    # Optional for custom field of type "checkbox"; not presented otherwise
+    string tag?;
+    # A unique key that identifies this custom field. This is used for updating the field and referencing in placeholders. The key must consist of only letters, numbers, and underscores. It can't be only numbers and can't be reused if deleted
+    string 'key;
+};
+
+# Represents the Headers record for the operation: DeleteTriggerCategory
+public type DeleteTriggerCategoryHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type DeletedUserResponse record {
+    @jsondata:Name {value: "deleted_user"}
+    DeletedUserObject deletedUser?;
+};
+
+# Represents the Headers record for the operation: DeleteGroup
+public type DeleteGroupHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: RedactStringInComment
+public type RedactStringInCommentHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: SuspendedTicketsAttachments
+public type SuspendedTicketsAttachmentsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type TagCountResponse record {
+    TagCountObject count?;
+};
+
+# Represents the Headers record for the operation: ShowTicketAudit
+public type ShowTicketAuditHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type OrganizationsResponse record {
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    int count?;
+    OrganizationObject[] organizations?;
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
+};
+
+public type TicketObject record {
+    # If true, the ticket's [via type](/documentation/ticketing/reference-guides/via-object-reference/) is a messaging channel
+    @jsondata:Name {value: "from_messaging_channel"}
+    boolean fromMessagingChannel?;
+    # Write only. Metadata for the audit. In the `audit` object, the data is specified in the `custom` property of the `metadata` object. See [Setting Metadata](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#setting-metadata)
+    record {} metadata?;
+    # The ids of agents or end users currently CC'ed on the ticket. See [CCs and followers resources](https://support.zendesk.com/hc/en-us/articles/360020585233) in the Support Help Center
+    @jsondata:Name {value: "email_cc_ids"}
+    int[] emailCcIds?;
+    # The value of the subject field for this ticket. See [Subject](/api-reference/ticketing/tickets/tickets/#subject)
+    string subject?;
+    # Write only. See [Creating voicemail ticket](/api-reference/voice/talk-partner-edition-api/reference/#creating-voicemail-tickets)
+    @jsondata:Name {value: "voice_comment"}
+    record {} voiceComment?;
+    # POST requests only. List of macro IDs to be recorded in the ticket audit
+    @jsondata:Name {value: "macro_ids"}
+    int[] macroIds?;
+    # The type of this ticket
+    "problem"|"incident"|"question"|"task" 'type?;
+    # Write only. Datetime of last update received from API. See the `safe_update` property
+    @jsondata:Name {value: "updated_stamp"}
+    string updatedStamp?;
+    TicketObjectVia via?;
+    # Write only. An array of objects that represent agent or end users email CCs to add or delete from the ticket. See [Setting email CCs](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#setting-email-ccs)
+    @jsondata:Name {value: "email_ccs"}
+    record {} emailCcs?;
+    # POST requests only. Users to add as cc's when creating a ticket. See [Setting Collaborators](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-collaborators)
+    CollaboratorObject[] collaborators?;
+    # If this is a ticket of type "task" it has a due date.  Due date format uses [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601) format
+    @jsondata:Name {value: "due_at"}
+    string? dueAt?;
+    # Automatically assigned when the ticket is created
+    int id?;
+    # The dynamic content placeholder, if present, or the "subject" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "raw_subject"}
+    string rawSubject?;
+    # Write only. See [Creating a ticket with a new requester](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#creating-a-ticket-with-a-new-requester)
+    record {} requester?;
+    # Write only. Optional boolean. When true and an `update_stamp` date is included, protects against ticket update collisions and returns a message to let you know if one occurs. See [Protecting against ticket update collisions](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#protecting-against-ticket-update-collisions). A value of false has the same effect as true. Omit the property to force the updates to not be safe
+    @jsondata:Name {value: "safe_update"}
+    boolean safeUpdate?;
+    # Custom fields for the ticket. See [Setting custom field values](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-custom-field-values)
+    @jsondata:Name {value: "custom_fields"}
+    TicketObjectCustomFields[] customFields?;
+    # Is false if channelback is disabled, true otherwise. Only applicable for channels framework ticket
+    @jsondata:Name {value: "allow_channelback"}
+    boolean allowChannelback?;
+    # The satisfaction rating of the ticket, if it exists, or the state of satisfaction, "offered" or "unoffered". The value is null for plan types that don't support CSAT
+    @jsondata:Name {value: "satisfaction_rating"}
+    record {} satisfactionRating?;
+    # The urgency with which the ticket should be addressed
+    "urgent"|"high"|"normal"|"low" priority?;
+    # The id of the brand this ticket is associated with. See [Setting up multiple brands](https://support.zendesk.com/hc/en-us/articles/4408829476378)
+    @jsondata:Name {value: "brand_id"}
+    int brandId?;
+    # The array of tags applied to this ticket
+    string[] tags?;
+    # Write only. An array of objects that represent agent followers to add or delete from the ticket. See [Setting followers](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#setting-followers)
+    record {} followers?;
+    # The ids of the sharing agreements used for this ticket
+    @jsondata:Name {value: "sharing_agreement_ids"}
+    int[] sharingAgreementIds?;
+    # The organization of the requester. You can only specify the ID of an organization associated with the requester. See [Organization Memberships](/api-reference/ticketing/organizations/organization_memberships/)
+    @jsondata:Name {value: "organization_id"}
+    int organizationId?;
+    # POST requests only. The id of a closed ticket when creating a follow-up ticket. See [Creating a follow-up ticket](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#creating-a-follow-up-ticket)
+    @jsondata:Name {value: "via_followup_source_id"}
+    int viaFollowupSourceId?;
+    # Is true if a ticket is a problem type and has one or more incidents linked to it. Otherwise, the value is false
+    @jsondata:Name {value: "has_incidents"}
+    boolean hasIncidents?;
+    # Write only. An array of the IDs of attribute values to be associated with the ticket
+    @jsondata:Name {value: "attribute_value_ids"}
+    int[] attributeValueIds?;
+    # Write only. For more information, see the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference/)
+    @jsondata:Name {value: "via_id"}
+    int viaId?;
+    # The user who requested this ticket
+    @jsondata:Name {value: "requester_id"}
+    int requesterId;
+    # The state of the ticket.
+    # 
+    # If your account has activated custom ticket statuses, this is the ticket's
+    # status category. See [custom ticket statuses](#custom-ticket-statuses)
+    "new"|"open"|"pending"|"hold"|"solved"|"closed" status?;
+    # When this record was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The custom ticket status id of the ticket. See [custom ticket statuses](#custom-ticket-statuses)
+    @jsondata:Name {value: "custom_status_id"}
+    int customStatusId?;
+    # Read-only first comment on the ticket. When [creating a ticket](#create-ticket), use `comment` to set the description. See [Description and first comment](#description-and-first-comment)
+    string description?;
+    # An id you can use to link Zendesk Support tickets to local records
+    @jsondata:Name {value: "external_id"}
+    string externalId?;
+    # Permission for agents to add add attachments to a comment. Defaults to true
+    @jsondata:Name {value: "allow_attachments"}
+    boolean allowAttachments?;
+    # Write only. The email address of the agent to assign the ticket to
+    @jsondata:Name {value: "assignee_email"}
+    string assigneeEmail?;
+    # When this record last got updated. It is updated only if the update generates a [ticket event](#incremental-ticket-event-export)
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # For tickets of type "incident", the ID of the problem the incident is linked to
+    @jsondata:Name {value: "problem_id"}
+    int problemId?;
+    # The ids of agents currently following the ticket. See [CCs and followers resources](https://support.zendesk.com/hc/en-us/articles/360020585233)
+    @jsondata:Name {value: "follower_ids"}
+    int[] followerIds?;
+    # The agent currently assigned to the ticket
+    @jsondata:Name {value: "assignee_id"}
+    int assigneeId?;
+    # The topic in the Zendesk Web portal this ticket originated from, if any. The Web portal is deprecated
+    @jsondata:Name {value: "forum_topic_id"}
+    int forumTopicId?;
+    # Write only. A macro ID to be recorded in the ticket audit
+    @jsondata:Name {value: "macro_id"}
+    int macroId?;
+    # The user who submitted the ticket. The submitter always becomes the author of the first comment on the ticket
+    @jsondata:Name {value: "submitter_id"}
+    int submitterId?;
+    # The ids of users currently CC'ed on the ticket
+    @jsondata:Name {value: "collaborator_ids"}
+    int[] collaboratorIds?;
+    # The API url of this ticket
+    string url?;
+    # Enterprise only. The id of the ticket form to render for the ticket
+    @jsondata:Name {value: "ticket_form_id"}
+    int ticketFormId?;
+    # The group this ticket is assigned to
+    @jsondata:Name {value: "group_id"}
+    int groupId?;
+    # The ids of the followups created from this ticket. Ids are only visible once the ticket is closed
+    @jsondata:Name {value: "followup_ids"}
+    int[] followupIds?;
+    # Is true if any comments are public, false otherwise
+    @jsondata:Name {value: "is_public"}
+    boolean isPublic?;
+    # The original recipient e-mail address of the ticket. Notification emails for the ticket are sent from this address
+    string recipient?;
+    # Write only. An object that adds a comment to the ticket. See [Ticket comments](/api-reference/ticketing/tickets/ticket_comments/). To include an attachment with the comment, see [Attaching files](/documentation/ticketing/managing-tickets/creating-and-updating-tickets/#attaching-files)
+    record {} comment?;
+};
+
+# Represents the Headers record for the operation: RequestUserVerfication
+public type RequestUserVerficationHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type BatchErrorItemAllOf2 record {
+    @jsondata:Name {value: "trigger_id"}
+    string triggerId?;
+};
+
+public type AttachmentUploadResponseUpload record {
+    AttachmentObject[] attachments?;
+    AttachmentObject attachment?;
+    # Token for subsequent request
+    string token?;
+};
+
+public type TrialAccountResponse record {
+    TrialAccountObject account?;
+};
+
+# Represents the Queries record for the operation: ListComments
+public type ListCommentsQueries record {
+    # One of "agent", "end_user". If not specified it does not filter
+    string role?;
+    # Filters the comments from the given datetime
+    string since?;
+};
+
+# Represents the Headers record for the operation: UpdateQueue
+public type UpdateQueueHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ListComments
+public type ListCommentsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type ReverseLookupResponse UsersResponse;
+
+public type InlineResponse2009 record {
+    WorkspaceObject workspace?;
+};
+
+public type InlineResponse2008 record {
+    WorkspaceObject workspace?;
+};
+
+public type AssigneeFieldAssignableAgentObject record {
+    # URL of Agent's avatar
+    @jsondata:Name {value: "avatar_url"}
+    string? avatarUrl?;
+    # Name of the agent
+    string name?;
+    # Agent Support ID
+    int id?;
+};
+
+public type InlineResponse2001Count record {
+    # The time the last count was performed
+    string refreshed_at?;
+    # Number of records at the time of the latest count operation
+    int value?;
+};
+
+# Represents the Headers record for the operation: UpdateAttachment
+public type UpdateAttachmentHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type SkillBasedRoutingAttributesResponse record {
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    int count?;
+    SkillBasedRoutingAttributeObject[] attributes?;
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
+};
+
+# Represents the Headers record for the operation: ListViews
+public type ListViewsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: MarkManyTicketsAsSpam
+public type MarkManyTicketsAsSpamQueries record {
+    # Comma-separated list of ticket ids
+    string ids;
+};
+
+# Represents the Headers record for the operation: MarkTicketAsSpamAndSuspendRequester
+public type MarkTicketAsSpamAndSuspendRequesterHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: SetTicketAttributeValues
+public type SetTicketAttributeValuesHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ShowSession
+public type ShowSessionHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type TriggerCategoriesResponse record {
+    @jsondata:Name {value: "trigger_categories"}
+    TriggerCategoriesResponseTriggerCategories[] triggerCategories?;
+};
+
+public type TicketImportInput record {
+    # The conversation between requesters, collaborators, and agents
+    record {} comments?;
+    # The value of the subject field for this ticket
+    string subject?;
+    # Read-only first comment on the ticket. When [creating a ticket](#create-ticket), use `comment` to set the description. See [Description and first comment](#description-and-first-comment)
+    string description?;
+    # The agent currently assigned to the ticket
+    @jsondata:Name {value: "assignee_id"}
+    int assigneeId?;
+    # The user who requested this ticket
+    @jsondata:Name {value: "requester_id"}
+    int requesterId?;
+    # The array of tags applied to this ticket
+    string[] tags?;
+};
+
+# Represents the Headers record for the operation: ShowOrganizationField
+public type ShowOrganizationFieldHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# The active features for an account. See [Active Features](#active-features)
+public type AccountSettingsActiveFeaturesObject record {
+    @jsondata:Name {value: "business_hours"}
+    boolean businessHours?;
+    boolean voice?;
+    @jsondata:Name {value: "fallback_composer"}
+    boolean fallbackComposer?;
+    @jsondata:Name {value: "bcc_archiving"}
+    boolean bccArchiving?;
+    @jsondata:Name {value: "ticket_tagging"}
+    boolean ticketTagging?;
+    @jsondata:Name {value: "benchmark_opt_out"}
+    boolean benchmarkOptOut?;
+    @jsondata:Name {value: "allow_email_template_customization"}
+    boolean allowEmailTemplateCustomization?;
+    @jsondata:Name {value: "csat_reason_code"}
+    boolean csatReasonCode?;
+    boolean twitter?;
+    @jsondata:Name {value: "satisfaction_prediction"}
+    boolean satisfactionPrediction?;
+    @jsondata:Name {value: "customer_satisfaction"}
+    boolean customerSatisfaction?;
+    @jsondata:Name {value: "dynamic_contents"}
+    boolean dynamicContents?;
+    @jsondata:Name {value: "advanced_analytics"}
+    boolean advancedAnalytics?;
+    @jsondata:Name {value: "explore_on_support_pro_plan"}
+    boolean exploreOnSupportProPlan?;
+    @jsondata:Name {value: "customer_context_as_default"}
+    boolean customerContextAsDefault?;
+    boolean markdown?;
+    @jsondata:Name {value: "ticket_forms"}
+    boolean ticketForms?;
+    @jsondata:Name {value: "agent_forwarding"}
+    boolean agentForwarding?;
+    @jsondata:Name {value: "user_org_fields"}
+    boolean userOrgFields?;
+    @jsondata:Name {value: "automatic_answers"}
+    boolean automaticAnswers?;
+    @jsondata:Name {value: "good_data_and_explore"}
+    boolean goodDataAndExplore?;
+    @jsondata:Name {value: "chat_about_my_ticket"}
+    boolean chatAboutMyTicket?;
+    @jsondata:Name {value: "topic_suggestion"}
+    boolean topicSuggestion?;
+    boolean explore?;
+    @jsondata:Name {value: "on_hold_status"}
+    boolean onHoldStatus?;
+    boolean insights?;
+    @jsondata:Name {value: "light_agents"}
+    boolean lightAgents?;
+    @jsondata:Name {value: "user_tagging"}
+    boolean userTagging?;
+    boolean facebook?;
+    boolean sandbox?;
+    @jsondata:Name {value: "suspended_ticket_notification"}
+    boolean suspendedTicketNotification?;
+    @jsondata:Name {value: "facebook_login"}
+    boolean facebookLogin?;
+    @jsondata:Name {value: "rich_content_in_emails"}
+    boolean richContentInEmails?;
+    @jsondata:Name {value: "allow_ccs"}
+    boolean allowCcs?;
+    @jsondata:Name {value: "explore_on_support_ent_plan"}
+    boolean exploreOnSupportEntPlan?;
+    @jsondata:Name {value: "is_abusive"}
+    boolean isAbusive?;
+    @jsondata:Name {value: "organization_access_enabled"}
+    boolean organizationAccessEnabled?;
+    @jsondata:Name {value: "twitter_login"}
+    boolean twitterLogin?;
+    boolean chat?;
+    @jsondata:Name {value: "custom_dkim_domain"}
+    boolean customDkimDomain?;
+    @jsondata:Name {value: "google_login"}
+    boolean googleLogin?;
+    @jsondata:Name {value: "forum_analytics"}
+    boolean forumAnalytics?;
+};
+
+public type BookmarkResponse record {
+    BookmarkObject bookmark?;
+};
+
+public type CountOrganizationObject record {
+    @jsondata:Name {value: "refreshed_at"}
+    string refreshedAt?;
+    int value?;
+};
+
+# Represents the Headers record for the operation: DeleteResourceCollection
+public type DeleteResourceCollectionHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ShowAuditLog
+public type ShowAuditLogHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: BulkDeleteAutomations
+public type BulkDeleteAutomationsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type ChannelFrameworkPushResultsResponse record {
+    # An array of [result objects](#result-object)
+    ChannelFrameworkResultObject[] results?;
+};
+
+public type AutomationObject record {
+    # The raw title of the automation
+    @jsondata:Name {value: "raw_title"}
+    string rawTitle?;
+    # If true, the automation is a default automation
+    boolean default?;
+    # The time of the last update of the automation
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # Whether the automation is active
+    boolean active?;
+    # The time the automation was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Automatically assigned when created
+    int id?;
+    # The position of the automation which specifies the order it will be executed
+    int position?;
+    ConditionsObject conditions?;
+    # The title of the automation
+    string title?;
+    # An object describing what the automation will do. See [Actions reference](/documentation/ticketing/reference-guides/actions-reference)
+    ActionObject[] actions?;
+};
+
+# Represents the Headers record for the operation: DeleteUser
+public type DeleteUserHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type InlineResponse2001 record {
+    record {|InlineResponse2001Count...;|} count?;
+};
+
+public type SearchExportResponse record {
+    SearchExportResponseMeta meta?;
+    SearchExportResponseLinks links?;
+    # May consist of tickets, users, groups, or organizations, as specified by the `result_type` property in each result object
+    SearchResultObject[] results?;
+    # The facets corresponding to the search query
+    string? facets?;
+};
+
+public type InlineResponse2003 record {
+    MacroObject macro?;
+};
+
+public type InlineResponse2002 record {
+    MacroObject macro?;
+};
+
+public type ComplianceDeletionStatusObject record {
+    @jsondata:Name {value: "account_subdomain"}
+    string accountSubdomain;
+    string application;
+    @jsondata:Name {value: "user_id"}
+    int userId;
+    @jsondata:Name {value: "executer_id"}
+    int? executerId;
+    string action;
+    @jsondata:Name {value: "created_at"}
+    string createdAt;
+};
+
+public type InlineResponse2005 record {
+    InlineResponse2005Definitions definitions?;
+};
+
+public type InlineResponse2004 record {
+    record {}[] actions?;
+};
+
+public type InlineResponse2007 record {
+    *TriggerCategoriesResponse;
+    *Pagination;
+};
+
+public type InlineResponse2006 record {
+    InlineResponse2006Count count?;
+};
+
+public type TicketUpdateRequest record {
+    TicketUpdateInput ticket?;
+};
+
+# Brand settings. See [Brands](#brands)
+public type AccountSettingsBrandsObject record {
+    @jsondata:Name {value: "default_brand_id"}
+    int defaultBrandId?;
+    @jsondata:Name {value: "require_brand_on_new_tickets"}
+    boolean requireBrandOnNewTickets?;
+};
+
+public type PaginationLinks record {
+    string next?;
+    string prev?;
+};
+
+public type OrganizationMembershipObject record {
+    # Denotes whether the user can or cannot have access to all organization's tickets
+    @jsondata:Name {value: "view_tickets"}
+    boolean viewTickets?;
+    # Denotes whether this is the default organization membership for the user. If false, returns `null`
+    boolean? default;
+    # When this record last got updated
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # The ID of the user for whom this memberships belongs
+    @jsondata:Name {value: "user_id"}
+    int userId;
+    # The ID of the organization associated with this user, in this membership
+    @jsondata:Name {value: "organization_id"}
+    int organizationId;
+    # When this record was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Automatically assigned when the membership is created
+    int id?;
+    # The name of the organization associated with this user, in this membership
+    @jsondata:Name {value: "organization_name"}
+    string organizationName?;
+    # The API url of this membership
+    string url?;
+};
+
+public type QueueObjectDefinitionAll record {
+    string 'field?;
+    string value?;
+    string operator?;
+};
+
+public type TicketMetricEventBaseObject record {
+    # The instance of the metric associated with the event. See [instance_id](#instance_id)
+    @jsondata:Name {value: "instance_id"}
+    int instanceId?;
+    # The metric being tracked
+    "agent_work_time"|"pausable_update_time"|"periodic_update_time"|"reply_time"|"requester_wait_time"|"resolution_time" metric?;
+    # Automatically assigned when the record is created
+    int id?;
+    # The time the event occurred
+    string time?;
+    # Id of the associated ticket
+    @jsondata:Name {value: "ticket_id"}
+    int ticketId?;
+    # The type of the metric event. See [Ticket metric event types reference](/documentation/ticketing/reference-guides/ticket-metric-event-types-reference)
+    "activate"|"pause"|"fulfill"|"apply_sla"|"breach"|"update_status"|"measure" 'type?;
+};
+
+# Represents the Queries record for the operation: ShowManyJobStatuses
+public type ShowManyJobStatusesQueries record {
+    # Comma-separated list of job status ids
+    string ids;
+};
+
+public type UserMergeByIdInput record {
+    int id?;
+};
+
+public type AssigneeFieldAssignableGroupsAndAgentsSearchResponse record {
+    # Number of agents + groups listed from search result
+    int count?;
+    AssigneeFieldAssignableSearchGroupObject[] groups?;
+    AssigneeFieldAssignableSearchAgentObject[] agents?;
+};
+
+# Represents the Queries record for the operation: ShowManyOrganizations
+public type ShowManyOrganizationsQueries record {
+    # A list of organization ids
+    string ids?;
+    # A list of external ids
+    @http:Query {name: "external_ids"}
+    string externalIds?;
+};
+
+# Represents the Headers record for the operation: DeleteUserField
+public type DeleteUserFieldHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: AutocompleteUsers
+public type AutocompleteUsersQueries record {
+    # The id of a lookup relationship field.  The type of field is determined
+    # by the `source` param
+    @http:Query {name: "field_id"}
+    string fieldId?;
+    # The name to search for the user
+    string name;
+    # If a `field_id` is provided, this specifies the type of the field.
+    # For example, if the field is on a "zen:user", it references a field on a user
+    string 'source?;
+};
+
+# Represents the Headers record for the operation: ShowJobStatus
+public type ShowJobStatusHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ShowCustomObjectRecord
+public type ShowCustomObjectRecordHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: VerifySubdomainAvailability
+public type VerifySubdomainAvailabilityHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type AuditObject record {
+    record {} metadata?;
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    int id?;
+    @jsondata:Name {value: "author_id"}
+    int authorId?;
+    @jsondata:Name {value: "ticket_id"}
+    int ticketId?;
+    AuditObjectEvents[] events?;
+    ViaObject via?;
+};
+
+# Represents the Headers record for the operation: TicketRelatedInformation
+public type TicketRelatedInformationHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: UpdateUser
+public type UpdateUserHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: VerifySubdomainAvailability
+public type VerifySubdomainAvailabilityQueries record {
+    # Specify the name of the subdomain you want to verify. The name can't contain underscores, hyphens, or spaces
+    string subdomain;
+};
+
+public type CustomObjectRecordsBulkCreateRequestJob record {
+    string action?;
+    # An array of record objects for job actions that create, update, or set. An array of strings for job actions that delete
+    CustomObjectRecord[] items?;
+};
+
+public type OrganizationResponse record {
+    OrganizationObject organization?;
+};
+
+public type TargetCommonFields record {
+    # Whether or not the target is activated
+    boolean active?;
+    # The time the target was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Automatically assigned when created
+    int id?;
+    # A name for the target
+    string title;
+    # A pre-defined target, such as "basecamp_target". See the additional attributes for the type that follow
+    string 'type;
+};
+
+# Represents the Headers record for the operation: DeleteTrigger
+public type DeleteTriggerHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: UpdateSLAPolicy
+public type UpdateSLAPolicyHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ShowCustomRoleById
+public type ShowCustomRoleByIdHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type MacroObjectAllOf2 record {
+    # The app installation that requires each macro, if present
+    @jsondata:Name {value: "app_installation"}
+    string? appInstallation?;
+    # The number of times each macro has been used in the past day
+    @jsondata:Name {value: "usage_24h"}
+    int usage24h?;
+    # The number of times each macro has been used in the past thirty days
+    @jsondata:Name {value: "usage_30d"}
+    int usage30d?;
+    # The number of times each macro has been used in the past hour
+    @jsondata:Name {value: "usage_1h"}
+    int usage1h?;
+    # Permissions for each macro
+    string? permissions?;
+    # The macro categories
+    string? categories?;
+    # The number of times each macro has been used in the past week
+    @jsondata:Name {value: "usage_7d"}
+    int usage7d?;
+};
+
+public type BulkUpdateDefaultCustomStatusResponse record {
+};
+
+public type GroupSLAPolicyFilterDefinitionResponseDefinitionsValuesList record {
+    string title?;
+    int? value?;
+};
+
+# Represents the Headers record for the operation: ShowOrganizationSubscription
+public type ShowOrganizationSubscriptionHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: CheckHostMappingValidityForExistingBrand
+public type CheckHostMappingValidityForExistingBrandHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type InlineResponse2005Definitions record {
+    record {}[] actions?;
+};
+
+# Represents the Queries record for the operation: TicketsShowMany
+public type TicketsShowManyQueries record {
+    # Comma-separated list of ticket ids
+    string ids;
+};
+
+# Represents the Headers record for the operation: ShowTriggerCategoryById
+public type ShowTriggerCategoryByIdHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type TriggerBulkUpdateItem record {
+    # The ID of the new category the trigger is to be moved to
+    @jsondata:Name {value: "category_id"}
+    string categoryId?;
+    # The active status of the trigger (true or false)
+    boolean active?;
+    # The ID of the trigger to update
+    int id;
+    # The new position of the trigger
+    int position?;
+};
+
+# Represents the Headers record for the operation: DynamicContentListVariants
+public type DynamicContentListVariantsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ShowGroupMembershipById
+public type ShowGroupMembershipByIdHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type SuspendedTicketsExportResponse record {
+    SuspendedTicketsExportResponseExport export?;
+};
+
+# Represents the Headers record for the operation: DeleteManyOrganizations
+public type DeleteManyOrganizationsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type TriggerConditionDefinitionObjectAllValues record {
+    string title?;
+    string value?;
+    boolean enabled?;
+};
+
+public type QueueObjectDefinitionAny record {
+    string 'field?;
+    string value?;
+    string operator?;
+};
+
+# Represents the Headers record for the operation: GettingTwicketStatus
+public type GettingTwicketStatusHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ListSatisfactionRatings
+public type ListSatisfactionRatingsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: CheckHostMappingValidity
+public type CheckHostMappingValidityHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ListGroupMembershipsByUserId
+public type ListGroupMembershipsByUserIdHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type V2MacrosBody record {
+    MacroInput macro?;
+};
+
+# Represents the Headers record for the operation: MergeEndUsers
+public type MergeEndUsersHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Account limits configuration. See [Limits](#limits)
+public type AccountSettingsLimitsObject record {
+    @jsondata:Name {value: "attachment_size"}
+    int attachmentSize?;
+};
+
+# Represents the Headers record for the operation: TriggerRevision
+public type TriggerRevisionHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: UpdateUserIdentity
+public type UpdateUserIdentityHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: BulkPermanentlyDeleteTickets
+public type BulkPermanentlyDeleteTicketsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ShowEssentialsCard
+public type ShowEssentialsCardHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: ListUsers
+public type ListUsersQueries record {
+    # Filters the results by role. Possible values are "end-user", "agent", or "admin"
+    "end-user"|"agent"|"admin" role?;
+    # Filters the results by more than one role using the format `role[]={role}&role[]={role}`
+    string roles?;
+    # List users by external id. External id has to be unique for each user under the same account
+    @http:Query {name: "external_id"}
+    string externalId?;
+    # For custom roles which is available on the Enterprise plan and above. You can only filter by one role ID per request
+    @http:Query {name: "permission_set"}
+    int permissionSet?;
+};
+
+public type AccountSettingsCdnObjectHosts record {
+    string name?;
+    string url?;
+};
+
+# Represents the Headers record for the operation: ListUsers
+public type ListUsersHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type SkillBasedRoutingAttributeDefinitionsDefinitions record {
+    @jsondata:Name {value: "conditions_any"}
+    SkillBasedRoutingAttributeDefinitionsDefinitionsConditionsAny[] conditionsAny?;
+    @jsondata:Name {value: "conditions_all"}
+    SkillBasedRoutingAttributeDefinitionsDefinitionsConditionsAll[] conditionsAll?;
+};
+
+public type DefinitionsResponseDefinitionsConditionsAll record {
+    boolean nullable?;
+    DefinitionsResponseDefinitionsOperators[] operators?;
+    boolean repeatable?;
+    string subject?;
+    DefinitionsResponseDefinitionsValues[] values?;
+    string title?;
+    string 'type?;
+    string group?;
+};
+
+# Represents the Headers record for the operation: UpdateManyUsers
+public type UpdateManyUsersHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: DeleteTagsTicket
+public type DeleteTagsTicketHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type GroupMembershipsResponse record {
+    @jsondata:Name {value: "group_memberships"}
+    GroupMembershipObject[] groupMemberships?;
+};
+
+public type TriggerBulkUpdateRequest record {
+    TriggerBulkUpdateItem[] triggers?;
+};
+
+# Represents the Headers record for the operation: ShowCustomObjectField
+public type ShowCustomObjectFieldHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type SLAPolicyFilterConditionObject record {
+    # The name of a ticket field
+    string 'field?;
+    # The value of a ticket field
+    string|(string|int)[] value?;
+    # A comparison operator
+    string operator?;
+};
+
+# Represents the Queries record for the operation: ListTriggers
+public type ListTriggersQueries record {
+    # Filter triggers by category ID
+    @http:Query {name: "category_id"}
+    string categoryId?;
+    # Filter by active triggers if true or inactive triggers if false
+    boolean active?;
+    # Cursor-based pagination only. Possible values are "alphabetical", "created_at", "updated_at", or "position"
+    string sort?;
+    # Offset pagination only. Possible values are "alphabetical", "created_at", "updated_at", "usage_1h", "usage_24h", or "usage_7d". Defaults to "position"
+    @http:Query {name: "sort_by"}
+    string sortBy?;
+    # One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
+    @http:Query {name: "sort_order"}
+    string sortOrder?;
+};
+
+# Represents the Headers record for the operation: DeleteCustomObjectRecord
+public type DeleteCustomObjectRecordHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: DeleteRecipientAddress
+public type DeleteRecipientAddressHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: DeleteView
+public type DeleteViewHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: UpdateWorkspace
+public type UpdateWorkspaceHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Billing configuration options. See [Billing](#billing)
+public type AccountSettingsBillingObject record {
+    string backend?;
+};
+
+public type CustomStatusCreateInput record {
+    *CustomStatusUpdateInput;
+    *CustomStatusCreateInputAllOf2;
+};
+
+public type MacroUpdateManyInputMacros record {
+    # The active status of the macro (true or false)
+    boolean active?;
+    # The ID of the macro to update
+    int id;
+    # The new position of the macro
+    int position?;
+};
+
+# An object explaining how the ticket was created. See the [Via object reference](/documentation/ticketing/reference-guides/via-object-reference)
+public type ViaObject record {
+    # This tells you how the ticket or event was created. Examples: "web", "mobile", "rule", "system"
+    string channel?;
+    ViaObjectSource 'source?;
+};
+
+# Represents the Headers record for the operation: DeleteCustomRoleById
+public type DeleteCustomRoleByIdHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: CreateUserIdentity
+public type CreateUserIdentityHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type UserCreateInputOrganization record {
+    string name;
+};
+
+# Represents the Headers record for the operation: DeleteManyOrganizationMemberships
+public type DeleteManyOrganizationMembershipsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ListTriggerRevisions
+public type ListTriggerRevisionsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type GroupSLAPolicyObject record {
+    GroupSLAPolicyFilterObject filter;
+    # The time of the last update of the Group SLA policy
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # Array of [policy metric](#policy-metric) objects
+    @jsondata:Name {value: "policy_metrics"}
+    GroupSLAPolicyMetricObject[] policyMetrics?;
+    # The time the Group SLA policy was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The description of the Group SLA policy
+    string description?;
+    # Automatically assigned when created
+    string id?;
+    # Position of the Group SLA policy. This position determines the order in which policies are matched to tickets. If not specified, the Group SLA policy is added at the last position
+    int position?;
+    # The title of the Group SLA policy
+    string title;
+    # URL of the Group SLA policy record
+    string url?;
+};
+
+public type TicketMetricTimeObject record {
+    # Time in calendar hours
+    int calendar?;
+    # Time in business hours
+    int business?;
+};
+
+# Represents the Queries record for the operation: UpdateManyUsers
+public type UpdateManyUsersQueries record {
+    # Id of the users to update. Comma separated
+    string ids?;
+    # External Id of the users to update. Comma separated
+    @http:Query {name: "external_ids"}
+    string externalIds?;
+};
+
+# Represents the Headers record for the operation: UpdateCustomRoleById
+public type UpdateCustomRoleByIdHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type DefinitionsResponseDefinitionsConditionsAny record {
+    boolean nullable?;
+    DefinitionsResponseDefinitionsOperators1[] operators?;
+    boolean repeatable?;
+    string subject?;
+    DefinitionsResponseDefinitionsValues1[] values?;
+    string title?;
+    string 'type?;
+    string group?;
+};
+
+public type CustomObjectRecordsJobsResponse record {
+    @jsondata:Name {value: "job_status"}
+    CustomObjectRecordsJobsResponseJobStatus jobStatus?;
+};
+
+public type IncrementalSkillBasedRouting record {
+    # The URL that should be called to get the next set of results
+    @jsondata:Name {value: "next_page"}
+    string nextPage?;
+    # Routing instance values
+    @jsondata:Name {value: "instance_values"}
+    IncrementalSkillBasedRoutingInstanceValue[] instanceValues?;
+    # Routing attribute values
+    @jsondata:Name {value: "attribute_values"}
+    IncrementalSkillBasedRoutingAttributeValue[] attributeValues?;
+    # The number of results returned for the current request
+    int count?;
+    # The most recent resource creation time present in this result set in Unix epoch time
+    @jsondata:Name {value: "end_time"}
+    int endTime?;
+    # Routing attributes
+    IncrementalSkillBasedRoutingAttribute[] attributes?;
+};
+
+# Represents the Queries record for the operation: GettingTwicketStatus
+public type GettingTwicketStatusQueries record {
+    # Optional comment ids to retrieve tweet information for only particular comments
+    string ids?;
+};
+
+# Represents the Headers record for the operation: CreateDynamicContentVariant
+public type CreateDynamicContentVariantHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type TriggerDefinitionObject record {
+    @jsondata:Name {value: "conditions_any"}
+    TriggerConditionDefinitionObjectAny[] conditionsAny?;
+    @jsondata:Name {value: "conditions_all"}
+    TriggerConditionDefinitionObjectAll[] conditionsAll?;
+    TriggerActionDefinitionObject[] actions?;
+};
+
+# Represents the Queries record for the operation: DeleteManyOrganizations
+public type DeleteManyOrganizationsQueries record {
+    # A list of organization ids
+    string ids?;
+    # A list of external ids
+    @http:Query {name: "external_ids"}
+    string externalIds?;
+};
+
+# Internationalization configuration settings. See [Localization](#localization)
+public type AccountSettingsLocalizationObject record {
+    @jsondata:Name {value: "locale_ids"}
+    int[] localeIds?;
+};
+
+# Represents the Headers record for the operation: ShowTicketForm
+public type ShowTicketFormHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type QueueObjectPrimaryGroupsGroups record {
+    string name?;
+    int id?;
+};
+
+public type SkillBasedRoutingTicketFulfilledResponse record {
+    @jsondata:Name {value: "fulfilled_ticket_ids"}
+    int[] fulfilledTicketIds?;
+};
+
+# Chat event object
+public type TicketChatCommentRedactionResponseChatEvent record {
+    # Id assigned to the chat event object
+    int id?;
+    # Type of chat event
+    string 'type?;
+    TicketChatCommentRedactionResponseChatEventValue value?;
+};
+
+public type OrganizationFieldsResponse record {
+    # URL of the next page
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    @jsondata:Name {value: "organization_fields"}
+    OrganizationFieldObject[] organizationFields?;
+    # Total count of records retrieved
+    int count?;
+    # URL of the previous page
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
+};
+
+# Cross Sell settings
+public type AccountSettingsCrossSellObject record {
+    @jsondata:Name {value: "show_chat_tooltip"}
+    boolean showChatTooltip?;
+    @jsondata:Name {value: "xsell_source"}
+    string? xsellSource?;
+};
+
+public type DeletedUsersResponse record {
+    @jsondata:Name {value: "deleted_users"}
+    DeletedUserObject[] deletedUsers?;
+};
+
+# Represents the Headers record for the operation: ShowMacro
+public type ShowMacroHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type SuspendedTicketsAttachmentsResponse record {
+    SuspendedTicketsAttachmentsResponseUpload upload?;
+};
+
+public type TriggerRevisionResponseTriggerRevisionSnapshot record {
+    boolean active?;
+    string? description?;
+    TriggerConditionsObject conditions?;
+    string title?;
+    TriggerActionObject[] actions?;
+};
+
+# Represents the Headers record for the operation: ShowDeletedUser
+public type ShowDeletedUserHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: DestroyManyWorkspaces
+public type DestroyManyWorkspacesHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: LogoutManyUsers
+public type LogoutManyUsersQueries record {
+    # Accepts a comma-separated list of up to 100 user ids
+    string ids?;
+};
+
+public type SuspendedTicketsAttachmentsResponseUpload record {
+    AttachmentObject[] attachments?;
+    # Token for subsequent request
+    string token?;
+};
+
+# Represents the Headers record for the operation: DeleteBookmark
+public type DeleteBookmarkHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ListTickets
+public type ListTicketsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: CountSearchResults
+public type CountSearchResultsQueries record {
+    # The search query
+    string query;
+};
+
+public type TicketFieldCountResponseCount record {
+    @jsondata:Name {value: "refreshed_at"}
+    string refreshedAt?;
+    int value?;
+};
+
+public type GroupsResponse record {
+    GroupObject[] groups?;
+};
+
+public type AuditLogObject record {
+    # The description of the change that occurred
+    @jsondata:Name {value: "change_description"}
+    string changeDescription?;
+    # The name of the item being audited
+    @jsondata:Name {value: "source_label"}
+    string sourceLabel?;
+    # Name of the user or system that initiated the change
+    @jsondata:Name {value: "actor_name"}
+    string actorName?;
+    # Type of change made. Possible values are "create", "destroy", "exported", "login", and "update"
+    string action?;
+    # The time the audit got created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Item type being audited. Typically describes the system where the change
+    # was initiated. Possible values vary based on your account's Zendesk
+    # products and activity. Common values include "apitoken", "rule", "ticket",
+    # "user", and "zendesk/app_market/app". The "rule" value is used for
+    # [automations](https://support.zendesk.com/hc/en-us/articles/4408832701850),
+    # [macros](https://support.zendesk.com/hc/en-us/articles/4408844187034),
+    # [triggers](https://support.zendesk.com/hc/en-us/articles/4408822236058),
+    # [views](https://support.zendesk.com/hc/en-us/articles/4408888828570),
+    # and other automated business rules
+    @jsondata:Name {value: "source_type"}
+    string sourceType?;
+    # id of the user or system that initiated the change
+    @jsondata:Name {value: "actor_id"}
+    int actorId?;
+    # The id automatically assigned upon creation
+    int id?;
+    # The IP address of the user doing the audit
+    @jsondata:Name {value: "ip_address"}
+    string ipAddress?;
+    # The id of the item being audited
+    @jsondata:Name {value: "source_id"}
+    int sourceId?;
+    # Localized string of action field
+    @jsondata:Name {value: "action_label"}
+    string actionLabel?;
+    # The URL to access the audit log
+    string url?;
+};
+
+public type ActivityResponse record {
+    ActivityObject activity?;
+};
+
+public type CustomObjectRecordsUpsertRequest record {
+    @jsondata:Name {value: "custom_object_record"}
+    CustomObjectRecord customObjectRecord?;
+};
+
+# Represents the Queries record for the operation: ListCustomObjectRecords
+public type ListCustomObjectRecordsQueries record {
+    # A [pagination cursor](/documentation/api-basics/pagination/paginating-through-lists-using-cursor-pagination) that tells the endpoint which page to start on. It should be a `meta.before_cursor` value from a previous request. Note: `page[before]` and `page[after]` can't be used together in the same request
+    @http:Query {name: "page[before]"}
+    string pageBefore?;
+    # One of `id`, `updated_at`, `-id`, or `-updated_at`. The `-` denotes the sort will be descending
+    string sort?;
+    # Optional comma-separated list of external ids to filter records by. If one or more ids are specified, only matching records are returned. The ids must be unique and are case sensitive
+    @http:Query {name: "filter[external_ids]"}
+    string filterExternalIds?;
+    # Specifies how many records should be returned in the response. You can specify up to 100 records per page
+    @http:Query {name: "page[size]"}
+    int pageSize?;
+    # Optional comma-separated list of ids to filter records by. If one or more ids are specified, only matching records are returned. The ids must be unique and are case sensitive
+    @http:Query {name: "filter[ids]"}
+    string filterIds?;
+    # A [pagination cursor](/documentation/api-basics/pagination/paginating-through-lists-using-cursor-pagination) that tells the endpoint which page to start on. It should be a `meta.after_cursor` value from a previous request. Note: `page[before]` and `page[after]` can't be used together in the same request
+    @http:Query {name: "page[after]"}
+    string pageAfter?;
+};
+
+public type SLAPolicyFilterDefinitionResponseDefinitionsValuesList record {
+    string title?;
+    string? value?;
+};
+
+# Represents the Headers record for the operation: CloneTicketForm
+public type CloneTicketFormHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type TicketsResponse record {
+    TicketObject[] tickets?;
+};
+
+# Represents the Headers record for the operation: AutocompleteUsers
+public type AutocompleteUsersHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ShowManyOrganizations
+public type ShowManyOrganizationsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ShowOrganization
+public type ShowOrganizationHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# An object that describes the conditions under which the automation will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
+public type ConditionsObject record {
+    # Logical AND. Tickets must fulfill all of the conditions to be considered matching
+    ConditionObject[] all?;
+    # Logical OR. Tickets may satisfy any of the conditions to be considered matching
+    ConditionObject[] 'any?;
+};
+
+# Represents the Headers record for the operation: UpdateAttribute
+public type UpdateAttributeHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# The links to the previous and next entries via the cursor ids in the metadata
+public type SearchExportResponseLinks record {
+    # The url to the next entry via the cursor
+    string? next?;
+    # The url to the previous entry via the cursor
+    string? prev?;
+};
+
+# Side conversations settings
+public type AccountSettingsSideConversationsObject record {
+    @jsondata:Name {value: "tickets_channel"}
+    boolean ticketsChannel?;
+    @jsondata:Name {value: "slack_channel"}
+    boolean slackChannel?;
+    @jsondata:Name {value: "email_channel"}
+    boolean emailChannel?;
+    @jsondata:Name {value: "show_in_context_panel"}
+    boolean showInContextPanel?;
+    @jsondata:Name {value: "msteams_channel"}
+    boolean msteamsChannel?;
+};
+
+public type ProblemsAutocompleteBody record {
+    # The text to search for
+    string text?;
+};
+
+public type OrganizationMembershipResponse record {
+    @jsondata:Name {value: "organization_membership"}
+    OrganizationMembershipObject organizationMembership?;
+};
+
+# User settings. See [Users](#users)
+public type AccountSettingsUserObject record {
+    boolean tagging?;
+    @jsondata:Name {value: "end_user_phone_number_validation"}
+    boolean endUserPhoneNumberValidation?;
+    @jsondata:Name {value: "agent_created_welcome_emails"}
+    boolean agentCreatedWelcomeEmails?;
+    @jsondata:Name {value: "language_selection"}
+    boolean languageSelection?;
+    @jsondata:Name {value: "multiple_organizations"}
+    boolean multipleOrganizations?;
+    @jsondata:Name {value: "time_zone_selection"}
+    boolean timeZoneSelection?;
+    @jsondata:Name {value: "have_gravatars_enabled"}
+    boolean haveGravatarsEnabled?;
+};
+
+public type GroupsCountObject record {
+    GroupsCountObjectCount count?;
+};
+
+public type ResourceCollectionObjectResources record {
+    string identifier?;
+    boolean deleted?;
+    @jsondata:Name {value: "resource_id"}
+    int resourceId?;
+    string 'type?;
+};
+
+public type MacroAttachmentObject record {
+    # The name of the image file
+    string filename?;
+    # The content type of the image. Example value: "image/png"
+    @jsondata:Name {value: "content_type"}
+    string contentType?;
+    # The size of the image file in bytes
+    int size?;
+    # The time when this attachment was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # A full URL where the attachment image file can be downloaded
+    @jsondata:Name {value: "content_url"}
+    string contentUrl?;
+    # Automatically assigned when created
+    int id?;
+};
+
+public type CustomObjectsResponse record {
+    @jsondata:Name {value: "custom_objects"}
+    CustomObject[] customObjects?;
+};
+
+public type CustomObjectRecordsResponseMeta record {
+    @jsondata:Name {value: "after_cursor"}
+    string? afterCursor;
+    @jsondata:Name {value: "before_cursor"}
+    string? beforeCursor;
+    @jsondata:Name {value: "has_more"}
+    boolean hasMore;
+};
+
+public type InlineResponse201 record {
+    WorkspaceObject workspace?;
+};
+
+public type InlineResponse200 record {
+    boolean success?;
+};
+
+# Represents the Headers record for the operation: UpdateCustomObject
+public type UpdateCustomObjectHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type GroupSLAPolicyFilterDefinitionResponse record {
+    GroupSLAPolicyFilterDefinitionResponseDefinitions definitions?;
+};
+
+public type ViaObjectSourceFrom record {
+    string? address?;
+    string? name?;
+    int? id?;
     string? title?;
-    string? 'type?;
-    DefinitionsResponse_definitions_values[]? values?;
+};
+
+# Represents the Headers record for the operation: UpdateView
+public type UpdateViewHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: ReorderSLAPolicies
+public type ReorderSLAPoliciesQueries record {
+    # The IDs of the SLA Policies to reorder
+    @http:Query {name: "sla_policy_ids"}
+    int[] slaPolicyIds?;
+};
+
+public type DynamicContentsResponse record {
+    DynamicContentObject[] items?;
+};
+
+public type AuditObjectEvents record {
+    int id?;
+    string body?;
+    string 'type?;
+    string|int value?;
+    @jsondata:Name {value: "field_name"}
+    string fieldName?;
+};
+
+public type JobStatusesResponse record {
+    @jsondata:Name {value: "job_statuses"}
+    JobStatusObject[] jobStatuses;
+};
+
+# Represents the Queries record for the operation: ListSearchResults
+public type ListSearchResultsQueries record {
+    # The search query. See [Query basics](#query-basics) above. For details on the query syntax, see the [Zendesk Support search reference](https://support.zendesk.com/hc/en-us/articles/203663226)
+    string query;
+    # One of `updated_at`, `created_at`, `priority`, `status`, or `ticket_type`. Defaults to sorting by relevance
+    @http:Query {name: "sort_by"}
+    string sortBy?;
+    # One of `asc` or `desc`.  Defaults to `desc`
+    @http:Query {name: "sort_order"}
+    string sortOrder?;
+};
+
+# Represents the Headers record for the operation: ShowSharingAgreement
+public type ShowSharingAgreementHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type Error record {
+    string code;
+    record {} links?;
+    string detail?;
+    string id?;
+    record {} 'source?;
+    string title;
+    string status?;
+};
+
+public type TargetObject TargetCommonFields;
+
+# Represents the Headers record for the operation: ListTriggerCategories
+public type ListTriggerCategoriesHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: DeleteBrand
+public type DeleteBrandHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type QueuesResponse record {
+    QueueObject[] queues?;
+};
+
+# Represents the Queries record for the operation: DestroyManyWorkspaces
+public type DestroyManyWorkspacesQueries record {
+    # The ids of the workspaces to delete
+    int[] ids;
+};
+
+# Represents the Headers record for the operation: CreateOrUpdateTicketFieldOption
+public type CreateOrUpdateTicketFieldOptionHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type CustomObjectFieldsResponse record {
+    @jsondata:Name {value: "custom_object_fields"}
+    CustomObjectField[] customObjectFields?;
+};
+
+public type TriggerCategory record {
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    string name?;
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    string id?;
+    int position?;
+};
+
+# Represents the Queries record for the operation: ListTickets
+public type ListTicketsQueries record {
+    # Lists tickets by external id. External ids don't have to be unique for each ticket. As a result, the request may return multiple tickets with the same external id
+    @http:Query {name: "external_id"}
+    string externalId?;
+};
+
+# Represents the Headers record for the operation: DeleteOrganizationField
+public type DeleteOrganizationFieldHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: LogoutManyUsers
+public type LogoutManyUsersHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: UpdateGroupSLAPolicy
+public type UpdateGroupSLAPolicyHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type TriggerRevisionResponseTriggerRevision record {
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    int id?;
+    @jsondata:Name {value: "author_id"}
+    int authorId?;
+    TriggerRevisionResponseTriggerRevisionSnapshot snapshot?;
+    string url?;
+};
+
+public type SessionObject record {
+    # The id of the user
+    @jsondata:Name {value: "user_id"}
+    int? userId?;
+    # When the session was created
+    @jsondata:Name {value: "authenticated_at"}
+    string? authenticatedAt?;
+    # Automatically assigned when the session is created
+    int id;
+    # The last approximate time this session was seen. This does not update on every request
+    @jsondata:Name {value: "last_seen_at"}
+    string? lastSeenAt?;
+    # The API URL of this session
+    string? url?;
+};
+
+# Represents the Headers record for the operation: UpdateTarget
+public type UpdateTargetHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type RelationshipFilterDefinitionResponse record {
+    RelationshipFilterDefinition definitions?;
+};
+
+public type SatisfactionReasonObject record {
+    # An account-level code for referencing the reason. Custom reasons are assigned an auto-incrementing integer (non-system reason codes begin at 1000). See [Reason codes](#reason-codes)
+    @jsondata:Name {value: "reason_code"}
+    int reasonCode?;
+    # The dynamic content placeholder, if present, or the current "value", if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "raw_value"}
+    string rawValue?;
+    # The time the reason was updated
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # The time the reason was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Automatically assigned upon creation
+    int id?;
+    # The time the reason was deleted
+    @jsondata:Name {value: "deleted_at"}
+    string deletedAt?;
+    # Translated value of the reason in the account locale
+    string value;
+    # API URL for the resource
+    string url?;
+};
+
+# Represents the Headers record for the operation: UpdateBrand
+public type UpdateBrandHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: ListTicketMetricEvents
+public type ListTicketMetricEventsQueries record {
+    # The Unix UTC epoch time of the oldest event you're interested in. Example: 1332034771
+    @http:Query {name: "start_time"}
+    int startTime;
+};
+
+# Represents the Headers record for the operation: DeleteSharingAgreement
+public type DeleteSharingAgreementHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type ActivitiesResponse record {
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    record {}[] actors?;
+    ActivityObject[] activities?;
+    int count?;
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
+    record {}[] users?;
+};
+
+# Represents the Queries record for the operation: DestroyManyUsers
+public type DestroyManyUsersQueries record {
+    # Id of the users to delete. Comma separated
+    string ids?;
+    # External Id of the users to delete. Comma separated
+    @http:Query {name: "external_ids"}
+    string externalIds?;
+};
+
+public type ListTicketIncidentsResponse record {
+};
+
+# Support UI settings. See [Lotus](#lotus)
+public type AccountSettingsLotusObject record {
+    @jsondata:Name {value: "pod_id"}
+    int podId?;
+    @jsondata:Name {value: "prefer_lotus"}
+    boolean preferLotus?;
+    boolean reporting?;
+};
+
+# Represents the Queries record for the operation: DeleteManyMacros
+public type DeleteManyMacrosQueries record {
+    # The IDs of the macros to delete
+    int[] ids;
+};
+
+public type DefinitionsResponse record {
+    DefinitionsResponseDefinitions definitions?;
+};
+
+public type TriggerConditionDefinitionObjectAny record {
+    boolean nullable?;
+    TriggerConditionDefinitionObjectAnyOperators[] operators?;
+    boolean repeatable?;
+    string subject?;
+    string title?;
+    string 'type?;
+    string group?;
+};
+
+public type TriggerChangeObject record {
+    # One of `-`, `+`, `=` representing the type of change
+    string change?;
+    # The value of the item it represents
+    boolean|string|int|(string|int|boolean)[] content?;
+};
+
+# Represents the Queries record for the operation: TicketImport
+public type TicketImportQueries record {
+    # If `true`, any ticket created with a `closed` status bypasses the normal ticket lifecycle and will be created directly in your ticket archive
+    @http:Query {name: "archive_immediately"}
+    boolean archiveImmediately?;
+};
+
+public type MacroResponse record {
+    MacroObject macro?;
+};
+
+public type TicketSkipsResponse record {
+    TicketSkipObject[] skips?;
+};
+
+public type TicketAuditsCountResponseCount record {
+    @jsondata:Name {value: "refreshed_at"}
+    string refreshedAt?;
+    int value?;
+};
+
+# Represents the Headers record for the operation: ListTicketEmailCCs
+public type ListTicketEmailCCsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Provides a set of configurations for controlling the behaviours when communicating with a remote HTTP endpoint.
+@display {label: "Connection Config"}
+public type ConnectionConfig record {|
+    # Configurations related to client authentication
+    http:CredentialsConfig auth;
+    # The HTTP version understood by the client
+    http:HttpVersion httpVersion = http:HTTP_2_0;
+    # Configurations related to HTTP/1.x protocol
+    http:ClientHttp1Settings http1Settings = {};
+    # Configurations related to HTTP/2 protocol
+    http:ClientHttp2Settings http2Settings = {};
+    # The maximum time to wait (in seconds) for a response before closing the connection
+    decimal timeout = 30;
+    # The choice of setting `forwarded`/`x-forwarded` header
+    string forwarded = "disable";
+    # Configurations associated with Redirection
+    http:FollowRedirects followRedirects?;
+    # Configurations associated with request pooling
+    http:PoolConfiguration poolConfig?;
+    # HTTP caching related configurations
+    http:CacheConfig cache = {};
+    # Specifies the way of handling compression (`accept-encoding`) header
+    http:Compression compression = http:COMPRESSION_AUTO;
+    # Configurations associated with the behaviour of the Circuit Breaker
+    http:CircuitBreakerConfig circuitBreaker?;
+    # Configurations associated with retrying
+    http:RetryConfig retryConfig?;
+    # Configurations associated with cookies
+    http:CookieConfig cookieConfig?;
+    # Configurations associated with inbound response size limits
+    http:ResponseLimitConfigs responseLimits = {};
+    # SSL/TLS-related options
+    http:ClientSecureSocket secureSocket?;
+    # Proxy server related options
+    http:ProxyConfig proxy?;
+    # Provides settings related to client socket configuration
+    http:ClientSocketConfig socketConfig = {};
+    # Enables the inbound payload validation functionality which provided by the constraint package. Enabled by default
+    boolean validation = true;
+    # Enables relaxed data binding on the client side. When enabled, `nil` values are treated as optional, 
+    # and absent fields are handled as `nilable` types. Enabled by default.
+    boolean laxDataBinding = true;
+|};
+
+# Represents the Queries record for the operation: ListActiveTriggers
+public type ListActiveTriggersQueries record {
+    # Filter triggers by category ID
+    @http:Query {name: "category_id"}
+    string categoryId?;
+    # Cursor-based pagination only. Possible values are "alphabetical", "created_at", "updated_at", or "position"
+    string sort?;
+    # Offset pagination only. Possible values are "alphabetical", "created_at", "updated_at", "usage_1h", "usage_24h", or "usage_7d". Defaults to "position"
+    @http:Query {name: "sort_by"}
+    string sortBy?;
+    # One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
+    @http:Query {name: "sort_order"}
+    string sortOrder?;
+};
+
+# Represents the Headers record for the operation: ListCustomStatuses
+public type ListCustomStatusesHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ListActiveTriggers
+public type ListActiveTriggersHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type SatisfactionReasonsResponse record {
+    SatisfactionReasonObject[] reasons?;
+};
+
+# Zendesk Chat settings. See [Chat](#chat)
+public type AccountSettingsChatObject record {
+    boolean available?;
+    @jsondata:Name {value: "welcome_message"}
+    string welcomeMessage?;
+    boolean enabled?;
+    @jsondata:Name {value: "maximum_request_count"}
+    int maximumRequestCount?;
+    boolean integrated?;
+};
+
+# Represents the Headers record for the operation: GetSourcesByTarget
+public type GetSourcesByTargetHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: TicketImport
+public type TicketImportHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type OrganizationSubscriptionsResponse record {
+    *OffsetPaginationObject;
+    *OrganizationSubscriptionsResponseAllOf2;
+};
+
+public type DefinitionsResponseDefinitionsOperators record {
+    boolean terminal?;
+    string title?;
+    string value?;
+};
+
+# Represents the Headers record for the operation: ShowDerivedMacro
+public type ShowDerivedMacroHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type SatisfactionRatingResponse record {
+    @jsondata:Name {value: "satisfaction_rating"}
+    SatisfactionRatingObject[] satisfactionRating?;
+};
+
+# Represents the Queries record for the operation: IncrementalTicketEvents
+public type IncrementalTicketEventsQueries record {
+    # The time to start the incremental export from. Must be at least one minute in the past. Data isn't provided for the most recent minute
+    @http:Query {name: "start_time"}
+    int startTime;
+};
+
+# Represents the Headers record for the operation: UpdateAttributeValue
+public type UpdateAttributeValueHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type CustomStatusUpdateInput record {
+    # The dynamic content placeholder, if present, or the "end_user_label" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "end_user_label"}
+    string endUserLabel?;
+    # The dynamic content placeholder, if present, or the "end_user_description" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "end_user_description"}
+    string endUserDescription?;
+    # True if the custom status is set as active; inactive if false
+    boolean active?;
+    # The dynamic content placeholder, if present, or the "description" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
+    string description?;
+    # The dynamic content placeholder, if present, or the "agent_label" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "agent_label"}
+    string agentLabel?;
+};
+
+public type SessionResponse record {
+    SessionObject[] session?;
+};
+
+# Represents the Headers record for the operation: SearchCustomObjectRecords
+public type SearchCustomObjectRecordsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: AutocompleteProblems
+public type AutocompleteProblemsQueries record {
+    # The text to search for
+    string text?;
+};
+
+# Represents the Headers record for the operation: ListTicketMetricEvents
+public type ListTicketMetricEventsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type BatchJobRequestJobItems record {
+    @jsondata:Name {value: "trigger_categories"}
+    TriggerCategoryBatchRequest[] triggerCategories?;
+    TriggerBatchRequest[] triggers?;
+};
+
+# Represents the Headers record for the operation: DeleteWorkspace
+public type DeleteWorkspaceHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type DynamicContentVariantObject record {
+    # An active locale
+    @jsondata:Name {value: "locale_id"}
+    int localeId;
+    # If the variant is the default for the item it belongs to
+    boolean default?;
+    # If the variant is outdated
+    boolean outdated?;
+    # When the variant was last updated
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # If the variant is active and useable
+    boolean active?;
+    # When the variant was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Automatically assigned when the variant is created
+    int id?;
+    # The content of the variant
+    string content;
+    # The API url of the variant
+    string url?;
+};
+
+# Represents the Headers record for the operation: MergeTicketsIntoTargetTicket
+public type MergeTicketsIntoTargetTicketHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type SLAPolicyFilterDefinitionResponse record {
+    SLAPolicyFilterDefinitionResponseDefinitions definitions?;
+};
+
+public type QueueResponse record {
+    QueueObject queue?;
+};
+
+public type TicketMetricsResponse record {
+    @jsondata:Name {value: "ticket_metrics"}
+    TicketMetricObject[] ticketMetrics?;
+};
+
+public type FollowerObject record {
+    @jsondata:Name {value: "user_email"}
+    string userEmail?;
+    @jsondata:Name {value: "user_id"}
+    string userId?;
+    "put"|"delete" action?;
+};
+
+# Represents the Queries record for the operation: ListActivities
+public type ListActivitiesQueries record {
+    # A UTC time in ISO 8601 format to return ticket activities since said date
+    string since?;
+};
+
+# Represents the Headers record for the operation: ListCustomObjectRecords
+public type ListCustomObjectRecordsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ListTicketCollaborators
+public type ListTicketCollaboratorsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ShowQueueById
+public type ShowQueueByIdHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ShowUserField
+public type ShowUserFieldHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type CollaboratorObject record {
+    string name?;
+    string email?;
+};
+
+# Represents the Headers record for the operation: TicketBulkImport
+public type TicketBulkImportHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Ticket form settings. See [Ticket Form](#ticket-form)
+public type AccountSettingsTicketFormObject record {
+    @jsondata:Name {value: "ticket_forms_instructions"}
+    string ticketFormsInstructions?;
+    @jsondata:Name {value: "raw_ticket_forms_instructions"}
+    string rawTicketFormsInstructions?;
+};
+
+public type TicketCreateInputAllOf2 record {
+    # The dynamic content placeholder, if present, or the "subject" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "raw_subject"}
+    string rawSubject?;
+    # Enterprise only. The id of the ticket form to render for the ticket
+    @jsondata:Name {value: "ticket_form_id"}
+    int ticketFormId?;
+    # The ids of agents or end users currently CC'ed on the ticket. See [CCs and followers resources](https://support.zendesk.com/hc/en-us/articles/360020585233) in the Support Help Center
+    @jsondata:Name {value: "email_cc_ids"}
+    int[] emailCcIds?;
+    # The ids of agents currently following the ticket. See [CCs and followers resources](https://support.zendesk.com/hc/en-us/articles/360020585233)
+    @jsondata:Name {value: "follower_ids"}
+    int[] followerIds?;
+    # The original recipient e-mail address of the ticket
+    string recipient?;
+    # POST requests only. The id of a closed ticket when creating a follow-up ticket. See [Creating a follow-up ticket](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#creating-a-follow-up-ticket)
+    @jsondata:Name {value: "via_followup_source_id"}
+    int viaFollowupSourceId?;
+    # POST requests only. Users to add as cc's when creating a ticket. See [Setting Collaborators](/documentation/ticketing/managing-tickets/creating-and-updating-tickets#setting-collaborators)
+    CollaboratorObject[] collaborators?;
+    # The user who submitted the ticket. The submitter always becomes the author of the first comment on the ticket
+    @jsondata:Name {value: "submitter_id"}
+    int submitterId?;
+    # POST requests only. List of macro IDs to be recorded in the ticket audit
+    @jsondata:Name {value: "macro_ids"}
+    int[] macroIds?;
+    # Enterprise only. The id of the brand this ticket is associated with
+    @jsondata:Name {value: "brand_id"}
+    int brandId?;
+    ViaObject via?;
+};
+
+public type TwitterChannelTwicketStatusResponseStatuses record {
+    @jsondata:Name {value: "user_followed"}
+    boolean userFollowed?;
+    int id?;
+    boolean favorited?;
+    boolean retweeted?;
+};
+
+public type SkillBasedRoutingAttributeObject record {
+    # When this record was last updated
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # The name of the attribute
+    string name;
+    # When this record was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Automatically assigned when an attribute is created
+    string id?;
+    # URL of the attribute
+    string url?;
+};
+
+# Represents the Headers record for the operation: DeleteTicketFieldOption
+public type DeleteTicketFieldOptionHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: DeleteManyMacros
+public type DeleteManyMacrosHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ExportAuditLogs
+public type ExportAuditLogsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type AttachmentUpdateInput record {
+    # If true, allows access to attachments with detected malware
+    @jsondata:Name {value: "malware_access_override"}
+    boolean malwareAccessOverride?;
+};
+
+public type TicketCreateRequest record {
+    TicketCreateInput ticket?;
+};
+
+# Represents the Headers record for the operation: CreateTicketSatisfactionRating
+public type CreateTicketSatisfactionRatingHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type OrganizationSubscriptionResponse record {
+    @jsondata:Name {value: "organization_subscription"}
+    OrganizationSubscriptionObject organizationSubscription?;
+};
+
+# Represents the Headers record for the operation: ShowTarget
+public type ShowTargetHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type TriggerRevisionsResponseDiff record {
+    # An array of [change](#change) objects
+    TriggerChangeObject[] active?;
+    # An array of [change](#change) objects
+    TriggerChangeObject[] description?;
+    # ID of the target revision
+    @jsondata:Name {value: "target_id"}
+    int targetId?;
+    # ID of the source revision
+    @jsondata:Name {value: "source_id"}
+    int sourceId?;
+    TriggerConditionDiffObject conditions?;
+    # An array of [change](#change) objects
+    TriggerChangeObject[] title?;
+    # An array that contain [action diff objects](#Action Diffs)
+    TriggerActionDiffObject[] actions?;
+};
+
+public type TicketCreateInput record {
+    *TicketUpdateInput;
+    *TicketCreateInputAllOf2;
+};
+
+# Represents the Headers record for the operation: SearchViews
+public type SearchViewsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type TrialAccountObject record {
+    # The name of the account
+    string name?;
+    # The subdomain of the account
+    string subdomain?;
+    # The URL of the account
+    string url?;
+};
+
+# Represents the Queries record for the operation: IncrementalTicketExportTime
+public type IncrementalTicketExportTimeQueries record {
+    # The time to start the incremental export from. Must be at least one minute in the past. Data isn't provided for the most recent minute
+    @http:Query {name: "start_time"}
+    int startTime;
+};
+
+# Represents the Headers record for the operation: ListSearchResults
+public type ListSearchResultsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type WorkspaceObject record {
+    # The ids of the macros associated to this workspace
+    int[] macros?;
+    # The time the workspace was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # User-defined description of this workspace's purpose
+    string description?;
+    # The ids of the macros associated to this workspace
+    @jsondata:Name {value: "macro_ids"}
+    int[] macroIds?;
+    # If true, the order of apps within the workspace will be preserved
+    @jsondata:Name {value: "prefer_workspace_app_order"}
+    boolean preferWorkspaceAppOrder?;
+    # The title of the workspace
+    string title?;
+    # The URL for this resource
+    string url?;
+    # The id of the ticket web form associated to this workspace
+    @jsondata:Name {value: "ticket_form_id"}
+    int ticketFormId?;
+    # The time of the last update of the workspace
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # An array of the macro objects that will be used in this workspace. See [Macros](/api-reference/ticketing/business-rules/macros/)
+    @jsondata:Name {value: "selected_macros"}
+    MacroObject[] selectedMacros?;
+    # Automatically assigned upon creation
+    int id?;
+    # Ordering of the workspace relative to other workspaces
+    int position?;
+    ConditionsObject conditions?;
+    # If true, this workspace is available for use
+    boolean activated?;
+    # The apps associated to this workspace
+    record {}[] apps?;
+};
+
+# Represents the Queries record for the operation: ListTicketsFromView
+public type ListTicketsFromViewQueries record {
+    # Sort or group the tickets by a column in the [View columns](#view-columns) table. The `subject` and `submitter` columns are not supported
+    @http:Query {name: "sort_by"}
+    string sortBy?;
+    # One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
+    @http:Query {name: "sort_order"}
+    string sortOrder?;
+};
+
+public type SLAPolicyObject record {
+    SLAPolicyFilterObject filter;
+    # The time of the last update of the SLA policy
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # Array of [Policy Metric](#policy-metric) objects
+    @jsondata:Name {value: "policy_metrics"}
+    SLAPolicyMetricObject[] policyMetrics?;
+    # The time the SLA policy was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The description of the SLA policy
+    string description?;
+    # Automatically assigned when created
+    int id?;
+    # Position of the SLA policy that determines the order they will be matched. If not specified, the SLA policy is added as the last position
+    int position?;
+    # The title of the SLA policy
+    string title;
+    # URL of the SLA Policy reacord
+    string url?;
+};
+
+# Represents the Headers record for the operation: UpdateUserField
+public type UpdateUserFieldHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: SearchCustomObjectRecords
+public type SearchCustomObjectRecordsQueries record {
+    # The query parameter is used to search text-based fields for records that match specific query terms.
+    # The query can be multiple words or numbers. Every record that matches the beginning of any word or number in the query string is returned.<br/><br/>
+    # 
+    # For example, you might want to search for records related to Tesla vehicles: `query=Tesla`. In this example the API would return every record for the given custom object where any of the text fields contain the word 'Tesla'.<br/><br/>
+    # 
+    # If needed, you could include multiple words or numbers in your search. For example: `query=Tesla Honda 2020`. This would be URL encoded as `query=Tesla%20Honda%202020`. In this example, the API would return every record for the custom object for which any of the text fields contained 'Tesla', 'Honda', or '2020'
+    string query?;
+    # A [pagination cursor](/documentation/api-basics/pagination/paginating-through-lists-using-cursor-pagination) that tells the endpoint which page to start on. It should be a `meta.before_cursor` value from a previous request. Note: `page[before]` and `page[after]` can't be used together in the same request
+    @http:Query {name: "page[before]"}
+    string pageBefore?;
+    # One of `name`, `created_at`, `updated_at`, `-name`, `-created_at`, or `-updated_at`. The `-` denotes the sort will be descending. Defaults to sorting by relevance
+    string sort?;
+    # Specifies how many records should be returned in the response. You can specify up to 100 records per page
+    @http:Query {name: "page[size]"}
+    int pageSize?;
+    # A [pagination cursor](/documentation/api-basics/pagination/paginating-through-lists-using-cursor-pagination) that tells the endpoint which page to start on. It should be a `meta.after_cursor` value from a previous request. Note: `page[before]` and `page[after]` can't be used together in the same request
+    @http:Query {name: "page[after]"}
+    string pageAfter?;
+};
+
+# Represents the Headers record for the operation: ShowAutomation
+public type ShowAutomationHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: IncrementalTicketExportCursor
+public type IncrementalTicketExportCursorQueries record {
+    # The cursor pointer to work with for all subsequent exports after the initial request
+    string cursor?;
+    # The time to start the incremental export from. Must be at least one minute in the past. Data isn't provided for the most recent minute
+    @http:Query {name: "start_time"}
+    int startTime;
+};
+
+public type PushNotificationDevicesInput string[];
+
+# Represents the Queries record for the operation: SearchTriggers
+public type SearchTriggersQueries record {
+    # Trigger attribute filters for the search. See [Filter](#filter)
+    filter filter?;
+    # A sideload to include in the response. See [Sideloads](#sideloads-2)
+    string include?;
+    # Query string used to find all triggers with matching title
+    string query;
+    # Filter by active triggers if true or inactive triggers if false
+    boolean active?;
+    # Cursor-based pagination only. Possible values are "alphabetical", "created_at", "updated_at", or "position"
+    string sort?;
+    # Offset pagination only. Possible values are "alphabetical", "created_at", "updated_at", "usage_1h", "usage_24h", or "usage_7d". Defaults to "position"
+    @http:Query {name: "sort_by"}
+    string sortBy?;
+    # One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
+    @http:Query {name: "sort_order"}
+    string sortOrder?;
+};
+
+public type ListDeletedTicketsResponseDeletedTickets record {
+    ListDeletedTicketsResponseActor actor?;
+    @jsondata:Name {value: "previous_state"}
+    string previousState?;
+    string subject?;
+    int id?;
+    @jsondata:Name {value: "deleted_at"}
+    string deletedAt?;
+};
+
+public type BrandCreateRequest record {
+    BrandObject brand?;
+};
+
+public type Page record {
+    int size?;
+    string before?;
+    string after?;
+};
+
+public type CustomRoleObject record {
+    # The number of team members assigned to this role
+    @jsondata:Name {value: "team_member_count"}
+    int teamMemberCount?;
+    # The user's role. 0 stands for a custom agent, 1 for a light agent, 2 for a chat agent, 3 for a contributor, 4 for an admin and 5 for a billing admin. See [Understanding standard agent roles in Zendesk Support](https://support.zendesk.com/hc/en-us/articles/4409155971354-Understanding-standard-agent-roles-in-Zendesk-Support) in Zendesk help
+    @jsondata:Name {value: "role_type"}
+    int roleType;
+    # The time the record was last updated
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    CustomRoleConfigurationObject configuration?;
+    # Name of the custom role
+    string name;
+    # The time the record was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # A description of the role
+    string description?;
+    # Automatically assigned on creation
+    int id?;
+};
+
+public type CustomObjectRecordsResponse record {
+    CustomObjectRecordsResponseMeta meta?;
+    # The number of results returned for the current request
+    int count?;
+    CustomObjectRecordsResponseLinks links?;
+    @jsondata:Name {value: "custom_object_records"}
+    CustomObjectRecord[] customObjectRecords?;
+};
+
+# Represents the Headers record for the operation: ReorderSLAPolicies
+public type ReorderSLAPoliciesHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type UserRequest record {
+    UserInput user;
+};
+
+# Represents the Headers record for the operation: ShowSupportAddress
+public type ShowSupportAddressHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type OrganizationSubscriptionObject record {
+    # The ID of the user
+    @jsondata:Name {value: "user_id"}
+    int userId?;
+    # The ID of the organization
+    @jsondata:Name {value: "organization_id"}
+    int organizationId?;
+    # The date the organization subscription was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The ID of the organization subscription
+    int id?;
+};
+
+# Account metrics settings. See [Metrics](#metrics)
+public type AccountSettingsMetricsObject record {
+    @jsondata:Name {value: "account_size"}
+    string accountSize?;
+};
+
+public type MacrosResponse record {
+    *MacrosResponseAllOf1;
+    *OffsetPaginationObject;
+};
+
+# Represents the Headers record for the operation: ListTriggers
+public type ListTriggersHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type CountResponse record {
+    CountResponseCount count?;
+};
+
+# Represents the Queries record for the operation: ExportSearchResults
+public type ExportSearchResultsQueries record {
+    # The object type returned by the export query. Can be `ticket`, `organization`, `user`, or `group`
+    @http:Query {name: "filter[type]"}
+    string filterType?;
+    # The search query. See [Query basics](#query-basics) above. For details on the query syntax, see the [Zendesk Support search reference](https://support.zendesk.com/hc/en-us/articles/203663226)
+    string query;
+    # The number of results shown in a page
+    @http:Query {name: "page[size]"}
+    int pageSize?;
+};
+
+# Onboarding settings
+public type AccountSettingsOnboardingObject record {
+    @jsondata:Name {value: "product_sign_up"}
+    string? productSignUp?;
+    @jsondata:Name {value: "checklist_onboarding_version"}
+    int checklistOnboardingVersion?;
+    @jsondata:Name {value: "onboarding_segments"}
+    string? onboardingSegments?;
+};
+
+# Represents the Headers record for the operation: ShowUser
+public type ShowUserHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: IncrementalTicketEvents
+public type IncrementalTicketEventsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ListAssigneeFieldAssignableGroupAgents
+public type ListAssigneeFieldAssignableGroupAgentsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type AttachmentBaseObject record {
+    # If true, you can download an attachment flagged as malware. If false, you can't download such an attachment
+    @jsondata:Name {value: "malware_access_override"}
+    boolean malwareAccessOverride?;
+    # The URL the attachment image file has been mapped to
+    @jsondata:Name {value: "mapped_content_url"}
+    string mappedContentUrl?;
+    # The name of the image file
+    @jsondata:Name {value: "file_name"}
+    string fileName?;
+    # The result of the malware scan. There is a delay between the time the attachment is uploaded and when the malware scan is completed. Usually the scan is done within a few seconds, but high load conditions can delay the scan results. Possible values: "malware_found", "malware_not_found", "failed_to_scan", "not_scanned"
+    @jsondata:Name {value: "malware_scan_result"}
+    string malwareScanResult?;
+    # A URL to access the attachment details
+    string url?;
+    # If true, the attachment has been deleted
+    boolean deleted?;
+    # The content type of the image. Example value: "image/png"
+    @jsondata:Name {value: "content_type"}
+    string contentType?;
+    # If true, the attachment is excluded from the attachment list and the attachment's URL
+    # can be referenced within the comment of a ticket. Default is false
+    boolean inline?;
+    # The size of the image file in bytes
+    int size?;
+    # The width of the image file in pixels. If width is unknown, returns null
+    string width?;
+    # A full URL where the attachment image file can be downloaded. The file may be hosted externally so take care not to inadvertently send Zendesk authentication credentials. See [Working with url properties](/documentation/ticketing/managing-tickets/working-with-url-properties)
+    @jsondata:Name {value: "content_url"}
+    string contentUrl?;
+    # Automatically assigned when created
+    int id?;
+    # The height of the image file in pixels. If height is unknown, returns null
+    string height?;
+};
+
+public type UpdateResourceResult record {
+    # whether the action was successful or not (`"success": true`)
+    boolean success;
+    # the action the job attempted (`"action": "update"`)
+    string action;
+    # the id of the resource the job attempted to update
+    int id;
+    # the status (`"status": "Updated"`)
+    string status;
+};
+
+# Represents the Headers record for the operation: CountSearchResults
+public type CountSearchResultsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type UserPasswordRequirementsResponse record {
+    string[] requirements?;
+};
+
+# Represents the Headers record for the operation: ListGroups
+public type ListGroupsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: DestroyManyUsers
+public type DestroyManyUsersHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type DefinitionsResponseDefinitions record {
+    @jsondata:Name {value: "conditions_any"}
+    DefinitionsResponseDefinitionsConditionsAny[] conditionsAny?;
+    @jsondata:Name {value: "conditions_all"}
+    DefinitionsResponseDefinitionsConditionsAll[] conditionsAll?;
+};
+
+# Represents the Headers record for the operation: IncrementalTicketExportCursor
+public type IncrementalTicketExportCursorHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type MacroApplyTicketResponseResultTicketFields record {
+    int id?;
+    string value?;
+};
+
+# Represents the Queries record for the operation: ShowManyUsers
+public type ShowManyUsersQueries record {
+    # Accepts a comma-separated list of up to 100 user ids
+    string ids?;
+    # Accepts a comma-separated list of up to 100 external ids
+    @http:Query {name: "external_ids"}
+    string externalIds?;
+};
+
+# Represents the Queries record for the operation: SearchUsers
+public type SearchUsersQueries record {
+    # The `query` parameter supports the Zendesk search syntax for more advanced
+    # user searches. It can specify a partial or full value of any
+    # user property, including name, email address, notes, or phone. Example:
+    # `query="jdoe"`.
+    # See the [Search API](/api-reference/ticketing/ticket-management/search/)
+    string query?;
+    # The `external_id` parameter does not support the search syntax. It only accepts ids
+    @http:Query {name: "external_id"}
+    string externalId?;
+};
+
+# Represents the Headers record for the operation: IncrementalUserExportCursor
+public type IncrementalUserExportCursorHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type TriggerConditionDefinitionObjectAll record {
+    boolean nullable?;
+    TriggerConditionDefinitionObjectAllOperators[] operators?;
+    boolean repeatable?;
+    string subject?;
+    TriggerConditionDefinitionObjectAllValues[] values?;
+    string title?;
+    string 'type?;
+    string group?;
+};
+
+# Represents the Headers record for the operation: ShowComment
+public type ShowCommentHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: RedactCommentAttachment
+public type RedactCommentAttachmentHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type TicketResponse record {
+    TicketObject ticket?;
+};
+
+# An object that describes the conditions under which the trigger will execute. See [Conditions reference](/documentation/ticketing/reference-guides/conditions-reference)
+public type TriggerConditionsObject record {
+    TriggerConditionObject[]? all?;
+    TriggerConditionObject[]? 'any?;
+};
+
+public type TicketMetricsByTicketMetricIdResponse record {
+    @jsondata:Name {value: "ticket_metric"}
+    TicketMetricObject[] ticketMetric?;
+};
+
+public type TicketFormObject record {
+    # The dynamic content placeholder, if present, or the "name" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "raw_name"}
+    string rawName?;
+    # Is the form available for use in all brands on this account
+    @jsondata:Name {value: "in_all_brands"}
+    boolean inAllBrands?;
+    # ids of all ticket fields which are in this ticket form. The products use the order of the ids to show the field values in the tickets
+    @jsondata:Name {value: "ticket_field_ids"}
+    int[] ticketFieldIds?;
+    # If the form is set as active
+    boolean active?;
+    # Array of condition sets for agent workspaces
+    @jsondata:Name {value: "agent_conditions"}
+    record {}[] agentConditions?;
+    # The time the ticket form was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # The dynamic content placeholder, if present, or the "display_name" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "raw_display_name"}
+    string rawDisplayName?;
+    # The name of the form that is displayed to an end user
+    @jsondata:Name {value: "display_name"}
+    string displayName?;
+    # URL of the ticket form
+    string url?;
+    # Is the form the default form for this account
+    boolean default?;
+    # Array of condition sets for end user products
+    @jsondata:Name {value: "end_user_conditions"}
+    record {}[] endUserConditions?;
+    # The time of the last update of the ticket form
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # Is the form visible to the end user
+    @jsondata:Name {value: "end_user_visible"}
+    boolean endUserVisible?;
+    # The name of the form
+    string name;
+    # Automatically assigned when creating ticket form
+    int id?;
+    # The position of this form among other forms in the account, i.e. dropdown
+    int position?;
+    # ids of all brands that this ticket form is restricted to
+    @jsondata:Name {value: "restricted_brand_ids"}
+    int[] restrictedBrandIds?;
+};
+
+# Represents the Headers record for the operation: ListTicketsFromView
+public type ListTicketsFromViewHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type ListDeletedTicketsResponse record {
+    *ListDeletedTicketsResponseAllOf1;
+    *OffsetPaginationObject;
+};
+
+public type TargetsResponse record {
+    TargetObject[] targets?;
+};
+
+public type UserObject UserForAdmin|UserForEndUser;
+
+public type WorkspaceInput record {
+    decimal[] macros?;
+    @jsondata:Name {value: "ticket_form_id"}
+    decimal ticketFormId?;
+    # User-defined description of this workspace's purpose
+    string description?;
+    ConditionsObject conditions?;
+    # The title of the workspace
+    string title?;
+};
+
+# Represents the Queries record for the operation: ExportAuditLogs
+public type ExportAuditLogsQueries record {
+    # Filter audit logs by the source id. Requires `filter[source_type]` to also be set
+    @http:Query {name: "filter[source_id]"}
+    int filterSourceId?;
+    # Filter audit logs by the time of creation. When used, you must specify `filter[created_at]` twice in your request, first with the start time and again with an end time
+    @http:Query {name: "filter[created_at]"}
+    string filterCreatedAt?;
+    # Filter audit logs by the source type. For example, user or rule
+    @http:Query {name: "filter[source_type]"}
+    string filterSourceType?;
+    # Filter audit logs by the action
+    @http:Query {name: "filter[action]"}
+    string filterAction?;
+    # Filter audit logs by the actor id
+    @http:Query {name: "filter[actor_id]"}
+    int filterActorId?;
+    # Filter audit logs by the ip address
+    @http:Query {name: "filter[ip_address]"}
+    string filterIpAddress?;
+};
+
+public type ValueOneOf1 string;
+
+# Configuration settings for the role. See [Configuration](#configuration)
+public type CustomRoleConfigurationObject record {
+    @jsondata:Name {value: "moderate_forums"}
+    boolean moderateForums?;
+    # Whether or not the agent can contribute to side conversations
+    @jsondata:Name {value: "side_conversation_create"}
+    boolean sideConversationCreate?;
+    # Whether or not the agent can answer and place calls to end users
+    @jsondata:Name {value: "voice_access"}
+    boolean voiceAccess?;
+    # What the agent can do with customer lists. Allowed values: "full", "manage-group", "manage-personal", "none", "readonly"
+    @jsondata:Name {value: "user_view_access"}
+    string userViewAccess?;
+    # Whether or not the agent can merge tickets
+    @jsondata:Name {value: "ticket_merge"}
+    boolean ticketMerge?;
+    @jsondata:Name {value: "light_agent"}
+    boolean lightAgent?;
+    # What kind of tickets the agent can access. Allowed values: "all", "assigned-only", "within-groups", "within-groups-and-public-groups", "within-organization"
+    @jsondata:Name {value: "ticket_access"}
+    string ticketAccess?;
+    # Whether or not the agent can view details about calls on the Talk dashboard
+    @jsondata:Name {value: "voice_dashboard_access"}
+    boolean voiceDashboardAccess?;
+    # Whether or not the agent can assign tickets to any group
+    @jsondata:Name {value: "assign_tickets_to_any_group"}
+    boolean assignTicketsToAnyGroup?;
+    # Allowed values: "edit", "full", "none", "readonly"
+    @jsondata:Name {value: "explore_access"}
+    string exploreAccess?;
+    # What the agent can do with macros. Allowed values: "full", "manage-group", "manage-personal", "readonly"
+    @jsondata:Name {value: "macro_access"}
+    string macroAccess?;
+    # Whether or not the agent can add or modify organization notes
+    @jsondata:Name {value: "organization_notes_editing"}
+    boolean organizationNotesEditing?;
+    # Whether or not the agent can view deleted tickets
+    @jsondata:Name {value: "view_deleted_tickets"}
+    boolean viewDeletedTickets?;
+    # Whether or not the agent can view lists of user profiles. Allowed values: "full", "none"
+    @jsondata:Name {value: "end_user_list_access"}
+    string endUserListAccess?;
+    # What the agent can do with end-user profiles. Allowed values: "edit", "edit-within-org", "full", "readonly"
+    @jsondata:Name {value: "end_user_profile_access"}
+    string endUserProfileAccess?;
+    # Whether or not the agent can create and manage ticket fields
+    @jsondata:Name {value: "manage_ticket_fields"}
+    boolean manageTicketFields?;
+    # What the agent can do with reports. Allowed values: "full", "none", "readonly"
+    @jsondata:Name {value: "report_access"}
+    string reportAccess?;
+    # Whether or not the agent can access dynamic content
+    @jsondata:Name {value: "manage_dynamic_content"}
+    boolean manageDynamicContent?;
+    # The kind of access the agent has to Guide. Allowed values: "edit-topics", "full", "readonly"
+    @jsondata:Name {value: "forum_access"}
+    string forumAccess?;
+    # What type of comments the agent can make. Allowed values: "public", "none"
+    @jsondata:Name {value: "ticket_comment_access"}
+    string ticketCommentAccess?;
+    @jsondata:Name {value: "twitter_search_access"}
+    boolean twitterSearchAccess?;
+    @jsondata:Name {value: "forum_access_restricted_content"}
+    boolean forumAccessRestrictedContent?;
+    # Whether or not the agent can add or modify groups
+    @jsondata:Name {value: "group_access"}
+    boolean groupAccess?;
+    # Whether or not the agent can edit ticket properties
+    @jsondata:Name {value: "ticket_editing"}
+    boolean ticketEditing?;
+    # Whether or not the agent can create and manage user fields
+    @jsondata:Name {value: "manage_user_fields"}
+    boolean manageUserFields?;
+    # Whether or not the agent can manage business rules
+    @jsondata:Name {value: "manage_business_rules"}
+    boolean manageBusinessRules?;
+    # Whether or not the agent can create and manage organization fields
+    @jsondata:Name {value: "manage_organization_fields"}
+    boolean manageOrganizationFields?;
+    # Whether or not the agent can delete tickets
+    @jsondata:Name {value: "ticket_deletion"}
+    boolean ticketDeletion?;
+    # What the agent can do with views. Allowed values: "full", "manage-group", "manage-personal", "playonly", "readonly"
+    @jsondata:Name {value: "view_access"}
+    string viewAccess?;
+    # Whether or not the agent can edit ticket tags
+    @jsondata:Name {value: "ticket_tag_editing"}
+    boolean ticketTagEditing?;
+    # Whether or not the agent can manage Facebook pages
+    @jsondata:Name {value: "manage_facebook"}
+    boolean manageFacebook?;
+    # Whether or not the agent can view, add, and edit contextual workspaces
+    @jsondata:Name {value: "manage_contextual_workspaces"}
+    boolean manageContextualWorkspaces?;
+    # Whether or not the agent can create and manage ticket forms
+    @jsondata:Name {value: "manage_ticket_forms"}
+    boolean manageTicketForms?;
+    # Whether or not the agent can manage channels and extensions
+    @jsondata:Name {value: "manage_extensions_and_channels"}
+    boolean manageExtensionsAndChannels?;
+    # Whether or not the agent can add or modify organizations
+    @jsondata:Name {value: "organization_editing"}
+    boolean organizationEditing?;
+    # Whether or not the agent has access to Chat
+    @jsondata:Name {value: "chat_access"}
+    boolean chatAccess?;
+};
+
+public type SLAPolicyResponse record {
+    @jsondata:Name {value: "sla_policy"}
+    SLAPolicyObject slaPolicy?;
+};
+
+# Represents the Headers record for the operation: RedactTicketCommentInAgentWorkspace
+public type RedactTicketCommentInAgentWorkspaceHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: CountAuditsForTicket
+public type CountAuditsForTicketHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: AutocompleteCustomObjectRecordSearch
+public type AutocompleteCustomObjectRecordSearchQueries record {
+    # The id of the lookup field. If the field has a relationship filter, the filter is applied to the results. Must be used with `source` param
+    @http:Query {name: "field_id"}
+    string fieldId?;
+    # A [pagination cursor](/documentation/api-basics/pagination/paginating-through-lists-using-cursor-pagination) that tells the endpoint which page to start on. It should be a `meta.before_cursor` value from a previous request. Note: `page[before]` and `page[after]` can't be used together in the same request
+    @http:Query {name: "page[before]"}
+    string pageBefore?;
+    # Part of a name of the record you are searching for
+    string name?;
+    # One of "zen:user", "zen:ticket", "zen:organization", or "zen:custom_object:CUSTOM_OBJECT_KEY". Represents the object `field_id` belongs to. Must be used with field_id param
+    string 'source?;
+    # The number of records to return in the response. You can specify up to 100 records per page
+    @http:Query {name: "page[size]"}
+    int pageSize?;
+    # A [pagination cursor](/documentation/api-basics/pagination/paginating-through-lists-using-cursor-pagination) that tells the endpoint which page to start on. It should be a `meta.after_cursor` value from a previous request. Note: `page[before]` and `page[after]` can't be used together in the same request
+    @http:Query {name: "page[after]"}
+    string pageAfter?;
+};
+
+# Who may access this macro. Will be null when everyone in the account can access it
+public type MacroInputRestriction record {
+    # The numeric ID of the group or user
+    int id?;
+    # The numeric IDs of the groups
+    int[] ids?;
+    # Allowed values are Group or User
+    string 'type?;
+};
+
+public type TicketMergeInput record {
+    # Whether comment in source tickets are public or private
+    @jsondata:Name {value: "source_comment_is_public"}
+    boolean sourceCommentIsPublic?;
+    # Whether comment in target ticket is public or private
+    @jsondata:Name {value: "target_comment_is_public"}
+    boolean targetCommentIsPublic?;
+    # Private comment to add to the target ticket
+    @jsondata:Name {value: "target_comment"}
+    string targetComment?;
+    # Ids of tickets to merge into the target ticket
+    int[] ids;
+    # Private comment to add to the source ticket
+    @jsondata:Name {value: "source_comment"}
+    string sourceComment?;
+};
+
+public type AssigneeFieldAssignableGroupObject record {
+    # Name of the group
+    string name?;
+    # Description of the group
+    string description?;
+    # Group ID
+    int id?;
+};
+
+public type SLAPolicyMetricObject record {
+    # Whether the metric targets are being measured in business hours or calendar hours
+    @jsondata:Name {value: "business_hours"}
+    boolean businessHours?;
+    # The definition of the time that is being measured
+    string metric?;
+    # Priority that a ticket must match
+    string priority?;
+    # The time within which the end-state for a metric should be met
+    int target?;
+};
+
+public type HostMappingObject record {
+    # Reason why a host mapping is valid or not
+    string reason?;
+    # Array of expected CNAME records for host mapping(s) of a given brand
+    @jsondata:Name {value: "expected_cnames"}
+    string[] expectedCnames?;
+    # Whether a host mapping is valid or not for a given brand
+    @jsondata:Name {value: "is_valid"}
+    boolean isValid?;
+    # The canonical name record for a host mapping
+    string cname?;
+};
+
+# Represents the Headers record for the operation: DeleteTicketField
+public type DeleteTicketFieldHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type QueueObjectSecondaryGroupsGroups record {
+    string name?;
+    int id?;
+};
+
+public type CustomObject record {
+    # The dynamic content placeholder, if present, or the "title" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "raw_title"}
+    string rawTitle?;
+    # User-defined pluralized version of the object's title
+    @jsondata:Name {value: "title_pluralized"}
+    string titlePluralized;
+    # The time of the last update of the object
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # Id of the last user who updated the object
+    @jsondata:Name {value: "updated_by_user_id"}
+    string updatedByUserId?;
+    # The dynamic content placeholder, if present, or the "raw_title_pluralized" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "raw_title_pluralized"}
+    string rawTitlePluralized?;
+    # The time the object type was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # User-defined description of the object
+    string description?;
+    # User-defined display name for the object
+    string title;
+    # Id of a user who created the object
+    @jsondata:Name {value: "created_by_user_id"}
+    string createdByUserId?;
+    # The dynamic content placeholder, if present, or the "raw_description" value, if not. See [Dynamic Content Items](/api-reference/ticketing/ticket-management/dynamic_content/)
+    @jsondata:Name {value: "raw_description"}
+    string rawDescription?;
+    # A user-defined unique identifier. Writable on create only. Cannot be reused if deleted
+    string 'key;
+    # Direct link to the specific custom object
+    string url?;
+};
+
+# Represents the Headers record for the operation: ListTicketIncidents
+public type ListTicketIncidentsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: DeleteTicketField
+public type DeleteTicketFieldQueries record {
+    # If true, displays the `creator_user_id` and `creator_app_name` properties. If the ticket field is created
+    #  by an app, `creator_app_name` is the name of the app and `creator_user_id` is `-1`. If the ticket field
+    #  is not created by an app, then `creator_app_name` is null
+    boolean creator?;
+};
+
+public type TicketFieldResponse record {
+    @jsondata:Name {value: "ticket_field"}
+    TicketFieldObject ticketField?;
+};
+
+public type ViaObjectSourceTo record {
+    string address?;
+    string name?;
+};
+
+# Represents the Headers record for the operation: AutocompleteTags
+public type AutocompleteTagsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ShowSatisfactionRatings
+public type ShowSatisfactionRatingsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ExportSearchResults
+public type ExportSearchResultsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type ViewCountResponse record {
+    @jsondata:Name {value: "view_count"}
+    ViewCountObject viewCount?;
+};
+
+# See [Tickets](/api-reference/ticketing/tickets/tickets/) for a detailed example
+public type CursorBasedExportIncrementalTicketsResponse record {
+    @jsondata:Name {value: "before_url"}
+    string? beforeUrl?;
+    @jsondata:Name {value: "end_of_stream"}
+    boolean endOfStream?;
+    TicketObject[] tickets?;
+    @jsondata:Name {value: "after_cursor"}
+    string? afterCursor?;
+    @jsondata:Name {value: "after_url"}
+    string? afterUrl?;
+    @jsondata:Name {value: "before_cursor"}
+    string? beforeCursor?;
+};
+
+public type OrganizationSubscriptionCreateRequest record {
+    @jsondata:Name {value: "organization_subscription"}
+    OrganizationSubscriptionInput organizationSubscription?;
+};
+
+public type ActivitiesCountResponse record {
+    ActivitiesCountResponseCount count?;
+};
+
+public type TicketFieldCountResponse record {
+    TicketFieldCountResponseCount count?;
+};
+
+# Represents the Headers record for the operation: UpdateDynamicContentVariant
+public type UpdateDynamicContentVariantHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type BulkUpdateDefaultCustomStatusRequest record {
+    # The comma-separated list of custom ticket status ids to be set as default for their status categories
+    string ids?;
+};
+
+# Represents the Headers record for the operation: DeleteUpload
+public type DeleteUploadHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type UserIdentityResponse record {
+    UserIdentityObject identity?;
+};
+
+public type TriggerBatchRequest record {
+    @jsondata:Name {value: "category_id"}
+    string categoryId?;
+    boolean active?;
+    string id;
+    int position?;
+};
+
+# Represents the Queries record for the operation: BulkRestoreDeletedTickets
+public type BulkRestoreDeletedTicketsQueries record {
+    # Comma-separated list of ticket ids
+    string ids;
+};
+
+# Represents the Headers record for the operation: CreateAssociatedMacroAttachment
+public type CreateAssociatedMacroAttachmentHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type OrganizationSubscriptionInput record {
+    # The ID of the user
+    @jsondata:Name {value: "user_id"}
+    int userId?;
+    # The ID of the organization
+    @jsondata:Name {value: "organization_id"}
+    int organizationId?;
+};
+
+# Represents the Headers record for the operation: SearchTriggers
+public type SearchTriggersHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: AutocompleteCustomObjectRecordSearch
+public type AutocompleteCustomObjectRecordSearchHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type SkillBasedRoutingAttributeValuesResponse record {
+    @jsondata:Name {value: "attribute_values"}
+    SkillBasedRoutingAttributeValueObject[] attributeValues?;
+};
+
+# Represents the Headers record for the operation: ShowLocaleById
+public type ShowLocaleByIdHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type TicketUpdateResponse record {
+    TicketObject ticket?;
+    AuditObject audit?;
+};
+
+# Represents the Headers record for the operation: OpenUsersProfileInAgentBrowser
+public type OpenUsersProfileInAgentBrowserHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ShowMacroAttachment
+public type ShowMacroAttachmentHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: DeleteOrganizationSubscription
+public type DeleteOrganizationSubscriptionHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: GroupMembershipSetDefault
+public type GroupMembershipSetDefaultHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: DeleteEssentialsCard
+public type DeleteEssentialsCardHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type AccountSettingsObject record {
+    AccountSettingsLocalizationObject localization?;
+    AccountSettingsVoiceObject voice?;
+    @jsondata:Name {value: "side_conversations"}
+    AccountSettingsSideConversationsObject sideConversations?;
+    AccountSettingsTicketObject tickets?;
+    AccountSettingsBrandingObject branding?;
+    AccountSettingsLotusObject lotus?;
+    AccountSettingsRuleObject rule?;
+    @jsondata:Name {value: "gooddata_advanced_analytics"}
+    AccountSettingsGooddataAdvancedAnalyticsObject gooddataAdvancedAnalytics?;
+    @jsondata:Name {value: "active_features"}
+    AccountSettingsActiveFeaturesObject activeFeatures?;
+    AccountSettingsBillingObject billing?;
+    @jsondata:Name {value: "ticket_form"}
+    AccountSettingsTicketFormObject ticketForm?;
+    AccountSettingsRoutingObject routing?;
+    AccountSettingsTwitterObject twitter?;
+    AccountSettingsOnboardingObject onboarding?;
+    AccountSettingsApiObject api?;
+    AccountSettingsLimitsObject limits?;
+    AccountSettingsAppsObject apps?;
+    AccountSettingsBrandsObject brands?;
+    AccountSettingsGroupObject groups?;
+    AccountSettingsCdnObject cdn?;
+    @jsondata:Name {value: "cross_sell"}
+    AccountSettingsCrossSellObject crossSell?;
+    AccountSettingsAgentObject agents?;
+    AccountSettingsChatObject chat?;
+    @jsondata:Name {value: "ticket_sharing_partners"}
+    AccountSettingsTicketSharingPartnersObject ticketSharingPartners?;
+    AccountSettingsMetricsObject metrics?;
+    @jsondata:Name {value: "google_apps"}
+    AccountSettingsGoogleAppsObject googleApps?;
+    AccountSettingsUserObject user?;
+    AccountSettingsStatisticsObject statistics?;
+};
+
+# Represents the Headers record for the operation: ListAuditsForTicket
+public type ListAuditsForTicketHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type CustomObjectFieldResponse record {
+    @jsondata:Name {value: "custom_object_field"}
+    CustomObjectField customObjectField?;
+};
+
+# Represents the Queries record for the operation: ListActiveViews
+public type ListActiveViewsQueries record {
+    # Only views with given access. May be "personal", "shared", or "account"
+    string access?;
+    # Only views belonging to given group
+    @http:Query {name: "group_id"}
+    int groupId?;
+    # Possible values are "alphabetical", "created_at", or "updated_at". Defaults to "position"
+    @http:Query {name: "sort_by"}
+    string sortBy?;
+    # One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
+    @http:Query {name: "sort_order"}
+    string sortOrder?;
+};
+
+public type TicketMetricEventsResponse record {
+    *TicketMetricEventsResponseAllOf1;
+    *TicketMetricEventsResponseTicketMetricEventsResponseAllOf12;
+};
+
+# Represents the Queries record for the operation: ListMacros
+public type ListMacrosQueries record {
+    # A sideload to include in the response. See [Sideloads](#sideloads-2)
+    string include?;
+    # Filter macros by access. Possible values are "personal", "agents", "shared", or "account". The "agents" value returns all personal macros for the account's agents and is only available to admins
+    string access?;
+    # Filter macros by group
+    @http:Query {name: "group_id"}
+    int groupId?;
+    # Filter by active macros if true or inactive macros if false
+    boolean active?;
+    # If true, returns only macros that can be applied to tickets. If false, returns all macros the current user can manage. Default is false
+    @http:Query {name: "only_viewable"}
+    boolean onlyViewable?;
+    # Possible values are alphabetical, "created_at", "updated_at", "usage_1h", "usage_24h", "usage_7d", or "usage_30d". Defaults to alphabetical
+    @http:Query {name: "sort_by"}
+    string sortBy?;
+    # Filter macros by category
+    int category?;
+    # One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
+    @http:Query {name: "sort_order"}
+    string sortOrder?;
+};
+
+public type MacroApplyTicketResponse record {
+    MacroApplyTicketResponseResult result?;
+};
+
+# Represents the Headers record for the operation: ReorderCustomObjectFields
+public type ReorderCustomObjectFieldsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type TimeBasedExportIncrementalUsersResponse record {
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    @jsondata:Name {value: "end_of_stream"}
+    boolean endOfStream?;
+    int count?;
+    @jsondata:Name {value: "end_time"}
+    int endTime?;
+    UserObject[] users?;
+};
+
+public type ExportIncrementalTicketEventsResponse record {
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    @jsondata:Name {value: "end_of_stream"}
+    boolean endOfStream?;
+    @jsondata:Name {value: "ticket_events"}
+    TicketMetricEventBaseObject[] ticketEvents?;
+    int count?;
+    @jsondata:Name {value: "end_time"}
+    int endTime?;
+};
+
+public type TargetFailureObject record {
+    # The raw message of the target request
+    @jsondata:Name {value: "raw_request"}
+    string rawRequest?;
+    # HTTP status code of the target failure
+    @jsondata:Name {value: "status_code"}
+    int statusCode?;
+    # Name of the target failure
+    @jsondata:Name {value: "target_name"}
+    string targetName?;
+    # Time of the failure
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Number of times the target failed consecutively
+    @jsondata:Name {value: "consecutive_failure_count"}
+    int consecutiveFailureCount?;
+    # The ID of the target failure
+    int id?;
+    # The raw response of the failure
+    @jsondata:Name {value: "raw_response"}
+    string rawResponse?;
+    # The API url of the failure record
+    string url?;
+};
+
+public type filter record {
+    TriggerObject 'json?;
+};
+
+public type CustomObjectCreateInput record {
+    # Pluralized version of the object's title
+    @jsondata:Name {value: "title_pluralized"}
+    string titlePluralized?;
+    # Display name for the object
+    string title?;
+    # Unique identifier. Writable on create only
+    string 'key?;
+};
+
+# Represents the Queries record for the operation: IncrementalUserExportCursor
+public type IncrementalUserExportCursorQueries record {
+    # The cursor pointer to work with for all subsequent exports after the initial request
+    string cursor?;
+    # The time to start the incremental export from. Must be at least one minute in the past. Data isn't provided for the most recent minute
+    @http:Query {name: "start_time"}
+    int startTime;
+    # The number of records to return per page
+    @http:Query {name: "per_page"}
+    int perPage?;
+};
+
+# Represents the Headers record for the operation: CountUsers
+public type CountUsersHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type SLAPolicyFilterDefinitionResponseDefinitionsAny record {
+    SLAPolicyFilterDefinitionResponseDefinitionsOperators1[] operators?;
+    SLAPolicyFilterDefinitionResponseDefinitionsValues1 values?;
+    string title?;
+    string value?;
+    string group?;
+    string? target?;
+};
+
+# Represents the Headers record for the operation: ListAuditLogs
+public type ListAuditLogsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type BookmarkCreateRequest record {
+    BookmarkInput bookmark?;
+};
+
+public type TicketFormsResponse record {
+    @jsondata:Name {value: "ticket_forms"}
+    TicketFormObject[] ticketForms?;
+};
+
+# Represents the Headers record for the operation: GetUserPasswordRequirements
+public type GetUserPasswordRequirementsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ListTicketSkips
+public type ListTicketSkipsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: SearchUsers
+public type SearchUsersHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: UpsertCustomObjectRecord
+public type UpsertCustomObjectRecordHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type AutomationResponse record {
+    AutomationObject automation?;
+};
+
+public type TicketAuditResponse record {
+    TicketAuditObject audit?;
+};
+
+# Configuration for routing. See [Routing](#routing)
+public type AccountSettingsRoutingObject record {
+    @jsondata:Name {value: "reassignment_messaging_enabled"}
+    boolean reassignmentMessagingEnabled?;
+    @jsondata:Name {value: "reassignment_messaging_timeout"}
+    int reassignmentMessagingTimeout?;
+    @jsondata:Name {value: "autorouting_tag"}
+    string autoroutingTag?;
+    @jsondata:Name {value: "max_email_capacity"}
+    int maxEmailCapacity?;
+    boolean enabled?;
+    @jsondata:Name {value: "max_messaging_capacity"}
+    int maxMessagingCapacity?;
+    @jsondata:Name {value: "reassignment_talk_timeout"}
+    int reassignmentTalkTimeout?;
+};
+
+# Group configuration
+public type AccountSettingsGroupObject record {
+    @jsondata:Name {value: "check_group_name_uniqueness"}
+    boolean checkGroupNameUniqueness?;
+};
+
+# Represents the Headers record for the operation: SearchMacro
+public type SearchMacroHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type CustomStatusesResponse record {
+    @jsondata:Name {value: "custom_statuses"}
+    CustomStatusObject[] customStatuses?;
+};
+
+# Represents the Headers record for the operation: MarkManyTicketsAsSpam
+public type MarkManyTicketsAsSpamHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type MacroApplyTicketResponseResult record {
+    MacroApplyTicketResponseResultTicket ticket?;
+};
+
+# Represents the Headers record for the operation: ListViewsById
+public type ListViewsByIdHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type Pagination record {
+    PaginationMeta meta?;
+    PaginationLinks links?;
+};
+
+# Represents the Headers record for the operation: ShowDynamicContentItem
+public type ShowDynamicContentItemHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type MacroObject record {
+    *MacroCommonObject;
+    *MacroObjectAllOf2;
+};
+
+public type SkillBasedRoutingAttributeResponse record {
+    SkillBasedRoutingAttributeObject attribute?;
+};
+
+# Represents the Queries record for the operation: ListCustomObjectFields
+public type ListCustomObjectFieldsQueries record {
+    # Include standard fields if true. Exclude them if false
+    @http:Query {name: "include_standard_fields"}
+    boolean includeStandardFields?;
+};
+
+# Represents the Headers record for the operation: DeleteGroupMembership
+public type DeleteGroupMembershipHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: ListCustomStatuses
+public type ListCustomStatusesQueries record {
+    # If true, show only default custom ticket statuses. If false, show only non-default custom ticket statuses. If the filter is not used, show all custom ticket statuses
+    boolean default?;
+    # Filter the list of custom ticket statuses by a comma-separated list of status categories
+    @http:Query {name: "status_categories"}
+    string statusCategories?;
+    # If true, show only active custom ticket statuses. If false, show only inactive custom ticket statuses. If the filter is not used, show all custom ticket statuses
+    boolean active?;
+};
+
+public type RequestObjectCustomFields record {
+    int id?;
+    string value?;
+};
+
+public type SLAPolicyFilterDefinitionResponseDefinitionsAll record {
+    SLAPolicyFilterDefinitionResponseDefinitionsOperators[] operators?;
+    SLAPolicyFilterDefinitionResponseDefinitionsValues values?;
+    string title?;
+    string value?;
+    string group?;
+    string? target?;
+};
+
+# Represents the Headers record for the operation: IncrementalUserExportTime
+public type IncrementalUserExportTimeHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type AutomationsResponse record {
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    AutomationObject[] automations?;
+    int count?;
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
+};
+
+public type GroupMembershipObject record {
+    # If true, tickets assigned directly to the agent will assume this membership's group
+    boolean default?;
+    # The time of the last update of the group
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # The id of a group
+    @jsondata:Name {value: "group_id"}
+    int groupId;
+    # The id of an agent
+    @jsondata:Name {value: "user_id"}
+    int userId;
+    # The time the group was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Automatically assigned upon creation
+    int id?;
+    # The API url of this record
+    string url?;
+};
+
+public type GroupSLAPolicyFilterDefinitionResponseDefinitionsValues record {
+    GroupSLAPolicyFilterDefinitionResponseDefinitionsValuesList[] list?;
+    string 'type?;
+};
+
+public type UserFieldObject CustomFieldObject;
+
+# Represents the Queries record for the operation: BulkDeleteViews
+public type BulkDeleteViewsQueries record {
+    # The IDs of the views to delete
+    string ids;
+};
+
+# Represents the Headers record for the operation: BulkDeleteViews
+public type BulkDeleteViewsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: UnassignOrganization
+public type UnassignOrganizationHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type RenewSessionResponse record {
+    # A token of authenticity for the request
+    @jsondata:Name {value: "authenticity_token"}
+    string authenticityToken?;
+};
+
+public type MacroAttachmentResponse record {
+    @jsondata:Name {value: "macro_attachment"}
+    MacroAttachmentObject macroAttachment?;
+};
+
+# Represents the Headers record for the operation: IncrementalTicketExportTime
+public type IncrementalTicketExportTimeHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: BulkRestoreDeletedTickets
+public type BulkRestoreDeletedTicketsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: DeleteSLAPolicy
+public type DeleteSLAPolicyHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ShowManyJobStatuses
+public type ShowManyJobStatusesHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type TicketCommentsResponse record {
+    TicketCommentObject[] comments?;
+};
+
+# Represents the Queries record for the operation: ListViewsById
+public type ListViewsByIdQueries record {
+    # List of view's ids separated by commas
+    string ids;
+    # Only active views if true, inactive views if false
+    boolean active?;
+};
+
+public type BrandsResponseAllOf2 record {
+    # Array of brands
+    BrandObject[] brands?;
+};
+
+public type ListDeletedTicketsResponseAllOf1 record {
+    @jsondata:Name {value: "deleted_tickets"}
+    ListDeletedTicketsResponseDeletedTickets[] deletedTickets?;
+};
+
+# Represents the Headers record for the operation: ShowTicketFieldOption
+public type ShowTicketFieldOptionHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ListGroupMembershipsByGroupId
+public type ListGroupMembershipsByGroupIdHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type AssigneeFieldAssignableGroupsResponse record {
+    @jsondata:Name {value: "next_page"}
+    string? nextPage?;
+    # Number of groups listed in `groups` property
+    int count?;
+    AssigneeFieldAssignableGroupObject[] groups?;
+    @jsondata:Name {value: "previous_page"}
+    string? previousPage?;
+};
+
+public type WorkspacesReorderBody record {
+    decimal[] ids?;
+};
+
+# Represents the Headers record for the operation: ListCustomObjectFields
+public type ListCustomObjectFieldsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ListMacros
+public type ListMacrosHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: DeleteTicketPermanently
+public type DeleteTicketPermanentlyHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Headers record for the operation: ListResourceTags
+public type ListResourceTagsHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+public type TriggerRevisionResponse record {
+    @jsondata:Name {value: "trigger_revision"}
+    TriggerRevisionResponseTriggerRevision triggerRevision?;
+};
+
+# Represents the Headers record for the operation: SetUserPassword
+public type SetUserPasswordHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: ListAuditLogs
+public type ListAuditLogsQueries record {
+    # Filter audit logs by the source id. Requires `filter[source_type]` to also be set
+    @http:Query {name: "filter[source_id]"}
+    int filterSourceId?;
+    # Filter audit logs by the time of creation. When used, you must specify `filter[created_at]` twice in your request, first with the start time and again with an end time
+    @http:Query {name: "filter[created_at]"}
+    string filterCreatedAt?;
+    # Filter audit logs by the source type. For example, user or rule
+    @http:Query {name: "filter[source_type]"}
+    string filterSourceType?;
+    # Filter audit logs by the action
+    @http:Query {name: "filter[action]"}
+    string filterAction?;
+    # Offset pagination only. Sort audit logs. Default is `sort_by=created_at`
+    @http:Query {name: "sort_by"}
+    string sortBy?;
+    # Cursor pagination only. Sort audit logs. Default is `sort=-created_at`
+    string sort?;
+    # Filter audit logs by the actor id
+    @http:Query {name: "filter[actor_id]"}
+    int filterActorId?;
+    # Offset pagination only. Sort audit logs. Default is `sort_order=desc`
+    @http:Query {name: "sort_order"}
+    string sortOrder?;
+    # Filter audit logs by the ip address
+    @http:Query {name: "filter[ip_address]"}
+    string filterIpAddress?;
+};
+
+public type TicketSkipObject record {
+    # Reason for skipping the ticket
+    string reason?;
+    # The skipped ticket. See the [Ticket object reference](/api-reference/ticketing/tickets/tickets/#json-format)
+    TicketObject ticket?;
+    # Time the skip was last updated
+    @jsondata:Name {value: "updated_at"}
+    string updatedAt?;
+    # ID of the skipping agent
+    @jsondata:Name {value: "user_id"}
+    int userId?;
+    # Time the skip was created
+    @jsondata:Name {value: "created_at"}
+    string createdAt?;
+    # Automatically assigned upon creation
+    int id?;
+    # ID of the skipped ticket
+    @jsondata:Name {value: "ticket_id"}
+    int ticketId?;
+};
+
+public type BatchErrorItem record {
+    *Error;
+    *BatchErrorItemAllOf2;
+};
+
+public type ViewCountsResponse record {
+    @jsondata:Name {value: "view_counts"}
+    ViewCountObject[] viewCounts?;
+};
+
+public type BookmarksResponse record {
+    *OffsetPaginationObject;
+    *BookmarksResponseAllOf2;
+};
+
+public type TriggerSnapshotObject record {
+    # Whether the trigger is active
+    boolean active?;
+    # The description of the trigger
+    string? description?;
+    TriggerConditionsObject conditions?;
+    # The title of the trigger
+    string title?;
+    # An array of [Actions](#actions) describing what the trigger will do
+    TriggerActionObject[] actions?;
+};
+
+# Represents the Headers record for the operation: UpdateSharingAgreement
+public type UpdateSharingAgreementHeaders record {
+    @http:Header {name: "Accept"}
+    string accept = "application/json";
+};
+
+# Represents the Queries record for the operation: CountUsers
+public type CountUsersQueries record {
+    # Filters the results by role. Possible values are "end-user", "agent", or "admin"
+    "end-user"|"agent"|"admin" role?;
+    # Filters the results by more than one role using the format `role[]={role}&role[]={role}`
+    string roles?;
+    # For custom roles which is available on the Enterprise plan and above. You can only filter by one role ID per request
+    @http:Query {name: "permission_set"}
+    int permissionSet?;
+};
+
+public type SatisfactionRatingsCountResponse record {
+    SatisfactionRatingsCountResponseCount count?;
+};
+
+# Represents the Queries record for the operation: ListTicketSkips
+public type ListTicketSkipsQueries record {
+    # Sort order. Defaults to "asc"
+    @http:Query {name: "sort_order"}
+    "asc"|"desc" sortOrder?;
+};
+
+public type UsersUpdateManyBody UserRequest|UsersRequest;
+
+# Represents the Queries record for the operation: BulkDeleteAutomations
+public type BulkDeleteAutomationsQueries record {
+    # The IDs of the automations to delete
+    int[] ids?;
+};
+
+public type TicketCreateVoicemailTicketRequest record {
+    # Ticket object that lists the values to set when the ticket is created
+    TicketCreateVoicemailTicketInput ticket?;
+    # Optional value such as the ID of the agent that will see the newly created ticket
+    @jsondata:Name {value: "display_to_agent"}
+    int displayToAgent?;
+};
+
+# Represents the Queries record for the operation: SearchViews
+public type SearchViewsQueries record {
+    # A sideload to include in the response. See [Sideloads](#sideloads-3)
+    string include?;
+    # Filter views by access. May be "personal", "shared", or "account"
+    string access?;
+    # Filter views by group
+    @http:Query {name: "group_id"}
+    int groupId?;
+    # Query string used to find all views with matching title
+    string query;
+    # Filter by active views if true or inactive views if false
+    boolean active?;
+    # Possible values are "alphabetical", "created_at", "updated_at", and "position". If unspecified, the views are sorted by relevance
+    @http:Query {name: "sort_by"}
+    string sortBy?;
+    # One of "asc" or "desc". Defaults to "asc" for alphabetical and position sort, "desc" for all others
+    @http:Query {name: "sort_order"}
+    string sortOrder?;
+};
+
+public type TriggerCategoriestriggerCategoryIdBody record {
+    @jsondata:Name {value: "trigger_category"}
+    TriggerCategoryRequest triggerCategory?;
 };
