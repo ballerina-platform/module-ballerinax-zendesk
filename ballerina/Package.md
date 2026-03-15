@@ -1,8 +1,15 @@
 ## Overview
 
-[Zendesk](https://www.zendesk.com/) is a customer service software company that provides a cloud-based customer support platform. It is designed to offer a seamless and efficient customer service experience, enabling businesses to manage customer interactions across multiple channels, including email, chat, phone, and social media.
+[Zendesk](https://www.zendesk.com/) is a cloud-based customer service and support platform designed to provide a seamless customer experience. it enables businesses to manage interactions across multiple channels, including email, chat, phone, and social media, efficiently and at scale.
 
-The Ballerina Zendesk Connector allows developers to interact with the [Zendesk REST API V2](https://developer.zendesk.com/api-reference/ticketing/introduction/), making it easier to integrate customer support features into Ballerina applications. This connector enables the automation of Zendesk Support operations such as ticket management, user and organization management, and more.
+The Zendesk connector allows developers to interact with the Zendesk REST API V2, enabling the integration of comprehensive customer support features and the automation of support operations.
+
+### Key Features
+
+- Manage support tickets, users, and organizations programmatically
+- Support for Zendesk REST API V2
+- Seamless integration across multiple support channels
+- Efficient automation of customer service workflows
 
 ## Setup guide
 
