@@ -4,6 +4,14 @@
 
 The Ballerina Zendesk Connector allows developers to interact with the [Zendesk REST API V2](https://developer.zendesk.com/api-reference/ticketing/introduction/), making it easier to integrate customer support features into Ballerina applications. This connector enables the automation of Zendesk Support operations such as ticket management, user and organization management, and more.
 
+
+### Key Features
+
+- Manage support tickets, users, and organizations
+- Access and update help center content
+- Automate customer support workflows
+- Search and query support data
+
 ## Setup guide
 
 To use the Zendesk Connector in Ballerina, you must have a Zendesk account and an API token for authentication. Follow the steps below to set up the connector with your Zendesk account. If you don't have an account, you can create one by visiting [Zendesk Sign Up page](https://www.zendesk.com/register/) and completing the registration process.
