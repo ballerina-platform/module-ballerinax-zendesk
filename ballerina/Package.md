@@ -2,12 +2,12 @@
 
 [Zendesk](https://www.zendesk.com/) is a cloud-based customer service and support platform designed to provide a seamless customer experience. It enables businesses to manage interactions across multiple channels, including email, chat, phone, and social media, efficiently and at scale.
 
-The Zendesk connector allows developers to interact with the Zendesk REST API V2, enabling the integration of comprehensive customer support features and the automation of support operations.
+The Zendesk connector allows developers to interact with the [Zendesk REST API V2](https://developer.zendesk.com/api-reference/ticketing/introduction/), enabling the integration of comprehensive customer support features and the automation of support operations.
 
 ### Key Features
 
 - Manage support tickets, users, and organizations programmatically
-- Support for Zendesk REST API V2
+- Support for [Zendesk REST API V2](https://developer.zendesk.com/api-reference/ticketing/introduction/)
 - Seamless integration across multiple support channels
 - Efficient automation of customer service workflows
 
