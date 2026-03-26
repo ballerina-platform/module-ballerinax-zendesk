@@ -7,7 +7,6 @@ The Ballerina Zendesk Connector allows developers to interact with the [Zendesk 
 ### Key Features
 
 - Manage support tickets, users, and organizations
-- Access and update help center content
 - Automate customer support workflows
 - Search and query support data
 
