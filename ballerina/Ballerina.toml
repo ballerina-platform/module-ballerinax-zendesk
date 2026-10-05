@@ -5,7 +5,7 @@ name = "zendesk"
 version = "2.0.1"
 license = ["Apache-2.0"]
 authors = ["Ballerina"]
-keywords = ["CSM", "Support/Customer Support", "Cost/Freemium", "Vendor/Zendesk", "Area/CRM", "Type/Connector"]
+keywords = ["CSM", "Support/Customer Support", "Cost/Freemium", "Vendor/Zendesk", "Area/CRM & Sales", "Type/Connector", "Name/Zendesk"]
 icon = "icon.png"
 repository = "https://github.com/ballerina-platform/module-ballerinax-zendesk"
 
